@@ -378,14 +378,14 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			if (!FMTokens[0].Equals(FMResponseCount))
 			{
 				FMResponseCount = FMTokens[0];
-				if (FMTokens[1] == PlayerSession.PlayerActions.JUMP)
+				if (FMTokens[1].Equals(PlayerSession.PlayerActions.JUMP, System.StringComparison.OrdinalIgnoreCase))
 				{
 					ballJump = true;
 					GetComponent<AudioSource>().PlayOneShot(jumpingSound);
 
 					Invoke("JumpFalse", 1f);
 				}
-				else if (FMTokens[1] == PlayerSession.PlayerActions.STOP) {
+				else if (FMTokens[1].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase)) {
 					//Invoke("leftOps", 0.3f);
 
 					moveHorzRight = false;
@@ -397,7 +397,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 					PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.STOP);
 				}
-				else if (FMTokens[1] == PlayerSession.PlayerActions.RUNNING) {
+				else if (FMTokens[1].Contains(PlayerSession.PlayerActions.RUNNING)) {
 					moveHorzLeft = false;
 					//touchHorizontalMoveDown(2);
 

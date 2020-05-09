@@ -23,10 +23,10 @@ public class PlayerSession : MonoBehaviour
 
     public class PlayerActions
     {
-        public static string LEFTMOVE = "left-move";
-        public static string RIGHTMOVE = "right-move";
-        public static string JUMP = "jump";
-        public static string STOP = "stop";
+        public static string LEFTMOVE = "left move";
+        public static string RIGHTMOVE = "right move";
+        public static string JUMP = "jumping";
+        public static string STOP = "running stop";
         public static string RUNNING = "running";
     }
 
