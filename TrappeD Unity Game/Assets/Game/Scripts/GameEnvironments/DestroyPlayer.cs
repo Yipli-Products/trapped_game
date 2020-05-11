@@ -12,11 +12,15 @@ public class DestroyPlayer : MonoBehaviour {
 	private GameObject cameraRef;
 
 	public AudioClip gameOverSound;
+
+	private YSessionManager ysm;
 	
 	void Start()
 	{
 		Shaking = false;
 		cameraRef = GameObject.Find ("Main Camera");
+
+		ysm = FindObjectOfType<YSessionManager>();
 	}
 
 
@@ -43,7 +47,9 @@ public class DestroyPlayer : MonoBehaviour {
 			if (col.gameObject.name == "Ball") {
 			   GetComponent<AudioSource>().PlayOneShot(gameOverSound);
 				DoShake();
-				PlayerSession.Instance.StoreSPSession(PlayerPrefs.GetInt("Coins"));
+
+				ysm.StoreSession();
+
 				//col.gameObject.SendMessage("PlayerDead");
 			}
 	}
@@ -51,8 +57,10 @@ public class DestroyPlayer : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.name == "Ball") {
 			DoShake();
-//			Debug.Log("Called Once from here...");
-			PlayerSession.Instance.StoreSPSession(PlayerPrefs.GetInt("Coins"));
+			//			Debug.Log("Called Once from here...");
+
+			ysm.StoreSession();
+
 			col.gameObject.SendMessage("PlayerDead");
 			//Debug.Log("Shake the Camera");
 		}

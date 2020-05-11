@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfde7f38103dea4ca73b42ff05b5b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
   hInput: 0
   vInput: 0
   groundCheck: {fileID: 497860}

@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameWon : MonoBehaviour {
 
 	public float delayTime = 10.0f;
 	private float elapsedTime = 0.0f;
 	private bool isGameWon = false;
+
+	private YSessionManager ysm;
+
 	// Use this for initialization
 	void Start () {
-	
+		ysm = FindObjectOfType<YSessionManager>();
 	}
 	
 	// Update is called once per frame
@@ -25,7 +29,7 @@ public class GameWon : MonoBehaviour {
 				PlayerPrefs.SetInt ("NUMBER_OF_COMP_LEVELS", PlayerPrefs.GetInt ("CURRENT_LEVEL_SERIAL"));
 			}
 
-			PlayerSession.Instance.StoreSPSession(PlayerPrefs.GetInt("Coins"));
+			ysm.StoreSession();
 
 			isGameWon = true;
 		}

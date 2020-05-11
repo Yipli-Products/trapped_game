@@ -14,6 +14,7 @@ public class PlayerSession : MonoBehaviour
     private string playerHeight = ""; //Current height of the player
     private string playerWeight = ""; //Current height of the player
     private string matId = "";
+    private string matMacAddress;
     private DateTime startTime;
     private DateTime endTime;
     private float duration;
@@ -53,7 +54,7 @@ public class PlayerSession : MonoBehaviour
             _instance = this;
         }
 
-        if (currentYipliConfig.playerInfo == null || currentYipliConfig.playerInfo.playerId.Equals(""))
+        if (currentYipliConfig.playerInfo == null)
         {
             // Call Yipli_GameLib_Scene
             Instance.currentYipliConfig.callbackLevel = SceneManager.GetActiveScene().name;
@@ -63,7 +64,7 @@ public class PlayerSession : MonoBehaviour
         }
         else
         {
-            Debug.Log("Current player is null.");
+            Debug.Log("Current player is not null.");
         }
     }
 
@@ -95,6 +96,7 @@ public class PlayerSession : MonoBehaviour
         x.Add("duration", Convert.ToInt32(duration).ToString());
         x.Add("intensity-level", intensityLevel.ToString());
         x.Add("player-action-counts", playerActionCounts);
+        x.Add("mac-address", matMacAddress);
         if (playerGameData != null)
         {
             if (playerGameData.Count > 0)
@@ -126,6 +128,7 @@ public class PlayerSession : MonoBehaviour
     }
 
     //Pass here name of the game
+    //TODO: Shift this check to backend.
     public void SetYipliGameId(string strGameId)
     {
         if (strGameId.Equals("unleash"))
@@ -138,7 +141,7 @@ public class PlayerSession : MonoBehaviour
         {
             gameId = strGameId;
             SetGameClusterId(1);
-            intensityLevel = "high";
+            intensityLevel = "medium";
         }
         else if (strGameId.Equals("joyfuljumps"))
         {
@@ -153,6 +156,12 @@ public class PlayerSession : MonoBehaviour
             intensityLevel = "low";
         }
         else if (strGameId.Equals("yiplirunner"))
+        {
+            gameId = strGameId;
+            SetGameClusterId(2);
+            intensityLevel = "medium";
+        }
+        else if (strGameId.Equals("rollingball"))
         {
             gameId = strGameId;
             SetGameClusterId(2);
@@ -181,6 +190,7 @@ public class PlayerSession : MonoBehaviour
         startTime = DateTime.Now;
         SetYipliGameId(GameId);
         matId = currentYipliConfig.matInfo.matId;
+        matMacAddress = currentYipliConfig.matInfo.macAddress;
     }
 
     //To be used for error handling
@@ -258,13 +268,13 @@ public class PlayerSession : MonoBehaviour
     }
 
     //to be called from all the player movment actions handled script
-    public void AddPlayerAction(string action)
+    public void AddPlayerAction(string action, int steps = 1)
     {
         Debug.Log("Adding action current player session.");
         if (playerActionCounts.ContainsKey(action))
-            playerActionCounts[action] = playerActionCounts[action] + 1;
+            playerActionCounts[action] = playerActionCounts[action] + steps;
         else
-            playerActionCounts.Add(action, 1);
+            playerActionCounts.Add(action, steps);
     }
 
     //To be called from GameObject FixedUpdate
@@ -279,15 +289,16 @@ public class PlayerSession : MonoBehaviour
 
     public void GoToYipli()
     {
-        Debug.Log("Go to Yipli Called");
-        string bundleId = "org.hightimeshq.yipli"; //to be changed later
-        AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        AndroidJavaObject ca = up.GetStatic<AndroidJavaObject>("currentActivity");
-        AndroidJavaObject packageManager = ca.Call<AndroidJavaObject>("getPackageManager");
-
-        AndroidJavaObject launchIntent = null;
         try
         {
+            Debug.Log("Go to Yipli Called");
+            string bundleId = "org.hightimeshq.yipli"; //to be changed later
+            AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+            AndroidJavaObject ca = up.GetStatic<AndroidJavaObject>("currentActivity");
+            AndroidJavaObject packageManager = ca.Call<AndroidJavaObject>("getPackageManager");
+
+            AndroidJavaObject launchIntent = null;
+
             launchIntent = packageManager.Call<AndroidJavaObject>("getLaunchIntentForPackage", bundleId);
             ca.Call("startActivity", launchIntent);
         }

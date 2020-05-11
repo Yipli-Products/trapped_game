@@ -7,6 +7,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 {
 	public class BallController : MonoBehaviour {
 
+		[SerializeField] PlayerStats ps;
 
 		public float hInput=0.0f;
 		public float vInput=0.0f;
@@ -218,7 +219,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					}
 					else
 					{
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(0, verticalForce * Time.deltaTime * 60.0f));
+						//GetComponent<Rigidbody2D>().AddForce(new Vector2(0, verticalForce * Time.deltaTime * 60.0f)); //o
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * 60.0f, verticalForce * Time.deltaTime * 60.0f));
 					}
 
 					AddJumpPlayerAction();
@@ -292,6 +294,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			coinText.text = coinAmount.ToString ();
 			PlayerPrefs.SetInt ("Coins", coinAmount);
 			PlayerPrefs.SetInt("thisLevelPoints", thisLevelPoints);
+
+			ps.SetCoinScore(coinAmount);
 		}
 
 
@@ -375,10 +379,55 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			string[] FMTokens = FMResponse.Split('.');
 			Debug.Log("UNITY FMTokens: " + FMTokens[0]);
 
-			if (!FMTokens[0].Equals(FMResponseCount))
+			//FMResponseCount = FMTokens[0];
+
+			if (FMTokens.Length > 1 && !FMTokens[0].Equals(FMResponseCount))
 			{
 				FMResponseCount = FMTokens[0];
-				if (FMTokens[1].Equals(PlayerSession.PlayerActions.JUMP, System.StringComparison.OrdinalIgnoreCase))
+
+				string[] whiteSpace = FMTokens[1].Split('+');
+
+				if (whiteSpace.Length > 1)
+				{
+					//performedAction = whiteSpace[0];
+					//  Runnig+23+1.2 // coming string from mat
+
+					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNING, System.StringComparison.OrdinalIgnoreCase))
+					{
+						int step = int.Parse(whiteSpace[1]);
+
+						moveHorzLeft = false;
+
+						float hForce = 15f;
+
+						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce, 0f));
+
+						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNING, step);
+					}
+
+				}
+				else if (whiteSpace.Length == 1)
+				{
+					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.JUMP, System.StringComparison.OrdinalIgnoreCase))
+					{
+						ballJump = true;
+						GetComponent<AudioSource>().PlayOneShot(jumpingSound);
+
+						Invoke("JumpFalse", 1f);
+					}
+					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase))
+					{
+						moveHorzRight = false;
+						float hForce = -1.5f;
+
+						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
+
+						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.STOP);
+					}
+				}
+
+
+				/*if (FMTokens[1].Equals(PlayerSession.PlayerActions.JUMP, System.StringComparison.OrdinalIgnoreCase))
 				{
 					ballJump = true;
 					GetComponent<AudioSource>().PlayOneShot(jumpingSound);
@@ -386,11 +435,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					Invoke("JumpFalse", 1f);
 				}
 				else if (FMTokens[1].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase)) {
-					//Invoke("leftOps", 0.3f);
-
 					moveHorzRight = false;
-					//bc.touchHorizontalMoveDown(-1);
-
 					float hForce = -1.5f;
 
 					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
@@ -399,14 +444,13 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				}
 				else if (FMTokens[1].Contains(PlayerSession.PlayerActions.RUNNING)) {
 					moveHorzLeft = false;
-					//touchHorizontalMoveDown(2);
 
 					float hForce = 15f;
 
 					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce, 0f));
 
 					PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNING);
-				}
+				}*/
 			}
 		}
 
