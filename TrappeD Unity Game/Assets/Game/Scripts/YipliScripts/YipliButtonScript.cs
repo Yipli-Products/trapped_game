@@ -14,14 +14,15 @@ public class YipliButtonScript : MonoBehaviour
     [SerializeField] GameObject NoInternetIcon;
 
 
-    private IEnumerator Start()
+    private void Start()
     {
         NoInternetIcon.SetActive(false);
 
         if (YipliHelper.checkInternetConnection())
         {
             GetPlayerData();
-            yield return null;
+            //Task.Run(GetPlayerData).Wait();
+            //await GetPlayerData();
         }
         else
         {

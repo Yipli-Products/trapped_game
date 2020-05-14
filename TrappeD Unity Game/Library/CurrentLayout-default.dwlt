@@ -75,7 +75,7 @@ MonoBehaviour:
   m_MinSize: {x: 304, y: 200}
   m_MaxSize: {x: 8004, y: 4022}
   vertical: 0
-  controlID: 72
+  controlID: 84
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -98,7 +98,7 @@ MonoBehaviour:
     y: 0
     width: 1536
     height: 781
-  m_MinSize: {x: 950, y: 522}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &5
 MonoBehaviour:
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_MinSize: {x: 579, y: 472}
   m_MaxSize: {x: 14002, y: 14044}
   vertical: 0
-  controlID: 145
+  controlID: 82
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_MinSize: {x: 304, y: 472}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 71
+  controlID: 83
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 41.020363, y: -2.6148834, z: -192.78903}
     speed: 2
-    m_Value: {x: 41.10209, y: -2.5202932, z: -192.74329}
+    m_Value: {x: 41.020363, y: -2.6148834, z: -192.78903}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 12.126923
     speed: 2
-    m_Value: 12.698348
+    m_Value: 12.126923
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -515,9 +515,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 5077f0ff
-      m_LastClickedID: -1018032
-      m_ExpandedIDs: 467cf0ff2c86f0fff293f0fffa01f2ff4e0bf2ffb40bf2ff4a0cf2fff40cf2ff240df2ff260df2ff300df2ff3a0df2ff4e0df2ff620df2ffb614f2ff141bf2ffbe23f2ff4a2cf2ff4e2cf2ffc839f2ffce3ef2ff6a46f2ff284af2ff3a4af2ff5c4cf2ff9854f2ff3e55f2ff6e55f2ff7055f2ff7a55f2ff8455f2ff9855f2ffac55f2ff005df2ff5e63f2ff086cf2ff9474f2ff5c7ef2ffd68bf2ffdc8bf2ff7893f2ff3697f2ff4897f2ffee97f2ff1e98f2ff1c99f2ff3099f2ff4299f2ff5c99f2ff7699f2ffd6a0f2ff38a7f2ffe6aff2ff78b8f2ff44c2f2ffc6cff2ffd0cff2ff72d7f2ff36dbf2ff50dbf2ffb4e0f2ff26e8f2ffa2eef2ff6af7f2ff1400f3fffa09f3ff9217f3fff618f3ff2e27f3ffe027f3ff1028f3ff0e29f3ff2229f3ff3429f3ff4e29f3ff6829f3ff7029f3ffd22ff3ff8038f3ff1241f3ffde4af3ff6058f3ff6a5df3ff0e65f3ffd268f3ffec68f3ffa470f3ff2077f3fffe7df3ffae80f3ff288cf3ffcc8cf3fffc8cf3ff028df3ff108df3ff1e8df3ff368df3ff4e8df3ff568df3ffb893f3ff669cf3fff6a4f3ffc2aef3ff40bcf3ff4ac1f3ffeac8f3ffacccf3ffc2ccf3ff3ed4f3ffbadaf3ff82e3f3ff2cecf3ff12f6f3ffd403f4ff2609f4ffca09f4fffa09f4ff000af4ff0e0af4ff1c0af4ff340af4ff4c0af4ff540af4ffb610f4ff6419f4fff421f4ffc02bf4ff3e39f4ff483ef4ffe845f4ffaa49f4ffc049f4ff3c51f4ffb857f4ffdc60f4ff0e6af4fff473f4ffce81f4ffee84f4ff4e87f4ff0890f4ffac90f4ffdc90f4ffd691f4ffe691f4fff491f4ff0a92f4ff2092f4ff2492f4ff8298f4ff2ca1f4ffbaa9f4ff82b3f4ff00c1f4ff06c6f4ffa6cdf4ff66d1f4ff7cd1f4ff4cd9f4ffe2dff4ffc4e8f4ff88f1f4ff88fbf4ff3a09f5ff780ef5fff216f5ffb818f5ffe818f5ffe619f5fffa19f5ff0c1af5ff261af5ff401af5ffa021f5ff0228f5ffb030f5ff4239f5ff0e43f5ff9050f5ff9a55f5ff3e5df5ff465df5ff605df5ff6c61f5ffde68f5ff5a6ff5ff2278f5ffcc80f5ffb28af5ff4a98f5ff6e9df5ffeca3f5ffc8a7f5ff82aff5ffb8b4f5ffdeb9f5ff90bdf5ff5ac2f5fff2cff5ff16d5f5ffd0dcf5ff06e1f5ff1ee2f5ffcae8f5ffeeedf5ff22f2f5ffd4f5f5ff4a04f7ff7a04f7ff7405f7ff8405f7ff9205f7ffa805f7ffbe05f7ff1a0df7ff7813f7ff221cf7ffb024f7ff782ef7fff63bf7fffc40f7ff9c48f7ffa048f7ffb648f7ffbc72f7ffec72f7ffe673f7fff673f7ff0474f7ff1a74f7ff3074f7ff8c7bf7ffea81f7ff948af7ff2293f7ffea9cf7ff68aaf7ff6eaff7ff0eb7f7ff12b7f7ff28b7f7ffb6c5f7ffe6c5f7ffe0c6f7fff0c6f7fffec6f7ff14c7f7ff2ac7f7ff86cef7ffe4d4f7ff8eddf7ff1ce6f7ffe4eff7ff62fdf7ff6802f8ff080af8ff0c0af8ff220af8ff540bf8ff840bf8ff7e0cf8ff8e0cf8ff9c0cf8ffb20cf8ffc80cf8ff2414f8ff821af8ff2c23f8ffba2bf8ff8235f8ff0043f8ff0648f8ffa64ff8ffaa4ff8ffc04ff8ff5054f8ffa65df8ffca62f8ff0273f8ff4a74f8ff307ef8ff9687f8ff5e90f8ffda96f8ff8ef4f8ff8af5f8ff980afaff5c0bfaff980ffaff626afaff94a7fbff9a4afcff7cfdfcffe2fdfcff2202fdff7208fdffda6cfdffc82efeff842ffeff8232feff4cb5fefff2b8feff2ab9feff6ab9fefff2c0fefffec6feffdacffeff98d8feff66e1feff12effeff4af4feff32fcfeffde8bffffae8dffff728fffff3890ffff16e6ffff48fbffffd23c00004ea50100d00102001e810500b8820500e85a0600d85b0600b4b90600341a0800b61d080058c708002ecb0800f60d0b00941d0b0032320b0086400b0072b50b0010c50b00b6550c008acd0c0018410e00a8430e003e440e00f4b00e00
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: f4e4feff24e5feff1ee6feff2ee6feff3ce6feff52e6feff68e6feffc4edfeff22f4feffccfcfeff5a05ffff220fffffa01cffffa61cffff4424ffff0428ffff1a28ffff4e29ffff7e29ffff7c2affff902affffa22affffbc2affffd62affff3632ffff9838ffff4641ffffd849ffffa453ffff2661ffff3061ffffd268ffff966cffffb06cfffff06dffff206effff1a6fffff2a6fffff386fffff4e6fffff646fffffc076ffff1e7dffffc885ffff568effff1e98ffff9ca5ffffa2a5ffff40adffff00b1ffff16b1ffff6cb2ffff9eb2ffff98b3ffffa8b3ffffb6b3ffffccb3ffffe2b3ffff3ebbffff9cc1ffff46caffffd4d2ffff9cdcffff1ceaffff22eaffffc0f1ffff80f5ffff96f5ffff6efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -606,11 +606,11 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Game/_Scenes
+    - Assets/Game
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Game/_Scenes
+  - Assets/Game
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\WorkSpace\FitMat\Unity\External_Projects\Trapped\TrappeD Unity
     Game
@@ -618,9 +618,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 02380000
-    m_LastClickedID: 14338
-    m_ExpandedIDs: 0000000092300000e43000002a31000072310000be32000058330000ac33000030350000763600001038000062380000e83800003c390000ba39000040460000424600004446000046460000484600004a46000000ca9a3b
+    m_SelectedIDs: ee300000
+    m_LastClickedID: 12526
+    m_ExpandedIDs: 000000000e30000060300000a6300000ee3000003a320000d432000028330000ac340000f23500008c370000de37000064380000b838000036390000f2450000f4450000f6450000f8450000fa450000fc45000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -648,7 +648,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000092300000e43000002a31000072310000be32000058330000ac3300001038000062380000e83800003c390000ba39000040460000424600004446000046460000484600004a460000
+    m_ExpandedIDs: 000000000e30000060300000a6300000ee3000003a320000d432000028330000ac340000f23500008c370000de37000064380000b838000036390000f2450000f4450000f6450000f8450000fa450000fc450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -700,7 +700,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 407}
+    m_ScrollPosition: {x: 0, y: 103}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 229

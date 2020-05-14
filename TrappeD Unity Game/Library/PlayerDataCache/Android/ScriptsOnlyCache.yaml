@@ -130,7 +130,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12044}
     - Class: 114
-      Script: {instanceID: 37968}
+      Script: {instanceID: 35940}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1478,7 +1478,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12044}
     - Class: 114
-      Script: {instanceID: 458962}
+      Script: {instanceID: 19136}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -2611,4 +2611,4 @@ ScriptsOnlyBuild:
   - Assets/Game/_Scenes/Level_Selector.unity
   - Assets/Game/_Scenes/Store.unity
   - Assets/yipli_lib_scene.unity
-  playerPath: D:/WorkSpace/FitMat/FO/Trapped/trapped_test24.apk
+  playerPath: D:/WorkSpace/FitMat/FO/Trapped/trapped_test28.apk
