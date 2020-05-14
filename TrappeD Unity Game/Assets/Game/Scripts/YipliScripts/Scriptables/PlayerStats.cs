@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PlayerStats/playerData")]
 public class PlayerStats : ScriptableObject
 {
-    private string playerName;
-    private int completed_levels;
-    private int coinScore;
+    public string playerName;
+    public int completed_levels;
+    public int coinScore;
 
     public void SetPlayerName(string pname)
     {

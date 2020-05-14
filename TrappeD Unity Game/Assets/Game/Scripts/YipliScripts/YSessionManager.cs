@@ -13,8 +13,11 @@ public class YSessionManager : MonoBehaviour
      // Start is called before the first frame update
     void Start()
     {
-        PlayerSession.Instance.StartSPSession("trapped");
-
+        if (YipliHelper.checkInternetConnection())
+        {
+            PlayerSession.Instance.StartSPSession("trapped");
+        }
+        
         completed_levels = ps.GetCompletedLevels();
         coinScore = ps.GetCoinScore();
     }
@@ -22,20 +25,23 @@ public class YSessionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerSession.Instance.UpdateDuration();
+        if (YipliHelper.checkInternetConnection())
+        {
+            PlayerSession.Instance.UpdateDuration();
+        }
     }
 
     public void StoreSession() {
 
-        if (PlayerPrefs.GetInt("NUMBER_OF_COMP_LEVELS") != completed_levels || PlayerPrefs.GetInt("Coins") > coinScore)
+        if (ps.GetCompletedLevels() != completed_levels || ps.GetCoinScore() > coinScore)
         {
             Dictionary<string, string> gameData;
             gameData = new Dictionary<string, string>();
-            gameData.Add("completed-levels", PlayerPrefs.GetInt("NUMBER_OF_COMP_LEVELS").ToString());
+            gameData.Add("completed-levels", ps.GetCompletedLevels().ToString());
             
             if (PlayerPrefs.GetInt("Coins") > coinScore)
             {
-                gameData.Add("coins-collected", PlayerPrefs.GetInt("Coins").ToString());
+                gameData.Add("coins-collected", ps.GetCoinScore().ToString());
             }
             else
             {

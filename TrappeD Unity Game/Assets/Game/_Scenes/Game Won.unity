@@ -1706,14 +1706,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4715304531452843896, guid: 0c88d08e7f936224e8913112641257f8,
         type: 3}
-      propertyPath: pointScore
-      value: 
-      objectReference: {fileID: 1995310548}
-    - target: {fileID: 4715304531452843896, guid: 0c88d08e7f936224e8913112641257f8,
-        type: 3}
       propertyPath: pointScoreTotal
       value: 
       objectReference: {fileID: 567588014}
+    - target: {fileID: 4715304531452843896, guid: 0c88d08e7f936224e8913112641257f8,
+        type: 3}
+      propertyPath: pointScore
+      value: 
+      objectReference: {fileID: 1995310548}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c88d08e7f936224e8913112641257f8, type: 3}
 --- !u!1 &1073602882

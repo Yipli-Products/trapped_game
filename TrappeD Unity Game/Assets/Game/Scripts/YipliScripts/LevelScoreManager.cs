@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelScoreManager : MonoBehaviour
 {
-   /* private string level_one = "Level_01_RC";
-    private string level_two = "Level_02_RC";
-    private string level_three = "Level_03_RC";
-    private string level_four = "Level_04_RC";
-    private string level_five = "Level_05_RC";
-    private string level_six = "Level_06_RC";
-    private string level_seven = "Level_07_rc";
-    private string level_eight = "Level_08_RC";
-    private string level_nine = "Level_09_RC"; */
+    /* private string level_one = "Level_01_RC";
+     private string level_two = "Level_02_RC";
+     private string level_three = "Level_03_RC";
+     private string level_four = "Level_04_RC";
+     private string level_five = "Level_05_RC";
+     private string level_six = "Level_06_RC";
+     private string level_seven = "Level_07_rc";
+     private string level_eight = "Level_08_RC";
+     private string level_nine = "Level_09_RC"; */
+
+    [SerializeField] Text playerName;
+    [SerializeField] PlayerStats ps;
 
     private int level_one_start = 9;
     private int level_two_start = 5;
@@ -30,6 +34,7 @@ public class LevelScoreManager : MonoBehaviour
 
     private void Start()
     {
+        playerName.text = ps.GetPlayerName();
         SetCurrentStarts();
     }
 
@@ -41,6 +46,7 @@ public class LevelScoreManager : MonoBehaviour
         {
             case "Level_01_RC":
                 currentStars = level_one_start;
+                PlayerPrefs.SetInt("1", 0);
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
 

@@ -48,6 +48,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		public Text coinText;
 		private int coinAmount = 0;
+		private int totalCoins;
 
 		public float buttonHoldDownTime = 0;
 
@@ -83,6 +84,11 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		string FMResponseCount = "";
 		private int thisLevelPoints;
 
+		public bool leftJump = false;
+
+		public float waitTimeCal = 0f;
+		public bool calWaitTime = true;
+
 		// Use this for initialization
 		void Start () {
 
@@ -114,6 +120,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			thisLevelPoints = 0;
 			PlayerPrefs.SetInt("thisLevelPoints", thisLevelPoints);
+
+			totalCoins = ps.GetCoinScore();
 		}
 
 
@@ -209,18 +217,21 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 					//GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * 60.0f, verticalForce * Time.deltaTime * 60.0f));
 
-					if (moveHorzRight)
+					if (!leftJump)
 					{
+						print("jumping when moveHorzRight is true");
 						GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * 60.0f, verticalForce * Time.deltaTime * 60.0f));
 					}
-					else if (moveHorzLeft)
+					else if (leftJump)
 					{
+						print("jumping when moveHorzLeft is true");
 						GetComponent<Rigidbody2D>().AddForce(new Vector2(-verticalForce * Time.deltaTime * 60.0f, verticalForce * Time.deltaTime * 60.0f));
 					}
 					else
 					{
-						//GetComponent<Rigidbody2D>().AddForce(new Vector2(0, verticalForce * Time.deltaTime * 60.0f)); //o
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * 60.0f, verticalForce * Time.deltaTime * 60.0f));
+						print("jumping when nothing is true");
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(0, verticalForce * Time.deltaTime * 60.0f)); //o
+						//GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * 60.0f, verticalForce * Time.deltaTime * 60.0f));
 					}
 
 					AddJumpPlayerAction();
@@ -271,6 +282,11 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				}
 			}
 
+			if (calWaitTime)
+			{
+				waitTimeCal += Time.deltaTime;
+			}
+
 		}
 
 		public void PlayerDead(){
@@ -291,11 +307,13 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		public void AddCoins(int amount){
 			coinAmount += amount;
 			thisLevelPoints += amount;
+			totalCoins += amount;
 			coinText.text = coinAmount.ToString ();
+			
 			PlayerPrefs.SetInt ("Coins", coinAmount);
 			PlayerPrefs.SetInt("thisLevelPoints", thisLevelPoints);
 
-			ps.SetCoinScore(coinAmount);
+			ps.SetCoinScore(totalCoins);
 		}
 
 
@@ -313,11 +331,20 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				//AutoMovement = false;
 				//hInput = Input.GetAxis("Horizontal"); //FOR PC
 				hInput = forwardForce;
+				leftJump = false;
+				calWaitTime = false;
+				waitTimeCal = 0;
 			}
 			else
 			{
 				//AutoMovement = true;
-				hInput = -5f;
+				calWaitTime = true;
+
+				if (waitTimeCal >= 5f)
+				{
+					hInput = -8f;
+					leftJump = true;
+				}
 			}
 		}
 
@@ -397,8 +424,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						int step = int.Parse(whiteSpace[1]);
 
 						moveHorzLeft = false;
-
-						float hForce = 15f;
+						leftJump = false;
+						float hForce = 18f;
+						calWaitTime = false;
+						waitTimeCal = 0f;
 
 						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce, 0f));
 
@@ -417,12 +446,19 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase))
 					{
-						moveHorzRight = false;
-						float hForce = -1.5f;
+						calWaitTime = true;
 
-						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
+						if (waitTimeCal >= 5f)
+						{
+							moveHorzRight = false;
+							hInput = -8f;
+							leftJump = true;
 
-						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.STOP);
+							//float hForce = -1.5f;
+							//gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
+						}
+
+						PlayerSession.Instance.AddPlayerAction("stop");
 					}
 				}
 
@@ -457,7 +493,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		private void leftOps()
 		{
 			moveHorzRight = false;
-			touchHorizontalMoveDown(3);
+			leftJump = true;
+			float hForce = -1.5f;
+
+			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
 		}
 	}
 }

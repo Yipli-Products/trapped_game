@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Firebase.Database;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,7 +29,7 @@ public class PlayerSession : MonoBehaviour
         public static string LEFTMOVE = "left move";
         public static string RIGHTMOVE = "right move";
         public static string JUMP = "jumping";
-        public static string STOP = "running stop";
+        public static string STOP = "running stopped";
         public static string RUNNING = "running";
     }
 
@@ -125,6 +127,19 @@ public class PlayerSession : MonoBehaviour
             playerGameData = new Dictionary<string, string>();
             playerGameData = update;
         }
+    }
+
+    // Get player game data
+    public async Task<DataSnapshot> GetGameData (string gameId)
+    {
+        DataSnapshot dataSnapShot =  await FirebaseDBHandler.GetGameData(
+            currentYipliConfig.userId, 
+            currentYipliConfig.playerInfo.playerId, 
+            gameId,
+            () => { Debug.Log("Got Game data successfully"); }
+        );
+
+        return dataSnapShot ?? null;
     }
 
     //Pass here name of the game

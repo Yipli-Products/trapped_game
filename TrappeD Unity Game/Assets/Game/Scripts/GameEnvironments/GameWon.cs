@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class GameWon : MonoBehaviour {
 
+	[SerializeField] PlayerStats ps;
+
 	public float delayTime = 10.0f;
 	private float elapsedTime = 0.0f;
 	private bool isGameWon = false;
@@ -29,7 +31,12 @@ public class GameWon : MonoBehaviour {
 				PlayerPrefs.SetInt ("NUMBER_OF_COMP_LEVELS", PlayerPrefs.GetInt ("CURRENT_LEVEL_SERIAL"));
 			}
 
-			ysm.StoreSession();
+			ps.SetCompletedLevels(ps.GetCompletedLevels() + 1);
+			
+			if (YipliHelper.checkInternetConnection())
+			{
+				ysm.StoreSession();
+			}
 
 			isGameWon = true;
 		}

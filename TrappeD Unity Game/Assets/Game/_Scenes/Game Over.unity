@@ -3438,6 +3438,11 @@ PrefabInstance:
       propertyPath: pointScore
       value: 
       objectReference: {fileID: 1503883185}
+    - target: {fileID: 4715304531452843896, guid: 0c88d08e7f936224e8913112641257f8,
+        type: 3}
+      propertyPath: pointScoreTotal
+      value: 
+      objectReference: {fileID: 1503883185}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c88d08e7f936224e8913112641257f8, type: 3}
 --- !u!1001 &8550317030911404435

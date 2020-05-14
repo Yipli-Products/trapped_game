@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class LevelButtonController : MonoBehaviour {
 
+	[SerializeField] PlayerStats ps;
 
 	public Button thisButton;
 	public Image star1;
@@ -43,7 +44,7 @@ public class LevelButtonController : MonoBehaviour {
 
 
 		//show the stars earned
-		if (thisLevelNumber <= numberOfCompletedLevels+1) {//this level has been unlocked.
+		if (thisLevelNumber <= ps.GetCompletedLevels() + 1) {//this level has been unlocked.
 
 
 			int starEarned = PlayerPrefs.GetInt ("STAR_EARNED_"+thisLevelNumber.ToString());

@@ -89,14 +89,14 @@ public static class FirebaseDBHandler
 
                 FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://yipli-project.firebaseio.com/");
                 DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-                snapshot = await reference.Child("profiles/users/" + userId).Child("/players").Child(playerId).Child("/activity-statistics/game-statistics").Child(gameId).Child("/game-data").GetValueAsync();
+                snapshot = await reference.Child("profiles/users/" + userId).Child("players").Child(playerId).Child("activity-statistics/games-statistics").Child(gameId).Child("game-data").GetValueAsync();
             }
             catch(Exception exp)
             {
                 Debug.Log("Failed to GetAllPlayerdetails : " + exp.Message);
             }
         }
-        return snapshot;
+        return snapshot ?? null;
     }
 
     /* The function call to be allowed only if network is available */

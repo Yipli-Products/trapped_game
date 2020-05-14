@@ -175,7 +175,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   horizontalForce: 10
-  verticalForce: 450
+  verticalForce: 550
   moveHorzRight: 0
   moveHorzLeft: 0
   ballJump: 0
@@ -214,6 +214,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e94114ca44f4f12478dae5ee9fe29551, type: 3}
   - {fileID: 21300000, guid: f4e6882644e47ed4ca08c1ff02670793, type: 3}
   forwardForce: 500
+  leftJump: 0
+  waitTimeCal: 0
+  calWaitTime: 1
 --- !u!96 &9691444
 TrailRenderer:
   serializedVersion: 2

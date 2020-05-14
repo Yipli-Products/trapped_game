@@ -20,7 +20,11 @@ public class StoreYSession : MonoBehaviour
 
     private void StoreYipliSession()
     {
-        ysm.StoreSession();
+        if (YipliHelper.checkInternetConnection())
+        {
+            ysm.StoreSession();
+        }
+
         sgls.SessionStartStatus = false;
     }
 }

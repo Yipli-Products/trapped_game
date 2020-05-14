@@ -7,11 +7,12 @@ public class PointDisplay : MonoBehaviour
 {
     [SerializeField] Text pointScoreTotal;
     [SerializeField] Text pointScore;
+    [SerializeField] PlayerStats ps;
 
     // Start is called before the first frame update
     void Start()
     {
-        pointScoreTotal.text = "Total Points : " + PlayerPrefs.GetInt("Coins");
+        pointScoreTotal.text = "Total Points : " + ps.GetCoinScore();
         pointScore.text = "Collected Points : " + PlayerPrefs.GetInt("thisLevelPoints");
     }
 }

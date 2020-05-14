@@ -20,8 +20,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
         private void OnTriggerEnter2D(Collider2D col) {
             if (gameObject.tag == "SpeedI") {
                 if (col.gameObject.tag == "Player") {
-                    bc.forwardForce = 2000f;
-                    jc.hForce = 2000f;
+                    bc.forwardForce = 1000f;
+                    jc.hForce = 1000f;
 
                     Debug.Log("Player Triggered SpeedI");
                 }

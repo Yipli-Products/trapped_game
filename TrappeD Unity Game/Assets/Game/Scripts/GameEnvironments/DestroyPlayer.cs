@@ -48,10 +48,13 @@ public class DestroyPlayer : MonoBehaviour {
 			   GetComponent<AudioSource>().PlayOneShot(gameOverSound);
 				DoShake();
 
-				ysm.StoreSession();
+				if (YipliHelper.checkInternetConnection())
+				{
+					ysm.StoreSession();
+				}
 
-				//col.gameObject.SendMessage("PlayerDead");
-			}
+			//col.gameObject.SendMessage("PlayerDead");
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
