@@ -29,7 +29,8 @@ public class LevelButtonController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//PlayerPrefs.SetInt ("NUMBER_OF_COMP_LEVELS", 0);
-		numberOfCompletedLevels = PlayerPrefs.GetInt ("NUMBER_OF_COMP_LEVELS");
+		//numberOfCompletedLevels = PlayerPrefs.GetInt ("NUMBER_OF_COMP_LEVELS");
+		numberOfCompletedLevels = ps.GetCompletedLevels();
 		//if(numberOfCompletedLevels == 0) numberOfCompletedLevels +=1;
 
 

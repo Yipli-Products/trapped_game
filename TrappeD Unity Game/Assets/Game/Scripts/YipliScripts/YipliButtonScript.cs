@@ -12,17 +12,20 @@ public class YipliButtonScript : MonoBehaviour
     [SerializeField] Text pointScore;
     [SerializeField] PlayerStats ps;
     [SerializeField] GameObject NoInternetIcon;
+    [SerializeField] GameObject LoadingPanel;
 
 
-    private void Start()
+    private async void Start()
     {
         NoInternetIcon.SetActive(false);
 
         if (YipliHelper.checkInternetConnection())
         {
-            GetPlayerData();
+            LoadingPanel.SetActive(true);
+            await GetPlayerData();
+            LoadingPanel.SetActive(false);
+
             //Task.Run(GetPlayerData).Wait();
-            //await GetPlayerData();
         }
         else
         {
@@ -61,7 +64,7 @@ public class YipliButtonScript : MonoBehaviour
         PlayerSession.Instance.GoToYipli();
     }
 
-    private async void GetPlayerData ()
+    private async Task GetPlayerData ()
     {
         DataSnapshot dataSnapshot = await PlayerSession.Instance.GetGameData("trapped");
         GameData gameData = new GameData();

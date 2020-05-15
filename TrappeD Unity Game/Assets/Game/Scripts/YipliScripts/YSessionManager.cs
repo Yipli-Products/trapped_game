@@ -39,7 +39,7 @@ public class YSessionManager : MonoBehaviour
             gameData = new Dictionary<string, string>();
             gameData.Add("completed-levels", ps.GetCompletedLevels().ToString());
             
-            if (PlayerPrefs.GetInt("Coins") > coinScore)
+            if (ps.GetCoinScore() > coinScore)
             {
                 gameData.Add("coins-collected", ps.GetCoinScore().ToString());
             }
@@ -53,6 +53,6 @@ public class YSessionManager : MonoBehaviour
             Debug.Log("Game data is updated successfully.");
         }
 
-        PlayerSession.Instance.StoreSPSession(PlayerPrefs.GetInt("Coins"));
+        PlayerSession.Instance.StoreSPSession(ps.GetCoinScore());
     }
 }

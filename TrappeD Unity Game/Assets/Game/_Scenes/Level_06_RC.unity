@@ -17835,6 +17835,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1706214377}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1706240347 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2045624, guid: 0c908e4df0cf3624ea31f8dd7265ae6b,
+    type: 3}
+  m_PrefabInstance: {fileID: 655683499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1706696935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18158,6 +18164,10 @@ PrefabInstance:
       propertyPath: Life3
       value: 
       objectReference: {fileID: 504826385}
+    - target: {fileID: 11491444, guid: 4f2d65df182e5e14f9ad00d075f852b7, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1706240347}
     - target: {fileID: 491446, guid: 4f2d65df182e5e14f9ad00d075f852b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -25.8

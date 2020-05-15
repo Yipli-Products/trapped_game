@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 
 namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 {
@@ -106,7 +106,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("CHKP_X"), PlayerPrefs.GetFloat("CHKP_Y"), PlayerPrefs.GetFloat("CHKP_Z"));
 			}
 
-
+			if (SceneManager.GetActiveScene().ToString() == "Level_04_RC")
+			{
+				transform.position = new Vector3(1.1f, 3f, -0.8f);
+			}
 		
 			showLifeOnScreen ();
 			#if UNITY_ANDROID
