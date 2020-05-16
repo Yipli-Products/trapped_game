@@ -81,7 +81,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
         public void jumpB()
         {
             bc.ballJump = true;
-            Invoke("JumpFalse", 1f);
+            Invoke("JumpFalse", 0.1f);
         }
 
         private void JumpFalse()

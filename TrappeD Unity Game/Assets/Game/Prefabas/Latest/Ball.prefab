@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
+  pauseCanvas: {fileID: 0}
   hInput: 0
   vInput: 0
   groundCheck: {fileID: 491448}
@@ -175,10 +176,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   horizontalForce: 10
-  verticalForce: 550
+  verticalForce: 800
   moveHorzRight: 0
   moveHorzLeft: 0
   ballJump: 0
+  verticleMultiplier: 100
   distG: 0.42
   isPlayerDead: 0
   mainCamera: {fileID: 0}

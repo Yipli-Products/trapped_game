@@ -8,6 +8,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 	public class BallController : MonoBehaviour {
 
 		[SerializeField] PlayerStats ps;
+		[SerializeField] GameObject pauseCanvas;
 
 		public float hInput=0.0f;
 		public float vInput=0.0f;
@@ -27,6 +28,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		public bool moveHorzRight = false;
 		public bool moveHorzLeft = false;
 		public bool ballJump = false;
+
+		public float verticleMultiplier = 100f;
 
 		//public GameObject rayDrawingPosition;
 		//public GameObject rayDrawingEndPosition;
@@ -223,12 +226,16 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					if (!leftJump)
 					{
 						print("jumping when moveHorzRight is true");
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * 60.0f, verticalForce * Time.deltaTime * 60.0f));
+						//GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * verticleMultiplier, verticalForce * Time.deltaTime * 60.0f));
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, verticalForce * Time.deltaTime * verticleMultiplier));
+						Invoke("positiveXJump", 0.09f);
 					}
 					else if (leftJump)
 					{
 						print("jumping when moveHorzLeft is true");
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(-verticalForce * Time.deltaTime * 60.0f, verticalForce * Time.deltaTime * 60.0f));
+						//GetComponent<Rigidbody2D>().AddForce(new Vector2(-verticalForce * Time.deltaTime * verticleMultiplier, verticalForce * Time.deltaTime * 60.0f));
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, verticalForce * Time.deltaTime * verticleMultiplier));
+						Invoke("negetiveXJump", 0.09f);
 					}
 					else
 					{
@@ -253,6 +260,16 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 
 
+		}
+
+		private void positiveXJump()
+		{
+			GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * verticleMultiplier * 2, 0f));
+		}
+
+		private void negetiveXJump()
+		{
+			GetComponent<Rigidbody2D>().AddForce(new Vector2(-verticalForce * Time.deltaTime * verticleMultiplier * 2, 0f));
 		}
 
 		void Update(){
@@ -500,6 +517,12 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			float hForce = -1.5f;
 
 			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
+		}
+
+		private void pauseGame()
+		{
+			Time.timeScale = 0f;
+			pauseCanvas.SetActive(true);
 		}
 	}
 }

@@ -8373,7 +8373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 410118, guid: c0aa3acf167cf894796884309fdcc1a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.53
+      value: 34.88
       objectReference: {fileID: 0}
     - target: {fileID: 410118, guid: c0aa3acf167cf894796884309fdcc1a5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8407,9 +8407,13 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 410118, guid: c0aa3acf167cf894796884309fdcc1a5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2701612
+      objectReference: {fileID: 0}
     - target: {fileID: 5010118, guid: c0aa3acf167cf894796884309fdcc1a5, type: 3}
       propertyPath: m_Mass
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5010118, guid: c0aa3acf167cf894796884309fdcc1a5, type: 3}
       propertyPath: m_BodyType
@@ -16450,6 +16454,10 @@ PrefabInstance:
       value: -3.47
       objectReference: {fileID: 0}
     - target: {fileID: 11497862, guid: c2a3cc1cbffd8bd42bcab3d371df710f, type: 3}
+      propertyPath: pauseCanvas
+      value: 
+      objectReference: {fileID: 5673878885259566658}
+    - target: {fileID: 11497862, guid: c2a3cc1cbffd8bd42bcab3d371df710f, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1000059510}
@@ -21739,7 +21747,7 @@ PrefabInstance:
     - target: {fileID: 833258890859280265, guid: b6812f5ba94b9e14fb4fca312b78f6b6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.307
+      value: -6.43
       objectReference: {fileID: 0}
     - target: {fileID: 833258890859280265, guid: b6812f5ba94b9e14fb4fca312b78f6b6,
         type: 3}
@@ -22119,7 +22127,7 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5673878883976699770, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
+    - target: {fileID: 7414530026137865823, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -22138,3 +22146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5673878885259566658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7414530025254950833, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
+    type: 3}
+  m_PrefabInstance: {fileID: 5673878885259566656}
+  m_PrefabAsset: {fileID: 0}
