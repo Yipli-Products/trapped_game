@@ -15,6 +15,7 @@ public class YSessionManager : MonoBehaviour
     {
         if (YipliHelper.checkInternetConnection())
         {
+            PlayerSession.Instance.SetGameClusterId(1); // set current gameid
             PlayerSession.Instance.StartSPSession("trapped");
         }
         

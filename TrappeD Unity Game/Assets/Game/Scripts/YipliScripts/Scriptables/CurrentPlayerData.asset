@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404322af594942f478347946ad7d1557, type: 3}
   m_Name: CurrentPlayerData
   m_EditorClassIdentifier: 
-  playerName: test
-  completed_levels: 0
-  coinScore: 0
+  playerName: hhsjsj
+  completed_levels: 1
+  coinScore: 430

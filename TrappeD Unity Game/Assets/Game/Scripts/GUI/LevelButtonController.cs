@@ -11,8 +11,6 @@ public class LevelButtonController : MonoBehaviour {
 	public Image star2;
 	public Image star3;
 
-
-
 	public Sprite starActive;
 	public Sprite starInactive;
 	public Sprite lockedLevelStarInactive;
@@ -30,7 +28,10 @@ public class LevelButtonController : MonoBehaviour {
 	void Start () {
 		//PlayerPrefs.SetInt ("NUMBER_OF_COMP_LEVELS", 0);
 		//numberOfCompletedLevels = PlayerPrefs.GetInt ("NUMBER_OF_COMP_LEVELS");
+
 		numberOfCompletedLevels = ps.GetCompletedLevels();
+		//numberOfCompletedLevels = 10; // uncomment this for only testing purpose. this will show all the levels unlocked. change 10 to maximum created levels.
+
 		//if(numberOfCompletedLevels == 0) numberOfCompletedLevels +=1;
 
 
@@ -40,13 +41,8 @@ public class LevelButtonController : MonoBehaviour {
 		}
 		else thisButton.image.sprite = levelBackLocked;
 
-
-
-
-
 		//show the stars earned
-		if (thisLevelNumber <= ps.GetCompletedLevels() + 1) {//this level has been unlocked.
-
+		if (thisLevelNumber <= ps.GetCompletedLevels() + 1) {//this level has been unlocked. 
 
 			int starEarned = PlayerPrefs.GetInt ("STAR_EARNED_"+thisLevelNumber.ToString());
 			//Debug.Log("STAR earned by " + thisLevelNumber.ToString() + " level = "+starEarned.ToString());
@@ -72,20 +68,8 @@ public class LevelButtonController : MonoBehaviour {
 			star2.sprite = lockedLevelStarInactive;
 			star3.sprite = lockedLevelStarInactive;
 		}
-
-
-
-
-
-
-
-
-
 	}
 	
-
-
-
 	public void LoadThisLevel(){
 		if (thisLevelNumber <= numberOfCompletedLevels+1) {
 			//audio.PlayOneShot(buttonClickSoundEffect);
@@ -94,6 +78,4 @@ public class LevelButtonController : MonoBehaviour {
 			Application.LoadLevel(thisLevelNumber);
 		}
 	}
-
-
 }

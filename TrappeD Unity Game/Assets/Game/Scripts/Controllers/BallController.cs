@@ -15,7 +15,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 
 		//Vars for ground check
-		bool isGrounded = false;
+		public bool isGrounded = false;
 		public Transform groundCheck;
 		public float groundRadius = 5.0f;
 		public LayerMask whatIsGround;
@@ -91,6 +91,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		public float waitTimeCal = 0f;
 		public bool calWaitTime = true;
+		public bool jumpManipulated = false;
 
 		// Use this for initialization
 		void Start () {
@@ -146,14 +147,14 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			}
 		}
 
-		public void touchJump(int j){
+		/*public void touchJump(int j){
 			if (j == 1) {
 					ballJump = true;
 					GetComponent<AudioSource>().PlayOneShot(jumpingSound);
 				}
 			else
 				ballJump = false;
-		}
+		}*/
 
 		public void touchHorizontalMoveDown(int h){
 			if (h == 1) {
@@ -225,23 +226,18 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 					if (!leftJump)
 					{
-						print("jumping when moveHorzRight is true");
-						//GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * verticleMultiplier, verticalForce * Time.deltaTime * 60.0f));
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, verticalForce * Time.deltaTime * verticleMultiplier));
-						Invoke("positiveXJump", 0.09f);
+						GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 20f);
+						//StartCoroutine(positiveXJump());
 					}
 					else if (leftJump)
 					{
-						print("jumping when moveHorzLeft is true");
-						//GetComponent<Rigidbody2D>().AddForce(new Vector2(-verticalForce * Time.deltaTime * verticleMultiplier, verticalForce * Time.deltaTime * 60.0f));
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, verticalForce * Time.deltaTime * verticleMultiplier));
-						Invoke("negetiveXJump", 0.09f);
+						GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 20f);
+						//StartCoroutine(negetiveXJump());
 					}
 					else
 					{
 						print("jumping when nothing is true");
 						GetComponent<Rigidbody2D>().AddForce(new Vector2(0, verticalForce * Time.deltaTime * 60.0f)); //o
-						//GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * 60.0f, verticalForce * Time.deltaTime * 60.0f));
 					}
 
 					AddJumpPlayerAction();
@@ -262,14 +258,16 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		}
 
-		private void positiveXJump()
+		private IEnumerator positiveXJump()
 		{
-			GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * verticleMultiplier * 2, 0f));
+			yield return new WaitForSeconds(0.05f);
+			GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * verticleMultiplier * 3, 0f));
 		}
 
-		private void negetiveXJump()
+		private IEnumerator negetiveXJump()
 		{
-			GetComponent<Rigidbody2D>().AddForce(new Vector2(-verticalForce * Time.deltaTime * verticleMultiplier * 2, 0f));
+			yield return new WaitForSeconds(0.05f);
+			GetComponent<Rigidbody2D>().AddForce(new Vector2(-verticalForce * Time.deltaTime * verticleMultiplier * 3, 0f));
 		}
 
 		void Update(){
@@ -282,7 +280,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if (Input.GetKeyDown (KeyCode.UpArrow)){
-					ballJump = true;
+					//ballJump = true;
 					GetComponent<AudioSource>().PlayOneShot(jumpingSound);
 				}
 				if (Input.GetKeyUp (KeyCode.UpArrow))
@@ -305,6 +303,32 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			if (calWaitTime)
 			{
 				waitTimeCal += Time.deltaTime;
+			}
+
+			if (ballJump)
+			{
+				if (jumpManipulated)
+				{
+					if (!leftJump)
+					{
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(10f, 0f), ForceMode2D.Force);
+					}
+					else if (leftJump)
+					{
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(-10f, 0f), ForceMode2D.Force);
+					}
+				}
+				else
+				{
+					if (!leftJump)
+					{
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(40f, 0f), ForceMode2D.Force);
+					}
+					else if (leftJump)
+					{
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(-40f, 0f), ForceMode2D.Force);
+					}
+				}
 			}
 
 		}
@@ -358,8 +382,11 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			else
 			{
 				//AutoMovement = true;
-				calWaitTime = true;
-
+				if (!ballJump)
+				{
+					calWaitTime = true;
+				}
+				
 				if (waitTimeCal >= 5f)
 				{
 					hInput = -8f;
@@ -445,7 +472,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 						moveHorzLeft = false;
 						leftJump = false;
-						float hForce = 18f;
+						float hForce = 40f;
 						calWaitTime = false;
 						waitTimeCal = 0f;
 
@@ -466,7 +493,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase))
 					{
-						calWaitTime = true;
+						if (!ballJump)
+						{
+							calWaitTime = true;
+						}
 
 						if (waitTimeCal >= 5f)
 						{

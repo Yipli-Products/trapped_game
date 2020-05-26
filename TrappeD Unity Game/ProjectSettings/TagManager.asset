@@ -9,6 +9,8 @@ TagManager:
   - StickeyObj
   - SpeedI
   - SpeedR
+  - jumpI
+  - jumpR
   layers:
   - Default
   - TransparentFX

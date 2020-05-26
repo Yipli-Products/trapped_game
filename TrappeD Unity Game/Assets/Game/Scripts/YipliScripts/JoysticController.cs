@@ -16,8 +16,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
         private BallController bc = null;
 
         private bool buttonHoldDownR = false;
-        public float hForce = 650;
-        public float hForceNegative = -0.0000005f;
+        public float hForce = 650f;
+        //public float hForceNegative = -0.0000005f;
 
         // Start is called before the first frame update
         void Start()
@@ -75,13 +75,16 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
         public void rightBHoldUp()
         {
             
-            bc.calWaitTime = true;
+            if (!bc.ballJump)
+            {
+                bc.calWaitTime = true;
+            }
             buttonHoldDownR = false;
         }
         public void jumpB()
         {
             bc.ballJump = true;
-            Invoke("JumpFalse", 0.1f);
+            Invoke("JumpFalse", 0.5f);
         }
 
         private void JumpFalse()
