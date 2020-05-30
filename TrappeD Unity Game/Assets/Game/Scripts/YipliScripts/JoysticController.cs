@@ -74,7 +74,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
         public void rightBHoldUp()
         {
-            
             if (!bc.ballJump)
             {
                 bc.calWaitTime = true;
@@ -84,6 +83,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
         public void jumpB()
         {
             bc.ballJump = true;
+            bc.calWaitTime = false;
+            bc.waitTimeCal = 0f;
             Invoke("JumpFalse", 0.5f);
         }
 

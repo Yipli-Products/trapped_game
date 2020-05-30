@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,18 +9,17 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 {
     //required variables
     [SerializeField] Button[] menuButtons;
+    [SerializeField] PlayerStats ps;
+    [SerializeField] Button back;
+
+    private List<Button> allowedLevels;
 
     Button currentB;
-
-    string currentButton;
     int currentButtonIndex;
 
-    LevelButtonController lbc;
-    LoadLevelByName llbn;
-
-    bool leftPressed = false;
-    bool rightPressed = false;
-    bool EnterPressed = false;
+    const string LEFT = "left";
+    const string RIGHT = "right";
+    const string ENTER = "enter";
 
     string FMResponseCount = "";
     float timer = 0;
@@ -27,20 +27,42 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lbc = FindObjectOfType<LevelButtonController>();
-        llbn = FindObjectOfType<LoadLevelByName>();
-        currentButton = "LevelOne";
+        print("From level selection : Set cluster id to : 0");
+        //PlayerSession.Instance.SetGameClusterId(0);
 
-        currentButtonIndex = 0;
+        allowedLevels = new List<Button>();
+        SetAllowedLevels();
 
-        PlayerSession.Instance.SetGameClusterId(0);
+        currentButtonIndex = ps.GetCompletedLevels() + 1;
+        manageCurrentButton();
+    }
+
+    private void SetAllowedLevels()
+    {
+        int allowedButtons = ps.GetCompletedLevels();
+
+        if (allowedButtons >= 10)
+        {
+            allowedButtons = 10;
+        }
+        else
+        {
+            allowedButtons += 1;
+        }
+
+        allowedLevels.Add(back);
+        
+        for (int i = 0; i < allowedButtons; i++)
+        {
+            allowedLevels.Add(menuButtons[i]);
+        }
+        print("allowed levels : " + allowedLevels.Count);
     }
 
     // Update is called once per frame
     void Update()
     {
         MenuControlSystem();
-        GetMatKeyInputs();
 
         CalculateTime();
     }
@@ -50,54 +72,38 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
         timer += Time.deltaTime;
     }
 
-    private void GetMatKeyInputs()
+    /*private void GetMatKeyInputs()
     {
-        // left to right 1, 2, 3, 4, 5, 6, 7, 8, 9, back
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || leftPressed)
+        // left to right play, changeplayer, gotoyipli, exit
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            currentButtonIndex = GetPreviousButton();
-            manageCurrentButton();
-
-            leftPressed = false;
+            ProcessMatInputs("left");
         }
 
-        // left to right 1, 2, 3, 4, 5, 6, 7, 8, 9, back
-        if (Input.GetKeyDown(KeyCode.RightArrow) || rightPressed)
+        // left to right play, changeplayer, gotoyipli, exit
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            currentButtonIndex = GetNextButton();
-            manageCurrentButton();
-
-            rightPressed = false;
+            ProcessMatInputs("right");
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || EnterPressed)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (currentButton == "Back")
-            {
-                llbn.LoadLevelGivenTheName("Main Menu");
-                EnterPressed = false;
-            }
-            else
-            {
-                PlayerSession.Instance.SetGameClusterId(1); // set game cluster id for action input
-                currentB.GetComponent<Button>().onClick.Invoke();
-                EnterPressed = false;
-            }
+            ProcessMatInputs("enter");
         }
-    }
+    }*/
+
     private void manageCurrentButton()
     {
-        for (int i = 0; i < menuButtons.Length; i++)
+        for (int i = 0; i < allowedLevels.Count; i++)
         {
             if (i == currentButtonIndex)
             {
-                menuButtons[i].GetComponent<Image>().color = Color.green;
-                currentButton = menuButtons[i].name;
-                currentB = menuButtons[i];
+                allowedLevels[i].GetComponent<Image>().color = Color.green;
+                currentB = allowedLevels[i];
             }
             else
             {
-                menuButtons[i].GetComponent<Image>().color = Color.white;
+                allowedLevels[i].GetComponent<Image>().color = Color.white;
             }
         }
     }
@@ -106,40 +112,38 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     private void MenuControlSystem()
     {
         // timer conditions to map with 1s time
-        if (timer > 1f)
+        if (timer > 0.5f)
         {
             //#if UNITY_ANDROID
             //string FMResponse = PlayerMovement.PluginClass.CallStatic<string>("_getFMResponse");
+
             string FMResponse = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
             Debug.Log("UNITY FMResponse: " + FMResponse);
 
             string[] FMTokens = FMResponse.Split('.');
             Debug.Log("UNITY FMTokens: " + FMTokens[0]);
 
-            if (!FMTokens[0].Equals(FMResponseCount))
+            if (FMTokens.Length > 1 && !FMTokens[0].Equals(FMResponseCount))
             {
                 FMResponseCount = FMTokens[0];
-                if (FMTokens[1] == "Pause")
+                if (FMTokens[1].Equals("Left", StringComparison.OrdinalIgnoreCase))
                 {
-
+                    ProcessMatInputs(LEFT);
                 }
-                else if (FMTokens[1] == "Left")
+                else if (FMTokens[1].Equals("Right", StringComparison.OrdinalIgnoreCase))
                 {
-                    leftPressed = true;
+                    ProcessMatInputs(RIGHT);
                 }
-                else if (FMTokens[1] == "Right")
+                else if (FMTokens[1].Equals("Enter", StringComparison.OrdinalIgnoreCase))
                 {
-                    rightPressed = true;
-                }
-                else if (FMTokens[1] == "Enter")
-                {
-                    EnterPressed = true;
+                    ProcessMatInputs(ENTER);
                 }
             }
 
-            timer = 0;
+            timer = 0f;
         }
     }
+
     private int GetNextButton()
     {
         if ((currentButtonIndex + 1) == menuButtons.Length)
@@ -164,4 +168,27 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
         }
     }
 
+    private void ProcessMatInputs(string matInput)
+    {
+        switch (matInput)
+        {
+            case LEFT:
+                currentButtonIndex = GetPreviousButton();
+                manageCurrentButton();
+                break;
+
+            case RIGHT:
+                currentButtonIndex = GetNextButton();
+                manageCurrentButton();
+                break;
+
+            case ENTER:
+                currentB.GetComponent<Button>().onClick.Invoke();
+                break;
+
+            default:
+                Debug.Log("Wrong Input");
+                break;
+        }
+    }
 }

@@ -93,8 +93,12 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		public bool calWaitTime = true;
 		public bool jumpManipulated = false;
 
+		PauseGame pg;
+
 		// Use this for initialization
 		void Start () {
+
+			pg = FindObjectOfType<PauseGame>();
 
 			//LOAD THE ACTIVE BALL
 			thisBallSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -110,10 +114,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("CHKP_X"), PlayerPrefs.GetFloat("CHKP_Y"), PlayerPrefs.GetFloat("CHKP_Z"));
 			}
 
-			if (SceneManager.GetActiveScene().ToString() == "Level_04_RC")
+			/*if (SceneManager.GetActiveScene().ToString() == "Level_04_RC")
 			{
 				transform.position = new Vector3(1.1f, 3f, -0.8f);
-			}
+			} */
 		
 			showLifeOnScreen ();
 			#if UNITY_ANDROID
@@ -489,14 +493,15 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						ballJump = true;
 						GetComponent<AudioSource>().PlayOneShot(jumpingSound);
 
+						calWaitTime = false;
+						waitTimeCal = 0f;
+
+						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.JUMP);
 						Invoke("JumpFalse", 1f);
 					}
-					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase))
+					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNING_STOP, System.StringComparison.OrdinalIgnoreCase))
 					{
-						if (!ballJump)
-						{
-							calWaitTime = true;
-						}
+						calWaitTime = true;
 
 						if (waitTimeCal >= 5f)
 						{
@@ -508,35 +513,29 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 							//gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
 						}
 
-						PlayerSession.Instance.AddPlayerAction("stop");
+						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNING_STOP);
+					}
+					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase))
+					{
+						calWaitTime = true;
+
+						if (waitTimeCal >= 5f)
+						{
+							moveHorzRight = false;
+							hInput = -8f;
+							leftJump = true;
+
+							//float hForce = -1.5f;
+							//gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
+						}
+
+						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.STOP);
+					}
+					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.PAUSE, System.StringComparison.OrdinalIgnoreCase))
+					{
+						pg.pauseButton();
 					}
 				}
-
-
-				/*if (FMTokens[1].Equals(PlayerSession.PlayerActions.JUMP, System.StringComparison.OrdinalIgnoreCase))
-				{
-					ballJump = true;
-					GetComponent<AudioSource>().PlayOneShot(jumpingSound);
-
-					Invoke("JumpFalse", 1f);
-				}
-				else if (FMTokens[1].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase)) {
-					moveHorzRight = false;
-					float hForce = -1.5f;
-
-					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
-
-					PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.STOP);
-				}
-				else if (FMTokens[1].Contains(PlayerSession.PlayerActions.RUNNING)) {
-					moveHorzLeft = false;
-
-					float hForce = 15f;
-
-					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce, 0f));
-
-					PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNING);
-				}*/
 			}
 		}
 
@@ -547,12 +546,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			float hForce = -1.5f;
 
 			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
-		}
-
-		private void pauseGame()
-		{
-			Time.timeScale = 0f;
-			pauseCanvas.SetActive(true);
 		}
 	}
 }

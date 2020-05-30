@@ -19,6 +19,8 @@ public class YipliButtonScript : MonoBehaviour
     {
         NoInternetIcon.SetActive(false);
 
+        PlayerPrefs.DeleteAll(); // reset player prefs
+
         if (YipliHelper.checkInternetConnection())
         {
             LoadingPanel.SetActive(true);

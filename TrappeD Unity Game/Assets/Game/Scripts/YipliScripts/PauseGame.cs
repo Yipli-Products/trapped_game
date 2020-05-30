@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,11 +13,9 @@ public class PauseGame : MonoBehaviour
     Button currentB;
     int currentButtonIndex;
 
-    LoadLevelByName llbn;
-
-    bool leftPressed = false;
-    bool rightPressed = false;
-    bool EnterPressed = false;
+    const string LEFT = "left";
+    const string RIGHT = "right";
+    const string ENTER = "enter";
 
     string FMResponseCount = "";
 
@@ -25,7 +23,6 @@ public class PauseGame : MonoBehaviour
 
     private void Start()
     {
-        llbn = FindObjectOfType<LoadLevelByName>();
         pauseArea.SetActive(false);
 
         currentButtonIndex = 0;
@@ -35,12 +32,6 @@ public class PauseGame : MonoBehaviour
     private void Update()
     {
         MenuControlSystem();
-
-        if (pauseArea.activeSelf)
-        {
-            GetMatKeyInputs();
-        }
-
         CalculateTime();
     }
 
@@ -51,59 +42,38 @@ public class PauseGame : MonoBehaviour
 
     public void pauseButton ()
     {
+        print("From pause function : Set cluster id to : 0");
+        // set gameid to 0
+        //PlayerSession.Instance.SetGameClusterId(0);
+
         PlayerSession.Instance.PauseSPSession();
         Time.timeScale = 0f;
-
-        // set gameid to 0
-        PlayerSession.Instance.SetGameClusterId(0);
         pauseArea.SetActive(true);
     }
 
     public void retryButton()
     {
+        print("From retry function : Set cluster id to : 1");
+        //PlayerSession.Instance.SetGameClusterId(1); // set current gameid
+
         Time.timeScale = 1f;
-        PlayerSession.Instance.SetGameClusterId(1); // set current gameid
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void resumeButton()
     {
+        print("From resume function : Set cluster id to : 1");
+        //PlayerSession.Instance.SetGameClusterId(1); // set current gameid
+
+        PlayerSession.Instance.ResumeSPSession();
 
         Time.timeScale = 1f;
-        PlayerSession.Instance.SetGameClusterId(1); // set current gameid
-        PlayerSession.Instance.ResumeSPSession();
         pauseArea.SetActive(false);
     }
 
     public void menuButtton ()
     {
         Time.timeScale = 1f;
-    }
-
-    private void GetMatKeyInputs()
-    {
-        // left to right resume, menu, retry
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || leftPressed)
-        {
-            currentButtonIndex = GetPreviousButton();
-            manageCurrentButton();
-            leftPressed = false;
-        }
-
-        // left to right resume, menu, retry
-        if (Input.GetKeyDown(KeyCode.RightArrow) || rightPressed)
-        {
-            currentButtonIndex = GetNextButton();
-            manageCurrentButton();
-            rightPressed = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) || EnterPressed)
-        {
-            currentB.GetComponent<Button>().onClick.Invoke();
-            EnterPressed = false;
-        }
     }
 
     private void manageCurrentButton()
@@ -122,40 +92,58 @@ public class PauseGame : MonoBehaviour
         }
     }
 
+    /*private void GetMatKeyInputs()
+    {
+        // left to right play, changeplayer, gotoyipli, exit
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            ProcessMatInputs("left");
+        }
+
+        // left to right play, changeplayer, gotoyipli, exit
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            ProcessMatInputs("right");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ProcessMatInputs("enter");
+        }
+    }*/
+
     private void MenuControlSystem()
     {
-        if (timer > 1f)
+        // timer conditions to map with 1s time
+        if (timer > 0.5f)
         {
             //#if UNITY_ANDROID
             //string FMResponse = PlayerMovement.PluginClass.CallStatic<string>("_getFMResponse");
+
             string FMResponse = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
             Debug.Log("UNITY FMResponse: " + FMResponse);
 
             string[] FMTokens = FMResponse.Split('.');
             Debug.Log("UNITY FMTokens: " + FMTokens[0]);
 
-            if (!FMTokens[0].Equals(FMResponseCount))
+            if (FMTokens.Length > 1 && !FMTokens[0].Equals(FMResponseCount))
             {
                 FMResponseCount = FMTokens[0];
-                if (FMTokens[1] == "Pause")
+                if (FMTokens[1].Equals("Left", StringComparison.OrdinalIgnoreCase))
                 {
-                    pauseButton();
+                    ProcessMatInputs(LEFT);
                 }
-                else if (FMTokens[1] == "Left")
+                else if (FMTokens[1].Equals("Right", StringComparison.OrdinalIgnoreCase))
                 {
-                    leftPressed = true;
+                    ProcessMatInputs(RIGHT);
                 }
-                else if (FMTokens[1] == "Right")
+                else if (FMTokens[1].Equals("Enter", StringComparison.OrdinalIgnoreCase))
                 {
-                    rightPressed = true;
-                }
-                else if (FMTokens[1] == "Enter")
-                {
-                    EnterPressed = true;
+                    ProcessMatInputs(ENTER);
                 }
             }
 
-            timer = 0;
+            timer = 0f;
         }
     }
 
@@ -180,6 +168,30 @@ public class PauseGame : MonoBehaviour
         else
         {
             return currentButtonIndex - 1;
+        }
+    }
+
+    private void ProcessMatInputs(string matInput)
+    {
+        switch (matInput)
+        {
+            case LEFT:
+                currentButtonIndex = GetPreviousButton();
+                manageCurrentButton();
+                break;
+
+            case RIGHT:
+                currentButtonIndex = GetNextButton();
+                manageCurrentButton();
+                break;
+
+            case ENTER:
+                currentB.GetComponent<Button>().onClick.Invoke();
+                break;
+
+            default:
+                Debug.Log("Wrong Input");
+                break;
         }
     }
 }

@@ -94,5 +94,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakWindow: {fileID: 0}
   speakText: {fileID: 0}
-  speakTimeLenght: 2
-  whatToSpeak: Awesome
+  speakTimeLenght: 3.5
+  whatToSpeak: Jump

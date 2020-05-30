@@ -15,7 +15,8 @@ public class YSessionManager : MonoBehaviour
     {
         if (YipliHelper.checkInternetConnection())
         {
-            PlayerSession.Instance.SetGameClusterId(1); // set current gameid
+            //print("From before session start : Set cluster id to : 1");
+            //PlayerSession.Instance.SetGameClusterId(1); // set current gameid
             PlayerSession.Instance.StartSPSession("trapped");
         }
         
@@ -55,5 +56,7 @@ public class YSessionManager : MonoBehaviour
         }
 
         PlayerSession.Instance.StoreSPSession(ps.GetCoinScore());
+        //print("From after storing session : Set cluster id to : 0");
+        //PlayerSession.Instance.SetGameClusterId(0);
     }
 }

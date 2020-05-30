@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelButtonController : MonoBehaviour {
 
@@ -75,7 +76,7 @@ public class LevelButtonController : MonoBehaviour {
 			//audio.PlayOneShot(buttonClickSoundEffect);
 			PlayerPrefs.SetInt("PLAYER_LIFE", 3);
 			PlayerPrefs.SetInt("CURRENT_LEVEL_SERIAL", thisLevelNumber);
-			Application.LoadLevel(thisLevelNumber);
+			SceneManager.LoadScene(thisLevelNumber);
 		}
 	}
 }

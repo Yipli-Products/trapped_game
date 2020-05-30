@@ -29,8 +29,10 @@ public class PlayerSession : MonoBehaviour
         public static string LEFTMOVE = "left move";
         public static string RIGHTMOVE = "right move";
         public static string JUMP = "jumping";
-        public static string STOP = "running stopped";
+        public static string RUNNING_STOP = "running stopped";
+        public static string STOP = "stop";
         public static string RUNNING = "running";
+        public static string PAUSE = "Pause";
     }
 
     [JsonIgnore]

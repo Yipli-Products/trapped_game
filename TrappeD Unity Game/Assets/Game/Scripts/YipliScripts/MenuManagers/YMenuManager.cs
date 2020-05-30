@@ -13,12 +13,9 @@ public class YMenuManager : MonoBehaviour
 
     int currentButtonIndex;
 
-    LoadLevelByName llbn;
-    MainMenuBtnController mmbc;
-
-    bool leftPressed = false;
-    bool rightPressed = false;
-    bool EnterPressed = false;
+    const string LEFT = "left";
+    const string RIGHT = "right";
+    const string ENTER = "enter";
 
     string FMResponseCount = "";
 
@@ -27,22 +24,17 @@ public class YMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        llbn = FindObjectOfType<LoadLevelByName>();
-        mmbc = FindObjectOfType<MainMenuBtnController>();
+        print("From main menu : Set cluster id to : 0");
+        //PlayerSession.Instance.SetGameClusterId(0);
 
         currentButtonIndex = 0;
         manageCurrentButton();
-
-        PlayerSession.Instance.SetGameClusterId(0);
     }
 
     // Update is called once per frame
     void Update()
     {
         MenuControlSystem();
-        
-        GetMatKeyInputs();
-
         CalculateTime();
     }
 
@@ -51,32 +43,25 @@ public class YMenuManager : MonoBehaviour
         timer += Time.deltaTime;
     }
 
-    private void GetMatKeyInputs()
+    /*private void GetMatKeyInputs()
     {
         // left to right play, changeplayer, gotoyipli, exit
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || leftPressed)
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            currentButtonIndex = GetPreviousButton();
-            manageCurrentButton();
-
-            leftPressed = false;
+            ProcessMatInputs("left");
         }
 
         // left to right play, changeplayer, gotoyipli, exit
-        if (Input.GetKeyDown(KeyCode.RightArrow) || rightPressed)
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            currentButtonIndex = GetNextButton();
-            manageCurrentButton();
-
-            rightPressed = false;
+            ProcessMatInputs("right");
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || EnterPressed)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            currentB.GetComponent<Button>().onClick.Invoke();
-            EnterPressed = false;
+            ProcessMatInputs("enter");
         }
-    }
+    }*/
 
     private void manageCurrentButton()
     {
@@ -97,7 +82,7 @@ public class YMenuManager : MonoBehaviour
     private void MenuControlSystem()
     {
         // timer conditions to map with 1s time
-        if (timer > 1f)
+        if (timer > 0.5f)
         {
             //#if UNITY_ANDROID
             //string FMResponse = PlayerMovement.PluginClass.CallStatic<string>("_getFMResponse");
@@ -111,21 +96,17 @@ public class YMenuManager : MonoBehaviour
             if (FMTokens.Length > 1 && !FMTokens[0].Equals(FMResponseCount))
             {
                 FMResponseCount = FMTokens[0];
-                if (FMTokens[1] == "Pause")
+                if (FMTokens[1].Equals("Left", StringComparison.OrdinalIgnoreCase))
                 {
-                    
+                    ProcessMatInputs(LEFT);
                 }
-                else if (FMTokens[1] == "Left")
+                else if (FMTokens[1].Equals("Right", StringComparison.OrdinalIgnoreCase))
                 {
-                    leftPressed = true;
+                    ProcessMatInputs(RIGHT);
                 }
-                else if (FMTokens[1] == "Right")
+                else if (FMTokens[1].Equals("Enter", StringComparison.OrdinalIgnoreCase))
                 {
-                    rightPressed = true;
-                }
-                else if (FMTokens[1] == "Enter")
-                {
-                    EnterPressed = true;
+                    ProcessMatInputs(ENTER);
                 }
             }
 
@@ -154,6 +135,30 @@ public class YMenuManager : MonoBehaviour
         else
         {
             return currentButtonIndex - 1;
+        }
+    }
+
+    private void ProcessMatInputs(string matInput)
+    {
+        switch (matInput)
+        {
+            case LEFT:
+                currentButtonIndex = GetPreviousButton();
+                manageCurrentButton();
+                break;
+
+            case RIGHT:
+                currentButtonIndex = GetNextButton();
+                manageCurrentButton();
+                break;
+
+            case ENTER:
+                currentB.GetComponent<Button>().onClick.Invoke();
+                break;
+
+            default:
+                Debug.Log("Wrong Input");
+                break;
         }
     }
 }

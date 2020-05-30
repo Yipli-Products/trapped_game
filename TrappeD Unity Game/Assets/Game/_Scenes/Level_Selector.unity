@@ -6285,6 +6285,17 @@ MonoBehaviour:
   - {fileID: 1147699166}
   - {fileID: 29518014}
   - {fileID: 544512992}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
+  level1: {fileID: 733609764}
+  level2: {fileID: 1021461309}
+  level3: {fileID: 1725629362}
+  level4: {fileID: 552724678}
+  level5: {fileID: 1509876027}
+  level6: {fileID: 416351891}
+  level7: {fileID: 43812120}
+  level8: {fileID: 1147699166}
+  level9: {fileID: 29518014}
+  back: {fileID: 544512992}
 --- !u!4 &919474701
 Transform:
   m_ObjectHideFlags: 0
