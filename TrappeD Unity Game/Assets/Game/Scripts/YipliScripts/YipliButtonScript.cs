@@ -19,7 +19,11 @@ public class YipliButtonScript : MonoBehaviour
     {
         NoInternetIcon.SetActive(false);
 
-        PlayerPrefs.DeleteAll(); // reset player prefs
+        //PlayerPrefs.DeleteAll(); // reset player prefs
+        PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
+        PlayerPrefs.DeleteKey("CHKP_X");
+        PlayerPrefs.DeleteKey("CHKP_Y");
+        PlayerPrefs.DeleteKey("CHKP_Z");
 
         if (YipliHelper.checkInternetConnection())
         {

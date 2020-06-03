@@ -196,7 +196,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5675730163684788677}
-        m_MethodName: pauseButton
+        m_MethodName: pauseFunction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseArea: {fileID: 7414530025254950833}
+  InstructionCanvas: {fileID: 0}
   menuButtons:
   - {fileID: 7414530026137865823}
   - {fileID: 7414530024549384084}

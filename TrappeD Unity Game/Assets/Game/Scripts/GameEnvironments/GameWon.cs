@@ -32,11 +32,8 @@ public class GameWon : MonoBehaviour {
 			}
 
 			ps.SetCompletedLevels(ps.GetCompletedLevels() + 1);
-			
-			if (YipliHelper.checkInternetConnection())
-			{
-				ysm.StoreSession();
-			}
+
+			ysm.StoreSession();
 
 			isGameWon = true;
 		}

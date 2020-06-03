@@ -20,28 +20,59 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     const string LEFT = "left";
     const string RIGHT = "right";
     const string ENTER = "enter";
+    const float waitTime = 0.75f;
 
     string FMResponseCount = "";
     float timer = 0;
 
+    long timeHistory1 = 0;
+    long timeHistory2 = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        print("From level selection : Set cluster id to : 0");
-        //PlayerSession.Instance.SetGameClusterId(0);
+        SetClusterIDtoZero();
 
         allowedLevels = new List<Button>();
-        SetAllowedLevels();
 
-        currentButtonIndex = ps.GetCompletedLevels() + 1;
+        SetAllowedLevels();
+        SetCurrentButtonIndex();
         manageCurrentButton();
+
+        timeHistory1 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+    }
+
+    private static void SetClusterIDtoZero()
+    {
+        try
+        {
+            Debug.Log("From level selection : Set cluster id to : 0");
+            PlayerSession.Instance.SetGameClusterId(0);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Level Selection cluster id 0 exception.");
+            Debug.Log("Exception : " + e.Message);
+        }
+    }
+
+    private void SetCurrentButtonIndex()
+    {
+        if (ps.GetCompletedLevels() >= 10)
+        {
+            currentButtonIndex = 9;
+        }
+        else
+        {
+            currentButtonIndex = ps.GetCompletedLevels() + 1;
+        }
     }
 
     private void SetAllowedLevels()
     {
         int allowedButtons = ps.GetCompletedLevels();
 
-        if (allowedButtons >= 10)
+        if (allowedButtons > 9)
         {
             allowedButtons = 10;
         }
@@ -52,7 +83,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 
         allowedLevels.Add(back);
         
-        for (int i = 0; i < allowedButtons; i++)
+        for (int i = 0; i < allowedButtons - 1; i++)
         {
             allowedLevels.Add(menuButtons[i]);
         }
@@ -62,9 +93,24 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MenuControlSystem();
+        GetMatKeyInputs();
+        TimeControlSystem();
 
-        CalculateTime();
+        //CalculateTime();
+    }
+
+    private void TimeControlSystem()
+    {
+        timeHistory2 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+        Debug.Log(timeHistory2 + "-" + timeHistory1 + "=" + (timeHistory2 - timeHistory1));
+
+        if ((timeHistory2 - timeHistory1) > 1000)
+        {
+            MenuControlSystem();
+
+            timeHistory1 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            Debug.Log("Time changed : " + timeHistory1);
+        }
     }
 
     private void CalculateTime()
@@ -72,7 +118,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
         timer += Time.deltaTime;
     }
 
-    /*private void GetMatKeyInputs()
+    private void GetMatKeyInputs()
     {
         // left to right play, changeplayer, gotoyipli, exit
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -90,7 +136,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
         {
             ProcessMatInputs("enter");
         }
-    }*/
+    }
 
     private void manageCurrentButton()
     {
@@ -111,36 +157,30 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 
     private void MenuControlSystem()
     {
-        // timer conditions to map with 1s time
-        if (timer > 0.5f)
+        //#if UNITY_ANDROID
+        //string FMResponse = PlayerMovement.PluginClass.CallStatic<string>("_getFMResponse");
+
+        string FMResponse = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
+        Debug.Log("UNITY FMResponse: " + FMResponse);
+
+        string[] FMTokens = FMResponse.Split('.');
+        Debug.Log("UNITY FMTokens: " + FMTokens[0]);
+
+        if (!FMTokens[0].Equals(FMResponseCount))
         {
-            //#if UNITY_ANDROID
-            //string FMResponse = PlayerMovement.PluginClass.CallStatic<string>("_getFMResponse");
-
-            string FMResponse = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
-            Debug.Log("UNITY FMResponse: " + FMResponse);
-
-            string[] FMTokens = FMResponse.Split('.');
-            Debug.Log("UNITY FMTokens: " + FMTokens[0]);
-
-            if (FMTokens.Length > 1 && !FMTokens[0].Equals(FMResponseCount))
+            FMResponseCount = FMTokens[0];
+            if (FMTokens[1].Equals("Left", StringComparison.OrdinalIgnoreCase))
             {
-                FMResponseCount = FMTokens[0];
-                if (FMTokens[1].Equals("Left", StringComparison.OrdinalIgnoreCase))
-                {
-                    ProcessMatInputs(LEFT);
-                }
-                else if (FMTokens[1].Equals("Right", StringComparison.OrdinalIgnoreCase))
-                {
-                    ProcessMatInputs(RIGHT);
-                }
-                else if (FMTokens[1].Equals("Enter", StringComparison.OrdinalIgnoreCase))
-                {
-                    ProcessMatInputs(ENTER);
-                }
+                ProcessMatInputs(LEFT);
             }
-
-            timer = 0f;
+            else if (FMTokens[1].Equals("Right", StringComparison.OrdinalIgnoreCase))
+            {
+                ProcessMatInputs(RIGHT);
+            }
+            else if (FMTokens[1].Equals("Enter", StringComparison.OrdinalIgnoreCase))
+            {
+                ProcessMatInputs(ENTER);
+            }
         }
     }
 

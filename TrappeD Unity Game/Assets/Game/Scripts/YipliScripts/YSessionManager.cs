@@ -13,13 +13,8 @@ public class YSessionManager : MonoBehaviour
      // Start is called before the first frame update
     void Start()
     {
-        if (YipliHelper.checkInternetConnection())
-        {
-            //print("From before session start : Set cluster id to : 1");
-            //PlayerSession.Instance.SetGameClusterId(1); // set current gameid
-            PlayerSession.Instance.StartSPSession("trapped");
-        }
-        
+        PlayerSession.Instance.StartSPSession("trapped");
+
         completed_levels = ps.GetCompletedLevels();
         coinScore = ps.GetCoinScore();
     }
@@ -27,10 +22,7 @@ public class YSessionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (YipliHelper.checkInternetConnection())
-        {
-            PlayerSession.Instance.UpdateDuration();
-        }
+        PlayerSession.Instance.UpdateDuration();
     }
 
     public void StoreSession() {
@@ -51,12 +43,13 @@ public class YSessionManager : MonoBehaviour
             }
             
 
-            PlayerSession.Instance.UpdateGameData(gameData);
-            Debug.Log("Game data is updated successfully.");
+            if (YipliHelper.checkInternetConnection())
+            {
+                PlayerSession.Instance.UpdateGameData(gameData);
+                Debug.Log("Game data is updated successfully.");
+            }
         }
 
         PlayerSession.Instance.StoreSPSession(ps.GetCoinScore());
-        //print("From after storing session : Set cluster id to : 0");
-        //PlayerSession.Instance.SetGameClusterId(0);
     }
 }

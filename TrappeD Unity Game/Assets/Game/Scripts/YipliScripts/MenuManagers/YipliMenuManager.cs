@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,27 +13,61 @@ public class YipliMenuManager : MonoBehaviour
     const string LEFT = "left";
     const string RIGHT = "right";
     const string ENTER = "enter";
+    const float waitTime = 0.75f;
 
     string FMResponseCount = "";
 
     float timer = 0;
 
+    long timeHistory1 = 0;
+    long timeHistory2 = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        print("From game won menu : Set cluster id to : 0");
-        //PlayerSession.Instance.SetGameClusterId(0);
+        SetClusterIDtoZero();
 
         currentButtonIndex = 0;
         manageCurrentButton();
+
+        timeHistory1 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+    }
+
+    private static void SetClusterIDtoZero()
+    {
+        try
+        {
+            Debug.Log("From game won menu : Set cluster id to : 0");
+            PlayerSession.Instance.SetGameClusterId(0);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Game won menu cluster id 0 exception.");
+            Debug.Log("Exception : " + e.Message);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        MenuControlSystem();
+        GetMatKeyInputs();
+        TimeControlSystem();
 
-        CalculateTime();
+        //CalculateTime();
+    }
+
+    private void TimeControlSystem()
+    {
+        timeHistory2 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+        Debug.Log(timeHistory2 + "-" + timeHistory1 + "=" + (timeHistory2 - timeHistory1));
+
+        if ((timeHistory2 - timeHistory1) > 1000)
+        {
+            MenuControlSystem();
+
+            timeHistory1 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            Debug.Log("Time changed : " + timeHistory1);
+        }
     }
 
     private void CalculateTime()
@@ -58,7 +91,7 @@ public class YipliMenuManager : MonoBehaviour
         }
     }
 
-    /*private void GetMatKeyInputs()
+    private void GetMatKeyInputs()
     {
         // left to right play, changeplayer, gotoyipli, exit
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -76,40 +109,34 @@ public class YipliMenuManager : MonoBehaviour
         {
             ProcessMatInputs("enter");
         }
-    }*/
+    }
 
     private void MenuControlSystem()
     {
-        // timer conditions to map with 1s time
-        if (timer > 0.5f)
+        //#if UNITY_ANDROID
+        //string FMResponse = PlayerMovement.PluginClass.CallStatic<string>("_getFMResponse");
+
+        string FMResponse = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
+        Debug.Log("UNITY FMResponse: " + FMResponse);
+
+        string[] FMTokens = FMResponse.Split('.');
+        Debug.Log("UNITY FMTokens: " + FMTokens[0]);
+
+        if (!FMTokens[0].Equals(FMResponseCount))
         {
-            //#if UNITY_ANDROID
-            //string FMResponse = PlayerMovement.PluginClass.CallStatic<string>("_getFMResponse");
-
-            string FMResponse = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
-            Debug.Log("UNITY FMResponse: " + FMResponse);
-
-            string[] FMTokens = FMResponse.Split('.');
-            Debug.Log("UNITY FMTokens: " + FMTokens[0]);
-
-            if (FMTokens.Length > 1 && !FMTokens[0].Equals(FMResponseCount))
+            FMResponseCount = FMTokens[0];
+            if (FMTokens[1].Equals("Left", StringComparison.OrdinalIgnoreCase))
             {
-                FMResponseCount = FMTokens[0];
-                if (FMTokens[1].Equals("Left", StringComparison.OrdinalIgnoreCase))
-                {
-                    ProcessMatInputs(LEFT);
-                }
-                else if (FMTokens[1].Equals("Right", StringComparison.OrdinalIgnoreCase))
-                {
-                    ProcessMatInputs(RIGHT);
-                }
-                else if (FMTokens[1].Equals("Enter", StringComparison.OrdinalIgnoreCase))
-                {
-                    ProcessMatInputs(ENTER);
-                }
+                ProcessMatInputs(LEFT);
             }
-
-            timer = 0f;
+            else if (FMTokens[1].Equals("Right", StringComparison.OrdinalIgnoreCase))
+            {
+                ProcessMatInputs(RIGHT);
+            }
+            else if (FMTokens[1].Equals("Enter", StringComparison.OrdinalIgnoreCase))
+            {
+                ProcessMatInputs(ENTER);
+            }
         }
     }
 

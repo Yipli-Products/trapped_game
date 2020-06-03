@@ -1408,11 +1408,11 @@ PrefabInstance:
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakWindow
       value: 
-      objectReference: {fileID: 2041854525}
+      objectReference: {fileID: 1266873877}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakText
       value: 
-      objectReference: {fileID: 1356944395}
+      objectReference: {fileID: 1266873876}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakTimeLenght
       value: 3.5
@@ -6601,6 +6601,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f2d65df182e5e14f9ad00d075f852b7, type: 3}
+--- !u!1 &481292814 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 191446, guid: 4f2d65df182e5e14f9ad00d075f852b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 481292813}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &481557936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9254,11 +9260,11 @@ PrefabInstance:
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakWindow
       value: 
-      objectReference: {fileID: 2041854525}
+      objectReference: {fileID: 1266873877}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakText
       value: 
-      objectReference: {fileID: 1356944395}
+      objectReference: {fileID: 1266873876}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakTimeLenght
       value: 3.5
@@ -9676,11 +9682,11 @@ PrefabInstance:
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakWindow
       value: 
-      objectReference: {fileID: 2041854525}
+      objectReference: {fileID: 1266873877}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakText
       value: 
-      objectReference: {fileID: 1356944395}
+      objectReference: {fileID: 1266873876}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakTimeLenght
       value: 3.5
@@ -11361,11 +11367,11 @@ PrefabInstance:
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakWindow
       value: 
-      objectReference: {fileID: 2041854525}
+      objectReference: {fileID: 1266873877}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakText
       value: 
-      objectReference: {fileID: 1356944395}
+      objectReference: {fileID: 1266873876}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakTimeLenght
       value: 3.5
@@ -15620,11 +15626,11 @@ PrefabInstance:
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakWindow
       value: 
-      objectReference: {fileID: 2041854525}
+      objectReference: {fileID: 1266873877}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakText
       value: 
-      objectReference: {fileID: 1356944395}
+      objectReference: {fileID: 1266873876}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakTimeLenght
       value: 3.5
@@ -16755,6 +16761,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1266873875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5821071325106484340, guid: c6000d20dcb6e5b438a014e6514aa957,
+    type: 3}
+  m_PrefabInstance: {fileID: 1266873871}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1266873876 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5821071325111822738, guid: c6000d20dcb6e5b438a014e6514aa957,
+    type: 3}
+  m_PrefabInstance: {fileID: 1266873871}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1266873877 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5821071325111822740, guid: c6000d20dcb6e5b438a014e6514aa957,
+    type: 3}
+  m_PrefabInstance: {fileID: 1266873871}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266873875}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1271219494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 406454, guid: 7cd0de9b33c6b4c4f81de3763775827a,
@@ -17831,18 +17867,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59dbf3ea8729e1644afa65a779f20781, type: 3}
---- !u!114 &1356944395 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 194104189, guid: c6000d20dcb6e5b438a014e6514aa957,
-    type: 3}
-  m_PrefabInstance: {fileID: 1266873871}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1357129302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26261,11 +26285,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: pauseCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5673878885202859443, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5673878885202859447, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26376,6 +26395,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1091344950}
+    - target: {fileID: 5675730163684788677, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 481292814}
+    - target: {fileID: 5675730163684788677, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
+        type: 3}
+      propertyPath: InstructionCanvas
+      value: 
+      objectReference: {fileID: 1266873875}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12b3b7282eb2f4443b4d3e3922959ac6, type: 3}
 --- !u!114 &2017775527 stripped
@@ -26488,18 +26517,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3250471b7671cf54c8973964a742e51e, type: 3}
---- !u!114 &2041854525 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 194104187, guid: c6000d20dcb6e5b438a014e6514aa957,
-    type: 3}
-  m_PrefabInstance: {fileID: 1266873871}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2046514190
 GameObject:
   m_ObjectHideFlags: 0

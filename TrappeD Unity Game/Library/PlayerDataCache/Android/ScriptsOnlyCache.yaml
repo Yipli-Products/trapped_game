@@ -138,7 +138,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12054}
     - Class: 114
-      Script: {instanceID: 78614}
+      Script: {instanceID: 46970}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1524,7 +1524,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12054}
     - Class: 114
-      Script: {instanceID: 15798}
+      Script: {instanceID: 15800}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -2252,7 +2252,7 @@ ScriptsOnlyBuild:
     className: PlayerLifeTaker
   - hash:
       serializedVersion: 2
-      Hash: dd2eb8502a09d509a350caec2df75ff8
+      Hash: 92941e4ba74e68f43c689f46b8b972b1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PauseGame

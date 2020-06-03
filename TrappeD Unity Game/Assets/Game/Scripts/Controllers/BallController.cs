@@ -533,7 +533,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.PAUSE, System.StringComparison.OrdinalIgnoreCase))
 					{
-						pg.pauseButton();
+						Debug.Log("processing mat input pause.");
+						pg.pauseFunction();
 					}
 				}
 			}

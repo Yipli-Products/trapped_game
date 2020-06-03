@@ -12,6 +12,12 @@ public class LoadLevelByName : MonoBehaviour {
 
 	public void RetryLevel(){
 		//PlayerPrefs.SetInt("PLAYER_LIFE", 5);
+
+		PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
+		PlayerPrefs.DeleteKey("CHKP_X");
+		PlayerPrefs.DeleteKey("CHKP_Y");
+		PlayerPrefs.DeleteKey("CHKP_Z");
+
 		PlayerPrefs.SetInt("PLAYER_LIFE", 3);
 		Application.LoadLevel (PlayerPrefs.GetInt("CURRENT_LEVEL_SERIAL"));
 

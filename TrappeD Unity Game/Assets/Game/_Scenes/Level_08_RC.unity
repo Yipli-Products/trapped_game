@@ -6722,6 +6722,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadLevelGivenTheName
       objectReference: {fileID: 0}
+    - target: {fileID: 5675730163684788677, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1644534934}
+    - target: {fileID: 5675730163684788677, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
+        type: 3}
+      propertyPath: InstructionCanvas
+      value: 
+      objectReference: {fileID: 2043063504}
     - target: {fileID: 5673878883976699770, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -6730,7 +6740,7 @@ PrefabInstance:
     - target: {fileID: 5673878883976699770, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: pauseButton
+      value: pauseFunction
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12b3b7282eb2f4443b4d3e3922959ac6, type: 3}
@@ -8403,7 +8413,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1644534933}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1644534934}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4dfde7f38103dea4ca73b42ff05b5b9d, type: 3}
@@ -12311,6 +12321,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f2d65df182e5e14f9ad00d075f852b7, type: 3}
+--- !u!1 &1644534934 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 191446, guid: 4f2d65df182e5e14f9ad00d075f852b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1644534933}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1659660728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400480, guid: 1b09924304607744196b31520f08003f,
@@ -15206,6 +15222,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 141100, guid: c6000d20dcb6e5b438a014e6514aa957, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 11441094, guid: c6000d20dcb6e5b438a014e6514aa957, type: 3}
       propertyPath: delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -15245,10 +15265,6 @@ PrefabInstance:
     - target: {fileID: 11441114, guid: c6000d20dcb6e5b438a014e6514aa957, type: 3}
       propertyPath: delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: touchHorizontalMoveUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 141100, guid: c6000d20dcb6e5b438a014e6514aa957, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6000d20dcb6e5b438a014e6514aa957, type: 3}
@@ -15306,12 +15322,18 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2043063498}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2043063504}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2043063504 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5821071325106484340, guid: c6000d20dcb6e5b438a014e6514aa957,
+    type: 3}
+  m_PrefabInstance: {fileID: 2043063498}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2051608177
 GameObject:
   m_ObjectHideFlags: 0
