@@ -8,11 +8,20 @@ using UnityEngine.UI;
 public class LevelSelectMenumanagerYipli : MonoBehaviour
 {
     //required variables
-    [SerializeField] Button[] menuButtons;
-    [SerializeField] PlayerStats ps;
-    [SerializeField] Button back;
+    [SerializeField] Button[] levelZero;
+    [SerializeField] Button[] levelOne;
+    [SerializeField] Button[] levelTwo;
+    [SerializeField] Button[] levelThree;
+    [SerializeField] Button[] levelFour;
+    [SerializeField] Button[] levelFive;
+    [SerializeField] Button[] levelSix;
+    [SerializeField] Button[] levelSeven;
+    [SerializeField] Button[] levelEight;
+    [SerializeField] Button[] levelAll;
 
-    private List<Button> allowedLevels;
+    private Button[] menuButtons;
+
+    [SerializeField] PlayerStats ps;
 
     Button currentB;
     int currentButtonIndex;
@@ -33,10 +42,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     {
         SetClusterIDtoZero();
 
-        allowedLevels = new List<Button>();
-
         SetAllowedLevels();
-        SetCurrentButtonIndex();
         manageCurrentButton();
 
         timeHistory1 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
@@ -58,36 +64,63 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 
     private void SetCurrentButtonIndex()
     {
-        if (ps.GetCompletedLevels() >= 10)
-        {
-            currentButtonIndex = 9;
-        }
-        else
-        {
-            currentButtonIndex = ps.GetCompletedLevels() + 1;
-        }
+        
     }
 
     private void SetAllowedLevels()
     {
-        int allowedButtons = ps.GetCompletedLevels();
+        switch(ps.GetCompletedLevels())
+        {
+            case 0:
+                menuButtons = levelZero;
+                currentButtonIndex = 1;
+                break;
 
-        if (allowedButtons > 9)
-        {
-            allowedButtons = 10;
-        }
-        else
-        {
-            allowedButtons += 1;
-        }
+            case 1:
+                menuButtons = levelOne;
+                currentButtonIndex = 2;
+                break;
 
-        allowedLevels.Add(back);
-        
-        for (int i = 0; i < allowedButtons - 1; i++)
-        {
-            allowedLevels.Add(menuButtons[i]);
+            case 2:
+                menuButtons = levelTwo;
+                currentButtonIndex = 3;
+                break;
+
+            case 3:
+                menuButtons = levelThree;
+                currentButtonIndex = 4;
+                break;
+
+            case 4:
+                menuButtons = levelFour;
+                currentButtonIndex = 5;
+                break;
+
+            case 5:
+                menuButtons = levelFive;
+                currentButtonIndex = 6;
+                break;
+
+            case 6:
+                menuButtons = levelSix;
+                currentButtonIndex = 7;
+                break;
+
+            case 7:
+                menuButtons = levelSeven;
+                currentButtonIndex = 8;
+                break;
+
+            case 8:
+                menuButtons = levelEight;
+                currentButtonIndex = 9;
+                break;
+
+            default:
+                menuButtons = levelAll;
+                currentButtonIndex = 9;
+                break;
         }
-        print("allowed levels : " + allowedLevels.Count);
     }
 
     // Update is called once per frame
@@ -140,16 +173,16 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 
     private void manageCurrentButton()
     {
-        for (int i = 0; i < allowedLevels.Count; i++)
+        for (int i = 0; i < menuButtons.Length; i++)
         {
             if (i == currentButtonIndex)
             {
-                allowedLevels[i].GetComponent<Image>().color = Color.green;
-                currentB = allowedLevels[i];
+                menuButtons[i].GetComponent<Image>().color = Color.green;
+                currentB = menuButtons[i];
             }
             else
             {
-                allowedLevels[i].GetComponent<Image>().color = Color.white;
+                menuButtons[i].GetComponent<Image>().color = Color.white;
             }
         }
     }
@@ -208,7 +241,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
         }
     }
 
-    private void ProcessMatInputs(string matInput)
+    public void ProcessMatInputs(string matInput)
     {
         switch (matInput)
         {

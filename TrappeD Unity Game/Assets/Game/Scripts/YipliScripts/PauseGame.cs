@@ -26,6 +26,8 @@ public class PauseGame : MonoBehaviour
     long timeHistory1 = 0;
     long timeHistory2 = 0;
 
+    bool isPause = false;
+
     private void Start()
     {
         pauseArea.SetActive(false);
@@ -40,9 +42,11 @@ public class PauseGame : MonoBehaviour
     private void Update()
     {
         GetMatKeyInputs();
-        TimeControlSystem();
-
-        //CalculateTime();
+        
+        if (isPause)
+        {
+            TimeControlSystem();
+        }
     }
 
     private void TimeControlSystem()
@@ -66,6 +70,8 @@ public class PauseGame : MonoBehaviour
 
     public void pauseFunction()
     {
+        isPause = true;
+
         PlayerSession.Instance.PauseSPSession();
         SetClusterIDtoZero();
 
@@ -92,6 +98,7 @@ public class PauseGame : MonoBehaviour
     public void retryButton()
     {
         Time.timeScale = 1f;
+        isPause = false;
 
         PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
         PlayerPrefs.DeleteKey("CHKP_X");
@@ -123,6 +130,7 @@ public class PauseGame : MonoBehaviour
     public void resumeButton()
     {
         Time.timeScale = 1f;
+        isPause = false;
 
         Debug.Log("Resume Function call");
         SetClusterIDtoOne();
