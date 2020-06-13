@@ -17,6 +17,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     [SerializeField] Button[] levelSix;
     [SerializeField] Button[] levelSeven;
     [SerializeField] Button[] levelEight;
+    [SerializeField] Button[] levelNine;
     [SerializeField] Button[] levelAll;
 
     private Button[] menuButtons;
@@ -60,11 +61,6 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
             Debug.Log("Level Selection cluster id 0 exception.");
             Debug.Log("Exception : " + e.Message);
         }
-    }
-
-    private void SetCurrentButtonIndex()
-    {
-        
     }
 
     private void SetAllowedLevels()
@@ -116,9 +112,14 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
                 currentButtonIndex = 9;
                 break;
 
+            case 9:
+                menuButtons = levelEight;
+                currentButtonIndex = 10;
+                break;
+
             default:
                 menuButtons = levelAll;
-                currentButtonIndex = 9;
+                currentButtonIndex = 10;
                 break;
         }
     }

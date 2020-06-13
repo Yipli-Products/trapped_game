@@ -89,14 +89,14 @@ public static class FirebaseDBHandler
 
                 FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://yipli-project.firebaseio.com/");
                 DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-                snapshot = await reference.Child("profiles/users/" + userId).Child("players").Child(playerId).Child("activity-statistics/games-statistics").Child(gameId).Child("game-data").GetValueAsync();
+                snapshot = await reference.Child("profiles/users/" + userId).Child("/players").Child(playerId).Child("/activity-statistics/games-statistics").Child(gameId).Child("/game-data").GetValueAsync();
             }
             catch(Exception exp)
             {
-                Debug.Log("Failed to GetAllPlayerdetails : " + exp.Message);
+                Debug.Log("Failed to GetGameData : " + exp.Message);
             }
         }
-        return snapshot ?? null;
+        return snapshot;
     }
 
     /* The function call to be allowed only if network is available */
@@ -203,7 +203,7 @@ public static class FirebaseDBHandler
     /* The function call to be allowed only if network is available */
     public static async Task<YipliMatInfo> GetCurrentMatDetails(string userId, PostUserCallback callback)
     {
-        Debug.Log("Getting the Default player from backend");
+        Debug.Log("Getting the Default mat from backend");
         DataSnapshot snapshot = null;
         YipliMatInfo defaultMat = new YipliMatInfo();
 

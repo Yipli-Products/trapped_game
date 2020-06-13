@@ -57,11 +57,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		private float horzontalInputMultiplier = 0.0f;
 
-	
-
 		public AudioClip jumpingSound;
-
-
 
 		public Image Life1;
 		public Image Life2;
@@ -95,8 +91,20 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		PauseGame pg;
 
+		public bool allowRun = false;
+		public bool allowjump = false;
+
+		public string detectedAction;
+
+		private FirstJump fj;
+		private FirstRun fr;
+
 		// Use this for initialization
 		void Start () {
+
+			detectedAction = "";
+			fj = FindObjectOfType<FirstJump>();
+			fr = FindObjectOfType<FirstRun>();
 
 			pg = FindObjectOfType<PauseGame>();
 
@@ -133,6 +141,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			PlayerPrefs.SetInt("thisLevelPoints", thisLevelPoints);
 
 			totalCoins = ps.GetCoinScore();
+
+			//StartCoroutine(BluetoothCheck());
 		}
 
 
@@ -262,23 +272,12 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		}
 
-		private IEnumerator positiveXJump()
-		{
-			yield return new WaitForSeconds(0.05f);
-			GetComponent<Rigidbody2D>().AddForce(new Vector2(verticalForce * Time.deltaTime * verticleMultiplier * 3, 0f));
-		}
-
-		private IEnumerator negetiveXJump()
-		{
-			yield return new WaitForSeconds(0.05f);
-			GetComponent<Rigidbody2D>().AddForce(new Vector2(-verticalForce * Time.deltaTime * verticleMultiplier * 3, 0f));
-		}
-
 		void Update(){
 
 			manageAUtoMovement();
-			//manageMatAutoMovement();
 			ManageMatActions();
+
+			manageTutorial();
 
 			if (isPlayerDead)GetComponent<Rigidbody2D>().velocity = new Vector3 (0,0,0);
 
@@ -339,8 +338,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		public void PlayerDead(){
 				//Debug.Log ("Someone called player Dead...");
-			PlayerPrefs.SetString ("LAST_LEVEL", Application.loadedLevelName);
+			PlayerPrefs.SetString ("LAST_LEVEL", SceneManager.GetActiveScene().name);
 			PlayerPrefs.SetInt ("PLAYER_LIFE", PlayerPrefs.GetInt("PLAYER_LIFE") - 1);
+
+			
 
 			GetComponent<Rigidbody2D>().velocity = new Vector3 (0,0,0);
 			isPlayerDead = true;
@@ -411,18 +412,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			}
 		}
 
-		/*private void manageMatAutoMovement ()
-		{
-			if (MatMovement)
-			{
-				forwardValue += 0.0005f;
-			}
-			else
-			{
-				forwardValue = 0f;
-			}
-		} */
-
 		private void ManageAndroidActions () {
 			if (moveHorzRight)
 				hInput = buttonHoldDownTime;
@@ -471,63 +460,38 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					//  Runnig+23+1.2 // coming string from mat
 
 					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNING, System.StringComparison.OrdinalIgnoreCase))
-					{
-						int step = int.Parse(whiteSpace[1]);
+                    {
+                        int step = int.Parse(whiteSpace[1]);
 
-						moveHorzLeft = false;
-						leftJump = false;
-						float hForce = 40f;
-						calWaitTime = false;
-						waitTimeCal = 0f;
+						detectedAction = PlayerSession.PlayerActions.RUNNING;
+						RunningStartAction();
 
-						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce, 0f));
+                        PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNING, step);
+                    }
 
-						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNING, step);
-					}
-
-				}
+                }
 				else if (whiteSpace.Length == 1)
 				{
 					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.JUMP, System.StringComparison.OrdinalIgnoreCase))
 					{
-						ballJump = true;
-						GetComponent<AudioSource>().PlayOneShot(jumpingSound);
 
-						calWaitTime = false;
-						waitTimeCal = 0f;
+						detectedAction = PlayerSession.PlayerActions.JUMP;
+						JumpAction();
 
 						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.JUMP);
 						Invoke("JumpFalse", 1f);
 					}
-					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNING_STOP, System.StringComparison.OrdinalIgnoreCase))
+					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNINGSTOPPED, System.StringComparison.OrdinalIgnoreCase))
 					{
-						calWaitTime = true;
+						detectedAction = PlayerSession.PlayerActions.RUNNINGSTOPPED;
+						RunningAction();
 
-						if (waitTimeCal >= 5f)
-						{
-							moveHorzRight = false;
-							hInput = -8f;
-							leftJump = true;
-
-							//float hForce = -1.5f;
-							//gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
-						}
-
-						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNING_STOP);
+						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNINGSTOPPED);
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase))
 					{
-						calWaitTime = true;
-
-						if (waitTimeCal >= 5f)
-						{
-							moveHorzRight = false;
-							hInput = -8f;
-							leftJump = true;
-
-							//float hForce = -1.5f;
-							//gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
-						}
+						detectedAction = PlayerSession.PlayerActions.STOP;
+						RunningAction();
 
 						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.STOP);
 					}
@@ -535,18 +499,87 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					{
 						Debug.Log("processing mat input pause.");
 						pg.pauseFunction();
+						detectedAction = PlayerSession.PlayerActions.PAUSE;
 					}
 				}
 			}
 		}
 
-		private void leftOps()
-		{
-			moveHorzRight = false;
-			leftJump = true;
-			float hForce = -1.5f;
+        public void RunningStartAction()
+        {
+			Time.timeScale = 1f;
 
-			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce--, 0f));
+			moveHorzLeft = false;
+            leftJump = false;
+            float hForce = 40f;
+            calWaitTime = false;
+            waitTimeCal = 0f;
+
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce, 0f));
+
+			fr.RTActive = false;
+		}
+
+        private IEnumerator BluetoothCheck()
+		{
+			Debug.Log("Starting the Co-routine for Bluetooth Check");
+			while (true)
+			{
+				yield return new WaitForSeconds(0.5f);
+				if (!PlayerSession.Instance.GetBleConnectionStatus().Equals("Connected", System.StringComparison.OrdinalIgnoreCase) && (Time.timeScale == 1f))
+				{
+					//Pause the game.
+					Debug.Log("Pausing the game as the bluetooth isn't connected.");
+					pg.pauseFunction();
+				}
+			}
+		}
+
+		public void JumpAction()
+        {
+			Time.timeScale = 1f;
+			ballJump = true;
+			GetComponent<AudioSource>().PlayOneShot(jumpingSound);
+
+			calWaitTime = false;
+			waitTimeCal = 0f;
+
+			fj.JTActive = false;
+
+			Invoke("JumpFalse", 1f);
+		}
+
+		public void RunningAction()
+        {
+			Time.timeScale = 1f;
+			calWaitTime = true;
+
+			if (waitTimeCal >= 5f)
+			{
+				moveHorzRight = false;
+				hInput = -8f;
+				leftJump = true;
+			}
+
+			fr.RTActive = false;
+		}
+
+		private void manageTutorial()
+		{
+			if (Input.GetKeyDown(KeyCode.J))
+            {
+				detectedAction = "jump";
+			}
+
+			if (Input.GetKeyDown(KeyCode.K))
+			{
+				detectedAction = "run";
+			}
+
+			if (Input.GetKeyDown(KeyCode.L))
+			{
+				detectedAction = "pause";
+			}
 		}
 	}
 }
