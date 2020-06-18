@@ -7,6 +7,7 @@ public class FirstLeftMove : MonoBehaviour
     // required variables
     [SerializeField] GameObject leftMoveSpeak;
     [SerializeField] GameObject RunAgainSpeak;
+    [SerializeField] GameObject RunAgainCol;
 
     [SerializeField] GameObject runVideoScreen;
     [SerializeField] GameObject stopVideoScreen;
@@ -17,6 +18,7 @@ public class FirstLeftMove : MonoBehaviour
     {
         stopVideoScreen.SetActive(false);
         RunAgainSpeak.SetActive(false);
+        RunAgainCol.SetActive(false);
     }
 
     private void Update()
@@ -34,6 +36,7 @@ public class FirstLeftMove : MonoBehaviour
             AIText.text = "Stop Running";
 
             RunAgainSpeak.SetActive(true);
+            RunAgainCol.SetActive(true);
 
             Invoke("leftSpeakDisable", 2f);
             

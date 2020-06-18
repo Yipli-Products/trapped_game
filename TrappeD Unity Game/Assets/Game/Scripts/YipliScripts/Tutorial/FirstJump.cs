@@ -34,11 +34,6 @@ public class FirstJump : MonoBehaviour
         {
             JumpTutorial();
         }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            pg.pauseFunction();
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -62,6 +57,10 @@ public class FirstJump : MonoBehaviour
 
     private void JumpTutorial()
     {
+        bc.allowjump = true;
+        bc.allowRun = false;
+        bc.allowStop = false;
+
         if (bc.detectedAction == PlayerSession.PlayerActions.JUMP)
         {
             Time.timeScale = 1f;

@@ -41,7 +41,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetClusterIDtoZero();
+        //SetClusterIDtoZero();
 
         SetAllowedLevels();
         manageCurrentButton();
@@ -68,7 +68,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
         switch(ps.GetCompletedLevels())
         {
             case 0:
-                menuButtons = levelZero;
+                menuButtons = levelOne;
                 currentButtonIndex = 1;
                 break;
 
@@ -127,8 +127,8 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetMatKeyInputs();
-        TimeControlSystem();
+        //GetMatKeyInputs();
+        //TimeControlSystem();
 
         //CalculateTime();
     }

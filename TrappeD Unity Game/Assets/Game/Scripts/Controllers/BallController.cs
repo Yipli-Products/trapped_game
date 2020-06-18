@@ -93,8 +93,11 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		public bool allowRun = false;
 		public bool allowjump = false;
+		public bool allowStop = false;
+		public bool isJumping = false;
 
 		public string detectedAction;
+		public string currentLevel;
 
 		private FirstJump fj;
 		private FirstRun fr;
@@ -102,6 +105,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		// Use this for initialization
 		void Start () {
 
+			currentLevel = SceneManager.GetActiveScene().name;
 			detectedAction = "";
 			fj = FindObjectOfType<FirstJump>();
 			fr = FindObjectOfType<FirstRun>();
@@ -121,11 +125,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			if (playerLife < 3) {
 					gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("CHKP_X"), PlayerPrefs.GetFloat("CHKP_Y"), PlayerPrefs.GetFloat("CHKP_Z"));
 			}
-
-			/*if (SceneManager.GetActiveScene().ToString() == "Level_04_RC")
-			{
-				transform.position = new Vector3(1.1f, 3f, -0.8f);
-			} */
 		
 			showLifeOnScreen ();
 			#if UNITY_ANDROID
@@ -142,7 +141,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			totalCoins = ps.GetCoinScore();
 
-			//StartCoroutine(BluetoothCheck());
+			StartCoroutine(BluetoothCheck());
 		}
 
 
@@ -213,16 +212,35 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			isGrounded = Physics2D.OverlapCircle (groundCheckPos, 0.01f, whatIsGround);
 
+			if (!isGrounded && isJumping)
+            {
+				if (GetComponent<Rigidbody2D>().velocity.y < 0)
+				{
+					if (!leftJump)
+					{
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(10f, 0f));
+					}
+					else if (leftJump)
+					{
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(-10f, 0f));
+					}
+				}
+
+				ballJump = false;
+			}
+
+
+
 
 #if UNITY_ANDROID
-				//hInput = CrossPlatformInputManager.GetAxis ("Horizontal");
-				//ManageAndroidActions();
+			//hInput = CrossPlatformInputManager.GetAxis ("Horizontal");
+			//ManageAndroidActions();
 #endif
 
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-			
+
 			//ManagePlayerInput();
-			
+
 #endif
 			ManagePlayerInput();
 			//ManageAndroidActions();
@@ -240,17 +258,20 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 					if (!leftJump)
 					{
-						GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 20f);
+						isJumping = true;
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2000f));
 						//StartCoroutine(positiveXJump());
 					}
 					else if (leftJump)
 					{
-						GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 20f);
+						isJumping = true;
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2000f));
 						//StartCoroutine(negetiveXJump());
 					}
 					else
 					{
 						print("jumping when nothing is true");
+						isJumping = true;
 						GetComponent<Rigidbody2D>().AddForce(new Vector2(0, verticalForce * Time.deltaTime * 60.0f)); //o
 					}
 
@@ -310,27 +331,13 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			if (ballJump)
 			{
-				if (jumpManipulated)
+				if (!leftJump)
 				{
-					if (!leftJump)
-					{
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(10f, 0f), ForceMode2D.Force);
-					}
-					else if (leftJump)
-					{
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(-10f, 0f), ForceMode2D.Force);
-					}
+					GetComponent<Rigidbody2D>().AddForce(new Vector2(1000f, 0f), ForceMode2D.Force);
 				}
-				else
+				else if (leftJump)
 				{
-					if (!leftJump)
-					{
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(40f, 0f), ForceMode2D.Force);
-					}
-					else if (leftJump)
-					{
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(-40f, 0f), ForceMode2D.Force);
-					}
+					GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 0f), ForceMode2D.Force);
 				}
 			}
 
@@ -459,11 +466,19 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					//performedAction = whiteSpace[0];
 					//  Runnig+23+1.2 // coming string from mat
 
+					if (currentLevel == "Level_Tutorial")
+					{
+						if (!allowRun)
+                        {
+							return;
+                        }
+					}
+
 					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNING, System.StringComparison.OrdinalIgnoreCase))
                     {
                         int step = int.Parse(whiteSpace[1]);
-
 						detectedAction = PlayerSession.PlayerActions.RUNNING;
+
 						RunningStartAction();
 
                         PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNING, step);
@@ -474,8 +489,16 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				{
 					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.JUMP, System.StringComparison.OrdinalIgnoreCase))
 					{
+						if (currentLevel == "Level_Tutorial")
+						{
+							if (!allowjump)
+							{
+								return;
+							}
+						}
 
 						detectedAction = PlayerSession.PlayerActions.JUMP;
+
 						JumpAction();
 
 						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.JUMP);
@@ -483,23 +506,40 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNINGSTOPPED, System.StringComparison.OrdinalIgnoreCase))
 					{
+						if (currentLevel == "Level_Tutorial")
+						{
+							if (!allowStop)
+							{
+								return;
+							}
+						}
+
 						detectedAction = PlayerSession.PlayerActions.RUNNINGSTOPPED;
+
 						RunningAction();
 
 						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNINGSTOPPED);
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase))
 					{
+						if (currentLevel == "Level_Tutorial")
+						{
+							if (!allowStop)
+							{
+								return;
+							}
+						}
 						detectedAction = PlayerSession.PlayerActions.STOP;
+
 						RunningAction();
 
 						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.STOP);
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.PAUSE, System.StringComparison.OrdinalIgnoreCase))
 					{
+						detectedAction = PlayerSession.PlayerActions.PAUSE;
 						Debug.Log("processing mat input pause.");
 						pg.pauseFunction();
-						detectedAction = PlayerSession.PlayerActions.PAUSE;
 					}
 				}
 			}
@@ -511,11 +551,13 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			moveHorzLeft = false;
             leftJump = false;
+
             float hForce = 40f;
+
             calWaitTime = false;
             waitTimeCal = 0f;
 
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce, 0f));
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce, 0f), ForceMode2D.Impulse);
 
 			fr.RTActive = false;
 		}
@@ -554,6 +596,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			Time.timeScale = 1f;
 			calWaitTime = true;
 
+			// generate the notification for not doing anything. just to let player know.
 			if (waitTimeCal >= 5f)
 			{
 				moveHorzRight = false;
@@ -568,17 +611,17 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		{
 			if (Input.GetKeyDown(KeyCode.J))
             {
-				detectedAction = "jump";
+				detectedAction = PlayerSession.PlayerActions.JUMP;
 			}
 
 			if (Input.GetKeyDown(KeyCode.K))
 			{
-				detectedAction = "run";
+				detectedAction = PlayerSession.PlayerActions.RUNNING;
 			}
 
 			if (Input.GetKeyDown(KeyCode.L))
 			{
-				detectedAction = "pause";
+				detectedAction = PlayerSession.PlayerActions.PAUSE;
 			}
 		}
 	}

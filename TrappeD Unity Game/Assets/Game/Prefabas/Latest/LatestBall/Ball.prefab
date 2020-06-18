@@ -199,6 +199,7 @@ MonoBehaviour:
   pauseCanvas: {fileID: 0}
   hInput: 0
   vInput: 0
+  isGrounded: 0
   groundCheck: {fileID: 497860}
   groundRadius: 0.445
   whatIsGround:
@@ -248,6 +249,10 @@ MonoBehaviour:
   leftJump: 0
   waitTimeCal: 0
   calWaitTime: 1
+  jumpManipulated: 0
+  allowRun: 0
+  allowjump: 0
+  detectedAction: 
 --- !u!82 &8297862
 AudioSource:
   m_ObjectHideFlags: 0

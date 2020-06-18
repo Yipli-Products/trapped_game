@@ -44,8 +44,13 @@ public class FirstRun : MonoBehaviour
 
     private void RunTutorial()
     {
+        bc.allowjump = false;
+        bc.allowRun = true;
+        bc.allowStop = false;
+
         if (bc.detectedAction == PlayerSession.PlayerActions.RUNNING)
         {
+            Time.timeScale = 1f;
             bc.RunningStartAction();
         }
     }

@@ -17,6 +17,7 @@ public class LevelScoreManager : MonoBehaviour
      private string level_nine = "Level_09_RC"; */
 
     [SerializeField] Text playerName;
+    [SerializeField] Text levelName;
     [SerializeField] PlayerStats ps;
 
     private int level_one_start = 9;
@@ -46,47 +47,56 @@ public class LevelScoreManager : MonoBehaviour
         {
             case "Level_01_RC":
                 currentStars = level_one_start;
+                levelName.text = "Level 1";
                 PlayerPrefs.SetInt("1", 0);
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
 
             case "Level_02_RC":
                 currentStars = level_two_start;
+                levelName.text = "Level 2";
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
 
             case "Level_03_RC":
                 currentStars = level_three_start;
+                levelName.text = "Level 3";
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
 
             case "Level_04_RC":
                 currentStars = level_four_start;
+                levelName.text = "Level 4";
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
 
             case "Level_05_RC":
                 currentStars = level_five_start;
+                levelName.text = "Level 5";
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
 
             case "Level_06_RC":
                 currentStars = level_six_start;
+                levelName.text = "Level 6";
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
 
             case "Level_07_rc":
                 currentStars = level_seven_start;
+                levelName.text = "Level 7";
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
 
             case "Level_08_RC":
                 currentStars = level_eight_start;
+                levelName.text = "Level 8";
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
 
             case "Level_09_RC":
                 currentStars = level_nine_start;
+                levelName.text = "Level 9";
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
         }

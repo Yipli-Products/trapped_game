@@ -28,8 +28,12 @@ public class PauseGame : MonoBehaviour
 
     bool isPause = false;
 
+    string currentScene;
+
     private void Start()
     {
+        currentScene = SceneManager.GetActiveScene().name;
+
         pauseArea.SetActive(false);
         InstructionCanvas.SetActive(true);
 
@@ -72,7 +76,11 @@ public class PauseGame : MonoBehaviour
     {
         isPause = true;
 
-        PlayerSession.Instance.PauseSPSession();
+        if (currentScene != "Level_Tutorial")
+        {
+            PlayerSession.Instance.PauseSPSession();
+        }
+
         SetClusterIDtoZero();
 
         InstructionCanvas.SetActive(false);
@@ -135,7 +143,11 @@ public class PauseGame : MonoBehaviour
         Debug.Log("Resume Function call");
         SetClusterIDtoOne();
 
-        PlayerSession.Instance.ResumeSPSession();
+        if (currentScene != "Level_Tutorial")
+        {
+            PlayerSession.Instance.ResumeSPSession();
+        }
+
         InstructionCanvas.SetActive(true);
         pauseArea.SetActive(false);
     }

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class DestroyPlayer : MonoBehaviour {
 
@@ -14,9 +14,13 @@ public class DestroyPlayer : MonoBehaviour {
 	public AudioClip gameOverSound;
 
 	private YSessionManager ysm;
-	
+
+	private string currentScene;
+
 	void Start()
 	{
+		currentScene = SceneManager.GetActiveScene().name;
+
 		Shaking = false;
 		cameraRef = GameObject.Find ("Main Camera");
 
@@ -59,7 +63,10 @@ public class DestroyPlayer : MonoBehaviour {
 			DoShake();
 			//			Debug.Log("Called Once from here...");
 
-			ysm.StoreSession();
+			if (currentScene != "Level_Tutorial")
+			{
+				ysm.StoreSession();
+			}
 
 			col.gameObject.SendMessage("PlayerDead");
 			//Debug.Log("Shake the Camera");

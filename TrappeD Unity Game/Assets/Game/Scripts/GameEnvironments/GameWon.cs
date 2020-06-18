@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameWon : MonoBehaviour {
 
@@ -12,8 +11,11 @@ public class GameWon : MonoBehaviour {
 
 	private YSessionManager ysm;
 
+	private string currentScene;
+
 	// Use this for initialization
 	void Start () {
+		currentScene = SceneManager.GetActiveScene().name;
 		ysm = FindObjectOfType<YSessionManager>();
 	}
 	
@@ -21,7 +23,7 @@ public class GameWon : MonoBehaviour {
 	void Update () {
 		if (isGameWon) {
 			elapsedTime += Time.deltaTime;
-			if (elapsedTime >= delayTime)Application.LoadLevel ("Game Won");
+			if (elapsedTime >= delayTime) SceneManager.LoadScene("Game Won");
 		}
 	}
 
@@ -33,7 +35,10 @@ public class GameWon : MonoBehaviour {
 
 			ps.SetCompletedLevels(ps.GetCompletedLevels() + 1);
 
-			ysm.StoreSession();
+			if (currentScene != "Level_Tutorial")
+            {
+				ysm.StoreSession();
+			}
 
 			isGameWon = true;
 		}
