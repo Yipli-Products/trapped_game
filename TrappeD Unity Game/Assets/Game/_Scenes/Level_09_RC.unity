@@ -5673,6 +5673,10 @@ PrefabInstance:
       propertyPath: speakText
       value: 
       objectReference: {fileID: 282822947}
+    - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: whatToSpeak
+      value: Stop and Jump
+      objectReference: {fileID: 0}
     - target: {fileID: 6174790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_Offset.y
       value: 9.676888
@@ -6094,7 +6098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 429432, guid: 91439a9cef6f5364face46fc622dadaf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.27
+      value: 1.06
       objectReference: {fileID: 0}
     - target: {fileID: 429432, guid: 91439a9cef6f5364face46fc622dadaf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30022,6 +30026,10 @@ PrefabInstance:
       propertyPath: speakText
       value: 
       objectReference: {fileID: 282822947}
+    - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: whatToSpeak
+      value: Stop and Jump
+      objectReference: {fileID: 0}
     - target: {fileID: 6174790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_Offset.y
       value: 9.676888
@@ -30153,7 +30161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 429432, guid: 91439a9cef6f5364face46fc622dadaf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.52
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 429432, guid: 91439a9cef6f5364face46fc622dadaf, type: 3}
       propertyPath: m_LocalPosition.z

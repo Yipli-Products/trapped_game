@@ -1359,7 +1359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 78.07936
+      value: 78.5
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1470,7 +1470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Jump
+      value: Stop and Jump to Cross
       objectReference: {fileID: 0}
     - target: {fileID: 6174790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_Offset.y
@@ -10843,7 +10843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Jump to Cross
+      value: Stop and Jump to Cross
       objectReference: {fileID: 0}
     - target: {fileID: 6174790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_Offset.y
@@ -12692,7 +12692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Jump to cross
+      value: Stop and Jump to Cross
       objectReference: {fileID: 0}
     - target: {fileID: 6174790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_Offset.y
@@ -12854,7 +12854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.27
+      value: -5.31
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.y

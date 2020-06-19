@@ -48,10 +48,10 @@ public class FirstRun : MonoBehaviour
         bc.allowRun = true;
         bc.allowStop = false;
 
-        if (bc.detectedAction == PlayerSession.PlayerActions.RUNNING)
+        /*if (bc.detectedAction == PlayerSession.PlayerActions.RUNNING)
         {
             Time.timeScale = 1f;
             bc.RunningStartAction();
-        }
+        }*/
     }
 }

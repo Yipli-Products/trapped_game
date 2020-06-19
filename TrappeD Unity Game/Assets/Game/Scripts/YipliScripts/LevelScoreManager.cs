@@ -35,6 +35,8 @@ public class LevelScoreManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
+
         playerName.text = ps.GetPlayerName();
         SetCurrentStarts();
     }

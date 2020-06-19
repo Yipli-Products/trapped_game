@@ -159,7 +159,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
+  m_LinearDrag: 1.5
   m_AngularDrag: 0.5
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -252,7 +252,10 @@ MonoBehaviour:
   jumpManipulated: 0
   allowRun: 0
   allowjump: 0
+  allowStop: 0
+  isJumping: 0
   detectedAction: 
+  currentLevel: 
 --- !u!82 &8297862
 AudioSource:
   m_ObjectHideFlags: 0

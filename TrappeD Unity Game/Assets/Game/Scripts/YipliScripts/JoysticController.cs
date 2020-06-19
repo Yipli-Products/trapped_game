@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
@@ -57,6 +53,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
         public void PlayerMoveLeft()
         {
+            Debug.Log("Player is moving left");
+
             if (bc.waitTimeCal > 5f)
             {
                 bc.moveHorzRight = false;
@@ -68,6 +66,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
         public void rightBHoldDown ()
         {
+            Time.timeScale = 1f;
             bc.calWaitTime = false;
             bc.detectedAction = PlayerSession.PlayerActions.RUNNING;
             buttonHoldDownR = true;
@@ -83,6 +82,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
         }
         public void jumpB()
         {
+            Time.timeScale = 1f;
             bc.ballJump = true;
             bc.calWaitTime = false;
             bc.waitTimeCal = 0f;

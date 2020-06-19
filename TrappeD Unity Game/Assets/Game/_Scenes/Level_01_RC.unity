@@ -670,7 +670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.85
+      value: -4.68
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4071,7 +4071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.85
+      value: -4.7
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7930,7 +7930,7 @@ PrefabInstance:
       objectReference: {fileID: 1165469847}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Jump
+      value: Stop and Jump
       objectReference: {fileID: 0}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakTimeLenght
@@ -10668,7 +10668,7 @@ PrefabInstance:
       objectReference: {fileID: 1165469847}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Jump
+      value: Stop and Jump
       objectReference: {fileID: 0}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakTimeLenght
@@ -11073,7 +11073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.85
+      value: -4.69
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16112,7 +16112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.85
+      value: -4.69
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19953,7 +19953,7 @@ PrefabInstance:
       objectReference: {fileID: 1165469847}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Jump
+      value: Stop and Jump
       objectReference: {fileID: 0}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakTimeLenght
@@ -20924,7 +20924,7 @@ PrefabInstance:
       objectReference: {fileID: 1165469847}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Jump
+      value: Stop and Jump
       objectReference: {fileID: 0}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakTimeLenght
@@ -22814,7 +22814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.85
+      value: -4.71
       objectReference: {fileID: 0}
     - target: {fileID: 484592, guid: 3217af2de723fa34883704ae6b47aaff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -28051,7 +28051,7 @@ PrefabInstance:
       objectReference: {fileID: 1165469847}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Jump
+      value: Stop and Jump
       objectReference: {fileID: 0}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakTimeLenght
@@ -31454,7 +31454,7 @@ PrefabInstance:
       objectReference: {fileID: 1165469847}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Jump
+      value: Stop and Jump
       objectReference: {fileID: 0}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: speakTimeLenght

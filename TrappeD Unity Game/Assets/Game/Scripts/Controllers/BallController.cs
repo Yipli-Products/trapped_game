@@ -259,13 +259,13 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					if (!leftJump)
 					{
 						isJumping = true;
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2000f));
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(1000f, 800f));
 						//StartCoroutine(positiveXJump());
 					}
 					else if (leftJump)
 					{
 						isJumping = true;
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2000f));
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 800f));
 						//StartCoroutine(negetiveXJump());
 					}
 					else
@@ -329,7 +329,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				waitTimeCal += Time.deltaTime;
 			}
 
-			if (ballJump)
+			/*if (ballJump && isJumping)
 			{
 				if (!leftJump)
 				{
@@ -339,7 +339,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				{
 					GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 0f), ForceMode2D.Force);
 				}
-			}
+			}*/
 
 		}
 
@@ -466,13 +466,13 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					//performedAction = whiteSpace[0];
 					//  Runnig+23+1.2 // coming string from mat
 
-					if (currentLevel == "Level_Tutorial")
+					/* if (currentLevel == "Level_Tutorial")
 					{
 						if (!allowRun)
                         {
 							return;
                         }
-					}
+					} */
 
 					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNING, System.StringComparison.OrdinalIgnoreCase))
                     {
@@ -489,13 +489,13 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				{
 					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.JUMP, System.StringComparison.OrdinalIgnoreCase))
 					{
-						if (currentLevel == "Level_Tutorial")
+						/*if (currentLevel == "Level_Tutorial")
 						{
 							if (!allowjump)
 							{
 								return;
 							}
-						}
+						}*/
 
 						detectedAction = PlayerSession.PlayerActions.JUMP;
 
@@ -506,13 +506,13 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNINGSTOPPED, System.StringComparison.OrdinalIgnoreCase))
 					{
-						if (currentLevel == "Level_Tutorial")
+						/* if (currentLevel == "Level_Tutorial")
 						{
 							if (!allowStop)
 							{
 								return;
 							}
-						}
+						} */
 
 						detectedAction = PlayerSession.PlayerActions.RUNNINGSTOPPED;
 
@@ -522,13 +522,14 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase))
 					{
-						if (currentLevel == "Level_Tutorial")
+						/* if (currentLevel == "Level_Tutorial")
 						{
 							if (!allowStop)
 							{
 								return;
 							}
-						}
+						} */
+
 						detectedAction = PlayerSession.PlayerActions.STOP;
 
 						RunningAction();

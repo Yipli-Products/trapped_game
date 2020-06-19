@@ -61,11 +61,11 @@ public class FirstJump : MonoBehaviour
         bc.allowRun = false;
         bc.allowStop = false;
 
-        if (bc.detectedAction == PlayerSession.PlayerActions.JUMP)
+        /* if (bc.detectedAction == PlayerSession.PlayerActions.JUMP)
         {
             Time.timeScale = 1f;
             bc.JumpAction();
-        }
+        } */
     }
 
     IEnumerator frameAnimation()
