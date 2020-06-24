@@ -11,7 +11,6 @@ public class FirstRun : MonoBehaviour
     [SerializeField] Text speakerT;
 
     private BallController bc;
-    public bool RTActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,14 +20,6 @@ public class FirstRun : MonoBehaviour
 
         speakerT.text = "Start Running to move Forward";
         AudioControl.Instance.playAudio();
-    }
-
-    private void Update()
-    {
-        if (RTActive)
-        {
-            RunTutorial();
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,7 +35,12 @@ public class FirstRun : MonoBehaviour
             bc.waitTimeCal = 0f;
 
             Time.timeScale = 0.1f;
-            RTActive = true;
+
+            bc.allowjump = false;
+            bc.allowRun = true;
+            bc.allowStop = false;
+
+            Invoke("couritineManager", 2f);
         }
     }
 
@@ -55,30 +51,17 @@ public class FirstRun : MonoBehaviour
 
     private IEnumerator appriciatePlayer()
     {
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(1f);
 
         speakerT.text = "Good one, Keep Running";
         AudioControl.Instance.playAudio();
         yield return new WaitForSecondsRealtime(1f);
 
-        speakerT.text = "Perfect, Keep it up.";
+        speakerT.text = "Perfect, Keep it up";
         AudioControl.Instance.playAudio();
         yield return new WaitForSecondsRealtime(1f);
 
-        speakerT.text = "Good one, Keep Running";
+        speakerT.text = "Bravo, Done exactly as expected";
         AudioControl.Instance.playAudio();
-    }
-
-    private void RunTutorial()
-    {
-        bc.allowjump = false;
-        bc.allowRun = true;
-        bc.allowStop = false;
-
-        /*if (bc.detectedAction == PlayerSession.PlayerActions.RUNNING)
-        {
-            Time.timeScale = 1f;
-            bc.RunningStartAction();
-        }*/
     }
 }

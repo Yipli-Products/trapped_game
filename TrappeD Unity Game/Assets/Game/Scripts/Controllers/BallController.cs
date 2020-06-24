@@ -102,8 +102,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		private FirstJump fj;
 		private FirstRun fr;
 
-		private bool called = false;
-
 		// Use this for initialization
 		void Start () {
 
@@ -471,13 +469,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					//performedAction = whiteSpace[0];
 					//  Runnig+23+1.2 // coming string from mat
 
-					/* if (currentLevel == "Level_Tutorial")
+					if (currentLevel == "Level_Tutorial" && !allowRun)
 					{
-						if (!allowRun)
-                        {
-							return;
-                        }
-					} */
+						return;
+					}
 
 					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNING, System.StringComparison.OrdinalIgnoreCase))
                     {
@@ -494,13 +489,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				{
 					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.JUMP, System.StringComparison.OrdinalIgnoreCase))
 					{
-						/*if (currentLevel == "Level_Tutorial")
+						if (currentLevel == "Level_Tutorial" && !allowjump)
 						{
-							if (!allowjump)
-							{
-								return;
-							}
-						}*/
+							return;
+						}
 
 						detectedAction = PlayerSession.PlayerActions.JUMP;
 
@@ -511,13 +503,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNINGSTOPPED, System.StringComparison.OrdinalIgnoreCase))
 					{
-						/* if (currentLevel == "Level_Tutorial")
+						if (currentLevel == "Level_Tutorial" && !allowStop)
 						{
-							if (!allowStop)
-							{
-								return;
-							}
-						} */
+							return;
+						}
 
 						detectedAction = PlayerSession.PlayerActions.RUNNINGSTOPPED;
 
@@ -527,13 +516,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase))
 					{
-						/* if (currentLevel == "Level_Tutorial")
+						if (currentLevel == "Level_Tutorial" && !allowStop)
 						{
-							if (!allowStop)
-							{
-								return;
-							}
-						} */
+							return;
+						}
 
 						detectedAction = PlayerSession.PlayerActions.STOP;
 
@@ -555,12 +541,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
         {
 			Time.timeScale = 1f;
 
-			if (!called && currentLevel == "Level_Tutorial")
-            {
-				fr.couritineManager();
-				called = true;
-            }
-
 			moveHorzLeft = false;
             leftJump = false;
 
@@ -570,8 +550,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
             waitTimeCal = 0f;
 
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce, 0f), ForceMode2D.Impulse);
-
-			fr.RTActive = false;
 		}
 
         private IEnumerator BluetoothCheck()
@@ -598,8 +576,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			calWaitTime = false;
 			waitTimeCal = 0f;
 
-			fj.JTActive = false;
-
 			Invoke("JumpFalse", 1f);
 		}
 
@@ -615,8 +591,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				hInput = -8f;
 				leftJump = true;
 			}
-
-			fr.RTActive = false;
 		}
 
 		private void manageTutorial()

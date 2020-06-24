@@ -513,4 +513,9 @@ public class PlayerSession : MonoBehaviour
     {
         return InitBLE.getGameClusterID();
     }
+
+    public string GetFMDriverVersion()
+    {
+        return InitBLE.getFMDriverVersion();
+    }
 }

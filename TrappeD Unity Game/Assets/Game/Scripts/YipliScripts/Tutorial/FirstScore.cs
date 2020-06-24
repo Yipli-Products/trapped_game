@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
+using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
 
 public class FirstScore : MonoBehaviour
 {
@@ -9,9 +10,13 @@ public class FirstScore : MonoBehaviour
     [SerializeField] GameObject rightArrow;
     [SerializeField] Text speakerT;
 
+    private BallController bc;
+
     // Start is called before the first frame update
     void Start()
     {
+        bc = FindObjectOfType<BallController>();
+
         scoreNum.SetActive(false);
         rightArrow.SetActive(false);
     }
@@ -22,6 +27,10 @@ public class FirstScore : MonoBehaviour
         {
             speakerT.text = "This is your score.";
             AudioControl.Instance.playAudio();
+
+            bc.allowjump = false;
+            bc.allowRun = false;
+            bc.allowStop = false;
 
             Time.timeScale = 0.1f;
             StartCoroutine(frameAnimation());
@@ -42,9 +51,36 @@ public class FirstScore : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f);
         }
 
+        bc.allowjump = true;
+        bc.allowRun = true;
+        bc.allowStop = true;
+
         speakerT.text = "Keep Running. You must finish to unlock Level 1.";
         AudioControl.Instance.playAudio();
         rightArrow.SetActive(false);
         Time.timeScale = 1f;
+
+        Invoke("couritineManager", 2f);
+    }
+
+    public void couritineManager()
+    {
+        StartCoroutine(appriciatePlayer());
+    }
+
+    private IEnumerator appriciatePlayer()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+
+        speakerT.text = "Good one, Keep Running";
+        AudioControl.Instance.playAudio();
+        yield return new WaitForSecondsRealtime(2f);
+
+        speakerT.text = "Perfect, Keep it up.";
+        AudioControl.Instance.playAudio();
+        yield return new WaitForSecondsRealtime(2f);
+
+        speakerT.text = "Good one, Keep Running";
+        AudioControl.Instance.playAudio();
     }
 }

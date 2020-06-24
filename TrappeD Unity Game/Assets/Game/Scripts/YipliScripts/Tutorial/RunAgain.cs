@@ -1,5 +1,6 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
+using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
 
 public class RunAgain : MonoBehaviour
 {
@@ -8,16 +9,22 @@ public class RunAgain : MonoBehaviour
     [SerializeField] GameObject leftMoveCol;
     [SerializeField] Text speakerT;
 
+    private BallController bc;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        bc = FindObjectOfType<BallController>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player" && gameObject.activeSelf)
         {
+            bc.allowjump = true;
+            bc.allowRun = true;
+            bc.allowStop = true;
+
             speakerT.text = "Run again to move further";
             AudioControl.Instance.playAudio();
             leftMoveCol.SetActive(false);

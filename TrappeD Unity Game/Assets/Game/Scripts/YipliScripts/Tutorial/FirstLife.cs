@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
+using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
 
 public class FirstLife : MonoBehaviour
 {
@@ -10,13 +11,19 @@ public class FirstLife : MonoBehaviour
     [SerializeField] GameObject lifeThree;
     [SerializeField] GameObject leftArrow;
 
-    [SerializeField] GameObject runVideoScreen;
+    [SerializeField] GameObject videoScreensPanel;
 
     [SerializeField] Text speakerT;
+
+    public bool tutDone = false;
+
+    private BallController bc;
 
     // Start is called before the first frame update
     void Start()
     {
+        bc = FindObjectOfType<BallController>();
+
         lifeOne.SetActive(false);
         lifeTwo.SetActive(false);
         lifeThree.SetActive(false);
@@ -25,16 +32,26 @@ public class FirstLife : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
-            runVideoScreen.SetActive(false);
-
-            speakerT.text = "These are your lives. You have 3 chances to finish the level.";
-            AudioControl.Instance.playAudio();
-
-            Time.timeScale = 0.1f;
-            StartCoroutine(frameAnimation());
+            TriggerTutorial();
         }
+    }
+
+    public void TriggerTutorial()
+    {
+        tutDone = true;
+        videoScreensPanel.SetActive(false);
+
+        speakerT.text = "These are your lives. You have 3 chances to finish the level.";
+        AudioControl.Instance.playAudio();
+
+        bc.allowjump = false;
+        bc.allowRun = false;
+        bc.allowStop = false;
+
+        Time.timeScale = 0.1f;
+        StartCoroutine(frameAnimation());
     }
 
     IEnumerator frameAnimation()
@@ -58,10 +75,14 @@ public class FirstLife : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f);
         }
 
+        bc.allowjump = true;
+        bc.allowRun = true;
+        bc.allowStop = true;
+
         speakerT.text = "Keep Running";
         AudioControl.Instance.playAudio();
         leftArrow.SetActive(false);
         Time.timeScale = 1f;
-        runVideoScreen.SetActive(true);
+        videoScreensPanel.SetActive(true);
     }
 }

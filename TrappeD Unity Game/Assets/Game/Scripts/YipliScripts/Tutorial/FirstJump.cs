@@ -15,7 +15,6 @@ public class FirstJump : MonoBehaviour
     [SerializeField] GameObject windowFrame;
 
     private BallController bc;
-    public bool JTActive = false;
 
     private PauseGame pg;
 
@@ -29,20 +28,16 @@ public class FirstJump : MonoBehaviour
         pg = FindObjectOfType<PauseGame>();
     }
 
-    private void Update()
-    {
-        if (JTActive)
-        {
-            JumpTutorial();
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             stopVideoScreen.SetActive(false);
             jumpVideoScreen.SetActive(true);
+
+            bc.allowjump = true;
+            bc.allowRun = true;
+            bc.allowStop = false;
 
             AIText.fontSize = 30;
             AIText.text = "You will be provided Text instructions through out the Game.";
@@ -53,7 +48,6 @@ public class FirstJump : MonoBehaviour
             StartCoroutine(frameAnimation());
 
             Time.timeScale = 0.01f;
-            JTActive = true;
         }
     }
 

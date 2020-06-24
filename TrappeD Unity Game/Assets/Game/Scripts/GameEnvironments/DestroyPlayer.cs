@@ -17,8 +17,11 @@ public class DestroyPlayer : MonoBehaviour {
 
 	private string currentScene;
 
+	private FirstLife fl;
+
 	void Start()
 	{
+		fl = FindObjectOfType<FirstLife>();
 		currentScene = SceneManager.GetActiveScene().name;
 
 		Shaking = false;
@@ -60,8 +63,13 @@ public class DestroyPlayer : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.name == "Ball") {
+
+			if (currentScene == "Level_Tutorial" && !fl.tutDone)
+			{
+				fl.TriggerTutorial();
+			}
+
 			DoShake();
-			//			Debug.Log("Called Once from here...");
 
 			if (currentScene != "Level_Tutorial")
 			{
@@ -69,7 +77,6 @@ public class DestroyPlayer : MonoBehaviour {
 			}
 
 			col.gameObject.SendMessage("PlayerDead");
-			//Debug.Log("Shake the Camera");
 		}
 	}
 

@@ -116,4 +116,17 @@ public class InitBLE
         return PluginInstance.CallStatic<int>("_getGameID");
     }
 
+    public static string getFMDriverVersion()
+    {
+        try
+        {
+            return PluginInstance.CallStatic<string>("_getDriverVersion");
+        }
+        catch(Exception exp)
+        {
+            Debug.Log("Exception in Driver Version" + exp.Message);
+            return "Exception";
+        }
+    }
+
 }

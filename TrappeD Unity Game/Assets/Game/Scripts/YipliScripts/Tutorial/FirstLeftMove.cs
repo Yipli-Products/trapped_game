@@ -25,15 +25,6 @@ public class FirstLeftMove : MonoBehaviour
         RunAgainCol.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (bc.waitTimeCal >= 5f)
-        {
-            bc.hInput = -8f;
-            bc.leftJump = true;
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -41,8 +32,9 @@ public class FirstLeftMove : MonoBehaviour
             runVideoScreen.SetActive(false);
             stopVideoScreen.SetActive(true);
 
-            bc.waitTimeCal = 0;
-            bc.calWaitTime = true;
+            bc.allowjump = false;
+            bc.allowRun = false;
+            bc.allowStop = true;
 
             AIText.fontSize = 50;
             AIText.text = "Stop Running";
@@ -52,28 +44,6 @@ public class FirstLeftMove : MonoBehaviour
 
             RunAgainCol.SetActive(true);
             
-            //countDownText.text = "Stop Running. if you dont do anything on mat, after a while, you will start moving backwords automatically.";
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            runVideoScreen.SetActive(false);
-            stopVideoScreen.SetActive(true);
-
-            bc.waitTimeCal = 0;
-            bc.calWaitTime = true;
-
-            AIText.fontSize = 50;
-            AIText.text = "Stand Still";
-            AudioControl.Instance.playAudio();
-
-            StartCoroutine(TextChange());
-
-            RunAgainCol.SetActive(true);
-
             //countDownText.text = "Stop Running. if you dont do anything on mat, after a while, you will start moving backwords automatically.";
         }
     }
