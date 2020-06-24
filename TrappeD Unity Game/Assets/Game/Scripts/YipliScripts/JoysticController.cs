@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
@@ -15,10 +16,18 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
         public float hForce = 650f;
         //public float hForceNegative = -0.0000005f;
 
+        private FirstRun fr;
+        public string currentLevel;
+
+        private bool called = false;
+
         // Start is called before the first frame update
         void Start()
         {
             bc = FindObjectOfType<BallController>();
+            fr = FindObjectOfType<FirstRun>();
+
+            currentLevel = SceneManager.GetActiveScene().name;
         }
 
         private void Update()
@@ -42,6 +51,12 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
         public void PlayerMoveRight()
         {
+            if (!called && currentLevel == "Level_Tutorial")
+            {
+                fr.couritineManager();
+                called = true;
+            }
+
             bc.moveHorzLeft = false;
 
             bc.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce * Time.deltaTime, 0f));

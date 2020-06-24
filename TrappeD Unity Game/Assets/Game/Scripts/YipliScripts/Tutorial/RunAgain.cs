@@ -1,26 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
 public class RunAgain : MonoBehaviour
 {
     // required variables
-    [SerializeField] GameObject obstacleBoxBig;
     [SerializeField] GameObject obstacleBoxSmall;
+    [SerializeField] GameObject leftMoveCol;
+    [SerializeField] Text speakerT;
 
     // Start is called before the first frame update
     void Start()
     {
-        obstacleBoxBig.SetActive(true);
-        obstacleBoxSmall.SetActive(false);
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player" && gameObject.activeSelf)
         {
-            obstacleBoxBig.SetActive(false);
-            obstacleBoxSmall.SetActive(true);
+            speakerT.text = "Run again to move further";
+            AudioControl.Instance.playAudio();
+            leftMoveCol.SetActive(false);
+
+            obstacleBoxSmall.GetComponent<Rigidbody2D>().mass = 1;
         }
     }
 }

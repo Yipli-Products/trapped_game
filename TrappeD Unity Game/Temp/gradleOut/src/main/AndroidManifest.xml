@@ -18,7 +18,7 @@
       </intent-filter>
       <meta-data android:name="android.notch_support" android:value="true" />
     </activity>
-    <meta-data android:name="unity.build-id" android:value="d67ec65d-4853-4128-9c43-1caaad213e39" />
+    <meta-data android:name="unity.build-id" android:value="779b2406-12ca-4e23-8f09-dadc507349ea" />
     <meta-data android:name="unity.splash-mode" android:value="0" />
     <meta-data android:name="unity.splash-enable" android:value="True" />
     <meta-data android:name="notch.config" android:value="portrait|landscape" />

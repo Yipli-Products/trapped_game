@@ -33,7 +33,7 @@ public class PlayerSession : MonoBehaviour
     public TextMeshProUGUI bleErrorText;
 
     public GameObject BleErrorPanel;
-    public GameObject LoadingPanel;
+    private GameObject LoadingScreen;
     private GameObject instantiatedBleErrorPanel;
     private bool bIsBleConnectionCoroutineRunning = false;
 
@@ -501,12 +501,16 @@ public class PlayerSession : MonoBehaviour
     {
         Debug.Log("GetBleConnectionStatus returning : " + InitBLE.getBLEStatus());
         return InitBLE.getBLEStatus();
-        //return "Connected"; // only for developer tests
     }
 
     public void LoadingScreenSetActive(bool bOn)
     {
         Debug.Log("Loading Screen : " + bOn);
-        LoadingPanel.SetActive(bOn);
+        LoadingScreen.SetActive(bOn);
+    }
+
+    public int GetGameClusterId()
+    {
+        return InitBLE.getGameClusterID();
     }
 }

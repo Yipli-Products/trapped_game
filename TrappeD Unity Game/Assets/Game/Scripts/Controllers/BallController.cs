@@ -102,6 +102,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		private FirstJump fj;
 		private FirstRun fr;
 
+		private bool called = false;
+
 		// Use this for initialization
 		void Start () {
 
@@ -116,7 +118,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			thisBallSpriteRenderer = GetComponent<SpriteRenderer>();
 			thisBallSpriteRenderer.sprite = balls[PlayerPrefs.GetInt("ACTIVE_BALL")];
 
-				backMusic = GameObject.Find ("Main Camera");
+			backMusic = GameObject.Find ("Main Camera");
 
 		
 			coinAmount = PlayerPrefs.GetInt ("Coins");
@@ -386,6 +388,9 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			{
 				//AutoMovement = false;
 				//hInput = Input.GetAxis("Horizontal"); //FOR PC
+
+				Time.timeScale = 1f;
+
 				hInput = forwardForce;
 				leftJump = false;
 				calWaitTime = false;
@@ -549,6 +554,12 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
         public void RunningStartAction()
         {
 			Time.timeScale = 1f;
+
+			if (!called && currentLevel == "Level_Tutorial")
+            {
+				fr.couritineManager();
+				called = true;
+            }
 
 			moveHorzLeft = false;
             leftJump = false;

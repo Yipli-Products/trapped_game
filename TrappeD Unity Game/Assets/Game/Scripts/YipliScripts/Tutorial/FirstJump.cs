@@ -10,6 +10,7 @@ public class FirstJump : MonoBehaviour
     [SerializeField] GameObject stopVideoScreen;
     [SerializeField] GameObject jumpVideoScreen;
     [SerializeField] Text AIText;
+    [SerializeField] Text speakerT;
 
     [SerializeField] GameObject windowFrame;
 
@@ -42,11 +43,12 @@ public class FirstJump : MonoBehaviour
         {
             stopVideoScreen.SetActive(false);
             jumpVideoScreen.SetActive(true);
+
             AIText.fontSize = 30;
             AIText.text = "You will be provided Text instructions through out the Game.";
 
-            bc.calWaitTime = false;
-            bc.waitTimeCal = 0f;
+            speakerT.text = "Stop and Jump on MAT to cross the hurdles";
+            AudioControl.Instance.playAudio();
 
             StartCoroutine(frameAnimation());
 
@@ -80,6 +82,7 @@ public class FirstJump : MonoBehaviour
         }
 
         AIText.text = "JUMP";
+        AudioControl.Instance.playAudio();
         Time.timeScale = 0.1f;
     }
 }

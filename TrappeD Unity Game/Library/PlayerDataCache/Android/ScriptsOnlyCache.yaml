@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AudioControl
     - BackgroundParallax
     - BalanceManager
     - BallOutOfBoundChecker
@@ -158,7 +159,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12136}
     - Class: 114
-      Script: {instanceID: 141730}
+      Script: {instanceID: 89996}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1587,6 +1588,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 68
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 82
@@ -1596,6 +1599,8 @@ ScriptsOnlyBuild:
     - Class: 92
       Script: {instanceID: 0}
     - Class: 104
+      Script: {instanceID: 0}
+    - Class: 111
       Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: 9922}
@@ -1664,8 +1669,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 11506}
-    - Class: 114
       Script: {instanceID: 11576}
     - Class: 114
       Script: {instanceID: 11646}
@@ -1689,6 +1692,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12092}
     - Class: 114
       Script: {instanceID: 12136}
+    - Class: 114
+      Script: {instanceID: 79688}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1793,7 +1798,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12136}
     - Class: 114
-      Script: {instanceID: 116880}
+      Script: {instanceID: 100392}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -2073,7 +2078,7 @@ ScriptsOnlyBuild:
     className: PositionAsUV1
   - hash:
       serializedVersion: 2
-      Hash: 480ba5d69f0b850919fe5445c0e0baee
+      Hash: 16524a24cb2d155cd16886f7b0840944
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstRun
@@ -2133,7 +2138,7 @@ ScriptsOnlyBuild:
     className: SawRotation
   - hash:
       serializedVersion: 2
-      Hash: 4a82405e60a93e165f5846bc5199aba0
+      Hash: c577593650f00946ec3bca8eb074abbc
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstLife
@@ -2247,7 +2252,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 3476a33688317b2a9fcfc97ef43125bd
+      Hash: 596b216f1dd23cbafd99cc94ae1ea102
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstLeftMove
@@ -2277,7 +2282,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 5115284e277224a343572e53940b3916
+      Hash: cb24dc485bd6a6bbd8d9c9dc10332d33
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstScore
@@ -2337,7 +2342,7 @@ ScriptsOnlyBuild:
     className: ControlTrack
   - hash:
       serializedVersion: 2
-      Hash: 5e7d6b88b55633c74f19286d7b949aa3
+      Hash: d7ef1263a7c32051b212f60319b2e0e6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstJump
@@ -2565,7 +2570,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: bb8ea5fbea4477a10eb07c25bc501509
+      Hash: 902447bd1f4bae04c4af23301fe8f1d6
     assemblyName: Assembly-CSharp.dll
     namespaceName: UnitySampleAssets.CrossPlatformInput.PlatformSpecific
     className: JoysticController
@@ -2583,7 +2588,7 @@ ScriptsOnlyBuild:
     className: WaypointCircuit
   - hash:
       serializedVersion: 2
-      Hash: 8ad3ca56c2e80f6a601dec4b898607d6
+      Hash: 1748fb32d9c6ae05d9f0f041c15d3d4d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerSession
@@ -2679,7 +2684,7 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 3f759dbef9c4ea98f4cd42d5a85a937b
+      Hash: 30c3bc1ba539a1b1fb38d12145252d43
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RunAgain
@@ -2907,7 +2912,7 @@ ScriptsOnlyBuild:
     className: DestroyPlayer
   - hash:
       serializedVersion: 2
-      Hash: f776e6f6add95485cc50e7c083ac5041
+      Hash: 34095f42d8002d0773b4ac0e6db4c0fb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstCheckpoint
@@ -3007,6 +3012,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: UnitySampleAssets.Utility
     className: AutoMobileShaderSwitch
+  - hash:
+      serializedVersion: 2
+      Hash: 6898d7090861da3b9cdb91e9e4a15634
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AudioControl
   platform: 13
   scenePathNames:
   - Assets/Game/_Scenes/Main Menu.unity
@@ -3025,4 +3036,4 @@ ScriptsOnlyBuild:
   - Assets/Game/_Scenes/Level_Selector.unity
   - Assets/Game/_Scenes/Store.unity
   - Assets/yipli_lib_scene.unity
-  playerPath: D:/WorkSpace/FitMat/FO/Trapped/trapped.apk
+  playerPath: D:/WorkSpace/FitMat/FO/Trapped/trapped123345.apk
