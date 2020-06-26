@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AprriciatorScript
     - AudioControl
     - BackgroundParallax
     - BalanceManager
@@ -22,6 +23,7 @@ ScriptsOnlyBuild:
     - GameWon
     - HorzontalMoverWithLimit
     - Joystick
+    - JumpAction
     - JumpManipulations
     - KeySystem
     - LevelButtonController
@@ -160,7 +162,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12142}
     - Class: 114
-      Script: {instanceID: 71958}
+      Script: {instanceID: 98146}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1697,6 +1699,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12136}
     - Class: 114
       Script: {instanceID: 12142}
+    - Class: 114
+      Script: {instanceID: 28896}
+    - Class: 114
+      Script: {instanceID: 34246}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1801,7 +1807,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12142}
     - Class: 114
-      Script: {instanceID: 90576}
+      Script: {instanceID: 72352}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -3033,6 +3039,18 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: UnitySampleAssets.Utility
     className: AutoMobileShaderSwitch
+  - hash:
+      serializedVersion: 2
+      Hash: 589940f40684319029f26bffbef9eca2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AprriciatorScript
+  - hash:
+      serializedVersion: 2
+      Hash: 240dbad8303ea67ed98b9e959d64292f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: JumpAction
   platform: 13
   scenePathNames:
   - Assets/Game/_Scenes/Main Menu.unity

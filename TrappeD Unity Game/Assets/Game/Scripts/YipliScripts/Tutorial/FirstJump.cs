@@ -35,33 +35,19 @@ public class FirstJump : MonoBehaviour
             stopVideoScreen.SetActive(false);
             jumpVideoScreen.SetActive(true);
 
-            bc.allowjump = true;
+            bc.allowjump = false;
             bc.allowRun = true;
             bc.allowStop = false;
 
-            AIText.fontSize = 30;
-            AIText.text = "You will be provided Text instructions through out the Game.";
+            AIText.text = "Game Hints";
 
-            speakerT.text = "Stop and Jump on MAT to cross the hurdles";
+            speakerT.text = "You will be provided Text instructions through out the Game.";
             AudioControl.Instance.playAudio();
 
             StartCoroutine(frameAnimation());
 
             Time.timeScale = 0.01f;
         }
-    }
-
-    private void JumpTutorial()
-    {
-        bc.allowjump = true;
-        bc.allowRun = false;
-        bc.allowStop = false;
-
-        /* if (bc.detectedAction == PlayerSession.PlayerActions.JUMP)
-        {
-            Time.timeScale = 1f;
-            bc.JumpAction();
-        } */
     }
 
     IEnumerator frameAnimation()
@@ -77,6 +63,6 @@ public class FirstJump : MonoBehaviour
 
         AIText.text = "JUMP";
         AudioControl.Instance.playAudio();
-        Time.timeScale = 0.1f;
+        Time.timeScale = 1f;
     }
 }

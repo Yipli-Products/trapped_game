@@ -259,13 +259,13 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					if (!leftJump)
 					{
 						isJumping = true;
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(1000f, 800f));
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(1000f, 1500f));
 						//StartCoroutine(positiveXJump());
 					}
 					else if (leftJump)
 					{
 						isJumping = true;
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 800f));
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 1500f));
 						//StartCoroutine(negetiveXJump());
 					}
 					else
@@ -402,7 +402,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					calWaitTime = true;
 				}
 				
-				if (waitTimeCal >= 5f)
+				if (waitTimeCal >= 4f)
 				{
 					hInput = -8f;
 					leftJump = true;
@@ -476,12 +476,15 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNING, System.StringComparison.OrdinalIgnoreCase))
                     {
-                        int step = int.Parse(whiteSpace[1]);
-						detectedAction = PlayerSession.PlayerActions.RUNNING;
+                        if (!ballJump)
+                        {
+							int step = int.Parse(whiteSpace[1]);
+							detectedAction = PlayerSession.PlayerActions.RUNNING;
 
-						RunningStartAction();
+							RunningStartAction();
 
-                        PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNING, step);
+							PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNING, step);
+						}
                     }
 
                 }
@@ -499,7 +502,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						JumpAction();
 
 						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.JUMP);
-						Invoke("JumpFalse", 1f);
+						//Invoke("JumpFalse", 1f);
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNINGSTOPPED, System.StringComparison.OrdinalIgnoreCase))
 					{
@@ -544,7 +547,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			moveHorzLeft = false;
             leftJump = false;
 
-            float hForce = 40f;
+            float hForce = 30f;
 
             calWaitTime = false;
             waitTimeCal = 0f;
@@ -575,8 +578,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			calWaitTime = false;
 			waitTimeCal = 0f;
-
-			Invoke("JumpFalse", 1f);
 		}
 
 		public void RunningAction()

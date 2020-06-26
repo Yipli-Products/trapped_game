@@ -39,29 +39,6 @@ public class FirstRun : MonoBehaviour
             bc.allowjump = false;
             bc.allowRun = true;
             bc.allowStop = false;
-
-            Invoke("couritineManager", 2f);
         }
-    }
-
-    public void couritineManager()
-    {
-        StartCoroutine(appriciatePlayer());
-    }
-
-    private IEnumerator appriciatePlayer()
-    {
-        yield return new WaitForSecondsRealtime(1f);
-
-        speakerT.text = "Good one, Keep Running";
-        AudioControl.Instance.playAudio();
-        yield return new WaitForSecondsRealtime(1f);
-
-        speakerT.text = "Perfect, Keep it up";
-        AudioControl.Instance.playAudio();
-        yield return new WaitForSecondsRealtime(1f);
-
-        speakerT.text = "Bravo, Done exactly as expected";
-        AudioControl.Instance.playAudio();
     }
 }

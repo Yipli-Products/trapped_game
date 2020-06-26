@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
@@ -17,6 +18,8 @@ public class FirstCheckpoint : MonoBehaviour
 
     private BallController bc;
 
+    bool calledAnim = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,35 +32,40 @@ public class FirstCheckpoint : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            stopVideoScreen.SetActive(false);
-            jumpVideoScreen.SetActive(false);
-            runVideoScreen.SetActive(true);
+            if (!calledAnim)
+            {
+                stopVideoScreen.SetActive(false);
+                jumpVideoScreen.SetActive(false);
+                runVideoScreen.SetActive(true);
 
-            AIText.fontSize = 50;
-            AIText.text = "Run, Stop or Jump";
+                AIText.fontSize = 50;
+                AIText.text = "Run, Stop or Jump";
 
-            speakerT.text = "This is checkpoint. After death, level will start from here.";
-            AudioControl.Instance.playAudio();
+                speakerT.text = "If you die, level will resume from last checkpoint.";
+                AudioControl.Instance.playAudio();
 
-            bc.allowjump = false;
-            bc.allowRun = false;
-            bc.allowStop = false;
+                calledAnim = true;
 
-            Time.timeScale = 0.1f;
-            StartCoroutine(frameAnimation());
+                bc.allowjump = false;
+                bc.allowRun = false;
+                bc.allowStop = false;
+
+                Time.timeScale = 0.1f;
+                StartCoroutine(frameAnimation());
+            }
+            else
+            {
+                print("Checkpoint tutorial is done already.");
+            }
         }
     }
 
     IEnumerator frameAnimation()
     {
-        for (int i = 0; i < 5; i++)
-        {
-            checkpointFrame.SetActive(true);
-            yield return new WaitForSecondsRealtime(1f);
+        checkpointFrame.SetActive(true);
+        yield return new WaitForSecondsRealtime(3f);
 
-            checkpointFrame.SetActive(false);
-            yield return new WaitForSecondsRealtime(1f);
-        }
+        checkpointFrame.SetActive(false);
 
         bc.allowjump = true;
         bc.allowRun = true;

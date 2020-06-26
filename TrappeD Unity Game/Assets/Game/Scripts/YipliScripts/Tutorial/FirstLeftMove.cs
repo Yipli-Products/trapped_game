@@ -43,8 +43,6 @@ public class FirstLeftMove : MonoBehaviour
             StartCoroutine(TextChange());
 
             RunAgainCol.SetActive(true);
-            
-            //countDownText.text = "Stop Running. if you dont do anything on mat, after a while, you will start moving backwords automatically.";
         }
     }
 

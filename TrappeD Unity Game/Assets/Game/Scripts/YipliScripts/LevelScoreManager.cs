@@ -103,4 +103,46 @@ public class LevelScoreManager : MonoBehaviour
                 break;
         }
     }
+
+    public void SetCompletedLevelsOnGameWon()
+    {
+        switch (currentLevel)
+        {
+            case "Level_01_RC":
+                
+                break;
+
+            case "Level_02_RC":
+                
+                break;
+
+            case "Level_03_RC":
+                
+                break;
+
+            case "Level_04_RC":
+                
+                break;
+
+            case "Level_05_RC":
+                
+                break;
+
+            case "Level_06_RC":
+                
+                break;
+
+            case "Level_07_rc":
+                
+                break;
+
+            case "Level_08_RC":
+                
+                break;
+
+            case "Level_09_RC":
+                
+                break;
+        }
+    }
 }

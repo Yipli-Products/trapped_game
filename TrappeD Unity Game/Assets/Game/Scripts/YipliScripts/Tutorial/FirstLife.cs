@@ -43,7 +43,7 @@ public class FirstLife : MonoBehaviour
         tutDone = true;
         videoScreensPanel.SetActive(false);
 
-        speakerT.text = "These are your lives. You have 3 chances to finish the level.";
+        speakerT.text = "You have 3 lives to finish the level.";
         AudioControl.Instance.playAudio();
 
         bc.allowjump = false;
@@ -67,12 +67,12 @@ public class FirstLife : MonoBehaviour
             lifeOne.SetActive(false);
             lifeTwo.SetActive(false);
             lifeThree.SetActive(false);
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime(0.25f);
 
             lifeOne.SetActive(true);
             lifeTwo.SetActive(true);
             lifeThree.SetActive(true);
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime(0.25f);
         }
 
         bc.allowjump = true;
