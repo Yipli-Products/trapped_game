@@ -131,7 +131,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 2
-  m_AngularDrag: 0.5
+  m_AngularDrag: 7
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -170,6 +170,7 @@ MonoBehaviour:
   pauseCanvas: {fileID: 0}
   hInput: 0
   vInput: 0
+  isGrounded: 0
   groundCheck: {fileID: 491448}
   groundRadius: 0.445
   whatIsGround:
@@ -219,6 +220,13 @@ MonoBehaviour:
   leftJump: 0
   waitTimeCal: 0
   calWaitTime: 1
+  jumpManipulated: 0
+  allowRun: 0
+  allowjump: 0
+  allowStop: 0
+  isJumping: 0
+  detectedAction: 
+  currentLevel: 
 --- !u!96 &9691444
 TrailRenderer:
   serializedVersion: 2

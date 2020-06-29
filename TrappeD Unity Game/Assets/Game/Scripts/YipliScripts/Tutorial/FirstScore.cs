@@ -53,7 +53,7 @@ public class FirstScore : MonoBehaviour
 
         bc.allowjump = true;
         bc.allowRun = true;
-        bc.allowStop = true;
+        bc.allowStop = false;
 
         speakerT.text = "Keep Running. You must finish Tutorial to unlock Level 1.";
         AudioControl.Instance.playAudio();

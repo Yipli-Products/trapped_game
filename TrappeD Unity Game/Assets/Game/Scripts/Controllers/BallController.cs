@@ -404,7 +404,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				
 				if (waitTimeCal >= 4f)
 				{
-					hInput = -8f;
+					hInput = -20f;
 					leftJump = true;
 				}
 			}
@@ -502,12 +502,13 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						JumpAction();
 
 						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.JUMP);
-						//Invoke("JumpFalse", 1f);
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNINGSTOPPED, System.StringComparison.OrdinalIgnoreCase))
 					{
 						if (currentLevel == "Level_Tutorial" && !allowStop)
 						{
+							calWaitTime = false;
+							waitTimeCal = 0f;
 							return;
 						}
 
@@ -521,6 +522,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					{
 						if (currentLevel == "Level_Tutorial" && !allowStop)
 						{
+							calWaitTime = false;
+							waitTimeCal = 0f;
 							return;
 						}
 
@@ -578,6 +581,11 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			calWaitTime = false;
 			waitTimeCal = 0f;
+
+			if (currentLevel == "Level_Tutorial")
+            {
+				allowRun = true;
+            }
 		}
 
 		public void RunningAction()
@@ -589,7 +597,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			if (waitTimeCal >= 5f)
 			{
 				moveHorzRight = false;
-				hInput = -8f;
+				hInput = -20f;
 				leftJump = true;
 			}
 		}

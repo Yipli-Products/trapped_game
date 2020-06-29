@@ -21,7 +21,7 @@ public class JumpAction : MonoBehaviour
         Time.timeScale = 0.1f;
 
         bc.allowjump = true;
-        bc.allowRun = true;
+        bc.allowRun = false;
         bc.allowStop = false;
 
         AIText.text = "Stop and Jump";

@@ -77,7 +77,7 @@ public class FirstLife : MonoBehaviour
 
         bc.allowjump = true;
         bc.allowRun = true;
-        bc.allowStop = true;
+        bc.allowStop = false;
 
         speakerT.text = "Keep Running";
         AudioControl.Instance.playAudio();

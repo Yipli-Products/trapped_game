@@ -69,7 +69,7 @@ public class FirstCheckpoint : MonoBehaviour
 
         bc.allowjump = true;
         bc.allowRun = true;
-        bc.allowStop = true;
+        bc.allowStop = false;
 
         AudioControl.Instance.playAudio();
         speakerT.text = "Keep Running";
