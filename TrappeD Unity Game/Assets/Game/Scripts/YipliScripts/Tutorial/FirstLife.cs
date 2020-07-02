@@ -48,7 +48,7 @@ public class FirstLife : MonoBehaviour
 
         bc.allowjump = false;
         bc.allowRun = false;
-        bc.allowStop = false;
+        bc.Runbackward = false;
 
         Time.timeScale = 0.1f;
         StartCoroutine(frameAnimation());
@@ -77,7 +77,7 @@ public class FirstLife : MonoBehaviour
 
         bc.allowjump = true;
         bc.allowRun = true;
-        bc.allowStop = false;
+        bc.Runbackward = false;
 
         speakerT.text = "Keep Running";
         AudioControl.Instance.playAudio();

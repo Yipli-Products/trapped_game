@@ -48,7 +48,7 @@ public class FirstCheckpoint : MonoBehaviour
 
                 bc.allowjump = false;
                 bc.allowRun = false;
-                bc.allowStop = false;
+                bc.Runbackward = false;
 
                 Time.timeScale = 0.1f;
                 StartCoroutine(frameAnimation());
@@ -69,7 +69,7 @@ public class FirstCheckpoint : MonoBehaviour
 
         bc.allowjump = true;
         bc.allowRun = true;
-        bc.allowStop = false;
+        bc.Runbackward = false;
 
         AudioControl.Instance.playAudio();
         speakerT.text = "Keep Running";

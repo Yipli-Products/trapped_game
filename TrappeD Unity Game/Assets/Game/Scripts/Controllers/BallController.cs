@@ -93,22 +93,18 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		public bool allowRun = false;
 		public bool allowjump = false;
-		public bool allowStop = false;
+		public bool Runbackward = false;
 		public bool isJumping = false;
+		public bool gameHint = false;
 
 		public string detectedAction;
 		public string currentLevel;
-
-		private FirstJump fj;
-		private FirstRun fr;
 
 		// Use this for initialization
 		void Start () {
 
 			currentLevel = SceneManager.GetActiveScene().name;
 			detectedAction = "";
-			fj = FindObjectOfType<FirstJump>();
-			fr = FindObjectOfType<FirstRun>();
 
 			pg = FindObjectOfType<PauseGame>();
 
@@ -505,7 +501,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNINGSTOPPED, System.StringComparison.OrdinalIgnoreCase))
 					{
-						if (currentLevel == "Level_Tutorial" && !allowStop)
+						if (currentLevel == "Level_Tutorial" && !Runbackward)
 						{
 							calWaitTime = false;
 							waitTimeCal = 0f;
@@ -520,7 +516,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					}
 					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase))
 					{
-						if (currentLevel == "Level_Tutorial" && !allowStop)
+						if (currentLevel == "Level_Tutorial" && !Runbackward)
 						{
 							calWaitTime = false;
 							waitTimeCal = 0f;

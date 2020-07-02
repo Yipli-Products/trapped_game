@@ -25,14 +25,9 @@ public class FirstScore : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            speakerT.text = "Your score";
+            speakerT.text = "";
             AudioControl.Instance.playAudio();
 
-            bc.allowjump = false;
-            bc.allowRun = false;
-            bc.allowStop = false;
-
-            Time.timeScale = 0.1f;
             StartCoroutine(frameAnimation());
         }
     }
@@ -51,13 +46,8 @@ public class FirstScore : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.25f);
         }
 
-        bc.allowjump = true;
-        bc.allowRun = true;
-        bc.allowStop = false;
-
         speakerT.text = "Keep Running. You must finish Tutorial to unlock Level 1.";
         AudioControl.Instance.playAudio();
         rightArrow.SetActive(false);
-        Time.timeScale = 1f;
     }
 }

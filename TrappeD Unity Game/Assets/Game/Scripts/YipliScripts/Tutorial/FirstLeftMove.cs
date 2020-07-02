@@ -13,6 +13,7 @@ public class FirstLeftMove : MonoBehaviour
     [SerializeField] Text AIText;
 
     [SerializeField] Text speakerT;
+    [SerializeField] GameObject speakerBack;
 
     private BallController bc;
 
@@ -34,12 +35,13 @@ public class FirstLeftMove : MonoBehaviour
 
             bc.allowjump = false;
             bc.allowRun = false;
-            bc.allowStop = true;
+            bc.Runbackward = true;
 
             AIText.fontSize = 50;
             AIText.text = "Stop Running";
             AudioControl.Instance.playAudio();
 
+            speakerBack.SetActive(true);
             StartCoroutine(TextChange());
 
             RunAgainCol.SetActive(true);
@@ -48,8 +50,6 @@ public class FirstLeftMove : MonoBehaviour
 
     private IEnumerator TextChange()
     {
-        Time.timeScale = 0.2f;
-
         speakerT.text = "There could be a situation, where you must go back to jump or climb the edge.";
         AudioControl.Instance.playAudio();
         yield return new WaitForSecondsRealtime(5f);
@@ -57,7 +57,5 @@ public class FirstLeftMove : MonoBehaviour
         speakerT.text = "Stand still to move backwards.";
         AudioControl.Instance.playAudio();
         yield return new WaitForSecondsRealtime(5f);
-
-        Time.timeScale = 1f;
     }
 }

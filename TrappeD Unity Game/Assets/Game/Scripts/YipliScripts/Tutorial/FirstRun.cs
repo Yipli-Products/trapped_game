@@ -9,16 +9,24 @@ public class FirstRun : MonoBehaviour
     [SerializeField] GameObject runVideoScreen;
     [SerializeField] Text AIText;
     [SerializeField] Text speakerT;
+    [SerializeField] GameObject speakerBack;
 
     private BallController bc;
+
+    private void Awake()
+    {
+        speakerT.text = "";
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        speakerBack.SetActive(false);
+
         runVideoScreen.SetActive(false);
         bc = FindObjectOfType<BallController>();
 
-        speakerT.text = "Start Running to move Forward";
+        speakerT.text = "";
         AudioControl.Instance.playAudio();
     }
 
@@ -26,9 +34,12 @@ public class FirstRun : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            speakerBack.SetActive(true);
+
             runVideoScreen.SetActive(true);
             AIText.fontSize = 40;
             AIText.text = "Run on Mat to move forward.";
+            speakerT.text = "Run to move Forward";
             AudioControl.Instance.playAudio();
 
             bc.calWaitTime = false;
@@ -38,7 +49,7 @@ public class FirstRun : MonoBehaviour
 
             bc.allowjump = false;
             bc.allowRun = true;
-            bc.allowStop = false;
+            bc.Runbackward = false;
         }
     }
 }

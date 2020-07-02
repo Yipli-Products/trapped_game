@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class KeySystem : MonoBehaviour {
 
@@ -22,7 +23,12 @@ public class KeySystem : MonoBehaviour {
 	}
 
 	void OnCollisionExit2D(Collision2D other){
-		gameobjectToInform.SendMessage ("OnKeyUntouched");
+		
+		if (!SceneManager.GetActiveScene().name.Equals("Level_06_RC", System.StringComparison.OrdinalIgnoreCase))
+        {
+			gameobjectToInform.SendMessage("OnKeyUntouched");
+		}
+
 		gameObject.GetComponent<Renderer>().material.color = Color.white;
 	}
 

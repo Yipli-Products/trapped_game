@@ -101,6 +101,10 @@ public class LevelScoreManager : MonoBehaviour
                 levelName.text = "Level 9";
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
+
+            default:
+                levelName.text = currentLevel;
+                break;
         }
     }
 

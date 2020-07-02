@@ -7,6 +7,7 @@ public class ActionEnabler : MonoBehaviour
     // required variables
     [SerializeField] Text AIText;
     [SerializeField] Text speakerT;
+    [SerializeField] GameObject speakerBack;
 
     private BallController bc;
 
@@ -20,11 +21,12 @@ public class ActionEnabler : MonoBehaviour
     {
         bc.allowjump = true;
         bc.allowRun = true;
-        bc.allowStop = false;
+        bc.Runbackward = false;
 
         AIText.text = "Run or Stop to Jump";
 
-        speakerT.text = "Run or Stop to Jump.";
+        speakerT.text = "";
+        speakerBack.SetActive(false);
         AudioControl.Instance.playAudio();
     }
 }

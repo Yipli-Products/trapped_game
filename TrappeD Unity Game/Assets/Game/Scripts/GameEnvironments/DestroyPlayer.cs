@@ -64,14 +64,14 @@ public class DestroyPlayer : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.name == "Ball") {
 
-			if (currentScene == "Level_Tutorial" && !fl.tutDone)
+			if (currentScene.Equals("Level_Tutorial", System.StringComparison.OrdinalIgnoreCase) && !fl.tutDone)
 			{
 				fl.TriggerTutorial();
 			}
 
 			DoShake();
 
-			if (currentScene != "Level_Tutorial")
+			if (!currentScene.Equals("Level_Tutorial", System.StringComparison.OrdinalIgnoreCase))
 			{
 				ysm.StoreSession();
 			}

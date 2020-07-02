@@ -18,11 +18,9 @@ public class JumpAction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Time.timeScale = 0.1f;
-
         bc.allowjump = true;
         bc.allowRun = false;
-        bc.allowStop = false;
+        bc.Runbackward = false;
 
         AIText.text = "Stop and Jump";
 

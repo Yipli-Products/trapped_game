@@ -37,7 +37,7 @@ public class FirstJump : MonoBehaviour
 
             bc.allowjump = false;
             bc.allowRun = false;
-            bc.allowStop = false;
+            bc.Runbackward = false;
 
             AIText.text = "Game Hints";
 
@@ -67,6 +67,6 @@ public class FirstJump : MonoBehaviour
 
         bc.allowjump = false;
         bc.allowRun = true;
-        bc.allowStop = false;
+        bc.Runbackward = false;
     }
 }

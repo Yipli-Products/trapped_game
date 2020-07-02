@@ -23,9 +23,9 @@ public class RunAgain : MonoBehaviour
         {
             bc.allowjump = true;
             bc.allowRun = true;
-            bc.allowStop = false;
+            bc.Runbackward = false;
 
-            speakerT.text = "Run or Stop to Jump";
+            speakerT.text = "Keep Running or Stop to Jump to finish the level";
             AudioControl.Instance.playAudio();
             leftMoveCol.SetActive(false);
 

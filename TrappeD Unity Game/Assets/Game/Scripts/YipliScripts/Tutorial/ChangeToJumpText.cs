@@ -21,9 +21,9 @@ public class ChangeToJumpText : MonoBehaviour
     {
         bc.allowjump = true;
         bc.allowRun = true;
-        bc.allowStop = false;
+        bc.Runbackward = false;
 
         AIText.text = "Run or Stop to Jump";
-        speakerT.text = "Run or Stop to Jump";
+        speakerT.text = "Use Run or Stop to Jump";
     }
 }
