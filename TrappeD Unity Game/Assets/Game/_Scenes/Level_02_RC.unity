@@ -30608,6 +30608,16 @@ PrefabInstance:
       propertyPath: TempColl
       value: 
       objectReference: {fileID: 2018955133}
+    - target: {fileID: 4493375547945146657, guid: b6812f5ba94b9e14fb4fca312b78f6b6,
+        type: 3}
+      propertyPath: m_Points.Array.data[1].y
+      value: -3.2606668
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493375547945146657, guid: b6812f5ba94b9e14fb4fca312b78f6b6,
+        type: 3}
+      propertyPath: m_Points.Array.data[1].x
+      value: 32.91489
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6812f5ba94b9e14fb4fca312b78f6b6, type: 3}
 --- !u!1001 &1983664871

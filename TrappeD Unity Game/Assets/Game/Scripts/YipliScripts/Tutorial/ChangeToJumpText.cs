@@ -7,7 +7,6 @@ using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
 public class ChangeToJumpText : MonoBehaviour
 {
     // required variables
-    [SerializeField] Text AIText;
     [SerializeField] Text speakerT;
 
     private BallController bc;
@@ -23,7 +22,6 @@ public class ChangeToJumpText : MonoBehaviour
         bc.allowRun = true;
         bc.Runbackward = false;
 
-        AIText.text = "Run or Stop to Jump";
         speakerT.text = "Use Run or Stop to Jump";
     }
 }

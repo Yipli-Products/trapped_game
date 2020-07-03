@@ -33,7 +33,10 @@ public class GameWon : MonoBehaviour {
 				PlayerPrefs.SetInt ("NUMBER_OF_COMP_LEVELS", PlayerPrefs.GetInt ("CURRENT_LEVEL_SERIAL"));
 			}
 
-			ps.SetCompletedLevels(ps.GetCompletedLevels() + 1);
+			if (SceneManager.GetActiveScene().buildIndex >= ps.GetCompletedLevels())
+            {
+				ps.SetCompletedLevels(ps.GetCompletedLevels() + 1);
+			}
 
 			if (currentScene != "Level_Tutorial")
             {

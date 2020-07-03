@@ -100,6 +100,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		public string detectedAction;
 		public string currentLevel;
 
+		public float matBallForce = 30f;
+
 		// Use this for initialization
 		void Start () {
 
@@ -546,12 +548,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			moveHorzLeft = false;
             leftJump = false;
 
-            float hForce = 30f;
-
             calWaitTime = false;
             waitTimeCal = 0f;
 
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hForce, 0f), ForceMode2D.Impulse);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(matBallForce, 0f), ForceMode2D.Impulse);
 		}
 
         private IEnumerator BluetoothCheck()

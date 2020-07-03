@@ -13,7 +13,6 @@ public class FirstCheckpoint : MonoBehaviour
     [SerializeField] GameObject runVideoScreen;
     [SerializeField] GameObject stopVideoScreen;
     [SerializeField] GameObject jumpVideoScreen;
-    [SerializeField] Text AIText;
     [SerializeField] Text speakerT;
 
     private BallController bc;
@@ -37,9 +36,6 @@ public class FirstCheckpoint : MonoBehaviour
                 stopVideoScreen.SetActive(false);
                 jumpVideoScreen.SetActive(false);
                 runVideoScreen.SetActive(true);
-
-                AIText.fontSize = 50;
-                AIText.text = "Run, Stop or Jump";
 
                 speakerT.text = "If you die, level will resume from last checkpoint.";
                 AudioControl.Instance.playAudio();

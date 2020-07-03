@@ -10,7 +10,6 @@ public class FirstLeftMove : MonoBehaviour
 
     [SerializeField] GameObject runVideoScreen;
     [SerializeField] GameObject stopVideoScreen;
-    [SerializeField] Text AIText;
 
     [SerializeField] Text speakerT;
     [SerializeField] GameObject speakerBack;
@@ -36,10 +35,6 @@ public class FirstLeftMove : MonoBehaviour
             bc.allowjump = false;
             bc.allowRun = false;
             bc.Runbackward = true;
-
-            AIText.fontSize = 50;
-            AIText.text = "Stop Running";
-            AudioControl.Instance.playAudio();
 
             speakerBack.SetActive(true);
             StartCoroutine(TextChange());

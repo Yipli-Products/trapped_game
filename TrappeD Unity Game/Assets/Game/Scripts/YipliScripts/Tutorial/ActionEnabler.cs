@@ -5,7 +5,6 @@ using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
 public class ActionEnabler : MonoBehaviour
 {
     // required variables
-    [SerializeField] Text AIText;
     [SerializeField] Text speakerT;
     [SerializeField] GameObject speakerBack;
 
@@ -22,8 +21,6 @@ public class ActionEnabler : MonoBehaviour
         bc.allowjump = true;
         bc.allowRun = true;
         bc.Runbackward = false;
-
-        AIText.text = "Run or Stop to Jump";
 
         speakerT.text = "";
         speakerBack.SetActive(false);

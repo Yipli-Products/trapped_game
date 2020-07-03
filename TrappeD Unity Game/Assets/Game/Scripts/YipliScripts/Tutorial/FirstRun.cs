@@ -7,7 +7,7 @@ public class FirstRun : MonoBehaviour
 {
     // required variables
     [SerializeField] GameObject runVideoScreen;
-    [SerializeField] Text AIText;
+    [SerializeField] GameObject jumpVideoScreen;
     [SerializeField] Text speakerT;
     [SerializeField] GameObject speakerBack;
 
@@ -22,6 +22,7 @@ public class FirstRun : MonoBehaviour
     void Start()
     {
         speakerBack.SetActive(false);
+        jumpVideoScreen.SetActive(false);
 
         runVideoScreen.SetActive(false);
         bc = FindObjectOfType<BallController>();
@@ -37,15 +38,11 @@ public class FirstRun : MonoBehaviour
             speakerBack.SetActive(true);
 
             runVideoScreen.SetActive(true);
-            AIText.fontSize = 40;
-            AIText.text = "Run on Mat to move forward.";
             speakerT.text = "Run to move Forward";
             AudioControl.Instance.playAudio();
 
             bc.calWaitTime = false;
             bc.waitTimeCal = 0f;
-
-            Time.timeScale = 0.1f;
 
             bc.allowjump = false;
             bc.allowRun = true;
