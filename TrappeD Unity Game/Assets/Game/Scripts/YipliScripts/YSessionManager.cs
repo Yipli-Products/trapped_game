@@ -41,13 +41,9 @@ public class YSessionManager : MonoBehaviour
             {
                 gameData.Add("coins-collected", coinScore.ToString());
             }
-            
 
-            if (YipliHelper.checkInternetConnection())
-            {
-                PlayerSession.Instance.UpdateGameData(gameData);
-                Debug.Log("Game data is updated successfully.");
-            }
+            PlayerSession.Instance.UpdateGameData(gameData);
+            Debug.Log("Game data is updated successfully.");
         }
 
         PlayerSession.Instance.StoreSPSession(ps.GetCoinScore());

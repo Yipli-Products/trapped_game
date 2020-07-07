@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class DistantKeyMsgSender : MonoBehaviour {
 
@@ -18,12 +18,18 @@ public class DistantKeyMsgSender : MonoBehaviour {
 	
 	}
 
-	void OnTriggerStay2D(Collider2D col){
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+		sk.SendMessage("UnlockYourself");
+		sr.color = new Color(1.0f, 0, 0, 1.0f);
+	}
+
+    /*void OnTriggerStay2D(Collider2D col){
 		sk.SendMessage("UnlockYourself");
 		sr.color = new Color (1.0f, 0,0,1.0f);
 	}
 	void OnTriggerExit2D(Collider2D col){
 		sr.color = new Color (1.0f, 1.0f,1.0f,1.0f);
 		sk.SendMessage("LockYourself");
-	}
+	} */
 }

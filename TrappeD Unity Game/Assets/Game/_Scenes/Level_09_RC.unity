@@ -768,15 +768,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sticker
       objectReference: {fileID: 0}
+    - target: {fileID: 833258890859486121, guid: b6812f5ba94b9e14fb4fca312b78f6b6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 833258890859280265, guid: b6812f5ba94b9e14fb4fca312b78f6b6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 130.277
+      value: 130.24
       objectReference: {fileID: 0}
     - target: {fileID: 833258890859280265, guid: b6812f5ba94b9e14fb4fca312b78f6b6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.865
+      value: 2.46
       objectReference: {fileID: 0}
     - target: {fileID: 833258890859280265, guid: b6812f5ba94b9e14fb4fca312b78f6b6,
         type: 3}
@@ -882,6 +887,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 2.7993999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3419918236280947876, guid: b6812f5ba94b9e14fb4fca312b78f6b6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -14.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3419918236280947876, guid: b6812f5ba94b9e14fb4fca312b78f6b6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -360
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6812f5ba94b9e14fb4fca312b78f6b6, type: 3}
@@ -4715,7 +4730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 133.98
+      value: 161
       objectReference: {fileID: 0}
     - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4767,7 +4782,11 @@ PrefabInstance:
       objectReference: {fileID: 282822947}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Jump carefully
+      value: Wait for the carrier
+      objectReference: {fileID: 0}
+    - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: speakTimeLenght
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6174790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_Offset.y
@@ -4776,6 +4795,14 @@ PrefabInstance:
     - target: {fileID: 6174790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_Size.y
       value: 20.35378
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.103385925
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_Size.x
+      value: 17.06453
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -28290,6 +28317,10 @@ PrefabInstance:
     - target: {fileID: 106454, guid: 7cd0de9b33c6b4c4f81de3763775827a, type: 3}
       propertyPath: m_TagString
       value: StickeyObj
+      objectReference: {fileID: 0}
+    - target: {fileID: 106454, guid: 7cd0de9b33c6b4c4f81de3763775827a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 406454, guid: 7cd0de9b33c6b4c4f81de3763775827a, type: 3}
       propertyPath: m_LocalPosition.x

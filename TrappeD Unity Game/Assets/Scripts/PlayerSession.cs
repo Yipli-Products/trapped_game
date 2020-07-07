@@ -95,6 +95,18 @@ public class PlayerSession : MonoBehaviour
         StartCoroutine(CheckBleRoutine());
     }
 
+    public void Update()
+    {
+        try
+        {
+            Debug.Log("Game Cluster Id : " + GetGameClusterId());
+        }
+        catch(Exception exp)
+        {
+            Debug.Log("Exception is getting Cluster ID" + exp.Message);
+        }
+    }
+
     public string GetCurrentPlayer()
     {
         return currentYipliConfig.playerInfo.playerName;

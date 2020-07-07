@@ -50,7 +50,6 @@ public class LevelScoreManager : MonoBehaviour
             case "Level_01_RC":
                 currentStars = level_one_start;
                 levelName.text = "Level 1";
-                PlayerPrefs.SetInt("1", 0);
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
 
@@ -104,48 +103,6 @@ public class LevelScoreManager : MonoBehaviour
 
             default:
                 levelName.text = currentLevel;
-                break;
-        }
-    }
-
-    public void SetCompletedLevelsOnGameWon()
-    {
-        switch (currentLevel)
-        {
-            case "Level_01_RC":
-                
-                break;
-
-            case "Level_02_RC":
-                
-                break;
-
-            case "Level_03_RC":
-                
-                break;
-
-            case "Level_04_RC":
-                
-                break;
-
-            case "Level_05_RC":
-                
-                break;
-
-            case "Level_06_RC":
-                
-                break;
-
-            case "Level_07_rc":
-                
-                break;
-
-            case "Level_08_RC":
-                
-                break;
-
-            case "Level_09_RC":
-                
                 break;
         }
     }

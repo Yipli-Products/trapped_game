@@ -11,6 +11,8 @@ public class FirstRun : MonoBehaviour
     [SerializeField] Text speakerT;
     [SerializeField] GameObject speakerBack;
 
+    [SerializeField] GameObject videoPanel;
+
     private BallController bc;
 
     private void Awake()
@@ -21,6 +23,8 @@ public class FirstRun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        videoPanel.SetActive(false);
+
         speakerBack.SetActive(false);
         jumpVideoScreen.SetActive(false);
 
@@ -35,6 +39,8 @@ public class FirstRun : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            videoPanel.SetActive(true);
+
             speakerBack.SetActive(true);
 
             runVideoScreen.SetActive(true);
