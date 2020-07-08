@@ -5,6 +5,9 @@ using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
 public class JumpAction : MonoBehaviour
 {
     //required variables
+    [SerializeField] GameObject runVideoScreen;
+    [SerializeField] GameObject jumpVideoScreen;
+    [SerializeField] GameObject stopVideoScreen;
     [SerializeField] Text speakerT;
 
     private BallController bc;
@@ -17,6 +20,10 @@ public class JumpAction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        runVideoScreen.SetActive(false);
+        jumpVideoScreen.SetActive(true);
+        stopVideoScreen.SetActive(false);
+
         bc.allowjump = true;
         bc.allowRun = false;
         bc.Runbackward = false;

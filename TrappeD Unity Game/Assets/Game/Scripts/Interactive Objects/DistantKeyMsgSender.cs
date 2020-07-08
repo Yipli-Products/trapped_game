@@ -7,8 +7,14 @@ public class DistantKeyMsgSender : MonoBehaviour {
 	public GameObject visualKey;
 	private SlideUpOnKeyDown sk;
 	private SpriteRenderer sr;
+
+	private SpeakerManagerOne smo;
+
 	// Use this for initialization
 	void Start () {
+
+		smo = FindObjectOfType<SpeakerManagerOne>();
+
 		sk = theLock.GetComponent<SlideUpOnKeyDown> ();
 		sr = visualKey.GetComponent<SpriteRenderer> ();
 	}
@@ -22,6 +28,8 @@ public class DistantKeyMsgSender : MonoBehaviour {
     {
 		sk.SendMessage("UnlockYourself");
 		sr.color = new Color(1.0f, 0, 0, 1.0f);
+
+		smo.disableSpeaker();
 	}
 
     /*void OnTriggerStay2D(Collider2D col){

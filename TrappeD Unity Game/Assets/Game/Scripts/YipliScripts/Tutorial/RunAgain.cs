@@ -5,6 +5,10 @@ using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
 public class RunAgain : MonoBehaviour
 {
     // required variables
+    [SerializeField] GameObject runVideoScreen;
+    [SerializeField] GameObject jumpVideoScreen;
+    [SerializeField] GameObject stopVideoScreen;
+
     [SerializeField] GameObject obstacleBoxSmall;
     [SerializeField] GameObject leftMoveCol;
     [SerializeField] Text speakerT;
@@ -21,6 +25,10 @@ public class RunAgain : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && gameObject.activeSelf)
         {
+            runVideoScreen.SetActive(true);
+            jumpVideoScreen.SetActive(false);
+            stopVideoScreen.SetActive(false);
+
             bc.allowjump = true;
             bc.allowRun = true;
             bc.Runbackward = false;

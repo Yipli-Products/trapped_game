@@ -28,6 +28,7 @@ public class FirstScore : MonoBehaviour
             speakerT.text = "";
             AudioControl.Instance.playAudio();
 
+            Time.timeScale = 0.1f;
             StartCoroutine(frameAnimation());
         }
     }
@@ -49,5 +50,7 @@ public class FirstScore : MonoBehaviour
         speakerT.text = "Keep Running. You must finish Tutorial to unlock Level 1.";
         AudioControl.Instance.playAudio();
         rightArrow.SetActive(false);
+
+        Time.timeScale = 1f;
     }
 }

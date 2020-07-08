@@ -9,6 +9,7 @@ public class FirstLeftMove : MonoBehaviour
     [SerializeField] GameObject RunAgainCol;
 
     [SerializeField] GameObject runVideoScreen;
+    [SerializeField] GameObject jumpVideoScreen;
     [SerializeField] GameObject stopVideoScreen;
 
     [SerializeField] Text speakerT;
@@ -30,6 +31,7 @@ public class FirstLeftMove : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             runVideoScreen.SetActive(false);
+            jumpVideoScreen.SetActive(false);
             stopVideoScreen.SetActive(true);
 
             bc.allowjump = false;

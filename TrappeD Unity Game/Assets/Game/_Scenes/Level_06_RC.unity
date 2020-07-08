@@ -7145,7 +7145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.85
+      value: 48.42
       objectReference: {fileID: 0}
     - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10822,6 +10822,95 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400480, guid: 1b09924304607744196b31520f08003f,
     type: 3}
   m_PrefabInstance: {fileID: 1681008759}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &674606130
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1612063000}
+    m_Modifications:
+    - target: {fileID: 174790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_Name
+      value: speak (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 59.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: speakWindow
+      value: 
+      objectReference: {fileID: 1976146700}
+    - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: speakText
+      value: 
+      objectReference: {fileID: 1976146699}
+    - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: whatToSpeak
+      value: You have to press the red button.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_Offset.y
+      value: 6.2400684
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+      propertyPath: m_Size.y
+      value: 13.480141
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
+--- !u!4 &674606131 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 674606130}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &674606132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 174790, guid: 0224fe5665b8e064da60bdbdd173b8dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 674606130}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &677263434 stripped
 Transform:
@@ -23385,7 +23474,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 413528, guid: c674ecba3c4f89c429fa8993b2153ae9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.109
+      value: 30.268
       objectReference: {fileID: 0}
     - target: {fileID: 413528, guid: c674ecba3c4f89c429fa8993b2153ae9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -23417,7 +23506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 413528, guid: c674ecba3c4f89c429fa8993b2153ae9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.3855
+      value: 0.71394604
       objectReference: {fileID: 0}
     - target: {fileID: 413528, guid: c674ecba3c4f89c429fa8993b2153ae9, type: 3}
       propertyPath: m_LocalScale.y
@@ -24589,6 +24678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1612063000}
+  - component: {fileID: 1612063001}
   m_Layer: 0
   m_Name: Speakers
   m_TagString: Untagged
@@ -24614,9 +24704,23 @@ Transform:
   - {fileID: 1940987951}
   - {fileID: 844778456}
   - {fileID: 1082387745}
+  - {fileID: 674606131}
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1612063001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612062999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d76d3f635932404e9338957e37f0ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secondarySpeaker: {fileID: 674606132}
 --- !u!1 &1612917823
 GameObject:
   m_ObjectHideFlags: 0

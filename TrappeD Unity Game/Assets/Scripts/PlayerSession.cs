@@ -512,8 +512,8 @@ public class PlayerSession : MonoBehaviour
     public string GetBleConnectionStatus()
     {
         Debug.Log("GetBleConnectionStatus returning : " + InitBLE.getBLEStatus());
-        return InitBLE.getBLEStatus();
-        //return "Connected";
+        //return InitBLE.getBLEStatus();
+        return "Connected";
     }
 
     public void LoadingScreenSetActive(bool bOn)

@@ -13,6 +13,9 @@ public class FirstCheckpoint : MonoBehaviour
     [SerializeField] GameObject runVideoScreen;
     [SerializeField] GameObject stopVideoScreen;
     [SerializeField] GameObject jumpVideoScreen;
+
+    [SerializeField] GameObject VideoScreenPanel;
+ 
     [SerializeField] Text speakerT;
 
     private BallController bc;
@@ -35,9 +38,11 @@ public class FirstCheckpoint : MonoBehaviour
             {
                 stopVideoScreen.SetActive(false);
                 jumpVideoScreen.SetActive(false);
-                runVideoScreen.SetActive(true);
+                runVideoScreen.SetActive(false);
 
-                speakerT.text = "If you die, level will resume from last checkpoint.";
+                VideoScreenPanel.SetActive(false);
+
+                speakerT.text = "If you die, level will resume from last checkpoint";
                 AudioControl.Instance.playAudio();
 
                 calledAnim = true;
@@ -69,6 +74,13 @@ public class FirstCheckpoint : MonoBehaviour
 
         AudioControl.Instance.playAudio();
         speakerT.text = "Keep Running";
+
+        VideoScreenPanel.SetActive(true);
+
+        runVideoScreen.SetActive(true);
+        jumpVideoScreen.SetActive(false);
+        stopVideoScreen.SetActive(false);
+
         Time.timeScale = 1f;
     }
 }

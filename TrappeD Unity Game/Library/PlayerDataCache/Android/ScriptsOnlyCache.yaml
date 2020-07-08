@@ -50,6 +50,7 @@ ScriptsOnlyBuild:
     - SlideUpOnKeyDown
     - SlidingDoor
     - SpeakToUser
+    - SpeakerManagerOne
     - StartDisplayScript
     - StickOBJ
     - StoreMangement
@@ -165,7 +166,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12156}
     - Class: 114
-      Script: {instanceID: 209486}
+      Script: {instanceID: 50296}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1047,6 +1048,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12110}
     - Class: 114
       Script: {instanceID: 12156}
+    - Class: 114
+      Script: {instanceID: 362408}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1458,6 +1461,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12110}
     - Class: 114
       Script: {instanceID: 12156}
+    - Class: 114
+      Script: {instanceID: 362408}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1808,7 +1813,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12156}
     - Class: 114
-      Script: {instanceID: 179908}
+      Script: {instanceID: 23482}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -2094,7 +2099,7 @@ ScriptsOnlyBuild:
     className: PositionAsUV1
   - hash:
       serializedVersion: 2
-      Hash: d6ac2b2e1e192a0f8f6dc6b211bb0a13
+      Hash: a9e29323e0cdea20baf0aefdc3de0cd1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstRun
@@ -2274,7 +2279,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 21aab91e5843b9e1ba8cc937f2d2ae9a
+      Hash: 82961f8106c8b6521f97e5f99d46cb94
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstLeftMove
@@ -2472,7 +2477,7 @@ ScriptsOnlyBuild:
     className: ForcedReset
   - hash:
       serializedVersion: 2
-      Hash: 7aaeb5be5bbe068f605ca2563de978c5
+      Hash: f6a1ad0da80842a556efb48763894b06
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ActionEnabler
@@ -2718,7 +2723,7 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 30c3bc1ba539a1b1fb38d12145252d43
+      Hash: 60284ba6538d751dd70c2ca18ab85262
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RunAgain
@@ -2808,7 +2813,7 @@ ScriptsOnlyBuild:
     className: AutoSlideUpDown
   - hash:
       serializedVersion: 2
-      Hash: 589940f40684319029f26bffbef9eca2
+      Hash: e07c022af262b2fa5ed6b70dd34d4acd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: JumpAction
@@ -2976,7 +2981,7 @@ ScriptsOnlyBuild:
     className: DestroyPlayer
   - hash:
       serializedVersion: 2
-      Hash: c6c5a24041d17c9dab5f9f9ce89ebc5a
+      Hash: 25c46f99794213687271efd10f463aa7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstCheckpoint
@@ -3082,6 +3087,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: UnitySampleAssets.Utility
     className: AutoMobileShaderSwitch
+  - hash:
+      serializedVersion: 2
+      Hash: 7ee49a408def5b8488c4eb01e9a7b2a1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SpeakerManagerOne
   platform: 13
   scenePathNames:
   - Assets/Game/_Scenes/Main Menu.unity
@@ -3100,4 +3111,4 @@ ScriptsOnlyBuild:
   - Assets/Game/_Scenes/Level_Selector.unity
   - Assets/Game/_Scenes/Store.unity
   - Assets/yipli_lib_scene.unity
-  playerPath: D:/WorkSpace/Fitmat/Final_Build/Trapped/trapped.apk
+  playerPath: D:/WorkSpace/Fitmat/Final_Build/Trapped/trapped_ble_connected.apk

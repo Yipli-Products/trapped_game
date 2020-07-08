@@ -9,15 +9,24 @@ public class KeySystem : MonoBehaviour {
 
 	private Transform startingPosition;
 
+	private SpeakerManagerOne smo;
+
 
 	// Use this for initialization
 	void Start () {
+		smo = FindObjectOfType<SpeakerManagerOne>();
 		startingPosition = gameObject.transform;
 	}
 	
 	void OnCollisionStay2D(Collision2D other){
 		gameobjectToInform.SendMessage ("OnKeyTouched");
 		gameObject.GetComponent<Renderer>().material.color = Color.green;
+
+		if (SceneManager.GetActiveScene().name.Equals("Level_06_RC", System.StringComparison.OrdinalIgnoreCase))
+		{
+			smo.disableSpeaker();
+		}
+
 		//Debug.Log ("key touched");
 		//gameObject.transform.position = new Vector3 (gameObject.transform.position.x, keyDownLimit.position.y, gameObject.transform.position.z);
 	}

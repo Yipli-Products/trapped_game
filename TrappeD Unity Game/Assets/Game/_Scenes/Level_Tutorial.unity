@@ -3466,7 +3466,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 5
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &232287989
 MonoBehaviour:
@@ -3771,7 +3771,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &246062824
 MonoBehaviour:
@@ -11021,7 +11021,7 @@ Transform:
   - {fileID: 310623832}
   - {fileID: 363791642}
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 8
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &682852796
 GameObject:
@@ -11379,7 +11379,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 12
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &701466260
 MonoBehaviour:
@@ -11746,7 +11746,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &713720434
 BoxCollider2D:
@@ -11788,6 +11788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runVideoScreen: {fileID: 863780622}
   jumpVideoScreen: {fileID: 1799834776}
+  stopVideoScreen: {fileID: 1043565551}
   speakerT: {fileID: 740938897}
   speakerBack: {fileID: 1888574651}
   videoPanel: {fileID: 1716351934}
@@ -18811,19 +18812,19 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 246062823}
-  - {fileID: 1594061552}
   - {fileID: 713720433}
   - {fileID: 1622955472}
-  - {fileID: 1844179769}
-  - {fileID: 232287988}
+  - {fileID: 1975089419}
+  - {fileID: 246062823}
+  - {fileID: 1594061552}
+  - {fileID: 2027408359}
+  - {fileID: 2107243046}
   - {fileID: 1455024051}
   - {fileID: 1279575527}
-  - {fileID: 674258469}
-  - {fileID: 2027408359}
-  - {fileID: 1975089419}
-  - {fileID: 2107243046}
   - {fileID: 701466259}
+  - {fileID: 1844179769}
+  - {fileID: 232287988}
+  - {fileID: 674258469}
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21600,11 +21601,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1279575526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 64.68, y: -5.62, z: 0}
+  m_LocalPosition: {x: 66.62, y: -5.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!68 &1279575528
 EdgeCollider2D:
@@ -21636,6 +21637,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167176daff22a2d468b4baf870d06cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runVideoScreen: {fileID: 863780622}
+  jumpVideoScreen: {fileID: 1799834776}
+  stopVideoScreen: {fileID: 1043565551}
   obstacleBoxSmall: {fileID: 1966708835}
   leftMoveCol: {fileID: 1455024050}
   speakerT: {fileID: 740938897}
@@ -23629,7 +23633,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1455024052
 MonoBehaviour:
@@ -23645,6 +23649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RunAgainCol: {fileID: 1279575526}
   runVideoScreen: {fileID: 863780622}
+  jumpVideoScreen: {fileID: 1799834776}
   stopVideoScreen: {fileID: 1043565551}
   speakerT: {fileID: 740938897}
   speakerBack: {fileID: 1888574651}
@@ -26122,7 +26127,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1594061553
 MonoBehaviour:
@@ -26136,6 +26141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60950a6c32f64b14d90ce0daf3edbee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runVideoScreen: {fileID: 863780622}
+  jumpVideoScreen: {fileID: 1799834776}
+  stopVideoScreen: {fileID: 1043565551}
   speakerT: {fileID: 740938897}
 --- !u!68 &1594061554
 EdgeCollider2D:
@@ -26660,7 +26668,7 @@ Transform:
   m_Children:
   - {fileID: 1183331831}
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!68 &1622955473
 EdgeCollider2D:
@@ -26696,6 +26704,7 @@ MonoBehaviour:
   runVideoScreen: {fileID: 863780622}
   stopVideoScreen: {fileID: 1043565551}
   jumpVideoScreen: {fileID: 1799834776}
+  VideoScreenPanel: {fileID: 1716351934}
   speakerT: {fileID: 740938897}
 --- !u!1 &1623231879
 GameObject:
@@ -29727,7 +29736,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 4
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1844179770
 MonoBehaviour:
@@ -31711,7 +31720,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 10
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1975089420
 BoxCollider2D:
@@ -32851,7 +32860,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 9
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!68 &2027408360
 EdgeCollider2D:
@@ -32883,6 +32892,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4a29578b59be8469557cae651961dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runVideoScreen: {fileID: 863780622}
+  jumpVideoScreen: {fileID: 1799834776}
+  stopVideoScreen: {fileID: 1043565551}
   speakerT: {fileID: 740938897}
   speakerBack: {fileID: 1888574651}
 --- !u!1001 &2036594053
@@ -34356,7 +34368,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134779608}
-  m_RootOrder: 11
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2107243047
 MonoBehaviour:

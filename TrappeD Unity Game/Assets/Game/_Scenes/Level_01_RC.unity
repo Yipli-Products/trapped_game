@@ -218,7 +218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3632516
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19433,7 +19433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1143662491
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26845,7 +26845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1542318411
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32862,7 +32862,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1951110436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36541,16 +36541,6 @@ PrefabInstance:
       propertyPath: InstructionCanvas
       value: 
       objectReference: {fileID: 1165469846}
-    - target: {fileID: 5999103023037482835, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -86.39996
-      objectReference: {fileID: 0}
-    - target: {fileID: 5999103023037482835, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 476.2
-      objectReference: {fileID: 0}
     - target: {fileID: 7343828379270173751, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
         type: 3}
       propertyPath: m_AnchoredPosition.y
