@@ -42,7 +42,7 @@ public class FirstCheckpoint : MonoBehaviour
 
                 VideoScreenPanel.SetActive(false);
 
-                speakerT.text = "If you die, level will resume from last checkpoint";
+                speakerT.text = "If you die, Game will resume from last checkpoint";
                 AudioControl.Instance.playAudio();
 
                 calledAnim = true;

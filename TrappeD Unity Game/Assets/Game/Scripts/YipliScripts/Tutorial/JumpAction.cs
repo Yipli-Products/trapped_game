@@ -28,6 +28,6 @@ public class JumpAction : MonoBehaviour
         bc.allowRun = false;
         bc.Runbackward = false;
 
-        speakerT.text = "Stop and Jump on MAT to cross the hurdles";
+        speakerT.text = "Stop and Jump to cross the hurdles";
     }
 }

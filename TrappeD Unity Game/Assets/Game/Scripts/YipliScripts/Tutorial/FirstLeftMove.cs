@@ -39,7 +39,8 @@ public class FirstLeftMove : MonoBehaviour
             bc.Runbackward = true;
 
             speakerBack.SetActive(true);
-            StartCoroutine(TextChange());
+            speakerT.text = "If you want to go backwards, Just stand still.";
+            AudioControl.Instance.playAudio();
 
             RunAgainCol.SetActive(true);
         }
@@ -47,7 +48,7 @@ public class FirstLeftMove : MonoBehaviour
 
     private IEnumerator TextChange()
     {
-        speakerT.text = "There could be a situation, where you must go back to jump or climb the edge.";
+        speakerT.text = "If you want to go backwards, Just stand still.";
         AudioControl.Instance.playAudio();
         yield return new WaitForSecondsRealtime(5f);
 

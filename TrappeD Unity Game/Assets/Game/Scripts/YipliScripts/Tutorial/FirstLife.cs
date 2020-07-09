@@ -43,7 +43,7 @@ public class FirstLife : MonoBehaviour
         tutDone = true;
         videoScreensPanel.SetActive(false);
 
-        speakerT.text = "You have 3 lives to finish the level.";
+        speakerT.text = "You have 3 lives in each level.";
         AudioControl.Instance.playAudio();
 
         bc.allowjump = false;

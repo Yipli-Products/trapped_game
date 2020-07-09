@@ -47,7 +47,7 @@ public class FirstScore : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.25f);
         }
 
-        speakerT.text = "Keep Running. You must finish Tutorial to unlock Level 1.";
+        speakerT.text = "Keep Running. Finish the tutorial to unlock Level 1.";
         AudioControl.Instance.playAudio();
         rightArrow.SetActive(false);
 

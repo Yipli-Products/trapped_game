@@ -9,7 +9,7 @@ public class AprriciatorScript : MonoBehaviour
     private string[] sentances = {
         "Good one, Keep Running",
         "Perfect, Keep it up",
-        "Bravo, Done exactly as expected",
+        "Bravo, Well Done",
         "Good one, Champ"
     };
 
