@@ -94,7 +94,7 @@ public class PauseGame : MonoBehaviour
         {
             Debug.Log("From pause function : Set cluster id to : 0");
             // set gameid to 0
-            PlayerSession.Instance.SetGameClusterId(0);
+            YipliHelper.SetGameClusterId(0);
         }
         catch (Exception e)
         {
@@ -126,7 +126,7 @@ public class PauseGame : MonoBehaviour
         try
         {
             Debug.Log("From retry or resume function : Set cluster id to : 1");
-            PlayerSession.Instance.SetGameClusterId(1); // set current gameid
+            YipliHelper.SetGameClusterId(1); // set current gameid
         }
         catch (Exception e)
         {

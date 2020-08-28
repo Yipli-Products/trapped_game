@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using YipliFMDriverCommunication;
 
 public class YipliMenuManager : MonoBehaviour
 {
@@ -13,14 +13,8 @@ public class YipliMenuManager : MonoBehaviour
     const string LEFT = "left";
     const string RIGHT = "right";
     const string ENTER = "enter";
-    const float waitTime = 0.75f;
 
-    string FMResponseCount = "";
-
-    float timer = 0;
-
-    long timeHistory1 = 0;
-    long timeHistory2 = 0;
+    int FMResponseCount = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -29,8 +23,6 @@ public class YipliMenuManager : MonoBehaviour
 
         currentButtonIndex = 0;
         manageCurrentButton();
-
-        timeHistory1 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
     }
 
     private static void SetClusterIDtoZero()
@@ -38,7 +30,7 @@ public class YipliMenuManager : MonoBehaviour
         try
         {
             Debug.Log("From game won menu : Set cluster id to : 0");
-            PlayerSession.Instance.SetGameClusterId(0);
+            YipliHelper.SetGameClusterId(0);
         }
         catch (Exception e)
         {
@@ -51,28 +43,7 @@ public class YipliMenuManager : MonoBehaviour
     void Update()
     {
         GetMatKeyInputs();
-        TimeControlSystem();
-
-        //CalculateTime();
-    }
-
-    private void TimeControlSystem()
-    {
-        timeHistory2 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-        Debug.Log(timeHistory2 + "-" + timeHistory1 + "=" + (timeHistory2 - timeHistory1));
-
-        if ((timeHistory2 - timeHistory1) > 1000)
-        {
-            MenuControlSystem();
-
-            timeHistory1 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            Debug.Log("Time changed : " + timeHistory1);
-        }
-    }
-
-    private void CalculateTime()
-    {
-        timer += Time.deltaTime;
+        MenuControlSystem();
     }
 
     private void manageCurrentButton()
@@ -116,24 +87,24 @@ public class YipliMenuManager : MonoBehaviour
         //#if UNITY_ANDROID
         //string FMResponse = PlayerMovement.PluginClass.CallStatic<string>("_getFMResponse");
 
-        string FMResponse = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
-        Debug.Log("UNITY FMResponse: " + FMResponse);
+        string fmActionData = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
 
-        string[] FMTokens = FMResponse.Split('.');
-        Debug.Log("UNITY FMTokens: " + FMTokens[0]);
+        FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
 
-        if (!FMTokens[0].Equals(FMResponseCount))
+        if (FMResponseCount != singlePlayerResponse.count)
         {
-            FMResponseCount = FMTokens[0];
-            if (FMTokens[1].Equals("Left", StringComparison.OrdinalIgnoreCase))
+            Debug.Log("FMResponse " + fmActionData);
+            FMResponseCount = singlePlayerResponse.count;
+
+            if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.LEFT)))
             {
                 ProcessMatInputs(LEFT);
             }
-            else if (FMTokens[1].Equals("Right", StringComparison.OrdinalIgnoreCase))
+            else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.RIGHT)))
             {
                 ProcessMatInputs(RIGHT);
             }
-            else if (FMTokens[1].Equals("Enter", StringComparison.OrdinalIgnoreCase))
+            else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.ENTER)))
             {
                 ProcessMatInputs(ENTER);
             }

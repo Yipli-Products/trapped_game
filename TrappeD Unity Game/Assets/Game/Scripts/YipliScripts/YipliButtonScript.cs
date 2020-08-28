@@ -1,7 +1,5 @@
 ﻿using Firebase.Database;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -67,7 +65,7 @@ public class YipliButtonScript : MonoBehaviour
 
     public void GoToYipli()
     {
-        PlayerSession.Instance.GoToYipli();
+        YipliHelper.GoToYipli();
     }
 
     private async Task GetPlayerData ()

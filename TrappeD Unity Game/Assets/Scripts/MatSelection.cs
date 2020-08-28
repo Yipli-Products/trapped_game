@@ -24,6 +24,7 @@ public class MatSelection : MonoBehaviour
     public YipliConfig currentYipliConfig;
     private string connectionState;
     private int checkMatStatusCount;
+    public GameObject tick;
 
     public void MatConnectionFlow()
     {
@@ -35,8 +36,9 @@ public class MatSelection : MonoBehaviour
         if (yipliMat != null && yipliMat.macAddress.Length > 0)
         {
             connectionState = InitBLE.getBLEStatus();
-            //uncomment below to to skip mat
-            //connectionState = "CONNECTED";
+
+            if (currentYipliConfig.matPlayMode == false)
+                connectionState = "connected";
 
             if (connectionState.Equals("CONNECTED", StringComparison.OrdinalIgnoreCase))
             {
@@ -70,6 +72,7 @@ public class MatSelection : MonoBehaviour
         if (inputPassword.text == "123456")
         {
             //load last Scene
+            currentYipliConfig.matPlayMode = false;
             StartCoroutine(LoadMainGameScene());
         }
         else
@@ -82,16 +85,27 @@ public class MatSelection : MonoBehaviour
 
     IEnumerator LoadMainGameScene()
     {
-        string strFmDriverVersion = InitBLE.getFMDriverVersion();
-        bleSuccessMsg.text = "Successfully Connected to the Mat.\nFmDriver Version : " + strFmDriverVersion;
+        bleSuccessMsg.text = "Your Fitmat is connected.\nTaking you to the game.";
         BluetoothSuccessPanel.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         FindObjectOfType<YipliAudioManager>().Play("BLE_success");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.15f);
+        tick.SetActive(true);
+        yield return new WaitForSeconds(0.35f);
+        StartCoroutine(LoadSceneAfterDisplayingDriverAndGameVersion());
+    }
+
+    IEnumerator LoadSceneAfterDisplayingDriverAndGameVersion()
+    {
+        //TODO : Comment following lines for production build
+        bleSuccessMsg.text = "FmDriver Version : " + YipliHelper.GetFMDriverVersion() + "\n  Game Version : " + Application.version;
+        yield return new WaitForSeconds(1.5f);
+
+
         BluetoothSuccessPanel.SetActive(false);
         //load last Scene
-        SceneManager.LoadScene(currentYipliConfig.callbackLevel);
+        SceneManager.LoadScene(currentYipliConfig.callbackLevel); 
     }
 
     public void OnBackPress()
@@ -241,21 +255,6 @@ public class MatSelection : MonoBehaviour
 
     public void OnGoToYipliPress()
     {
-        string bundleId = "org.hightimeshq.yipli"; //todo: Change this later
-        AndroidJavaClass up = new AndroidJavaClass("com.unity3d.Mat.UnityMat");
-        AndroidJavaObject ca = up.GetStatic<AndroidJavaObject>("currentActivity");
-        AndroidJavaObject packageManager = ca.Call<AndroidJavaObject>("getPackageManager");
-
-        AndroidJavaObject launchIntent = null;
-        try
-        {
-            launchIntent = packageManager.Call<AndroidJavaObject>("getLaunchIntentForPackage", bundleId);
-            ca.Call("startActivity", launchIntent);
-        }
-        catch (AndroidJavaException e)
-        {
-            Debug.Log(e);
-            noMatText.text = "Yipli App is not installed. Please install Yipli from playstore to proceed.";
-        }
+        YipliHelper.GoToYipli();
     }
 }

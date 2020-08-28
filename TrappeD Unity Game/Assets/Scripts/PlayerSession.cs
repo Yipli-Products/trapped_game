@@ -8,13 +8,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using YipliFMDriverCommunication;
 
 public class PlayerSession : MonoBehaviour
 {
-    //TODO : remove below:
-    string retStatus;
     private string userId = ""; // to be recieved from Yipli
-    private string gameId = ""; // to be assigned to every game.
+    public string gameId = ""; // to be assigned to every game.
     private string playerId = ""; // to be recieved from Yipli for each game
     private float points; // Game points / coins
     private string playerAge = ""; //Current age of the player
@@ -25,30 +24,17 @@ public class PlayerSession : MonoBehaviour
     private DateTime startTime;
     private DateTime endTime;
     private float duration;
-    private string intensityLevel = "low"; // to be decided by the game.
-    private IDictionary<string, int> playerActionCounts; // to be updated by the player movements
+    public string intensityLevel = ""; // to be decided by the game.
+    private IDictionary<YipliUtils.PlayerActions, int> playerActionCounts; // to be updated by the player movements
     private IDictionary<string, string> playerGameData; // to be used to store the player gameData like Highscore, last played level etc.
 
 
     public TextMeshProUGUI bleErrorText;
 
     public GameObject BleErrorPanel;
-    private GameObject LoadingScreen;
+    public GameObject LoadingScreen;
     private GameObject instantiatedBleErrorPanel;
     private bool bIsBleConnectionCoroutineRunning = false;
-
-    public class PlayerActions
-    {
-        public static string LEFTMOVE = "left move";
-        public static string RIGHTMOVE = "right move";
-        public static string JUMP = "jumping";
-        public static string STOP = "stop";
-        public static string RUNNINGSTOPPED = "running stopped";
-        public static string RUNNING = "running";
-        public static string PAUSE = "pause";
-        public static string JUMPIN = "Jump In";
-        public static string JUMPOUT = "jump out";
-    }
 
     [JsonIgnore]
     public YipliConfig currentYipliConfig;
@@ -99,12 +85,17 @@ public class PlayerSession : MonoBehaviour
     {
         try
         {
-            Debug.Log("Game Cluster Id : " + GetGameClusterId());
+            Debug.Log("Game Cluster Id : " + YipliHelper.GetGameClusterId());
         }
         catch(Exception exp)
         {
             Debug.Log("Exception is getting Cluster ID" + exp.Message);
         }
+    }
+
+    public IDictionary<YipliUtils.PlayerActions, int> getPlayerActionCounts()
+    {
+        return playerActionCounts;
     }
 
     public string GetCurrentPlayer()
@@ -120,7 +111,7 @@ public class PlayerSession : MonoBehaviour
         SceneManager.LoadScene("yipli_lib_scene");
     }
 
-    public Dictionary<string, dynamic> GetJsonDic()
+    public Dictionary<string, dynamic> GetPlayerSessionDataJsonDic()
     {
         Dictionary<string, dynamic> x;
         x = new Dictionary<string, dynamic>();
@@ -136,6 +127,7 @@ public class PlayerSession : MonoBehaviour
         x.Add("intensity-level", intensityLevel.ToString());
         x.Add("player-action-counts", playerActionCounts);
         x.Add("mac-address", matMacAddress);
+        x.Add("timestamp", ServerValue.Timestamp);
         if (playerGameData != null)
         {
             if (playerGameData.Count > 0)
@@ -178,60 +170,6 @@ public class PlayerSession : MonoBehaviour
         return dataSnapShot ?? null;
     }
 
-
-    //Pass here name of the game
-    //TODO: Shift this check to backend.
-    public void SetYipliGameId(string strGameId)
-    {
-        if (strGameId.Equals("unleash"))
-        {
-            gameId = strGameId;
-            SetGameClusterId(2);
-            intensityLevel = "medium";
-        }
-        else if (strGameId.Equals("trapped"))
-        {
-            gameId = strGameId;
-            SetGameClusterId(1);
-            intensityLevel = "medium";
-        }
-        else if (strGameId.Equals("joyfuljumps"))
-        {
-            gameId = strGameId;
-            SetGameClusterId(1);
-            intensityLevel = "medium";
-        }
-        else if (strGameId.Equals("eggcatcher"))
-        {
-            gameId = strGameId;
-            SetGameClusterId(2);
-            intensityLevel = "low";
-        }
-        else if (strGameId.Equals("yiplirunner"))
-        {
-            gameId = strGameId;
-            SetGameClusterId(2);
-            intensityLevel = "medium";
-        }
-        else if (strGameId.Equals("rollingball"))
-        {
-            gameId = strGameId;
-            SetGameClusterId(2);
-            intensityLevel = "medium";
-        }
-        else if (strGameId.Equals("skater"))
-        {
-            gameId = strGameId;
-            SetGameClusterId(3);
-            intensityLevel = "medium";
-        }
-        else
-        {
-            gameId = "";
-            intensityLevel = "";
-        }
-    }
-
     //First function to be called only once when the game starts()
     public void StartSPSession(string GameId)
     {
@@ -241,12 +179,12 @@ public class PlayerSession : MonoBehaviour
         playerAge = currentYipliConfig.playerInfo.playerAge ?? "";
         playerHeight = currentYipliConfig.playerInfo.playerHeight ?? "";
         playerWeight = currentYipliConfig.playerInfo.playerWeight ?? "";
-        playerActionCounts = new Dictionary<string, int>();
+        playerActionCounts = new Dictionary<YipliUtils.PlayerActions, int>();
         points = 0;
         duration = 0;
         bIsPaused = false;
         startTime = DateTime.Now;
-        SetYipliGameId(GameId);
+        ActionAndGameInfoManager.SetYipliGameInfo(GameId);
         matId = currentYipliConfig.matInfo.matId;
         matMacAddress = currentYipliConfig.matInfo.macAddress;
     }
@@ -255,11 +193,11 @@ public class PlayerSession : MonoBehaviour
     //Call in case of exception while playing game.
     public void CloseSPSession()
     {
+        //Destroy current player session data
         endTime = DateTime.Now;
         points = 0;
         duration = 0;
         Debug.Log("Aborting current player session.");
-        //Destroy current player session object
     }
 
     public void StoreSPSession(float gamePoints)
@@ -318,7 +256,7 @@ public class PlayerSession : MonoBehaviour
         Debug.Log("Pausing current player session.");
         bIsPaused = true; // only set the paused flat to true. Fixed update will take care of halting the time counter
                           //Ble check
-        if (!GetBleConnectionStatus().Equals("Connected", StringComparison.OrdinalIgnoreCase))
+        if (!YipliHelper.GetBleConnectionStatus().Equals("Connected", StringComparison.OrdinalIgnoreCase))
         {
             Debug.Log("In PauseSPSession : Ble disconnected");
             if (!BleErrorPanel.activeSelf)
@@ -337,13 +275,13 @@ public class PlayerSession : MonoBehaviour
     }
 
     //to be called from all the player movment actions handled script
-    public void AddPlayerAction(string action, int steps = 1)
+    public void AddPlayerAction(YipliUtils.PlayerActions action, int count = 1)
     {
         Debug.Log("Adding action in current player session.");
         if (playerActionCounts.ContainsKey(action))
-            playerActionCounts[action] = playerActionCounts[action] + steps;
+            playerActionCounts[action] = playerActionCounts[action] + count;
         else
-            playerActionCounts.Add(action, steps);
+            playerActionCounts.Add(action, count);
     }
 
     //To be called from GameObject FixedUpdate
@@ -355,7 +293,7 @@ public class PlayerSession : MonoBehaviour
             duration += Time.deltaTime;
         }
 
-        if (GetBleConnectionStatus().Equals("Connected", StringComparison.OrdinalIgnoreCase))
+        if (YipliHelper.GetBleConnectionStatus().Equals("Connected", StringComparison.OrdinalIgnoreCase))
         {
             Debug.Log("In UpdateDuration : Ble connected");
             if (BleErrorPanel.activeSelf)
@@ -366,40 +304,13 @@ public class PlayerSession : MonoBehaviour
         }
     }
 
-    public void GoToYipli()
-    {
-        try
-        {
-            Debug.Log("Go to Yipli Called");
-            string bundleId = "org.hightimeshq.yipli"; //to be changed later
-            AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-            AndroidJavaObject ca = up.GetStatic<AndroidJavaObject>("currentActivity");
-            AndroidJavaObject packageManager = ca.Call<AndroidJavaObject>("getPackageManager");
-
-            AndroidJavaObject launchIntent = null;
-
-            launchIntent = packageManager.Call<AndroidJavaObject>("getLaunchIntentForPackage", bundleId);
-            ca.Call("startActivity", launchIntent);
-        }
-        catch (AndroidJavaException e)
-        {
-            //Todo: Redirect to playstore for Yipli App.
-            Debug.Log(e);
-        }
-    }
-
-    public void SetGameClusterId(int gameClusterId)
-    {
-        InitBLE.setGameClusterID(gameClusterId);
-    }
-
     private IEnumerator CheckBleRoutine()
     {
         int autoRetryBleConnectionCount = 10;
         while (true)
         {
             yield return new WaitForSecondsRealtime(.15f);
-            string retStatus = GetBleConnectionStatus();
+            string retStatus = YipliHelper.GetBleConnectionStatus();
             Debug.Log("Bluetooth Status : " + retStatus);
             if (!retStatus.Equals("Connected", StringComparison.OrdinalIgnoreCase))
             {
@@ -482,7 +393,7 @@ public class PlayerSession : MonoBehaviour
             Debug.Log("In ReconnectBleFromGame while : " + iTryCount);
             iTryCount--;
             yield return new WaitForSecondsRealtime(.25f);
-            string strStatus = GetBleConnectionStatus();
+            string strStatus = YipliHelper.GetBleConnectionStatus();
             if (strStatus.Equals("connected", StringComparison.OrdinalIgnoreCase))
             {
                 Debug.Log("Connected back");
@@ -509,25 +420,9 @@ public class PlayerSession : MonoBehaviour
         bIsBleConnectionCoroutineRunning = false;
     }
 
-    public string GetBleConnectionStatus()
-    {
-        Debug.Log("GetBleConnectionStatus returning : " + InitBLE.getBLEStatus());
-        return InitBLE.getBLEStatus();
-    }
-
     public void LoadingScreenSetActive(bool bOn)
     {
         Debug.Log("Loading Screen : " + bOn);
         LoadingScreen.SetActive(bOn);
-    }
-
-    public int GetGameClusterId()
-    {
-        return InitBLE.getGameClusterID();
-    }
-
-    public string GetFMDriverVersion()
-    {
-        return InitBLE.getFMDriverVersion();
     }
 }

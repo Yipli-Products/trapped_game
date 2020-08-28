@@ -71,7 +71,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
         {
             Time.timeScale = 1f;
             bc.calWaitTime = false;
-            bc.detectedAction = PlayerSession.PlayerActions.RUNNING;
+            //bc.detectedAction = PlayerSession.PlayerActions.RUNNING;
             buttonHoldDownR = true;
         }
 
@@ -89,7 +89,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
             bc.ballJump = true;
             bc.calWaitTime = false;
             bc.waitTimeCal = 0f;
-            bc.detectedAction = PlayerSession.PlayerActions.JUMP;
+            //bc.detectedAction = PlayerSession.PlayerActions.JUMP;
             //Invoke("JumpFalse", 0.5f);
         }
 

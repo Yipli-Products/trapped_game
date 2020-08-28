@@ -27,7 +27,7 @@ public class ClusterIDManager : MonoBehaviour
         try
         {
             Debug.Log("From retry or resume function : Set cluster id to : 1");
-            PlayerSession.Instance.SetGameClusterId(1); // set current gameid
+            YipliHelper.SetGameClusterId(1); // set current gameid
         }
         catch (System.Exception e)
         {

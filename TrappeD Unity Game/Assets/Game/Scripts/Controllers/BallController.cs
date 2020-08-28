@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using YipliFMDriverCommunication;
 
 namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 {
@@ -80,7 +81,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		private float backValue = 0f;
 		public float forwardForce = 500f;
 
-		string FMResponseCount = "";
+		int FMResponseCount = -1;
 		private int thisLevelPoints;
 
 		public bool leftJump = false;
@@ -296,7 +297,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			manageAUtoMovement();
 			ManageMatActions();
 
-			manageTutorial();
+			//manageTutorial();
 
 			if (isPlayerDead)GetComponent<Rigidbody2D>().velocity = new Vector3 (0,0,0);
 
@@ -430,28 +431,21 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		private void AddJumpPlayerAction() 
 		{
-			PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.JUMP);
+			PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.JUMP);
 		}
 
 		private void JumpFalse () {
 			ballJump = false;
-		}	  
+		}
 
-		private void ManageMatActions()
+		/*private void ManageMatActions()
 		{
 			//#if UNITY_ANDROID
-			string FMResponse = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
-			Debug.Log("UNITY FMResponse: " + FMResponse);
+			string fmActionData = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
+			Debug.Log("UNITY FMResponse: " + fmActionData);
 			//Sample FMResponse : 
-			/*
-				 {response_count}.{response}
-				 1.Left Move
-				 2.Right Move
-				 3.Jumping
-				 4.Bending
-			 */
 
-			string[] FMTokens = FMResponse.Split('.');
+			string[] FMTokens = fmActionData.Split('.');
 			Debug.Log("UNITY FMTokens: " + FMTokens[0]);
 
 			//FMResponseCount = FMTokens[0];
@@ -472,36 +466,33 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						return;
 					}
 
-					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNING, System.StringComparison.OrdinalIgnoreCase))
+					if (whiteSpace[0].Equals(YipliUtils.PlayerActions.RUNNING, System.StringComparison.OrdinalIgnoreCase))
                     {
                         if (!ballJump)
                         {
 							int step = int.Parse(whiteSpace[1]);
-							detectedAction = PlayerSession.PlayerActions.RUNNING;
 
 							RunningStartAction();
 
-							PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNING, step);
+							PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, step);
 						}
                     }
 
                 }
 				else if (whiteSpace.Length == 1)
 				{
-					if (whiteSpace[0].Equals(PlayerSession.PlayerActions.JUMP, System.StringComparison.OrdinalIgnoreCase))
+					if (whiteSpace[0].Equals(YipliUtils.PlayerActions.JUMP, System.StringComparison.OrdinalIgnoreCase))
 					{
 						if (currentLevel == "Level_Tutorial" && !allowjump)
 						{
 							return;
 						}
 
-						detectedAction = PlayerSession.PlayerActions.JUMP;
-
 						JumpAction();
 
-						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.JUMP);
+						PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.JUMP);
 					}
-					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.RUNNINGSTOPPED, System.StringComparison.OrdinalIgnoreCase))
+					else if (whiteSpace[0].Equals(YipliUtils.PlayerActions.RUNNINGSTOPPED, System.StringComparison.OrdinalIgnoreCase))
 					{
 						if (currentLevel == "Level_Tutorial" && !Runbackward)
 						{
@@ -510,13 +501,11 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 							return;
 						}
 
-						detectedAction = PlayerSession.PlayerActions.RUNNINGSTOPPED;
-
 						RunningAction();
 
-						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.RUNNINGSTOPPED);
+						PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNINGSTOPPED);
 					}
-					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase))
+					else if (whiteSpace[0].Equals(YipliUtils.PlayerActions.STOP, System.StringComparison.OrdinalIgnoreCase))
 					{
 						if (currentLevel == "Level_Tutorial" && !Runbackward)
 						{
@@ -525,23 +514,131 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 							return;
 						}
 
-						detectedAction = PlayerSession.PlayerActions.STOP;
-
 						RunningAction();
 
-						PlayerSession.Instance.AddPlayerAction(PlayerSession.PlayerActions.STOP);
+						PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.STOP);
 					}
-					else if (whiteSpace[0].Equals(PlayerSession.PlayerActions.PAUSE, System.StringComparison.OrdinalIgnoreCase))
+					else if (whiteSpace[0].Equals(YipliUtils.PlayerActions.PAUSE, System.StringComparison.OrdinalIgnoreCase))
 					{
-						detectedAction = PlayerSession.PlayerActions.PAUSE;
 						Debug.Log("processing mat input pause.");
 						pg.pauseFunction();
 					}
 				}
 			}
+		}*/
+
+		private void ManageMatActions()
+        {
+			string fmActionData = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
+			Debug.Log("Json Data from Fmdriver : " + fmActionData);
+
+			/* New FmDriver Response Format
+               {
+                  "count": 1,                 # Updates every time new action is detected
+                  "timestamp": 1597237057689, # Time at which response was packaged/created by Driver
+                  "playerdata": [                      # Array containing player data
+                    {
+                      "id": 1,                         # Player ID (For Single-player-1 , Multiplayer it could be 1 or 2 )
+                      "fmresponse": {
+                        "action_id": "9D6O",           # Action ID-Unique ID for each action. Refer below table for all action IDs
+                        "action_name": "Jump",         # Action Name for debugging (Gamers should strictly check action ID)
+                        "properties": "null"           # Any properties action has - ex. Running could have Step Count, Speed
+                      }
+                    },
+                    {null}
+                  ]
+                }
+            */
+
+			FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
+
+			if (FMResponseCount != singlePlayerResponse.count)
+            {
+				Debug.Log("FMResponse " + fmActionData);
+				FMResponseCount = singlePlayerResponse.count;
+
+				//Handle "Running" case seperately to read the exta properties sent.
+				if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.RUNNING)))
+                {
+					///CheckPoint for the running action properties.
+					if (singlePlayerResponse.playerdata[0].fmresponse.properties.ToString() != "null")
+                    {
+						string[] tokens = singlePlayerResponse.playerdata[0].fmresponse.properties.Split(',');
+
+						if (tokens.Length > 0)
+						{
+							//Split the property value pairs:
+							string[] totalStepsCountKeyValue = tokens[0].Split('=');
+							if (totalStepsCountKeyValue[0].Equals("totalStepsCount"))
+							{
+								Debug.Log("Adding steps : " + totalStepsCountKeyValue[1]);
+								if (!ballJump)
+								{
+									int steps = int.Parse(totalStepsCountKeyValue[0]);
+
+									RunningStartAction();
+
+									PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, steps);
+								}
+
+							}
+
+							string[] speedKeyValue = tokens[1].Split('=');
+							if (speedKeyValue[0].Equals("speed"))
+							{
+								//TODO : Do some handling if speed parameter needs to be used to adjust the running speed in the game.
+							}
+						}
+					}
+
+				}
+				else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.RUNNINGSTOPPED)))
+                {
+					if (currentLevel == "Level_Tutorial" && !Runbackward)
+					{
+						calWaitTime = false;
+						waitTimeCal = 0f;
+						return;
+					}
+
+					RunningStopAction();
+
+					PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNINGSTOPPED);
+				}
+				else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.STOP)))
+				{
+					if (currentLevel == "Level_Tutorial" && !Runbackward)
+					{
+						calWaitTime = false;
+						waitTimeCal = 0f;
+						return;
+					}
+
+					RunningStopAction();
+
+					//PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.STOP);
+				}
+				else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.JUMP)))
+				{
+					if (currentLevel == "Level_Tutorial" && !allowjump)
+					{
+						return;
+					}
+
+					JumpAction();
+
+					PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.JUMP);
+				}
+				else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.PAUSE)))
+				{
+					Debug.Log("processing mat input pause.");
+					pg.pauseFunction();
+				}
+			}
 		}
 
-        public void RunningStartAction()
+
+		public void RunningStartAction()
         {
 			Time.timeScale = 1f;
 
@@ -560,7 +657,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			while (true)
 			{
 				yield return new WaitForSeconds(0.5f);
-				if (!PlayerSession.Instance.GetBleConnectionStatus().Equals("Connected", System.StringComparison.OrdinalIgnoreCase) && (Time.timeScale == 1f))
+				if (!YipliHelper.GetBleConnectionStatus().Equals("Connected", System.StringComparison.OrdinalIgnoreCase) && (Time.timeScale == 1f))
 				{
 					//Pause the game.
 					Debug.Log("Pausing the game as the bluetooth isn't connected.");
@@ -584,7 +681,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
             }
 		}
 
-		public void RunningAction()
+		public void RunningStopAction()
         {
 			Time.timeScale = 1f;
 			calWaitTime = true;
@@ -602,17 +699,17 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		{
 			if (Input.GetKeyDown(KeyCode.J))
             {
-				detectedAction = PlayerSession.PlayerActions.JUMP;
+				//detectedAction = YipliUtils.PlayerActions.JUMP;
 			}
 
 			if (Input.GetKeyDown(KeyCode.K))
 			{
-				detectedAction = PlayerSession.PlayerActions.RUNNING;
+				//detectedAction = YipliUtils.PlayerActions.RUNNING;
 			}
 
 			if (Input.GetKeyDown(KeyCode.L))
 			{
-				detectedAction = PlayerSession.PlayerActions.PAUSE;
+				//detectedAction = YipliUtils.PlayerActions.PAUSE;
 			}
 		}
 	}

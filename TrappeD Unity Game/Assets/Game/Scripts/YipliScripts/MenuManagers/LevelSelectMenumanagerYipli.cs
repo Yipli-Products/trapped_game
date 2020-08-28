@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using YipliFMDriverCommunication;
 
 public class LevelSelectMenumanagerYipli : MonoBehaviour
 {
@@ -30,13 +28,8 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     const string LEFT = "left";
     const string RIGHT = "right";
     const string ENTER = "enter";
-    const float waitTime = 0.75f;
 
-    string FMResponseCount = "";
-    float timer = 0;
-
-    long timeHistory1 = 0;
-    long timeHistory2 = 0;
+    int FMResponseCount = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -45,8 +38,6 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 
         SetAllowedLevels();
         manageCurrentButton();
-
-        timeHistory1 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
     }
 
     private static void SetClusterIDtoZero()
@@ -54,7 +45,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
         try
         {
             Debug.Log("From level selection : Set cluster id to : 0");
-            PlayerSession.Instance.SetGameClusterId(0);
+            YipliHelper.SetGameClusterId(0);
         }
         catch (Exception e)
         {
@@ -127,29 +118,8 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //GetMatKeyInputs();
-        //TimeControlSystem();
-
-        //CalculateTime();
-    }
-
-    private void TimeControlSystem()
-    {
-        timeHistory2 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-        Debug.Log(timeHistory2 + "-" + timeHistory1 + "=" + (timeHistory2 - timeHistory1));
-
-        if ((timeHistory2 - timeHistory1) > 1000)
-        {
-            MenuControlSystem();
-
-            timeHistory1 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            Debug.Log("Time changed : " + timeHistory1);
-        }
-    }
-
-    private void CalculateTime()
-    {
-        timer += Time.deltaTime;
+        GetMatKeyInputs();
+        MenuControlSystem();
     }
 
     private void GetMatKeyInputs()
@@ -194,24 +164,24 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
         //#if UNITY_ANDROID
         //string FMResponse = PlayerMovement.PluginClass.CallStatic<string>("_getFMResponse");
 
-        string FMResponse = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
-        Debug.Log("UNITY FMResponse: " + FMResponse);
+        string fmActionData = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
 
-        string[] FMTokens = FMResponse.Split('.');
-        Debug.Log("UNITY FMTokens: " + FMTokens[0]);
+        FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
 
-        if (!FMTokens[0].Equals(FMResponseCount))
+        if (FMResponseCount != singlePlayerResponse.count)
         {
-            FMResponseCount = FMTokens[0];
-            if (FMTokens[1].Equals("Left", StringComparison.OrdinalIgnoreCase))
+            Debug.Log("FMResponse " + fmActionData);
+            FMResponseCount = singlePlayerResponse.count;
+
+            if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.LEFT)))
             {
                 ProcessMatInputs(LEFT);
             }
-            else if (FMTokens[1].Equals("Right", StringComparison.OrdinalIgnoreCase))
+            else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.RIGHT)))
             {
                 ProcessMatInputs(RIGHT);
             }
-            else if (FMTokens[1].Equals("Enter", StringComparison.OrdinalIgnoreCase))
+            else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.ENTER)))
             {
                 ProcessMatInputs(ENTER);
             }
