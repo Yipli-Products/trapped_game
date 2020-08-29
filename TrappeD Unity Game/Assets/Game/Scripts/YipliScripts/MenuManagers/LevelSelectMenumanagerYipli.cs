@@ -6,19 +6,9 @@ using YipliFMDriverCommunication;
 public class LevelSelectMenumanagerYipli : MonoBehaviour
 {
     //required variables
-    [SerializeField] Button[] levelZero;
-    [SerializeField] Button[] levelOne;
-    [SerializeField] Button[] levelTwo;
-    [SerializeField] Button[] levelThree;
-    [SerializeField] Button[] levelFour;
-    [SerializeField] Button[] levelFive;
-    [SerializeField] Button[] levelSix;
-    [SerializeField] Button[] levelSeven;
-    [SerializeField] Button[] levelEight;
-    [SerializeField] Button[] levelNine;
-    [SerializeField] Button[] levelAll;
+    [SerializeField] Button[] allButtons;
 
-    private Button[] menuButtons;
+    private Button[] menuButtons = null;
 
     [SerializeField] PlayerStats ps;
 
@@ -34,7 +24,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //SetClusterIDtoZero();
+        SetClusterIDtoZero();
 
         SetAllowedLevels();
         manageCurrentButton();
@@ -56,62 +46,9 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 
     private void SetAllowedLevels()
     {
-        switch(ps.GetCompletedLevels())
+        for (int i = 0; i < ps.GetCompletedLevels(); i++)
         {
-            case 0:
-                menuButtons = levelOne;
-                currentButtonIndex = 1;
-                break;
-
-            case 1:
-                menuButtons = levelOne;
-                currentButtonIndex = 2;
-                break;
-
-            case 2:
-                menuButtons = levelTwo;
-                currentButtonIndex = 3;
-                break;
-
-            case 3:
-                menuButtons = levelThree;
-                currentButtonIndex = 4;
-                break;
-
-            case 4:
-                menuButtons = levelFour;
-                currentButtonIndex = 5;
-                break;
-
-            case 5:
-                menuButtons = levelFive;
-                currentButtonIndex = 6;
-                break;
-
-            case 6:
-                menuButtons = levelSix;
-                currentButtonIndex = 7;
-                break;
-
-            case 7:
-                menuButtons = levelSeven;
-                currentButtonIndex = 8;
-                break;
-
-            case 8:
-                menuButtons = levelEight;
-                currentButtonIndex = 9;
-                break;
-
-            case 9:
-                menuButtons = levelEight;
-                currentButtonIndex = 10;
-                break;
-
-            default:
-                menuButtons = levelAll;
-                currentButtonIndex = 10;
-                break;
+            menuButtons[i] = allButtons[i];
         }
     }
 

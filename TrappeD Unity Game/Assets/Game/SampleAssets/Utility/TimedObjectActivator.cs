@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -75,7 +76,7 @@ namespace UnitySampleAssets.Utility
         private IEnumerator ReloadLevel(Entry entry)
         {
             yield return new WaitForSeconds(entry.delay);
-            Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         }
     }

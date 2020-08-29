@@ -12,7 +12,15 @@ TrueTypeFontImporter:
   fontNames:
   - Lato
   fallbackFontReferences:
-  - {fileID: 12800000, guid: 27b99edf921c702478512df9d7c750a5, type: 3}
+  - {instanceID: 0}
+  - {instanceID: 0}
+  - {instanceID: 0}
+  - {instanceID: 0}
+  - {fileID: 12800000, guid: d05647f7583649841a1c102da4737115, type: 3}
+  - {instanceID: 0}
+  - {instanceID: 0}
+  - {instanceID: 0}
+  - {instanceID: 0}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

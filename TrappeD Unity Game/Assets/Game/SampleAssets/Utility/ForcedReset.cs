@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnitySampleAssets.CrossPlatformInput;
 
 
-[RequireComponent(typeof(GUITexture))]
+[RequireComponent(typeof(UnityEngine.UI.Image))]
 public class ForcedReset : MonoBehaviour {
 
     void Update () {
@@ -12,7 +13,7 @@ public class ForcedReset : MonoBehaviour {
         {
             
             //... reload the scene
-            Application.LoadLevelAsync (Application.loadedLevelName);
+            SceneManager.LoadSceneAsync (Application.loadedLevelName);
         }
     }
 

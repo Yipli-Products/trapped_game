@@ -90,6 +90,7 @@ public class PlayerSelection : MonoBehaviour
 
     async public void playPhoneHolderTutorial()
     {
+        TurnOffAllPanels();
         Debug.Log("Starting PhoneHolder Tutorial for " + defaultPlayer.playerName);
         Debug.Log("Is profilePicLoaded = " + bIsProfilePicLoaded);
         if (!bIsProfilePicLoaded)
@@ -269,8 +270,8 @@ public class PlayerSelection : MonoBehaviour
             Debug.Log(exp.Message);
             //defaultPlayer = null;
 
-            /*currentYipliConfig.userId = null;
-            defaultPlayer = null;*/
+            //currentYipliConfig.userId = null;
+            //defaultPlayer = null;
 
             /*currentYipliConfig.userId = "F9zyHSRJUCb0Ctc15F9xkLFSH5f1";
             defaultPlayer = new YipliPlayerInfo("-M2iG0P2_UNsE2VRcU5P", "rooo", "03-01-1999", "120", "49");
@@ -300,7 +301,8 @@ public class PlayerSelection : MonoBehaviour
             //Stop the Coroutine which keep schecking for the intents.
             StopCoroutine(KeepCheckingForIntents());
 
-            if (false == currentYipliConfig.bIsMatIntroDone)
+            currentYipliConfig.bIsMatIntroDone = false;
+            if (!currentYipliConfig.bIsMatIntroDone)
                 playPhoneHolderTutorial();
             else
                 SwitchPlayerFlow();
@@ -354,6 +356,7 @@ public class PlayerSelection : MonoBehaviour
                     bIsProfilePicLoaded = await loadProfilePicAsync(profilePicImage, defaultPlayer.profilePicUrl);
 
                 playerNameText.text = "Hi, " + currentYipliConfig.playerInfo.playerName;
+                playerNameText.gameObject.SetActive(true);
                 switchPlayerPanel.SetActive(true);
             }
         }
@@ -427,6 +430,7 @@ public class PlayerSelection : MonoBehaviour
         defaultPlayer = GetPlayerInfoFromPlayerName(PlayerName);
         bIsProfilePicLoaded = await loadProfilePicAsync(profilePicImage, defaultPlayer.profilePicUrl);
         playerNameText.text = "Hi, " + PlayerName;
+        playerNameText.gameObject.SetActive(true);
 
         TurnOffAllPanels();
         switchPlayerPanel.SetActive(true);
@@ -517,8 +521,6 @@ public class PlayerSelection : MonoBehaviour
             else
             {
                 //Default player is not there.
-                //Ask to open app from app
-                //zeroPlayersText.text = "No network connection. Can't find players. Try with an active network connection or launch the game from Yipli App.";
                 zeroPlayersPanel.SetActive(true);
             }
 
@@ -545,7 +547,6 @@ public class PlayerSelection : MonoBehaviour
                 else // If No then throw a new panel to tell the Gamer that there is no player found
                 {
                     TurnOffAllPanels();
-                    //zeroPlayersText.text = "No players found.Create a player from the YIPLI app to continue playing.";
                     zeroPlayersPanel.SetActive(true);
                 }
             }
@@ -559,7 +560,6 @@ public class PlayerSelection : MonoBehaviour
                 else // If No then throw a new panel to tell the Gamer that there is only 1 player currently
                 {
                     TurnOffAllPanels();
-                    //onlyOnePlayerText.text = "Only 1 player found.\nAdd more players from Yipli Hub and come back.";
                     onlyOnePlayerPanel.SetActive(true);
                 }
             }
