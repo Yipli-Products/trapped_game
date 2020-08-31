@@ -23,6 +23,12 @@ public static class YipliHelper
         InitBLE.setGameClusterID(gameClusterId);
     }
 
+    public static void SetGameMode(int gameMode)
+    {
+        Debug.Log("GameMode: " + gameMode);
+        InitBLE.setGameMode(gameMode);
+    }
+
     public static bool checkInternetConnection()
     {
         bool bIsNetworkAvailable = true;

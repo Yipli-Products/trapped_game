@@ -19,7 +19,7 @@ namespace UnitySampleAssets.Utility
             {
                 transform.DetachChildren();
             }
-            DestroyObject(gameObject);
+            Destroy(gameObject);
         }
     }
 }

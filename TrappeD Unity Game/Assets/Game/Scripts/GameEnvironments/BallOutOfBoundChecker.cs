@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BallOutOfBoundChecker : MonoBehaviour {
 
@@ -15,6 +16,6 @@ public class BallOutOfBoundChecker : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.name == "Ball")
-			Application.LoadLevel ("Game Over");
+			SceneManager.LoadScene ("Game Over");
 	}
 }

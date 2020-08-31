@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class DelayedGameOver : MonoBehaviour {
 
@@ -16,8 +17,8 @@ public class DelayedGameOver : MonoBehaviour {
 		elapsedTime += Time.deltaTime;
 		if (elapsedTime >= delayTime) {
 			int playerAvailableLife = PlayerPrefs.GetInt("PLAYER_LIFE");
-			if(playerAvailableLife > 0 )Application.LoadLevel(PlayerPrefs.GetString("LAST_LEVEL"));
-			else Application.LoadLevel ("Game Over");
+			if(playerAvailableLife > 0 )SceneManager.LoadScene(PlayerPrefs.GetString("LAST_LEVEL"));
+			else SceneManager.LoadScene ("Game Over");
 			
 		}
 	}

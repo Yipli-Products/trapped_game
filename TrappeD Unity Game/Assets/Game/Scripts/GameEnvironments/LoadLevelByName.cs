@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 
 public class LoadLevelByName : MonoBehaviour {
 
 	//private string[] levelNamesInSerial = new string[] {"Level_01", "Level_02_New", "Level_03_New"};
 	public int totalNumOfAvailableLevels = 10;
 	public void LoadLevelGivenTheName(string levelName){
-		Application.LoadLevel (levelName);
+		SceneManager.LoadScene (levelName);
 	}
 
 	public void RetryLevel(){
@@ -19,7 +19,7 @@ public class LoadLevelByName : MonoBehaviour {
 		PlayerPrefs.DeleteKey("CHKP_Z");
 
 		PlayerPrefs.SetInt("PLAYER_LIFE", 3);
-		Application.LoadLevel (PlayerPrefs.GetInt("CURRENT_LEVEL_SERIAL"));
+		SceneManager.LoadScene (PlayerPrefs.GetInt("CURRENT_LEVEL_SERIAL"));
 
 	}
 
@@ -28,7 +28,7 @@ public class LoadLevelByName : MonoBehaviour {
 		if (PlayerPrefs.GetInt ("CURRENT_LEVEL_SERIAL") + 1 <= totalNumOfAvailableLevels) {
 			PlayerPrefs.SetInt("CURRENT_LEVEL_SERIAL", PlayerPrefs.GetInt ("CURRENT_LEVEL_SERIAL") + 1 );
 			PlayerPrefs.SetInt("PLAYER_LIFE", 3);
-			Application.LoadLevel (PlayerPrefs.GetInt("CURRENT_LEVEL_SERIAL"));
+			SceneManager.LoadScene (PlayerPrefs.GetInt("CURRENT_LEVEL_SERIAL"));
 
 		}
 

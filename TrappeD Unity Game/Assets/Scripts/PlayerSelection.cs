@@ -1,18 +1,11 @@
-﻿using Firebase.Database;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Experimental;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Audio;
-using UnityEngine.Networking;
 using System.Threading.Tasks;
-using System.Threading;
-using Firebase.Storage;
 
 public class PlayerSelection : MonoBehaviour
 {
@@ -301,8 +294,7 @@ public class PlayerSelection : MonoBehaviour
             //Stop the Coroutine which keep schecking for the intents.
             StopCoroutine(KeepCheckingForIntents());
 
-            currentYipliConfig.bIsMatIntroDone = false;
-            if (!currentYipliConfig.bIsMatIntroDone)
+            if (!currentYipliConfig.bIsMatIntroDone && defaultPlayer != null)
                 playPhoneHolderTutorial();
             else
                 SwitchPlayerFlow();
