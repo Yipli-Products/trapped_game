@@ -46,7 +46,7 @@ public class YMenuManager : MonoBehaviour
     void Update()
     {
         GetMatKeyInputs();
-        //MenuControlSystem();
+        MenuControlSystem();
     }
 
     private void GetMatKeyInputs()

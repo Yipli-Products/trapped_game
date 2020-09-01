@@ -49,21 +49,7 @@ public class PauseGame : MonoBehaviour
         
         if (isPause)
         {
-            TimeControlSystem();
-        }
-    }
-
-    private void TimeControlSystem()
-    {
-        timeHistory2 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-        Debug.Log(timeHistory2 + "-" + timeHistory1 + "=" + (timeHistory2 - timeHistory1));
-
-        if ((timeHistory2 - timeHistory1) > 1000)
-        {
             MenuControlSystem();
-
-            timeHistory1 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            Debug.Log("Time changed : " + timeHistory1);
         }
     }
 
@@ -159,11 +145,15 @@ public class PauseGame : MonoBehaviour
             if (i == currentButtonIndex)
             {
                 menuButtons[i].GetComponent<Image>().color = Color.green;
+                menuButtons[i].GetComponent<Animator>().enabled = true;
+                menuButtons[i].transform.GetChild(0).gameObject.SetActive(true);
                 currentB = menuButtons[i];
             }
             else
             {
                 menuButtons[i].GetComponent<Image>().color = Color.white;
+                menuButtons[i].GetComponent<Animator>().enabled = false;
+                menuButtons[i].transform.GetChild(0).gameObject.SetActive(false);
             }
         }
     }

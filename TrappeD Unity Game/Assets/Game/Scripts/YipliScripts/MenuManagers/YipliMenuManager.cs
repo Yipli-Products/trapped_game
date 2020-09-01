@@ -43,7 +43,7 @@ public class YipliMenuManager : MonoBehaviour
     void Update()
     {
         GetMatKeyInputs();
-        //MenuControlSystem();
+        MenuControlSystem();
     }
 
     private void manageCurrentButton()
