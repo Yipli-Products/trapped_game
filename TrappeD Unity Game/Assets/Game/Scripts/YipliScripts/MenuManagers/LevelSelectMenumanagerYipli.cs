@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boo.Lang;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using YipliFMDriverCommunication;
@@ -7,8 +8,9 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 {
     //required variables
     [SerializeField] Button[] allButtons;
+    [SerializeField] Button backButton;
 
-    private Button[] menuButtons = null;
+    private List<Button> menuButtons = new List<Button>();
 
     [SerializeField] PlayerStats ps;
 
@@ -46,17 +48,18 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 
     private void SetAllowedLevels()
     {
-        for (int i = 0; i < ps.GetCompletedLevels(); i++)
+        for (int i = 0; i < ps.GetCompletedLevels() + 1; i++)
         {
-            menuButtons[i] = allButtons[i];
+            menuButtons.Add(allButtons[i]);
         }
+        menuButtons.Add(backButton);
     }
 
     // Update is called once per frame
     void Update()
     {
         GetMatKeyInputs();
-        MenuControlSystem();
+        //MenuControlSystem();
     }
 
     private void GetMatKeyInputs()
@@ -81,7 +84,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 
     private void manageCurrentButton()
     {
-        for (int i = 0; i < menuButtons.Length; i++)
+        for (int i = 0; i < menuButtons.Count; i++)
         {
             if (i == currentButtonIndex)
             {
@@ -127,7 +130,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 
     private int GetNextButton()
     {
-        if ((currentButtonIndex + 1) == menuButtons.Length)
+        if ((currentButtonIndex + 1) == menuButtons.Count)
         {
             return 0;
         }
@@ -141,7 +144,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     {
         if (currentButtonIndex == 0)
         {
-            return menuButtons.Length - 1;
+            return menuButtons.Count - 1;
         }
         else
         {

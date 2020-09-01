@@ -46,7 +46,7 @@ public class YMenuManager : MonoBehaviour
     void Update()
     {
         GetMatKeyInputs();
-        MenuControlSystem();
+        //MenuControlSystem();
     }
 
     private void GetMatKeyInputs()
@@ -76,11 +76,15 @@ public class YMenuManager : MonoBehaviour
             if (i == currentButtonIndex)
             {
                 menuButtons[i].GetComponent<Image>().color = Color.green;
+                menuButtons[i].GetComponent<Animator>().enabled = true;
+                menuButtons[i].transform.GetChild(0).gameObject.SetActive(true);
                 currentB = menuButtons[i];
             }
             else
             {
                 menuButtons[i].GetComponent<Image>().color = Color.white;
+                menuButtons[i].GetComponent<Animator>().enabled = false;
+                menuButtons[i].transform.GetChild(0).gameObject.SetActive(false);
             }
         }
     }
