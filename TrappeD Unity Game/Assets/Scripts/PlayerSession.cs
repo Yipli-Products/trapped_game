@@ -21,9 +21,9 @@ public class PlayerSession : MonoBehaviour
     private string playerWeight = ""; //Current height of the player
     private string matId = "";
     private string matMacAddress;
-    private DateTime startTime;
-    private DateTime endTime;
     private float duration;
+    private float calories;
+    private float fitnesssPoints;
     public string intensityLevel = ""; // to be decided by the game.
     private IDictionary<YipliUtils.PlayerActions, int> playerActionCounts; // to be updated by the player movements
     private IDictionary<string, string> playerGameData; // to be used to store the player gameData like Highscore, last played level etc.
@@ -67,7 +67,8 @@ public class PlayerSession : MonoBehaviour
             _instance.currentYipliConfig.callbackLevel = SceneManager.GetActiveScene().name;
             Debug.Log("Updating the callBackLevel Value to :" + _instance.currentYipliConfig.callbackLevel);
             Debug.Log("Loading Yipli scene for player Selection...");
-            SceneManager.LoadScene("yipli_lib_scene");
+            if (!_instance.currentYipliConfig.callbackLevel.Equals("Yipli_Testing_harness"))
+                SceneManager.LoadScene("yipli_lib_scene");
         }
         else
         {
@@ -78,7 +79,8 @@ public class PlayerSession : MonoBehaviour
     public void Start()
     {
         Debug.Log("Starting the BLE routine check in PlayerSession Start()");
-        StartCoroutine(CheckBleRoutine());
+        if (!_instance.currentYipliConfig.callbackLevel.Equals("Yipli_Testing_harness"))
+            StartCoroutine(CheckBleRoutine());
     }
 
     public void Update()
@@ -117,17 +119,18 @@ public class PlayerSession : MonoBehaviour
         x = new Dictionary<string, dynamic>();
         x.Add("game-id", gameId);
         x.Add("user-id", userId);
-        x.Add("player-id", playerId);
-        x.Add("age", playerAge);
-        x.Add("points", points.ToString());
-        x.Add("player-height", playerHeight);
-        x.Add("start-time", startTime);
-        x.Add("end-time", endTime);
-        x.Add("duration", Convert.ToInt32(duration).ToString());
-        x.Add("intensity-level", intensityLevel.ToString());
-        x.Add("player-action-counts", playerActionCounts);
+        x.Add("mat-id", matId);
         x.Add("mac-address", matMacAddress);
+        x.Add("player-id", playerId);
+        x.Add("age", int.Parse(playerAge));
+        x.Add("points", (int)points);
+        x.Add("height", playerHeight);
+        x.Add("duration", (int)duration);
+        x.Add("intensity", intensityLevel);
+        x.Add("player-actions", playerActionCounts);
         x.Add("timestamp", ServerValue.Timestamp);
+        x.Add("calories", (int)calories);
+        x.Add("fitness-points", (int)fitnesssPoints);
         if (playerGameData != null)
         {
             if (playerGameData.Count > 0)
@@ -144,7 +147,6 @@ public class PlayerSession : MonoBehaviour
             Debug.Log("Game-data is null");
         }
 
-        x.Add("mat-id", matId);
         return x;
     }
 
@@ -183,7 +185,6 @@ public class PlayerSession : MonoBehaviour
         points = 0;
         duration = 0;
         bIsPaused = false;
-        startTime = DateTime.Now;
         ActionAndGameInfoManager.SetYipliGameInfo(GameId);
         matId = currentYipliConfig.matInfo.matId;
         matMacAddress = currentYipliConfig.matInfo.macAddress;
@@ -194,7 +195,8 @@ public class PlayerSession : MonoBehaviour
     public void CloseSPSession()
     {
         //Destroy current player session data
-        endTime = DateTime.Now;
+        calories = 0;
+        fitnesssPoints = 0;
         points = 0;
         duration = 0;
         Debug.Log("Aborting current player session.");
@@ -204,8 +206,9 @@ public class PlayerSession : MonoBehaviour
     {
         Debug.Log("Storing current player session to backend database.");
         points = gamePoints;
-
-        endTime = DateTime.Now;
+        
+        calories = YipliUtils.GetCaloriesBurned(getPlayerActionCounts());
+        fitnesssPoints = YipliUtils.GetFitnessPoints(getPlayerActionCounts());
 
         if (0 == ValidateSessionBeforePosting())
         {
