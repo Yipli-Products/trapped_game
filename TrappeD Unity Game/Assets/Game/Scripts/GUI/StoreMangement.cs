@@ -5,42 +5,44 @@ using UnityEngine.UI;
 public class StoreMangement : MonoBehaviour {
 
 	public int thisBallID;
-	public int thisBallPrice;
+	private int thisBallPrice;
 	public Text ballPriceAndState;
 
 	private GameObject balanceManager;
 
-
 	public Canvas msgCanvas;
 	public Text msgToMsgCanvas;
 
-
 	public Canvas ballBuyConfirmationCanvas;
+
+	[SerializeField] PlayerStats ps;
 
 	private GameObject[] allBtn;
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		//PlayerPrefs.SetInt ("BOUGHT_BALL_" + thisBallID.ToString (), 0);
 		//PlayerPrefs.SetInt ("Coins", 750);
+
+		thisBallPrice = ps.GetBallPrice(thisBallID);
+
 		balanceManager = GameObject.Find ("BalanceManager");
 
-		PlayerPrefs.SetInt ("BOUGHT_BALL_0", 1);
+		//PlayerPrefs.SetInt ("BOUGHT_BALL_0", 1);
+		ps.SetBallBoughtStatus(0, true);
+
 		updateThePriceAndStateText ();
 
 		allBtn = GameObject.FindGameObjectsWithTag ("BALL_PRICE");
-
-
-
-	
-
 	}
 
-	public void updateThePriceAndStateText(){
+	public void updateThePriceAndStateText()
+	{
 		if (isThisBallBoughtAlready () == false) {
 			ballPriceAndState.text = "$ " + thisBallPrice.ToString();
 		} 
 		else {
-			if(thisBallID == PlayerPrefs.GetInt ("ACTIVE_BALL")){
+			if(thisBallID == ps.Active_ball){
 				ballPriceAndState.text = "Active" ;
 				ballPriceAndState.color = Color.gray;
 			}
@@ -50,12 +52,9 @@ public class StoreMangement : MonoBehaviour {
 			}
 		}
 	}
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-	public void manageBallBuying(){
+	public void manageBallBuying()
+	{
 
 		if (isThisBallBoughtAlready () == true) {
 			setThisBallAsActive ();
@@ -85,18 +84,25 @@ public class StoreMangement : MonoBehaviour {
 
 
 	private void setThisBallAsActive(){
-		PlayerPrefs.SetInt ("ACTIVE_BALL", thisBallID);
+		//PlayerPrefs.SetInt ("ACTIVE_BALL", thisBallID);
+		ps.Active_ball = thisBallID;
 	}
 
 	private int getAvailableBalance(){
-		return PlayerPrefs.GetInt ("Coins");
+		//return PlayerPrefs.GetInt ("Coins");
+		return ps.GetCoinScore();
 	}
 
 	private void buyThisBall(){
 		ballBuyConfirmationCanvas.enabled = true;
 
-		PlayerPrefs.SetInt ("INTENTED_BALL_PRICE",thisBallPrice);
-		PlayerPrefs.SetInt ("INTENTED_BALL_ID",thisBallID);
+		ps.Intended_ball_price = thisBallPrice;
+		ps.Intended_ball_id = thisBallID;
+
+		/*PlayerPrefs.SetInt ("INTENTED_BALL_PRICE",thisBallPrice);
+		PlayerPrefs.SetInt ("INTENTED_BALL_ID",thisBallID);*/
+
+
 
 		//PlayerPrefs.SetInt ("Coins", getAvailableBalance() - thisBallPrice);
 		//PlayerPrefs.SetInt ("BOUGHT_BALL_" + thisBallID.ToString (), 1);
@@ -105,10 +111,7 @@ public class StoreMangement : MonoBehaviour {
 	}
 
 	private bool isThisBallBoughtAlready(){
-		if (PlayerPrefs.GetInt ("BOUGHT_BALL_" + thisBallID.ToString ()) <= 0)
-			return false;
-
-		return true;
+		return ps.GetBallBoughtStatus(thisBallID);
 	}
 
 

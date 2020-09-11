@@ -20,15 +20,15 @@ public class LevelScoreManager : MonoBehaviour
     [SerializeField] Text levelName;
     [SerializeField] PlayerStats ps;
 
-    private int level_one_start = 9;
-    private int level_two_start = 5;
-    private int level_three_start = 3;
-    private int level_four_start = 9;
-    private int level_five_start = 9;
-    private int level_six_start = 8;
-    private int level_seven_start = 8;
-    private int level_eight_start = 8;
-    private int level_nine_start = 12;
+    private int level_one_start = 15; // 150
+    private int level_two_start = 16; // 160
+    private int level_three_start = 22; // 220
+    private int level_four_start = 30; // 300
+    private int level_five_start = 16; // 160
+    private int level_six_start = 22; // 220
+    private int level_seven_start = 18; // 180 
+    private int level_eight_start = 16; // 160
+    private int level_nine_start = 33; // 330
 
     private string currentLevel;
     private int currentStars;

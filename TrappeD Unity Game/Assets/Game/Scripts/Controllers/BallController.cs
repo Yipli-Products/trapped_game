@@ -14,6 +14,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		public float hInput=0.0f;
 		public float vInput=0.0f;
 
+		float timer;
 
 		//Vars for ground check
 		public bool isGrounded = false;
@@ -111,12 +112,12 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			//LOAD THE ACTIVE BALL
 			thisBallSpriteRenderer = GetComponent<SpriteRenderer>();
-			thisBallSpriteRenderer.sprite = balls[PlayerPrefs.GetInt("ACTIVE_BALL")];
+			thisBallSpriteRenderer.sprite = balls[ps.Active_ball];
 
 			backMusic = GameObject.Find ("Main Camera");
 
 		
-			coinAmount = PlayerPrefs.GetInt ("Coins");
+			coinAmount = ps.GetCoinScore();
 			coinText.text = coinAmount.ToString();
 			int playerLife = PlayerPrefs.GetInt ("PLAYER_LIFE");
 			if (playerLife < 3) {
@@ -131,7 +132,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				horzontalInputMultiplier = 220.0f;
 
-#endif
+			#endif
 
 			thisLevelPoints = 0;
 			PlayerPrefs.SetInt("thisLevelPoints", thisLevelPoints);
@@ -283,14 +284,22 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				GetComponent<Rigidbody2D>().velocity = new Vector2 (5.0f, GetComponent<Rigidbody2D>().velocity.y);
 			if (GetComponent<Rigidbody2D>().velocity.x < -5.0f)
 				GetComponent<Rigidbody2D>().velocity = new Vector2 (-5.0f, GetComponent<Rigidbody2D>().velocity.y);
-
-
-
-
-
 		}
 
+		private void CalculateTimkePlayed()
+        {
+			timer += Time.deltaTime;
+
+			if (timer > 1)
+            {
+				ps.TimePlayed += 1;
+				timer = 0;
+			}
+        }
+
 		void Update(){
+
+			CalculateTimkePlayed();
 
 			manageAUtoMovement();
 			ManageMatActions();
@@ -351,7 +360,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		
 				backMusic.GetComponent<AudioSource>().Stop ();
 
-			Instantiate (ballBrokenParts[PlayerPrefs.GetInt("ACTIVE_BALL")], gameObject.transform.position, Quaternion.identity);
+			Instantiate (ballBrokenParts[ps.Active_ball], gameObject.transform.position, Quaternion.identity);
 			Destroy (gameObject);
 		}
 
@@ -439,115 +448,99 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			string fmActionData = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
 			Debug.Log("Json Data from Fmdriver : " + fmActionData);
 
-			/* New FmDriver Response Format
-               {
-                  "count": 1,                 # Updates every time new action is detected
-                  "timestamp": 1597237057689, # Time at which response was packaged/created by Driver
-                  "playerdata": [                      # Array containing player data
-                    {
-                      "id": 1,                         # Player ID (For Single-player-1 , Multiplayer it could be 1 or 2 )
-                      "fmresponse": {
-                        "action_id": "9D6O",           # Action ID-Unique ID for each action. Refer below table for all action IDs
-                        "action_name": "Jump",         # Action Name for debugging (Gamers should strictly check action ID)
-                        "properties": "null"           # Any properties action has - ex. Running could have Step Count, Speed
-                      }
-                    },
-                    {null}
-                  ]
-                }
-            */
-
 			FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
+
+			if (singlePlayerResponse == null) return;
 
 			if (FMResponseCount != singlePlayerResponse.count)
             {
 				Debug.Log("FMResponse " + fmActionData);
 				FMResponseCount = singlePlayerResponse.count;
 
-				//Handle "Running" case seperately to read the exta properties sent.
-				if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.RUNNING)))
+				YipliUtils.PlayerActions providedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
+
+				switch(providedAction)
                 {
-					// do run here
-					int steps = 1;
+					case YipliUtils.PlayerActions.PAUSE:
+						Debug.Log("processing mat input pause.");
+						pg.pauseFunction();
+						break;
 
-					///CheckPoint for the running action properties.
-					if (singlePlayerResponse.playerdata[0].fmresponse.properties.ToString() != "null")
-                    {
-						string[] tokens = singlePlayerResponse.playerdata[0].fmresponse.properties.Split(',');
-
-						if (tokens.Length > 0)
+					case YipliUtils.PlayerActions.RUNNINGSTOPPED:
+						if (currentLevel == "Level_Tutorial" && !Runbackward)
 						{
-							//Split the property value pairs:
+							calWaitTime = false;
+							waitTimeCal = 0f;
+							return;
+						}
 
-							/*
-							 * {"count":240,"timestamp":1597928543171,"playerdata":[{"id":1,"fmresponse":{"action_id":"SWLO","action_name":"Running","properties":"totalStepsCount:1,speed:1.60"},"count":123},{null}]}
-							 **/
+						RunningStopAction();
+						break;
 
-							string[] totalStepsCountKeyValue = tokens[0].Split(':');
-							if (totalStepsCountKeyValue[0].Equals("totalStepsCount"))
+					case YipliUtils.PlayerActions.STOP:
+						if (currentLevel == "Level_Tutorial" && !Runbackward)
+						{
+							calWaitTime = false;
+							waitTimeCal = 0f;
+							return;
+						}
+
+						RunningStopAction();
+						break;
+
+					// actions
+					case YipliUtils.PlayerActions.RUNNING:
+						// do run here
+						int steps = 1;
+
+						///CheckPoint for the running action properties.
+						if (singlePlayerResponse.playerdata[0].fmresponse.properties.ToString() != "null")
+						{
+							string[] tokens = singlePlayerResponse.playerdata[0].fmresponse.properties.Split(',');
+
+							if (tokens.Length > 0)
 							{
-								Debug.Log("Adding steps : " + totalStepsCountKeyValue[1]);
-								steps = int.Parse(totalStepsCountKeyValue[1]);
-							}
+								//Split the property value pairs:
 
-							string[] speedKeyValue = tokens[1].Split(':');
-							if (speedKeyValue[0].Equals("speed"))
-							{
-								//TODO : Do some handling if speed parameter needs to be used to adjust the running speed in the game.
-								float speedAdditive = float.Parse(speedKeyValue[1]);
-								matBallForce *= speedAdditive;
+								/*
+								 * {"count":240,"timestamp":1597928543171,"playerdata":[{"id":1,"fmresponse":{"action_id":"SWLO","action_name":"Running","properties":"totalStepsCount:1,speed:1.60"},"count":123},{null}]}
+								 **/
+
+								string[] totalStepsCountKeyValue = tokens[0].Split(':');
+								if (totalStepsCountKeyValue[0].Equals("totalStepsCount"))
+								{
+									Debug.Log("Adding steps : " + totalStepsCountKeyValue[1]);
+									steps = int.Parse(totalStepsCountKeyValue[1]);
+								}
+
+								string[] speedKeyValue = tokens[1].Split(':');
+								if (speedKeyValue[0].Equals("speed"))
+								{
+									//TODO : Do some handling if speed parameter needs to be used to adjust the running speed in the game.
+									float speedAdditive = float.Parse(speedKeyValue[1]);
+									matBallForce *= speedAdditive;
+								}
 							}
 						}
-					}
 
-					if (!ballJump)
-					{
-						RunningStartAction();
+						if (!ballJump)
+						{
+							RunningStartAction();
 
-						PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, steps);
-					}
-				}
-				else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.RUNNINGSTOPPED)))
-                {
-					if (currentLevel == "Level_Tutorial" && !Runbackward)
-					{
-						calWaitTime = false;
-						waitTimeCal = 0f;
-						return;
-					}
+							PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, steps);
+						}
+						break;
 
-					RunningStopAction();
+					case YipliUtils.PlayerActions.JUMP:
+						if (currentLevel == "Level_Tutorial" && !allowjump)
+						{
+							return;
+						}
 
-					//PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNINGSTOPPED);
-				}
-				else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.STOP)))
-				{
-					if (currentLevel == "Level_Tutorial" && !Runbackward)
-					{
-						calWaitTime = false;
-						waitTimeCal = 0f;
-						return;
-					}
+						JumpAction();
 
-					RunningStopAction();
-
-					//PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.STOP);
-				}
-				else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.JUMP)))
-				{
-					if (currentLevel == "Level_Tutorial" && !allowjump)
-					{
-						return;
-					}
-
-					JumpAction();
-
-					PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.JUMP);
-				}
-				else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.PAUSE)))
-				{
-					Debug.Log("processing mat input pause.");
-					pg.pauseFunction();
+						PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.JUMP);
+						break;
 				}
 			}
 		}

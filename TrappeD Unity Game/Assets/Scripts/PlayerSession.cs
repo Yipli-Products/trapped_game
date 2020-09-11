@@ -160,6 +160,18 @@ public class PlayerSession : MonoBehaviour
         }
     }
 
+    // Update store data
+    public async Task UpdateStoreData(string gameId, Dictionary<string, object> dStoreData)
+    {
+        await FirebaseDBHandler.UpdateStoreData(
+            currentYipliConfig.userId,
+            currentYipliConfig.playerInfo.playerId,
+            gameId,
+            dStoreData,
+            () => { Debug.Log("Got Game data successfully"); }
+        );
+    }
+
     // Get player game data
     public async Task<DataSnapshot> GetGameData(string gameId)
     {

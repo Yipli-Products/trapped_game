@@ -12,6 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404322af594942f478347946ad7d1557, type: 3}
   m_Name: CurrentPlayerData
   m_EditorClassIdentifier: 
-  playerName: hhsjsj
-  completed_levels: 1
-  coinScore: 430
+  playerName: Rooo
+  completed_levels: 0
+  coinScore: 0
+  timePlayed: 0
+  calBurned: 0
+  fpPoints: 20
+  ballsInStore:
+  - ballID: 0
+    ballPrice: 0
+    boughtStatus: 1
+  - ballID: 1
+    ballPrice: 250
+    boughtStatus: 0
+  - ballID: 2
+    ballPrice: 800
+    boughtStatus: 0
+  - ballID: 3
+    ballPrice: 1200
+    boughtStatus: 0
+  - ballID: 4
+    ballPrice: 2000
+    boughtStatus: 0
+  - ballID: 5
+    ballPrice: 2500
+    boughtStatus: 0
+  - ballID: 6
+    ballPrice: 3500
+    boughtStatus: 0
+  - ballID: 7
+    ballPrice: 4500
+    boughtStatus: 0

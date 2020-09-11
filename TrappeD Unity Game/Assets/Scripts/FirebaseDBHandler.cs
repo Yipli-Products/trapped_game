@@ -75,6 +75,29 @@ public static class FirebaseDBHandler
         });
     }
 
+    public static async Task UpdateStoreData(string strUserId, string strPlayerId, string strGameId, Dictionary<string, object> dStoreData, PostUserCallback callback)
+    {
+        await auth.SignInAnonymouslyAsync().ContinueWith(async task =>
+        {
+            if (task.IsCanceled)
+            {
+                Debug.LogError("SignInAnonymouslyAsync was canceled.");
+                return;
+            }
+            if (task.IsFaulted)
+            {
+                Debug.LogError("SignInAnonymouslyAsync encountered an error: " + task.Exception);
+                return;
+            }
+            Firebase.Auth.FirebaseUser newUser = task.Result;
+            Debug.LogFormat("User signed in successfully: {0} ({1})",
+                newUser.DisplayName, newUser.UserId);
+            FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://yipli-project.firebaseio.com/");
+            DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+            await reference.Child("inventory/stores-data/" + strGameId).UpdateChildrenAsync(dStoreData);
+        });
+    }
+
     public static void ChangeCurrentPlayerInBackend(string strUserId, string strPlayerId, PostUserCallback callback)
     {
         auth.SignInAnonymouslyAsync().ContinueWith(task =>

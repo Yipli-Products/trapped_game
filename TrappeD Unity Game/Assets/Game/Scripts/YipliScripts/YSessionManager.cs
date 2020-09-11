@@ -46,6 +46,9 @@ public class YSessionManager : MonoBehaviour
             Debug.Log("Game data is updated successfully.");
         }
 
+        ps.CalBurned = (int)YipliUtils.GetCaloriesBurned(PlayerSession.Instance.getPlayerActionCounts());
+        ps.FpPoints = (int)YipliUtils.GetFitnessPoints(PlayerSession.Instance.getPlayerActionCounts());
+
         PlayerSession.Instance.StoreSPSession(ps.GetCoinScore());
     }
 }

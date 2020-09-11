@@ -170,11 +170,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisBallID: 6
-  thisBallPrice: 3500
   ballPriceAndState: {fileID: 1543126058}
   msgCanvas: {fileID: 1941811929}
   msgToMsgCanvas: {fileID: 579472288}
   ballBuyConfirmationCanvas: {fileID: 1039963254}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
 --- !u!1 &126295690
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +299,7 @@ RectTransform:
   - {fileID: 1314012637}
   - {fileID: 590787555}
   m_Father: {fileID: 1169182395}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 225587533}
   - component: {fileID: 225587532}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1110,6 +1110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   msgCanvas: {fileID: 1941811929}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
+  currentYipliConfig: {fileID: 11400000, guid: 4f87967ea03eb1743a90e503a6dc0a22, type: 2}
 --- !u!1 &572596365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,6 +1142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balanceText: {fileID: 1098031449}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
 --- !u!4 &572596367
 Transform:
   m_ObjectHideFlags: 0
@@ -1264,11 +1267,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisBallID: 1
-  thisBallPrice: 500
   ballPriceAndState: {fileID: 1314012638}
   msgCanvas: {fileID: 1941811929}
   msgToMsgCanvas: {fileID: 579472288}
   ballBuyConfirmationCanvas: {fileID: 1039963254}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
 --- !u!4 &590787555
 Transform:
   m_ObjectHideFlags: 0
@@ -1565,11 +1568,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisBallID: 4
-  thisBallPrice: 2000
   ballPriceAndState: {fileID: 637337829}
   msgCanvas: {fileID: 1941811929}
   msgToMsgCanvas: {fileID: 579472288}
   ballBuyConfirmationCanvas: {fileID: 1039963254}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
 --- !u!1 &1034062990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1833,7 +1836,7 @@ RectTransform:
   - {fileID: 357353216}
   - {fileID: 1731209786}
   m_Father: {fileID: 1169182395}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1965,7 +1968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 185, y: 81}
+  m_AnchoredPosition: {x: 23, y: 96}
   m_SizeDelta: {x: 180.7, y: 26.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1098031449
@@ -2058,6 +2061,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   msgCanvas: {fileID: 1039963254}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
+  currentYipliConfig: {fileID: 11400000, guid: 4f87967ea03eb1743a90e503a6dc0a22, type: 2}
 --- !u!1 &1169182394
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,8 +2094,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1518016632}
-  - {fileID: 126295694}
   - {fileID: 1047906032}
+  - {fileID: 126295694}
   - {fileID: 172992229}
   - {fileID: 1351181961}
   - {fileID: 1442412751}
@@ -2277,11 +2282,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisBallID: 5
-  thisBallPrice: 2500
   ballPriceAndState: {fileID: 218405118}
   msgCanvas: {fileID: 1941811929}
   msgToMsgCanvas: {fileID: 579472288}
   ballBuyConfirmationCanvas: {fileID: 1039963254}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
 --- !u!224 &1210235412
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2350,11 +2355,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisBallID: 7
-  thisBallPrice: 4500
   ballPriceAndState: {fileID: 1404825654}
   msgCanvas: {fileID: 1941811929}
   msgToMsgCanvas: {fileID: 579472288}
   ballBuyConfirmationCanvas: {fileID: 1039963254}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
 --- !u!1 &1239120578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2453,6 +2458,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   msgCanvas: {fileID: 1039963254}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
+  currentYipliConfig: {fileID: 11400000, guid: 4f87967ea03eb1743a90e503a6dc0a22, type: 2}
 --- !u!1 &1288984798
 GameObject:
   m_ObjectHideFlags: 0
@@ -3054,8 +3061,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4, y: -140}
-  m_SizeDelta: {x: 72, y: 70}
+  m_AnchoredPosition: {x: 4, y: -178}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1494918726
 MonoBehaviour:
@@ -3219,8 +3226,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3, y: -45}
-  m_SizeDelta: {x: 623, y: 402}
+  m_AnchoredPosition: {x: 3, y: -24.6}
+  m_SizeDelta: {x: 623, y: 446.74274}
   m_Pivot: {x: 0.4887254, y: 0.45599312}
 --- !u!1 &1539330193
 GameObject:
@@ -3559,11 +3566,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisBallID: 0
-  thisBallPrice: 0
   ballPriceAndState: {fileID: 357353217}
   msgCanvas: {fileID: 1941811929}
   msgToMsgCanvas: {fileID: 579472288}
   ballBuyConfirmationCanvas: {fileID: 1039963254}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
 --- !u!1 &1735222631
 GameObject:
   m_ObjectHideFlags: 0
@@ -3766,7 +3773,7 @@ GameObject:
   - component: {fileID: 1826791323}
   - component: {fileID: 1826791322}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonWrong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3932,11 +3939,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisBallID: 3
-  thisBallPrice: 1500
   ballPriceAndState: {fileID: 595670843}
   msgCanvas: {fileID: 1941811929}
   msgToMsgCanvas: {fileID: 579472288}
   ballBuyConfirmationCanvas: {fileID: 1039963254}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
 --- !u!1 &1864588435
 GameObject:
   m_ObjectHideFlags: 0
@@ -3986,11 +3993,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisBallID: 2
-  thisBallPrice: 1200
   ballPriceAndState: {fileID: 1288984800}
   msgCanvas: {fileID: 1941811929}
   msgToMsgCanvas: {fileID: 579472288}
   ballBuyConfirmationCanvas: {fileID: 1039963254}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
 --- !u!1 &1934529436
 GameObject:
   m_ObjectHideFlags: 0

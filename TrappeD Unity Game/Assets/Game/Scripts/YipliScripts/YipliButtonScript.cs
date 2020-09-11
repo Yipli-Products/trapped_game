@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class YipliButtonScript : MonoBehaviour
@@ -50,6 +51,8 @@ public class YipliButtonScript : MonoBehaviour
 
         playerName.text = ps.GetPlayerName();
         pointScore.text = "Points : " + ps.GetCoinScore();
+
+        ps.TimePlayed = 0;
     }
 
     private void Update()
@@ -66,6 +69,11 @@ public class YipliButtonScript : MonoBehaviour
     public void GoToYipli()
     {
         YipliHelper.GoToYipli();
+    }
+
+    public void GoToStore()
+    {
+        SceneManager.LoadScene("Store");
     }
 
     private async Task GetPlayerData ()

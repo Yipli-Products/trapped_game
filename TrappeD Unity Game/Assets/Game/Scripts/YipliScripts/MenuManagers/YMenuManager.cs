@@ -91,29 +91,33 @@ public class YMenuManager : MonoBehaviour
 
     private void MenuControlSystem()
     {
-        //#if UNITY_ANDROID
-        //string FMResponse = PlayerMovement.PluginClass.CallStatic<string>("_getFMResponse");
-
         string fmActionData = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
+        Debug.Log("Json Data from Fmdriver : " + fmActionData);
 
         FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
+
+        if (singlePlayerResponse == null) return;
 
         if (FMResponseCount != singlePlayerResponse.count)
         {
             Debug.Log("FMResponse " + fmActionData);
             FMResponseCount = singlePlayerResponse.count;
 
-            if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.LEFT)))
+            YipliUtils.PlayerActions providedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
+
+            switch(providedAction)
             {
-                ProcessMatInputs(LEFT);
-            }
-            else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.RIGHT)))
-            {
-                ProcessMatInputs(RIGHT);
-            }
-            else if (singlePlayerResponse.playerdata[0].fmresponse.action_id.Equals(ActionAndGameInfoManager.getActionIDFromActionName(YipliUtils.PlayerActions.ENTER)))
-            {
-                ProcessMatInputs(ENTER);
+                case YipliUtils.PlayerActions.LEFT:
+                    ProcessMatInputs(LEFT);
+                    break;
+
+                case YipliUtils.PlayerActions.RIGHT:
+                    ProcessMatInputs(RIGHT);
+                    break;
+
+                case YipliUtils.PlayerActions.ENTER:
+                    ProcessMatInputs(ENTER);
+                    break;
             }
         }
     }

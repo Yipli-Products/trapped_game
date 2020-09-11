@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using YipliFMDriverCommunication;
 
 public class PauseGame : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class PauseGame : MonoBehaviour
     const string ENTER = "enter";
     const float waitTime = 0.75f;
 
-    string FMResponseCount = "";
+    int FMResponseCount = -1;
 
     float timer = 0;
 
@@ -180,29 +181,33 @@ public class PauseGame : MonoBehaviour
 
     private void MenuControlSystem()
     {
-        //#if UNITY_ANDROID
-        //string FMResponse = PlayerMovement.PluginClass.CallStatic<string>("_getFMResponse");
+        string fmActionData = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
+        Debug.Log("Json Data from Fmdriver : " + fmActionData);
 
-        string FMResponse = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
-        Debug.Log("UNITY FMResponse: " + FMResponse);
+        FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
 
-        string[] FMTokens = FMResponse.Split('.');
-        Debug.Log("UNITY FMTokens: " + FMTokens[0]);
+        if (singlePlayerResponse == null) return;
 
-        if (!FMTokens[0].Equals(FMResponseCount))
+        if (FMResponseCount != singlePlayerResponse.count)
         {
-            FMResponseCount = FMTokens[0];
-            if (FMTokens[1].Equals("Left", StringComparison.OrdinalIgnoreCase))
+            Debug.Log("FMResponse " + fmActionData);
+            FMResponseCount = singlePlayerResponse.count;
+
+            YipliUtils.PlayerActions providedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
+
+            switch (providedAction)
             {
-                ProcessMatInputs(LEFT);
-            }
-            else if (FMTokens[1].Equals("Right", StringComparison.OrdinalIgnoreCase))
-            {
-                ProcessMatInputs(RIGHT);
-            }
-            else if (FMTokens[1].Equals("Enter", StringComparison.OrdinalIgnoreCase))
-            {
-                ProcessMatInputs(ENTER);
+                case YipliUtils.PlayerActions.LEFT:
+                    ProcessMatInputs(LEFT);
+                    break;
+
+                case YipliUtils.PlayerActions.RIGHT:
+                    ProcessMatInputs(RIGHT);
+                    break;
+
+                case YipliUtils.PlayerActions.ENTER:
+                    ProcessMatInputs(ENTER);
+                    break;
             }
         }
     }

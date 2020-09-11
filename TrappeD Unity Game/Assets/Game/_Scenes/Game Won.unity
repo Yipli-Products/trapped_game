@@ -1814,6 +1814,26 @@ PrefabInstance:
       propertyPath: pointScore
       value: 
       objectReference: {fileID: 1995310548}
+    - target: {fileID: 4715304531452843896, guid: 0c88d08e7f936224e8913112641257f8,
+        type: 3}
+      propertyPath: coinscoreTotal
+      value: 
+      objectReference: {fileID: 567588014}
+    - target: {fileID: 4715304531452843896, guid: 0c88d08e7f936224e8913112641257f8,
+        type: 3}
+      propertyPath: timePlayedText
+      value: 
+      objectReference: {fileID: 567588014}
+    - target: {fileID: 4715304531452843896, guid: 0c88d08e7f936224e8913112641257f8,
+        type: 3}
+      propertyPath: cbText
+      value: 
+      objectReference: {fileID: 567588014}
+    - target: {fileID: 4715304531452843896, guid: 0c88d08e7f936224e8913112641257f8,
+        type: 3}
+      propertyPath: fpText
+      value: 
+      objectReference: {fileID: 567588014}
     - target: {fileID: 4715304531452843897, guid: 0c88d08e7f936224e8913112641257f8,
         type: 3}
       propertyPath: m_LocalPosition.x
