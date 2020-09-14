@@ -31,7 +31,16 @@ public class StoreMsgController : MonoBehaviour {
 
 		ps.SetCoinScore(ps.GetCoinScore() - ps.Intended_ball_price);
 		ps.SetBallBoughtStatus(ps.Intended_ball_id, true);
-		
+
+		if (ps.PurchasedBalls == "")
+        {
+			ps.PurchasedBalls = "0," + ps.Intended_ball_id;
+		}
+		else
+        {
+			ps.PurchasedBalls = ps.PurchasedBalls + "," + ps.Intended_ball_id;
+		}
+
 		balanceManager.SendMessage ("updateBalance");
 		for(int i= 0; i<allBtn.Length; i++)allBtn[i].SendMessage("updateThePriceAndStateText");
 		confirm ();
@@ -46,15 +55,15 @@ public class StoreMsgController : MonoBehaviour {
 
 	private async Task UpdatePurchaseToDBAsync()
     {
-		Dictionary<string, System.Object> storeData;
-		storeData = new Dictionary<string, System.Object>();
+		Dictionary<string, object> storeData;
+		storeData = new Dictionary<string, object>();
 
-		storeData.Add("userid", currentYipliConfig.userId);
-		storeData.Add("playerid", currentYipliConfig.playerInfo.playerId);
-		storeData.Add("store-data", ps.GetBallInStoreList());
+		storeData.Add("coins-collected", ps.GetCoinScore().ToString());
+		storeData.Add("active-ball", ps.Active_ball);
+		storeData.Add("balls-purchased", ps.PurchasedBalls);
+
+		//Debug.LogError("Display store data : " + JsonConvert.SerializeObject(storeData));
 
 		await PlayerSession.Instance.UpdateStoreData("trapped", storeData);
-
-		Debug.LogError("Done Updating the data");
 	}
 }

@@ -9,16 +9,11 @@ public class FirstCheckpoint : MonoBehaviour
 {
     //required variables
     [SerializeField] GameObject checkpointFrame;
-
-    [SerializeField] GameObject runVideoScreen;
-    [SerializeField] GameObject stopVideoScreen;
-    [SerializeField] GameObject jumpVideoScreen;
-
-    [SerializeField] GameObject VideoScreenPanel;
  
     [SerializeField] Text speakerT;
 
     private BallController bc;
+    private TutModelManager tmm;
 
     bool calledAnim = false;
 
@@ -26,6 +21,7 @@ public class FirstCheckpoint : MonoBehaviour
     void Start()
     {
         bc = FindObjectOfType<BallController>();
+        tmm = FindObjectOfType<TutModelManager>();
 
         checkpointFrame.SetActive(false);
     }
@@ -36,11 +32,7 @@ public class FirstCheckpoint : MonoBehaviour
         {
             if (!calledAnim)
             {
-                stopVideoScreen.SetActive(false);
-                jumpVideoScreen.SetActive(false);
-                runVideoScreen.SetActive(false);
-
-                VideoScreenPanel.SetActive(false);
+                tmm.DeActivateModel();
 
                 speakerT.text = "If you die, Game will resume from last checkpoint";
                 AudioControl.Instance.playAudio();
@@ -75,11 +67,8 @@ public class FirstCheckpoint : MonoBehaviour
         AudioControl.Instance.playAudio();
         speakerT.text = "Keep Running";
 
-        VideoScreenPanel.SetActive(true);
-
-        runVideoScreen.SetActive(true);
-        jumpVideoScreen.SetActive(false);
-        stopVideoScreen.SetActive(false);
+        tmm.ActivateModel();
+        tmm.SetRunOverride();
 
         Time.timeScale = 1f;
     }

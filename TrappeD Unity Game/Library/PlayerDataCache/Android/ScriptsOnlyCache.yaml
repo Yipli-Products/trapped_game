@@ -7,6 +7,7 @@ ScriptsOnlyBuild:
     - BackgroundParallax
     - BalanceManager
     - BallOutOfBoundChecker
+    - ButtonDisplay
     - CameraController
     - CheckPointFlagController
     - CheckPointOne
@@ -16,7 +17,6 @@ ScriptsOnlyBuild:
     - DestroyPlayer
     - DistantKeyMsgSender
     - FirstCheckpoint
-    - FirstJump
     - FirstLeftMove
     - FirstLife
     - FirstRun
@@ -41,7 +41,6 @@ ScriptsOnlyBuild:
     - PlayerSession
     - PlayerStats
     - PointDisplay
-    - RawVideoRenderer
     - RotatingWoodFourWheels
     - RunAgain
     - SacaleOutApprearance
@@ -57,6 +56,7 @@ ScriptsOnlyBuild:
     - StickOBJ
     - StoreMangement
     - StoreMsgController
+    - TutModelManager
     - TutorialManager
     - UnitySampleAssets.CrossPlatformInput.MobileControlRig
     - UnitySampleAssets.CrossPlatformInput.PlatformSpecific.BallController
@@ -83,8 +83,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -172,7 +174,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13772}
     - Class: 114
-      Script: {instanceID: 16746}
+      Script: {instanceID: 246436}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -391,6 +393,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13724}
     - Class: 114
       Script: {instanceID: 13772}
+    - Class: 114
+      Script: {instanceID: 204534}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -530,6 +534,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13724}
     - Class: 114
       Script: {instanceID: 13772}
+    - Class: 114
+      Script: {instanceID: 204534}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -667,6 +673,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13724}
     - Class: 114
       Script: {instanceID: 13772}
+    - Class: 114
+      Script: {instanceID: 204534}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -810,6 +818,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13724}
     - Class: 114
       Script: {instanceID: 13772}
+    - Class: 114
+      Script: {instanceID: 204534}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -947,6 +957,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13724}
     - Class: 114
       Script: {instanceID: 13772}
+    - Class: 114
+      Script: {instanceID: 204534}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1092,6 +1104,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13724}
     - Class: 114
       Script: {instanceID: 13772}
+    - Class: 114
+      Script: {instanceID: 204534}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1227,6 +1241,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13724}
     - Class: 114
       Script: {instanceID: 13772}
+    - Class: 114
+      Script: {instanceID: 204534}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1372,6 +1388,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13724}
     - Class: 114
       Script: {instanceID: 13772}
+    - Class: 114
+      Script: {instanceID: 204534}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1519,6 +1537,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13724}
     - Class: 114
       Script: {instanceID: 13772}
+    - Class: 114
+      Script: {instanceID: 204534}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1637,6 +1657,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 28
       Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
     - Class: 50
@@ -1664,6 +1686,8 @@ ScriptsOnlyBuild:
     - Class: 95
       Script: {instanceID: 0}
     - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
       Script: {instanceID: 0}
     - Class: 111
       Script: {instanceID: 0}
@@ -1696,8 +1720,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11876}
     - Class: 114
-      Script: {instanceID: 11980}
-    - Class: 114
       Script: {instanceID: 12000}
     - Class: 114
       Script: {instanceID: 12018}
@@ -1707,8 +1729,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12146}
     - Class: 114
       Script: {instanceID: 12162}
-    - Class: 114
-      Script: {instanceID: 12220}
     - Class: 114
       Script: {instanceID: 12238}
     - Class: 114
@@ -1769,11 +1789,17 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13766}
     - Class: 114
       Script: {instanceID: 13772}
+    - Class: 114
+      Script: {instanceID: 52866}
+    - Class: 114
+      Script: {instanceID: 204534}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
       Script: {instanceID: 0}
     - Class: 128
+      Script: {instanceID: 0}
+    - Class: 137
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -1787,15 +1813,13 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
+    - Class: 221
+      Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
-      Script: {instanceID: 0}
-    - Class: 328
-      Script: {instanceID: 0}
-    - Class: 329
       Script: {instanceID: 0}
     Assets/Game/_Scenes/Main Menu.unity:
     - Class: 1
@@ -2197,7 +2221,7 @@ ScriptsOnlyBuild:
     className: PositionAsUV1
   - hash:
       serializedVersion: 2
-      Hash: a9e29323e0cdea20baf0aefdc3de0cd1
+      Hash: 7aaeb5be5bbe068f605ca2563de978c5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstRun
@@ -2257,7 +2281,7 @@ ScriptsOnlyBuild:
     className: SawRotation
   - hash:
       serializedVersion: 2
-      Hash: a11a637024048a6e0745388da5187a10
+      Hash: 28d324a6cf68491874e34be578d8d337
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstLife
@@ -2383,7 +2407,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 82961f8106c8b6521f97e5f99d46cb94
+      Hash: 21bf27b02479bc833209aceb80eb0d62
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstLeftMove
@@ -2593,7 +2617,7 @@ ScriptsOnlyBuild:
     className: ForcedReset
   - hash:
       serializedVersion: 2
-      Hash: f6a1ad0da80842a556efb48763894b06
+      Hash: 7aaeb5be5bbe068f605ca2563de978c5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ActionEnabler
@@ -2839,7 +2863,7 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 60284ba6538d751dd70c2ca18ab85262
+      Hash: 30c3bc1ba539a1b1fb38d12145252d43
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RunAgain
@@ -2929,7 +2953,7 @@ ScriptsOnlyBuild:
     className: AutoSlideUpDown
   - hash:
       serializedVersion: 2
-      Hash: e07c022af262b2fa5ed6b70dd34d4acd
+      Hash: 589940f40684319029f26bffbef9eca2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: JumpAction
@@ -3097,7 +3121,7 @@ ScriptsOnlyBuild:
     className: DestroyPlayer
   - hash:
       serializedVersion: 2
-      Hash: 25c46f99794213687271efd10f463aa7
+      Hash: 044255cd3106f325d2c54f74d6f9a857
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstCheckpoint
@@ -3175,7 +3199,7 @@ ScriptsOnlyBuild:
     className: CheckPointOne
   - hash:
       serializedVersion: 2
-      Hash: 74e946c60458d13537e0730a9633737c
+      Hash: 957ad2e4f7431e3016260759cc8c8e47
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerStats
@@ -3209,6 +3233,18 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: UnitySampleAssets.Utility
     className: AutoMobileShaderSwitch
+  - hash:
+      serializedVersion: 2
+      Hash: 3a03669afdc3354b9cf4511135c9b384
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TutModelManager
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ButtonDisplay
   platform: 13
   scenePathNames:
   - Assets/Game/_Scenes/Main Menu.unity

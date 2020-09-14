@@ -436,7 +436,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		private void AddJumpPlayerAction() 
 		{
-			PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.JUMP);
+			if (currentLevel != "Level_Tutorial")
+			{
+				PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.JUMP);
+			}
 		}
 
 		private void JumpFalse () {

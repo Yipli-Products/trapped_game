@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -222,6 +223,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -359,6 +361,7 @@ GameObject:
   - component: {fileID: 11441098}
   - component: {fileID: 11441096}
   - component: {fileID: 11441094}
+  - component: {fileID: 4461170311726375307}
   m_Layer: 5
   m_Name: Jump
   m_TagString: Untagged
@@ -409,6 +412,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -519,6 +523,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4461170311726375307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa2f459c98dbd04495d1d075275ba8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &141092
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +548,7 @@ GameObject:
   - component: {fileID: 11441104}
   - component: {fileID: 11441102}
   - component: {fileID: 11441100}
+  - component: {fileID: 6748334039064896009}
   m_Layer: 5
   m_Name: RightArrow
   m_TagString: Untagged
@@ -582,6 +599,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -681,6 +699,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &6748334039064896009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa2f459c98dbd04495d1d075275ba8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &141094
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,6 +771,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -815,6 +846,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -904,6 +936,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.6397059, g: 0.05174093, b: 0.06390563, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -984,6 +1017,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1154,6 +1188,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1231,6 +1266,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1308,6 +1344,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1385,6 +1422,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0.05490196, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1458,6 +1496,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0.05490196, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1481,6 +1520,14 @@ PrefabInstance:
     - target: {fileID: 104626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_Name
       value: speakWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_Text
+      value: Make A Plan First
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1570,14 +1617,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.0000076293
       objectReference: {fileID: 0}
-    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_Text
-      value: Make A Plan First
-      objectReference: {fileID: 0}
-    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
 --- !u!224 &174723131 stripped
@@ -1596,6 +1635,14 @@ PrefabInstance:
     - target: {fileID: 104626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_Name
       value: speakWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1689,14 +1736,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -27
       objectReference: {fileID: 0}
-    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
 --- !u!224 &2132806320 stripped
@@ -1715,6 +1754,18 @@ PrefabInstance:
     - target: {fileID: 104626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_Name
       value: speakWindowL
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_Text
+      value: Make A Plan First
       objectReference: {fileID: 0}
     - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1815,18 +1866,6 @@ PrefabInstance:
     - target: {fileID: 22404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_SizeDelta.y
       value: 98
-      objectReference: {fileID: 0}
-    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_FontData.m_MaxSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_Text
-      value: Make A Plan First
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}

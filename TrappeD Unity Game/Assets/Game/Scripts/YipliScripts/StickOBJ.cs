@@ -8,7 +8,10 @@ public class StickOBJ : MonoBehaviour
 
     private void Start()
     {
-        TempColl.SetActive(false);
+        if (TempColl != null)
+        {
+            TempColl.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col) {

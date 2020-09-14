@@ -10,11 +10,14 @@ public class PlayerStats : ScriptableObject
 
     private int intended_ball_price = -1;
     private int intended_ball_id = -1;
-    private int active_ball = -1;
+    [SerializeField] int active_ball = -1;
 
     [SerializeField] int timePlayed;
     [SerializeField] int calBurned;
     [SerializeField] int fpPoints;
+
+    [SerializeField] string playerID;
+    [SerializeField] string purchasedBalls;
 
     [SerializeField] List<StoreBalls> ballsInStore;
 
@@ -25,10 +28,38 @@ public class PlayerStats : ScriptableObject
     private List<StoreBalls> BallsInStore { get => ballsInStore; set => ballsInStore = value; }
     public int CalBurned { get => calBurned; set => calBurned = value; }
     public int FpPoints { get => fpPoints; set => fpPoints = value; }
+    public string PlayerID { get => playerID; set => playerID = value; }
+    public string PurchasedBalls { get => purchasedBalls; set => purchasedBalls = value; }
 
-    public List<StoreBalls> GetBallInStoreList()
+    public void SetListofBalls(List<int> purchasedIDs)
     {
-        return BallsInStore;
+        foreach(StoreBalls ball in BallsInStore)
+        {
+            if (purchasedIDs.Contains(ball.ballID))
+            {
+                ball.boughtStatus = true;
+            }
+            else
+            {
+                ball.boughtStatus = false;
+            }
+        }
+    }
+
+    public void SetDefaultStore()
+    {
+        foreach (StoreBalls ball in BallsInStore)
+        {
+            if (ball.ballID == 0)
+            {
+                ball.boughtStatus = true;
+                Active_ball = 0;
+            }
+            else
+            {
+                ball.boughtStatus = false;
+            }
+        }
     }
 
     public void SetPlayerName(string pname)

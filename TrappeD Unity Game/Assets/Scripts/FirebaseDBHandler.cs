@@ -94,7 +94,7 @@ public static class FirebaseDBHandler
                 newUser.DisplayName, newUser.UserId);
             FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://yipli-project.firebaseio.com/");
             DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-            await reference.Child("inventory/stores-data/" + strGameId).UpdateChildrenAsync(dStoreData);
+            await reference.Child("profiles/users/" + strUserId).Child("players").Child(strPlayerId).Child("activity-statistics/games-statistics").Child(strGameId).Child("game-data").UpdateChildrenAsync(dStoreData);
         });
     }
 

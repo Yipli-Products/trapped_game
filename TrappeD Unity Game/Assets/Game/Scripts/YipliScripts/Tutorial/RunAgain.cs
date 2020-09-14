@@ -5,29 +5,27 @@ using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
 public class RunAgain : MonoBehaviour
 {
     // required variables
-    [SerializeField] GameObject runVideoScreen;
-    [SerializeField] GameObject jumpVideoScreen;
-    [SerializeField] GameObject stopVideoScreen;
 
     [SerializeField] GameObject obstacleBoxSmall;
     [SerializeField] GameObject leftMoveCol;
     [SerializeField] Text speakerT;
 
     private BallController bc;
+    private TutModelManager tmm;
 
     // Start is called before the first frame update
     void Start()
     {
         bc = FindObjectOfType<BallController>();
+        tmm = FindObjectOfType<TutModelManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player" && gameObject.activeSelf)
         {
-            runVideoScreen.SetActive(true);
-            jumpVideoScreen.SetActive(false);
-            stopVideoScreen.SetActive(false);
+            tmm.ActivateModel();
+            tmm.SetRunOverride();
 
             bc.allowjump = true;
             bc.allowRun = true;

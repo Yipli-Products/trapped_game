@@ -8,21 +8,18 @@ public class FirstLeftMove : MonoBehaviour
     // required variables
     [SerializeField] GameObject RunAgainCol;
 
-    [SerializeField] GameObject runVideoScreen;
-    [SerializeField] GameObject jumpVideoScreen;
-    [SerializeField] GameObject stopVideoScreen;
-
     [SerializeField] Text speakerT;
     [SerializeField] GameObject speakerBack;
 
     private BallController bc;
+    private TutModelManager tmm;
 
     // Start is called before the first frame update
     void Start()
     {
         bc = FindObjectOfType<BallController>();
+        tmm = FindObjectOfType<TutModelManager>();
 
-        stopVideoScreen.SetActive(false);
         RunAgainCol.SetActive(false);
     }
 
@@ -30,9 +27,7 @@ public class FirstLeftMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            runVideoScreen.SetActive(false);
-            jumpVideoScreen.SetActive(false);
-            stopVideoScreen.SetActive(true);
+            tmm.DeActivateModel();
 
             bc.allowjump = false;
             bc.allowRun = false;

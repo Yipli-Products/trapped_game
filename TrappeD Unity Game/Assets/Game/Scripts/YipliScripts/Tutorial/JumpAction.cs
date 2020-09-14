@@ -5,24 +5,22 @@ using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
 public class JumpAction : MonoBehaviour
 {
     //required variables
-    [SerializeField] GameObject runVideoScreen;
-    [SerializeField] GameObject jumpVideoScreen;
-    [SerializeField] GameObject stopVideoScreen;
     [SerializeField] Text speakerT;
 
     private BallController bc;
+    private TutModelManager tmm;
 
     // Start is called before the first frame update
     void Start()
     {
         bc = FindObjectOfType<BallController>();
+        tmm = FindObjectOfType<TutModelManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        runVideoScreen.SetActive(false);
-        jumpVideoScreen.SetActive(true);
-        stopVideoScreen.SetActive(false);
+        tmm.ActivateModel();
+        tmm.SetJumpOverride();
 
         bc.allowjump = true;
         bc.allowRun = false;

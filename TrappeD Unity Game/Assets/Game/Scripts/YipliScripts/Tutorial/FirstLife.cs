@@ -11,18 +11,18 @@ public class FirstLife : MonoBehaviour
     [SerializeField] GameObject lifeThree;
     [SerializeField] GameObject leftArrow;
 
-    [SerializeField] GameObject videoScreensPanel;
-
     [SerializeField] Text speakerT;
 
     public bool tutDone = false;
 
     private BallController bc;
+    private TutModelManager tmm;
 
     // Start is called before the first frame update
     void Start()
     {
         bc = FindObjectOfType<BallController>();
+        tmm = FindObjectOfType<TutModelManager>();
 
         lifeOne.SetActive(false);
         lifeTwo.SetActive(false);
@@ -41,7 +41,8 @@ public class FirstLife : MonoBehaviour
     public void TriggerTutorial()
     {
         tutDone = true;
-        videoScreensPanel.SetActive(false);
+
+        tmm.DeActivateModel();
 
         speakerT.text = "You have 3 lives in each level.";
         AudioControl.Instance.playAudio();
@@ -83,6 +84,7 @@ public class FirstLife : MonoBehaviour
         AudioControl.Instance.playAudio();
         leftArrow.SetActive(false);
         Time.timeScale = 1f;
-        videoScreensPanel.SetActive(true);
+
+        tmm.ActivateModel();
     }
 }
