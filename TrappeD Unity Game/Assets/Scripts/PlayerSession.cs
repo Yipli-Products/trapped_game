@@ -168,7 +168,7 @@ public class PlayerSession : MonoBehaviour
             currentYipliConfig.playerInfo.playerId,
             gameId,
             dStoreData,
-            () => { Debug.Log("Got Game data successfully"); }
+            () => { Debug.Log("Updated Store data successfully"); }
         );
     }
 
