@@ -21,7 +21,7 @@ public class BalanceManager : MonoBehaviour {
 
 	private void SetStore()
     {
-		if (ps.PurchasedBalls == "" || ps.PurchasedBalls == "")
+		if (ps.PurchasedBalls == "" || ps.PurchasedBalls == null)
         {
 			ps.SetDefaultStore();
         }

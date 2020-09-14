@@ -32,10 +32,6 @@ public class YipliButtonScript : MonoBehaviour
                 LoadingPanel.SetActive(false);
             }
 
-            LoadingPanel.SetActive(true);
-            await GetPlayerData();
-            LoadingPanel.SetActive(false);
-
             //Task.Run(GetPlayerData).Wait();
         }
         else
