@@ -15,7 +15,7 @@ MonoBehaviour:
   playerName: Test3
   completed_levels: 9
   coinScore: 30
-  active_ball: 2
+  active_ball: 0
   timePlayed: 0
   calBurned: 0
   fpPoints: 40
@@ -27,13 +27,13 @@ MonoBehaviour:
     boughtStatus: 1
   - ballID: 1
     ballPrice: 250
-    boughtStatus: 1
+    boughtStatus: 0
   - ballID: 2
     ballPrice: 800
-    boughtStatus: 1
+    boughtStatus: 0
   - ballID: 3
     ballPrice: 1200
-    boughtStatus: 1
+    boughtStatus: 0
   - ballID: 4
     ballPrice: 2000
     boughtStatus: 0

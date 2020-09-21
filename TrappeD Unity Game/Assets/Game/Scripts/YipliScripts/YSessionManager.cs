@@ -49,6 +49,10 @@ public class YSessionManager : MonoBehaviour
         ps.CalBurned = (int)YipliUtils.GetCaloriesBurned(PlayerSession.Instance.getPlayerActionCounts());
         ps.FpPoints = (int)YipliUtils.GetFitnessPoints(PlayerSession.Instance.getPlayerActionCounts());
 
+        ps.ThisSessionTimePlayed += ps.TimePlayed;
+        ps.ThisSessionCalBurned += ps.CalBurned;
+        ps.ThisSessionFpPoints += ps.FpPoints;
+
         PlayerSession.Instance.StoreSPSession(ps.GetCoinScore());
     }
 }

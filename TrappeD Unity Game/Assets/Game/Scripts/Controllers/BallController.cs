@@ -460,6 +460,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				Debug.Log("FMResponse " + fmActionData);
 				FMResponseCount = singlePlayerResponse.count;
 
+				Debug.LogError("provided action id : " + singlePlayerResponse.playerdata[0].fmresponse.action_id);
+
 				YipliUtils.PlayerActions providedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
 
 				switch(providedAction)
@@ -470,23 +472,23 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						break;
 
 					case YipliUtils.PlayerActions.RUNNINGSTOPPED:
-						if (currentLevel == "Level_Tutorial" && !Runbackward)
+						/*if (currentLevel == "Level_Tutorial" && !Runbackward)
 						{
 							calWaitTime = false;
 							waitTimeCal = 0f;
 							return;
-						}
+						}*/
 
 						RunningStopAction();
 						break;
 
 					case YipliUtils.PlayerActions.STOP:
-						if (currentLevel == "Level_Tutorial" && !Runbackward)
+						/*if (currentLevel == "Level_Tutorial" && !Runbackward)
 						{
 							calWaitTime = false;
 							waitTimeCal = 0f;
 							return;
-						}
+						}*/
 
 						RunningStopAction();
 						break;
@@ -496,8 +498,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						// do run here
 						int steps = 1;
 
+						Debug.LogError("from YipliUtils.PlayerActions.RUNNING case in switch");
+
 						///CheckPoint for the running action properties.
-						if (singlePlayerResponse.playerdata[0].fmresponse.properties.ToString() != "null")
+						/*if (singlePlayerResponse.playerdata[0].fmresponse.properties.ToString() != "null")
 						{
 							string[] tokens = singlePlayerResponse.playerdata[0].fmresponse.properties.Split(',');
 
@@ -505,9 +509,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 							{
 								//Split the property value pairs:
 
-								/*
-								 * {"count":240,"timestamp":1597928543171,"playerdata":[{"id":1,"fmresponse":{"action_id":"SWLO","action_name":"Running","properties":"totalStepsCount:1,speed:1.60"},"count":123},{null}]}
-								 **/
+								//{"count":240,"timestamp":1597928543171,"playerdata":[{"id":1,"fmresponse":{"action_id":"SWLO","action_name":"Running","properties":"totalStepsCount:1,speed:1.60"},"count":123},{null}]}
 
 								string[] totalStepsCountKeyValue = tokens[0].Split(':');
 								if (totalStepsCountKeyValue[0].Equals("totalStepsCount"))
@@ -524,7 +526,9 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 									matBallForce *= speedAdditive;
 								}
 							}
-						}
+						}*/
+
+						Debug.LogError("ball jump status : " + ballJump);
 
 						if (!ballJump)
 						{
@@ -535,9 +539,9 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						break;
 
 					case YipliUtils.PlayerActions.JUMP:
-						if (currentLevel == "Level_Tutorial" && !allowjump)
+						if (currentLevel == "Level_Tutorial")
 						{
-							return;
+							FindObjectOfType<TutorialManager>().TextTutorialNextButton();
 						}
 
 						JumpAction();

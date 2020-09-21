@@ -16,6 +16,10 @@ public class PlayerStats : ScriptableObject
     [SerializeField] int calBurned;
     [SerializeField] int fpPoints;
 
+    [SerializeField] int thisSessionTimePlayed;
+    [SerializeField] int thisSessionCalBurned;
+    [SerializeField] int thisSessionFpPoints;
+
     [SerializeField] string playerID;
     [SerializeField] string purchasedBalls;
 
@@ -30,6 +34,9 @@ public class PlayerStats : ScriptableObject
     public int FpPoints { get => fpPoints; set => fpPoints = value; }
     public string PlayerID { get => playerID; set => playerID = value; }
     public string PurchasedBalls { get => purchasedBalls; set => purchasedBalls = value; }
+    public int ThisSessionTimePlayed { get => thisSessionTimePlayed; set => thisSessionTimePlayed = value; }
+    public int ThisSessionCalBurned { get => thisSessionCalBurned; set => thisSessionCalBurned = value; }
+    public int ThisSessionFpPoints { get => thisSessionFpPoints; set => thisSessionFpPoints = value; }
 
     public void SetListofBalls(List<int> purchasedIDs)
     {

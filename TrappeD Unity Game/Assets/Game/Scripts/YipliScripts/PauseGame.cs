@@ -198,11 +198,11 @@ public class PauseGame : MonoBehaviour
             switch (providedAction)
             {
                 case YipliUtils.PlayerActions.LEFT:
-                    ProcessMatInputs(LEFT);
+                    ProcessMatInputs(RIGHT);
                     break;
 
                 case YipliUtils.PlayerActions.RIGHT:
-                    ProcessMatInputs(RIGHT);
+                    ProcessMatInputs(LEFT);
                     break;
 
                 case YipliUtils.PlayerActions.ENTER:

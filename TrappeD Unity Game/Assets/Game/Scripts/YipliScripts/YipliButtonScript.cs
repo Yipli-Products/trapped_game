@@ -44,7 +44,15 @@ public class YipliButtonScript : MonoBehaviour
         ps.SetPlayerName(PlayerSession.Instance.GetCurrentPlayer());
         ps.PlayerID = PlayerSession.Instance.currentYipliConfig.playerInfo.playerId;
 
-        playerName.text = ps.GetPlayerName();
+        if (ps.GetPlayerName().Length > 10)
+        {
+            playerName.text = ps.GetPlayerName().Substring(0, 9);
+        }
+        else
+        {
+            playerName.text = ps.GetPlayerName();
+        }
+
         pointScore.text = "Points : " + ps.GetCoinScore();
 
         ps.TimePlayed = 0;

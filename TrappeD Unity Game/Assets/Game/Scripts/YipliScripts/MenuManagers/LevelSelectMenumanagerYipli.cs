@@ -53,6 +53,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
             menuButtons.Add(allButtons[i]);
         }
         menuButtons.Add(backButton);
+        currentButtonIndex = ps.GetCompletedLevels();
     }
 
     // Update is called once per frame
