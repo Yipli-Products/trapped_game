@@ -13,11 +13,11 @@ public class PlayerStats : ScriptableObject
     [SerializeField] int active_ball = -1;
 
     [SerializeField] int timePlayed;
-    [SerializeField] int calBurned;
+    [SerializeField] float calBurned;
     [SerializeField] int fpPoints;
 
     [SerializeField] int thisSessionTimePlayed;
-    [SerializeField] int thisSessionCalBurned;
+    [SerializeField] float thisSessionCalBurned;
     [SerializeField] int thisSessionFpPoints;
 
     [SerializeField] string playerID;
@@ -30,12 +30,12 @@ public class PlayerStats : ScriptableObject
     public int Active_ball { get => active_ball; set => active_ball = value; }
     public int TimePlayed { get => timePlayed; set => timePlayed = value; }
     private List<StoreBalls> BallsInStore { get => ballsInStore; set => ballsInStore = value; }
-    public int CalBurned { get => calBurned; set => calBurned = value; }
+    public float CalBurned { get => calBurned; set => calBurned = value; }
     public int FpPoints { get => fpPoints; set => fpPoints = value; }
     public string PlayerID { get => playerID; set => playerID = value; }
     public string PurchasedBalls { get => purchasedBalls; set => purchasedBalls = value; }
     public int ThisSessionTimePlayed { get => thisSessionTimePlayed; set => thisSessionTimePlayed = value; }
-    public int ThisSessionCalBurned { get => thisSessionCalBurned; set => thisSessionCalBurned = value; }
+    public float ThisSessionCalBurned { get => thisSessionCalBurned; set => thisSessionCalBurned = value; }
     public int ThisSessionFpPoints { get => thisSessionFpPoints; set => thisSessionFpPoints = value; }
 
     public void SetListofBalls(List<int> purchasedIDs)

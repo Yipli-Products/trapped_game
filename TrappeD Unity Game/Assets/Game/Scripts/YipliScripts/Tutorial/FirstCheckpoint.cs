@@ -34,7 +34,7 @@ public class FirstCheckpoint : MonoBehaviour
             {
                 tmm.DeActivateModel();
 
-                speakerT.text = "If you die, Game will resume from last checkpoint";
+                speakerT.text = "If you die, Game will resume\nfrom last checkpoint";
                 AudioControl.Instance.playAudio();
 
                 calledAnim = true;

@@ -15,7 +15,7 @@ public class PointDisplay : MonoBehaviour
     void Start()
     {
         //pointScore.text = "Collected Coins : " + PlayerPrefs.GetInt("thisLevelPoints");
-        pointScore.text = "Collected Coins : " + ps.GetCoinScore();
+        pointScore.text = "Coins collected : " + ps.GetCoinScore();
 
         if (SceneManager.GetActiveScene().name == "Game Over")
         {

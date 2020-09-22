@@ -34,7 +34,7 @@ public class FirstLeftMove : MonoBehaviour
             bc.Runbackward = true;
 
             speakerBack.SetActive(true);
-            speakerT.text = "If you want to go backwards, Just stand still.";
+            speakerT.text = "Just stand still to go backwards.";
             AudioControl.Instance.playAudio();
 
             RunAgainCol.SetActive(true);
@@ -43,11 +43,11 @@ public class FirstLeftMove : MonoBehaviour
 
     private IEnumerator TextChange()
     {
-        speakerT.text = "If you want to go backwards, Just stand still.";
+        speakerT.text = "Just stand still to go backwards";
         AudioControl.Instance.playAudio();
         yield return new WaitForSecondsRealtime(5f);
 
-        speakerT.text = "Stand still to move backwards.";
+        speakerT.text = "Just stand still to go backwards";
         AudioControl.Instance.playAudio();
         yield return new WaitForSecondsRealtime(5f);
     }

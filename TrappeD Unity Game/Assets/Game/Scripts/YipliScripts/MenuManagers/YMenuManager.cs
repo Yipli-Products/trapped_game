@@ -7,6 +7,7 @@ public class YMenuManager : MonoBehaviour
 {
     //required variables
     [SerializeField] Button[] menuButtons;
+    [SerializeField] GameObject niText;
 
     Button currentB;
 
@@ -26,6 +27,8 @@ public class YMenuManager : MonoBehaviour
 
         currentButtonIndex = 0;
         manageCurrentButton();
+
+        niText.SetActive(false);
     }
 
     private static void SetClusterIDtoZero()
@@ -168,5 +171,15 @@ public class YMenuManager : MonoBehaviour
                 Debug.Log("Wrong Input");
                 break;
         }
+    }
+
+    public void ShowNoInternetText()
+    {
+        niText.SetActive(true);
+    }
+
+    public void CloseNoInternetText()
+    {
+        niText.SetActive(false);
     }
 }

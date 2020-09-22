@@ -49,7 +49,14 @@ public class GameWon : MonoBehaviour {
 				ysm.StoreSession();
 			}
 
-			isGameWon = true;
+			if (currentScene != "Level_Tutorial")
+            {
+
+            } 
+			else
+            {
+				isGameWon = true;
+			}
 		}
 			
 	}

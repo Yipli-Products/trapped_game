@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Test3
   completed_levels: 9
-  coinScore: 30
+  coinScore: 1990
   active_ball: 0
   timePlayed: 0
   calBurned: 0
-  fpPoints: 40
+  fpPoints: 0
+  thisSessionTimePlayed: 1071
+  thisSessionCalBurned: 5
+  thisSessionFpPoints: 1100
   playerID: -M7DmXj_rRc7OaMYUOiT
-  purchasedBalls: 0,1,2,3
+  purchasedBalls: 
   ballsInStore:
   - ballID: 0
     ballPrice: 0

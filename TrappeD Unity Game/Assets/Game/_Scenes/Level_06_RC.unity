@@ -8380,12 +8380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e5e939646aab849babadb40bfa7edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &494464320 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7414530025254950833, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
-    type: 3}
-  m_PrefabInstance: {fileID: 494464317}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &494464321 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6937818800024660284, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
@@ -11118,7 +11112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 59.25
+      value: 59.16
       objectReference: {fileID: 0}
     - target: {fileID: 474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11178,7 +11172,7 @@ PrefabInstance:
       objectReference: {fileID: 1976146699}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: You have to press the red button.
+      value: You must press the red button.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -28303,7 +28297,7 @@ PrefabInstance:
     - target: {fileID: 11491444, guid: 4f2d65df182e5e14f9ad00d075f852b7, type: 3}
       propertyPath: pauseCanvas
       value: 
-      objectReference: {fileID: 494464320}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f2d65df182e5e14f9ad00d075f852b7, type: 3}
 --- !u!1 &1751696440 stripped

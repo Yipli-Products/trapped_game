@@ -46,7 +46,7 @@ public class YSessionManager : MonoBehaviour
             Debug.Log("Game data is updated successfully.");
         }
 
-        ps.CalBurned = (int)YipliUtils.GetCaloriesBurned(PlayerSession.Instance.getPlayerActionCounts());
+        ps.CalBurned = YipliUtils.GetCaloriesBurned(PlayerSession.Instance.getPlayerActionCounts());
         ps.FpPoints = (int)YipliUtils.GetFitnessPoints(PlayerSession.Instance.getPlayerActionCounts());
 
         ps.ThisSessionTimePlayed += ps.TimePlayed;
