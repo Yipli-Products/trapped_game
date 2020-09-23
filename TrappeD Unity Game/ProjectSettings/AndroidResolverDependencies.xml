@@ -69,7 +69,7 @@
     <file>Assets/Plugins/Android/com.google.firebase.firebase-storage-unity-6.15.2.aar</file>
   </files>
   <settings>
-    <setting name="androidAbis" value="armeabi-v7a" />
+    <setting name="androidAbis" value="arm64-v8a,armeabi-v7a" />
     <setting name="bundleId" value="com.yipli.trapped" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />

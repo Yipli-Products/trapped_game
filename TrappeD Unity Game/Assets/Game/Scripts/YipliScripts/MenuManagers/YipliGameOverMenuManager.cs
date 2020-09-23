@@ -19,6 +19,11 @@ public class YipliGameOverMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
+        PlayerPrefs.DeleteKey("CHKP_X");
+        PlayerPrefs.DeleteKey("CHKP_Y");
+        PlayerPrefs.DeleteKey("CHKP_Z");
+
         SetClusterIDtoZero();
 
         currentButtonIndex = 0;

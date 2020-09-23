@@ -48,6 +48,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -130,4 +131,4 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 0.029379446, y: -0.70614034}
-  - {x: -4.1883464, y: 6.123161}
+  - {x: -12.368986, y: 19.569221}

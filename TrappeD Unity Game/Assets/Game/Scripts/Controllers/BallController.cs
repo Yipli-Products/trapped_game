@@ -120,8 +120,12 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			coinAmount = ps.GetCoinScore();
 			coinText.text = coinAmount.ToString();
 			int playerLife = PlayerPrefs.GetInt ("PLAYER_LIFE");
-			if (playerLife < 3) {
-					gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("CHKP_X"), PlayerPrefs.GetFloat("CHKP_Y"), PlayerPrefs.GetFloat("CHKP_Z"));
+			if (playerLife < 3 && currentLevel != "Level_09_RC") {
+				gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("CHKP_X"), 3, PlayerPrefs.GetFloat("CHKP_Z"));
+			}
+			else
+            {
+				gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("CHKP_X"), PlayerPrefs.GetFloat("CHKP_Y"), PlayerPrefs.GetFloat("CHKP_Z"));
 			}
 		
 			showLifeOnScreen ();
