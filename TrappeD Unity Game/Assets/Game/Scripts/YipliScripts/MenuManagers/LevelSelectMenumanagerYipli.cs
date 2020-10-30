@@ -42,7 +42,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
         try
         {
             Debug.Log("From level selection : Set cluster id to : 0");
-            YipliHelper.SetGameClusterId(0);
+            //YipliHelper.SetGameClusterId(0);
         }
         catch (Exception e)
         {
@@ -53,12 +53,24 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 
     private void SetAllowedLevels()
     {
-        for (int i = 0; i < ps.GetCompletedLevels() + 1; i++)
+        int totalButtons;
+        if (ps.GetCompletedLevels() >= 10)
+        {
+            currentButtonIndex = 9;
+            totalButtons = 10;
+        }
+        else
+        {
+            currentButtonIndex = ps.GetCompletedLevels();
+            totalButtons = ps.GetCompletedLevels() + 1;
+        }
+
+        for (int i = 0; i < totalButtons; i++)
         {
             menuButtons.Add(allButtons[i]);
         }
+
         menuButtons.Add(backButton);
-        currentButtonIndex = ps.GetCompletedLevels();
     }
 
     // Update is called once per frame

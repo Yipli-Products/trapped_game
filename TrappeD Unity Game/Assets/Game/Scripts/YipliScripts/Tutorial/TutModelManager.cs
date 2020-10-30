@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TutModelManager : MonoBehaviour
 {
-    [SerializeField] GameObject tutModel;
+    [SerializeField] GameObject tutModelRun;
+    [SerializeField] GameObject tutModelJump;
 
     [SerializeField] AnimatorOverrideController runOR;
     [SerializeField] AnimatorOverrideController jumpOR;
@@ -30,21 +31,26 @@ public class TutModelManager : MonoBehaviour
 
     public void ActivateModel()
     {
-        tutModel.SetActive(true);
+        tutModelRun.SetActive(true);
     }
     
     public void DeActivateModel()
     {
-        tutModel.SetActive(false);
+        tutModelRun.SetActive(false);
+        tutModelJump.SetActive(false);
     }
 
     public void SetRunOverride()
     {
-        tutModel.GetComponent<Animator>().runtimeAnimatorController = runOR;
+        DeActivateModel();
+        tutModelRun.SetActive(true);
+        tutModelRun.GetComponent<Animator>().runtimeAnimatorController = runOR;
     }
     
     public void SetJumpOverride()
     {
-        tutModel.GetComponent<Animator>().runtimeAnimatorController = jumpOR;
+        //tutModelRun.GetComponent<Animator>().runtimeAnimatorController = jumpOR;
+        tutModelRun.SetActive(false);
+        tutModelJump.SetActive(true);
     }
 }

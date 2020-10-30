@@ -25,6 +25,8 @@ public class PlayerStats : ScriptableObject
 
     [SerializeField] List<StoreBalls> ballsInStore;
 
+    [SerializeField] GameState gameState;
+
     public int Intended_ball_price { get => intended_ball_price; set => intended_ball_price = value; }
     public int Intended_ball_id { get => intended_ball_id; set => intended_ball_id = value; }
     public int Active_ball { get => active_ball; set => active_ball = value; }
@@ -37,6 +39,7 @@ public class PlayerStats : ScriptableObject
     public int ThisSessionTimePlayed { get => thisSessionTimePlayed; set => thisSessionTimePlayed = value; }
     public float ThisSessionCalBurned { get => thisSessionCalBurned; set => thisSessionCalBurned = value; }
     public int ThisSessionFpPoints { get => thisSessionFpPoints; set => thisSessionFpPoints = value; }
+    public GameState GameState { get => gameState; set => gameState = value; }
 
     public void SetListofBalls(List<int> purchasedIDs)
     {

@@ -19,6 +19,8 @@ public class YipliGameOverMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MatControlsStatManager.gameStateChanged(GameState.GAME_OVER);
+
         PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
         PlayerPrefs.DeleteKey("CHKP_X");
         PlayerPrefs.DeleteKey("CHKP_Y");
@@ -35,7 +37,7 @@ public class YipliGameOverMenuManager : MonoBehaviour
         try
         {
             Debug.Log("From game over menu : Set cluster id to : 0");
-            YipliHelper.SetGameClusterId(0);
+            //YipliHelper.SetGameClusterId(0);
         }
         catch (Exception e)
         {

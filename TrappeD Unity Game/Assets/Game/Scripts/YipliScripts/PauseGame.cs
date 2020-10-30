@@ -68,7 +68,8 @@ public class PauseGame : MonoBehaviour
             PlayerSession.Instance.PauseSPSession();
         }
 
-        SetClusterIDtoZero();
+        //SetClusterIDtoZero();
+        MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
 
         InstructionCanvas.SetActive(false);
         pauseArea.SetActive(true);
@@ -81,7 +82,7 @@ public class PauseGame : MonoBehaviour
         {
             Debug.Log("From pause function : Set cluster id to : 0");
             // set gameid to 0
-            YipliHelper.SetGameClusterId(0);
+            //YipliHelper.SetGameClusterId(0);
         }
         catch (Exception e)
         {
@@ -101,7 +102,9 @@ public class PauseGame : MonoBehaviour
         PlayerPrefs.DeleteKey("CHKP_Z");
 
         Debug.Log("Retry Function call");
-        SetClusterIDtoOne();
+        //SetClusterIDtoOne();
+
+        MatControlsStatManager.gameStateChanged(GameState.GAME_PLAY);
 
         InstructionCanvas.SetActive(true);
         pauseArea.SetActive(false);
@@ -113,7 +116,7 @@ public class PauseGame : MonoBehaviour
         try
         {
             Debug.Log("From retry or resume function : Set cluster id to : 1");
-            YipliHelper.SetGameClusterId(1); // set current gameid
+            //YipliHelper.SetGameClusterId(1); // set current gameid
         }
         catch (Exception e)
         {
@@ -129,6 +132,8 @@ public class PauseGame : MonoBehaviour
 
         Debug.Log("Resume Function call");
         SetClusterIDtoOne();
+
+        MatControlsStatManager.gameStateChanged(GameState.GAME_PLAY);
 
         if (currentScene != "Level_Tutorial")
         {

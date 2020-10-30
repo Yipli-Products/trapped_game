@@ -23,7 +23,7 @@ public class YMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetClusterIDtoZero();
+        MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
 
         currentButtonIndex = 0;
         manageCurrentButton();
@@ -36,7 +36,7 @@ public class YMenuManager : MonoBehaviour
         try
         {
             Debug.Log("From main menu : Set cluster id to : 0");
-            YipliHelper.SetGameClusterId(0);
+            //YipliHelper.SetGameClusterId(0);
         }
         catch (Exception e)
         {

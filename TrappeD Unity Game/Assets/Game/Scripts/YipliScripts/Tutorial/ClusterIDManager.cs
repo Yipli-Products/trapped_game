@@ -11,7 +11,8 @@ public class ClusterIDManager : MonoBehaviour
 
     private void Awake()
     {
-        SetClusterIDtoOne();
+        //SetClusterIDtoOne();
+        MatControlsStatManager.gameStateChanged(GameState.GAME_PLAY);
     }
 
     // Start is called before the first frame update
@@ -27,7 +28,7 @@ public class ClusterIDManager : MonoBehaviour
         try
         {
             Debug.Log("From retry or resume function : Set cluster id to : 1");
-            YipliHelper.SetGameClusterId(1); // set current gameid
+            //YipliHelper.SetGameClusterId(1); // set current gameid
         }
         catch (System.Exception e)
         {
