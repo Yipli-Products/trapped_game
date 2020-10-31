@@ -25,7 +25,16 @@ public class YSessionManager : MonoBehaviour
         PlayerSession.Instance.UpdateDuration();
     }
 
-    public void StoreSession() {
+    public void StoreSession(bool isGameOver = false) 
+    {
+        if (isGameOver)
+        {
+            MatControlsStatManager.gameStateChanged(GameState.GAME_OVER);
+        }
+        else
+        {
+            MatControlsStatManager.gameStateChanged(GameState.GAME_NEW_LIFE);
+        }
 
         if (ps.GetCompletedLevels() != completed_levels || ps.GetCoinScore() > coinScore)
         {

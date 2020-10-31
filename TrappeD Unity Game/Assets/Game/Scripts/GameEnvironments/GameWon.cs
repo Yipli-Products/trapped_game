@@ -46,7 +46,7 @@ public class GameWon : MonoBehaviour {
 
 			if (currentScene != "Level_Tutorial")
             {
-				ysm.StoreSession();
+				ysm.StoreSession(true);
 			}
 
 			PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
@@ -54,10 +54,7 @@ public class GameWon : MonoBehaviour {
 			PlayerPrefs.DeleteKey("CHKP_Y");
 			PlayerPrefs.DeleteKey("CHKP_Z");
 
-			if (currentScene != "Level_Tutorial")
-            {
-				isGameWon = true;
-			}
+			isGameWon = true;
 		}
 			
 	}

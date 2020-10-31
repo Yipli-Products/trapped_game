@@ -25,6 +25,7 @@ public class YipliMenuManager : MonoBehaviour
         PlayerPrefs.DeleteKey("CHKP_Z");
 
         SetClusterIDtoZero();
+        MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
 
         currentButtonIndex = 0;
         manageCurrentButton();
@@ -35,7 +36,7 @@ public class YipliMenuManager : MonoBehaviour
         try
         {
             Debug.Log("From game won menu : Set cluster id to : 0");
-            YipliHelper.SetGameClusterId(0);
+            //YipliHelper.SetGameClusterId(0);
         }
         catch (Exception e)
         {

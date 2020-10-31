@@ -76,6 +76,9 @@ public class LevelButtonController : MonoBehaviour {
 			//audio.PlayOneShot(buttonClickSoundEffect);
 			PlayerPrefs.SetInt("PLAYER_LIFE", 3);
 			PlayerPrefs.SetInt("CURRENT_LEVEL_SERIAL", thisLevelNumber);
+
+			MatControlsStatManager.gameStateChanged(GameState.GAME_PLAY);
+
 			SceneManager.LoadScene(thisLevelNumber);
 		}
 	}

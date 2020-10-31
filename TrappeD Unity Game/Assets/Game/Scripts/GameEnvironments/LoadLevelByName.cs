@@ -6,7 +6,9 @@ public class LoadLevelByName : MonoBehaviour {
 
 	//private string[] levelNamesInSerial = new string[] {"Level_01", "Level_02_New", "Level_03_New"};
 	public int totalNumOfAvailableLevels = 10;
+
 	public void LoadLevelGivenTheName(string levelName){
+		MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
 		SceneManager.LoadScene (levelName);
 	}
 
