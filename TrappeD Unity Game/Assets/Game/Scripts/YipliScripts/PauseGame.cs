@@ -12,6 +12,8 @@ public class PauseGame : MonoBehaviour
     [SerializeField] GameObject InstructionCanvas;
     [SerializeField] Button[] menuButtons;
 
+    [SerializeField] PlayerStats ps;
+
     Button currentB;
     int currentButtonIndex;
 
@@ -73,6 +75,9 @@ public class PauseGame : MonoBehaviour
 
         InstructionCanvas.SetActive(false);
         pauseArea.SetActive(true);
+
+        ps.AllowInput = false;
+
         Time.timeScale = 0f;
     }
 
@@ -94,12 +99,16 @@ public class PauseGame : MonoBehaviour
     public void retryButton()
     {
         Time.timeScale = 1f;
+        ps.CheckPointPassed = false;
+        ps.AllowInput = true;
         isPause = false;
 
+        /*
         PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
         PlayerPrefs.DeleteKey("CHKP_X");
         PlayerPrefs.DeleteKey("CHKP_Y");
         PlayerPrefs.DeleteKey("CHKP_Z");
+        */
 
         Debug.Log("Retry Function call");
         //SetClusterIDtoOne();
@@ -128,6 +137,7 @@ public class PauseGame : MonoBehaviour
     public void resumeButton()
     {
         Time.timeScale = 1f;
+        ps.AllowInput = true;
         isPause = false;
 
         Debug.Log("Resume Function call");
@@ -186,17 +196,17 @@ public class PauseGame : MonoBehaviour
 
     private void MenuControlSystem()
     {
-        string fmActionData = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
+        string fmActionData = InitBLE.GetFMResponse();
         Debug.Log("Json Data from Fmdriver : " + fmActionData);
 
         FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
 
         if (singlePlayerResponse == null) return;
 
-        if (FMResponseCount != singlePlayerResponse.count)
+        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount < singlePlayerResponse.count)
         {
             Debug.Log("FMResponse " + fmActionData);
-            FMResponseCount = singlePlayerResponse.count;
+            PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
 
             YipliUtils.PlayerActions providedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
 

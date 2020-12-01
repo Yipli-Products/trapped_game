@@ -1,9 +1,10 @@
-﻿using System;
+﻿using com.fitmat.fitmatdriver.Producer.Connection;
+using System;
 using UnityEngine;
 
 public static class YipliHelper
 {
-    private static string yipliAppBundleId = "org.hightimeshq.yipli"; //todo: Change this later
+    private static string yipliAppBundleId = "com.yipli.app"; //todo: Change this later
 
     public static int GetGameClusterId()
     {
@@ -18,6 +19,16 @@ public static class YipliHelper
     public static void SetGameClusterId(int gameClusterId)
     {
         InitBLE.setGameClusterID(gameClusterId);
+        //#if UNITY_ANDROID
+
+        //#endif
+        /*
+        #if UNITY_STANDALONE_WIN
+        //#if UNITY_STANDALONE_WIN && !UNITY_EDITOR
+                DeviceControlActivity.InitPCFramework(gameClusterId);
+                Debug.LogError("pc framework id is set : " + gameClusterId);
+        #endif
+        */
     }
 
     public static void SetGameMode(int gameMode)
@@ -36,12 +47,22 @@ public static class YipliHelper
         return bIsNetworkAvailable;
     }
 
-    public static string GetBleConnectionStatus()
+    public static string GetMatConnectionStatus()
     {
-        Debug.Log("GetBleConnectionStatus returning : " + InitBLE.getBLEStatus());
-        if (PlayerSession.Instance.currentYipliConfig.matPlayMode == false)
+        if(!PlayerSession.Instance.currentYipliConfig.onlyMatPlayMode)
             return "connected";
-        return InitBLE.getBLEStatus();
+        Debug.Log("GetBleConnectionStatus returning : " + InitBLE.getMatConnectionStatus());
+        return InitBLE.getMatConnectionStatus();
+    }
+
+
+    public static void GoToPlaystoreUpdate(string gamePackageId)
+    {
+#if UNITY_ANDROID
+            Application.OpenURL("market://details?id=" + gamePackageId);
+#else
+        Debug.Log("Unsupported os");
+#endif
     }
 
     public static void GoToYipli()
@@ -62,6 +83,8 @@ public static class YipliHelper
             Debug.Log(e);
             Application.OpenURL("market://details?id=" + yipliAppBundleId);
         }
+#else
+        Debug.Log("Unsupported os");
 #endif
     }
 
@@ -91,11 +114,16 @@ public static class YipliHelper
             Debug.Log("Yipli app is not installed.");
             return false;
         }
-          
+
+        Debug.Log("Yipli App is Installed. Returning true.");
+        return true;
+
+#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+        Debug.Log("Yipli App validation for windows isnt required. Returning true");
         return true;
 #else
         Debug.Log("OS not supported. Returnin false.");
-         return false;
+        return false;
 #endif
     }
 }

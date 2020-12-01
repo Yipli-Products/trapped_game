@@ -11,6 +11,11 @@ TagManager:
   - SpeedR
   - jumpI
   - jumpR
+  - YipliPlayers
+  - invisibleCP
+  - jumpTUT
+  - stepBackStart
+  - stepBackEnd
   layers:
   - Default
   - TransparentFX

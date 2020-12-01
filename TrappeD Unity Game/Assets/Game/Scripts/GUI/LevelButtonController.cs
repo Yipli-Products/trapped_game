@@ -74,7 +74,8 @@ public class LevelButtonController : MonoBehaviour {
 	public void LoadThisLevel(){
 		if (thisLevelNumber <= numberOfCompletedLevels+1) {
 			//audio.PlayOneShot(buttonClickSoundEffect);
-			PlayerPrefs.SetInt("PLAYER_LIFE", 3);
+			//PlayerPrefs.SetInt("PLAYER_LIFE", 3);
+			ps.PlayerLives = 3;
 			PlayerPrefs.SetInt("CURRENT_LEVEL_SERIAL", thisLevelNumber);
 
 			MatControlsStatManager.gameStateChanged(GameState.GAME_PLAY);

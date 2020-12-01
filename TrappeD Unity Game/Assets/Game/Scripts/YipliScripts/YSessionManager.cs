@@ -13,7 +13,7 @@ public class YSessionManager : MonoBehaviour
      // Start is called before the first frame update
     void Start()
     {
-        PlayerSession.Instance.StartSPSession("trapped");
+        PlayerSession.Instance.StartSPSession();
 
         completed_levels = ps.GetCompletedLevels();
         coinScore = ps.GetCoinScore();

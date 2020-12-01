@@ -8,6 +8,7 @@ public class RunAgain : MonoBehaviour
 
     [SerializeField] GameObject obstacleBoxSmall;
     [SerializeField] GameObject leftMoveCol;
+    [SerializeField] GameObject jumopbacktwoCol;
     [SerializeField] Text speakerT;
 
     private BallController bc;
@@ -24,16 +25,17 @@ public class RunAgain : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && gameObject.activeSelf)
         {
-            tmm.ActivateModel();
-            tmm.SetRunOverride();
+            //tmm.ActivateModel();
+            //tmm.SetRunOverride();
 
             bc.allowjump = true;
             bc.allowRun = true;
             bc.Runbackward = false;
 
-            speakerT.text = "Keep Running or Jumping \nto finish the level";
+            speakerT.text = "Take the box with you and make your moves smartly";
             AudioControl.Instance.playAudio();
             leftMoveCol.SetActive(false);
+            jumopbacktwoCol.SetActive(false);
 
             obstacleBoxSmall.GetComponent<Rigidbody2D>().mass = 1;
         }

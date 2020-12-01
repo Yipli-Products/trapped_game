@@ -27,6 +27,16 @@ public class PlayerStats : ScriptableObject
 
     [SerializeField] GameState gameState;
 
+    [SerializeField] Vector3 checkPointPos;
+
+    [SerializeField] bool checkPointPassed = false;
+
+    [SerializeField] string[] tips;
+
+    [SerializeField] int playerLives;
+
+    [SerializeField] bool allowInput = false;
+
     public int Intended_ball_price { get => intended_ball_price; set => intended_ball_price = value; }
     public int Intended_ball_id { get => intended_ball_id; set => intended_ball_id = value; }
     public int Active_ball { get => active_ball; set => active_ball = value; }
@@ -40,6 +50,11 @@ public class PlayerStats : ScriptableObject
     public float ThisSessionCalBurned { get => thisSessionCalBurned; set => thisSessionCalBurned = value; }
     public int ThisSessionFpPoints { get => thisSessionFpPoints; set => thisSessionFpPoints = value; }
     public GameState GameState { get => gameState; set => gameState = value; }
+    public Vector3 CheckPointPos { get => checkPointPos; set => checkPointPos = value; }
+    public string[] Tips { get => tips; set => tips = value; }
+    public bool CheckPointPassed { get => checkPointPassed; set => checkPointPassed = value; }
+    public int PlayerLives { get => playerLives; set => playerLives = value; }
+    public bool AllowInput { get => allowInput; set => allowInput = value; }
 
     public void SetListofBalls(List<int> purchasedIDs)
     {

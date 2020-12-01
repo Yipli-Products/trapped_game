@@ -9,6 +9,8 @@ public class YMenuManager : MonoBehaviour
     [SerializeField] Button[] menuButtons;
     [SerializeField] GameObject niText;
 
+    [SerializeField] PlayerStats ps;
+
     Button currentB;
 
     int currentButtonIndex;
@@ -29,6 +31,9 @@ public class YMenuManager : MonoBehaviour
         manageCurrentButton();
 
         niText.SetActive(false);
+
+        ps.CheckPointPassed = false;
+        ps.AllowInput = false;
     }
 
     private static void SetClusterIDtoZero()
@@ -78,14 +83,14 @@ public class YMenuManager : MonoBehaviour
         {
             if (i == currentButtonIndex)
             {
-                menuButtons[i].GetComponent<Image>().color = Color.white;
+                menuButtons[i].GetComponent<Image>().color = Color.green;
                 menuButtons[i].GetComponent<Animator>().enabled = true;
                 menuButtons[i].transform.GetChild(0).gameObject.SetActive(true);
                 currentB = menuButtons[i];
             }
             else
             {
-                menuButtons[i].GetComponent<Image>().color = Color.green;
+                menuButtons[i].GetComponent<Image>().color = Color.white;
                 menuButtons[i].GetComponent<Animator>().enabled = false;
                 menuButtons[i].transform.GetChild(0).gameObject.SetActive(false);
             }
@@ -94,17 +99,17 @@ public class YMenuManager : MonoBehaviour
 
     private void MenuControlSystem()
     {
-        string fmActionData = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
+        string fmActionData = InitBLE.GetFMResponse();
         Debug.Log("Json Data from Fmdriver : " + fmActionData);
 
         FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
 
         if (singlePlayerResponse == null) return;
 
-        if (FMResponseCount != singlePlayerResponse.count)
+        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount < singlePlayerResponse.count)
         {
             Debug.Log("FMResponse " + fmActionData);
-            FMResponseCount = singlePlayerResponse.count;
+            PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
 
             YipliUtils.PlayerActions providedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
 

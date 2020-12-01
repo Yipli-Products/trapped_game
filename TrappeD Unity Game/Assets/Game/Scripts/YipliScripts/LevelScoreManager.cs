@@ -101,6 +101,10 @@ public class LevelScoreManager : MonoBehaviour
                 PlayerPrefs.SetInt("currentStars", currentStars);
                 break;
 
+            case "Level_Tutorial":
+                levelName.text = "Tutorial";
+                break;
+
             default:
                 levelName.text = currentLevel;
                 break;

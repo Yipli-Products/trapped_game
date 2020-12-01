@@ -31,6 +31,12 @@ namespace YipliFMDriverCommunication
                     return YipliUtils.PlayerActions.JUMPIN;
                 case "QRTY":
                     return YipliUtils.PlayerActions.JUMPOUT;
+                case "TIL3":
+                    return YipliUtils.PlayerActions.TILES;
+                case "3DIN":
+                    return YipliUtils.PlayerActions.R_LEG_HOPPING;
+                case "3DI1":
+                    return YipliUtils.PlayerActions.L_LEG_HOPPING;
             }
             Debug.Log("Invalid action. Returning null Action ID.");
             return YipliUtils.PlayerActions.INVALID_ACTION;
@@ -72,6 +78,15 @@ namespace YipliFMDriverCommunication
 
                 case YipliUtils.PlayerActions.JUMPOUT:
                     return "QRTY";
+
+                case YipliUtils.PlayerActions.TILES:
+                    return "TIL3";
+
+                case YipliUtils.PlayerActions.R_LEG_HOPPING:
+                    return "3DIN";
+
+                case YipliUtils.PlayerActions.L_LEG_HOPPING:
+                    return "3DI1";
             }
 
             Debug.Log("Invalid action. Returning null Action ID.");
@@ -84,61 +99,122 @@ namespace YipliFMDriverCommunication
             switch (strGameName.ToLower())
             {
                 case "unleash":
-                    PlayerSession.Instance.gameId = strGameName;
                     YipliHelper.SetGameClusterId(2);
                     PlayerSession.Instance.intensityLevel = "medium";
                     break;
 
                 case "trapped":
-                    PlayerSession.Instance.gameId = strGameName;
                     YipliHelper.SetGameClusterId(1);
                     PlayerSession.Instance.intensityLevel = "medium";
                     break;
 
                 case "joyfuljumps":
-                    PlayerSession.Instance.gameId = strGameName;
                     YipliHelper.SetGameClusterId(1);
                     PlayerSession.Instance.intensityLevel = "medium";
                     break;
 
                 case "eggcatcher":
-                    PlayerSession.Instance.gameId = strGameName;
                     YipliHelper.SetGameClusterId(2);
                     PlayerSession.Instance.intensityLevel = "low";
                     break;
 
-                case "yiplirunner":
-                    PlayerSession.Instance.gameId = strGameName;
+                case "metrorush":
                     YipliHelper.SetGameClusterId(2);
                     PlayerSession.Instance.intensityLevel = "medium";
                     break;
 
                 case "rollingball":
-                    PlayerSession.Instance.gameId = strGameName;
                     YipliHelper.SetGameClusterId(2);
                     PlayerSession.Instance.intensityLevel = "medium";
                     break;
 
                 case "skater":
-                    PlayerSession.Instance.gameId = strGameName;
                     YipliHelper.SetGameClusterId(3);
                     PlayerSession.Instance.intensityLevel = "medium";
                     break;
 
                 case "penguinpop":
-                    PlayerSession.Instance.gameId = strGameName;
-                    YipliHelper.SetGameClusterId(1);
-                    PlayerSession.Instance.intensityLevel = "easy";
+                    YipliHelper.SetGameClusterId(4);
+                    PlayerSession.Instance.intensityLevel = "medium";
                     break;
 
                 case "treewarrior":
-                    PlayerSession.Instance.gameId = strGameName;
                     YipliHelper.SetGameClusterId(2);
                     PlayerSession.Instance.intensityLevel = "medium";
                     break;
 
+                case "tugofwar":
+                    YipliHelper.SetGameClusterId(4);
+                    PlayerSession.Instance.intensityLevel = "medium";
+                    break;
+
+                case "matbeats":
+                    YipliHelper.SetGameClusterId(5);
+                    PlayerSession.Instance.intensityLevel = "medium";
+                    break;
+
+                case "monsterriver":
+                    YipliHelper.SetGameClusterId(211);
+                    PlayerSession.Instance.intensityLevel = "high";
+                    break;
+
+                case "theraft":
+                    YipliHelper.SetGameClusterId(5);
+                    PlayerSession.Instance.intensityLevel = "high";
+                    break;
+
                 default:
-                    PlayerSession.Instance.gameId = "";
+                    YipliHelper.SetGameClusterId(0);
+                    PlayerSession.Instance.intensityLevel = "";
+                    break;
+            }
+        }
+        public static void SetYipliMultiplayerGameInfo(string strGameName)
+        {
+            switch (strGameName.ToLower())
+            {
+
+                case "penguinpop":
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.gameId = strGameName;
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.gameId = strGameName;
+                    YipliHelper.SetGameClusterId(4);
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.intensityLevel = "medium";
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.intensityLevel = "medium";
+                    break;
+
+                case "treewarrior":
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.gameId = strGameName;
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.gameId = strGameName;
+                    YipliHelper.SetGameClusterId(2);
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.intensityLevel = "medium";
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.intensityLevel = "medium";
+                    break;
+
+                case "tugofwar":
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.gameId = strGameName;
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.gameId = strGameName;
+                    YipliHelper.SetGameClusterId(4);
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.intensityLevel = "medium";
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.intensityLevel = "medium";
+                    break;
+
+                case "monsterriver":
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.gameId = strGameName;
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.gameId = strGameName;
+                    YipliHelper.SetGameClusterId(211);
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.intensityLevel = "high";
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.intensityLevel = "high";
+                    break;
+
+                case "theraft":
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.gameId = strGameName;
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.gameId = strGameName;
+                    YipliHelper.SetGameClusterId(211);
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.intensityLevel = "high";
+                    PlayerSession.Instance.currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.intensityLevel = "high";
+                    break;
+
+                default:
                     PlayerSession.Instance.intensityLevel = "";
                     break;
             }

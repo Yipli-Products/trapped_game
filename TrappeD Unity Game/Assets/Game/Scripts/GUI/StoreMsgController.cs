@@ -53,7 +53,7 @@ public class StoreMsgController : MonoBehaviour {
 		ps.Active_ball = ps.Intended_ball_id;
 	}
 
-	private async Task UpdatePurchaseToDBAsync()
+	private void UpdatePurchaseToDBAsync()
     {
 		Dictionary<string, object> storeData;
 		storeData = new Dictionary<string, object>();
@@ -64,6 +64,6 @@ public class StoreMsgController : MonoBehaviour {
 
 		//Debug.LogError("Display store data : " + JsonConvert.SerializeObject(storeData));
 
-		await PlayerSession.Instance.UpdateStoreData("trapped", storeData);
+		PlayerSession.Instance.UpdateStoreData(storeData);
 	}
 }

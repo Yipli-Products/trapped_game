@@ -13,22 +13,24 @@ public class YipliButtonScript : MonoBehaviour
     [SerializeField] GameObject NoInternetIcon;
     [SerializeField] GameObject LoadingPanel;
 
-    private async void Start()
+    private void Start()
     {
         NoInternetIcon.SetActive(false);
 
         //PlayerPrefs.DeleteAll(); // reset player prefs
+        /*
         PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
         PlayerPrefs.DeleteKey("CHKP_X");
         PlayerPrefs.DeleteKey("CHKP_Y");
         PlayerPrefs.DeleteKey("CHKP_Z");
+        */
 
         if (YipliHelper.checkInternetConnection())
         {
             if (PlayerSession.Instance.currentYipliConfig.playerInfo.playerId != ps.PlayerID)
             {
                 LoadingPanel.SetActive(true);
-                await GetPlayerData();
+                GetPlayerData();
                 LoadingPanel.SetActive(false);
             }
 
@@ -79,9 +81,9 @@ public class YipliButtonScript : MonoBehaviour
         SceneManager.LoadScene("Store");
     }
 
-    private async Task GetPlayerData ()
+    private void GetPlayerData ()
     {
-        DataSnapshot dataSnapshot = await PlayerSession.Instance.GetGameData("trapped");
+        DataSnapshot dataSnapshot = PlayerSession.Instance.GetGameData();
         GameData gameData = new GameData();
 
         try

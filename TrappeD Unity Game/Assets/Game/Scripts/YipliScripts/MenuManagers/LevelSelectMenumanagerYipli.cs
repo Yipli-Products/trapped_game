@@ -26,10 +26,12 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
         PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
         PlayerPrefs.DeleteKey("CHKP_X");
         PlayerPrefs.DeleteKey("CHKP_Y");
         PlayerPrefs.DeleteKey("CHKP_Z");
+        */
 
         SetClusterIDtoZero();
 
@@ -119,17 +121,17 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 
     private void MenuControlSystem()
     {
-        string fmActionData = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
+        string fmActionData = InitBLE.GetFMResponse();
         Debug.Log("Json Data from Fmdriver : " + fmActionData);
 
         FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
 
         if (singlePlayerResponse == null) return;
 
-        if (FMResponseCount != singlePlayerResponse.count)
+        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount < singlePlayerResponse.count)
         {
             Debug.Log("FMResponse " + fmActionData);
-            FMResponseCount = singlePlayerResponse.count;
+            PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
 
             YipliUtils.PlayerActions providedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
 

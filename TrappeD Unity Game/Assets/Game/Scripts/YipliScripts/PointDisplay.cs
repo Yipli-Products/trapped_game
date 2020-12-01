@@ -9,6 +9,8 @@ public class PointDisplay : MonoBehaviour
     [SerializeField] Text cbText;
     [SerializeField] Text fpText;
 
+    [SerializeField] Text tipsText;
+
     [SerializeField] PlayerStats ps;
 
     // Start is called before the first frame update
@@ -19,9 +21,13 @@ public class PointDisplay : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Game Over")
         {
+            /*
             timePlayedText.text = "Time Played : " + ((int)(ps.ThisSessionTimePlayed / 60)).ToString("00") + ":" + ((int)(ps.ThisSessionTimePlayed % 60)).ToString("00");
             cbText.text = "Calories Burnt : " + ps.ThisSessionCalBurned;
             fpText.text = "Fitness Points : " + ps.ThisSessionFpPoints;
+            */
+
+            tipsText.text = ps.Tips[Random.Range(0, ps.Tips.Length)];
 
             ps.TimePlayed = 0;
             ps.CalBurned = 0;

@@ -17,7 +17,7 @@ public class YipliPlayerInfo
 
     public YipliPlayerInfo() { }
 
-    public YipliPlayerInfo(string playerId, string playerName, string playerDob, string playerHeight, string playerWeight, string gender = "")
+    public YipliPlayerInfo(string playerId, string playerName, string playerDob, string playerHeight, string playerWeight, string profilePicUrl = null, string gender = "")
     {
         this.playerId = playerId;
         this.playerName = char.ToUpper(playerName[0]) + playerName.Substring(1);
@@ -34,6 +34,7 @@ public class YipliPlayerInfo
         this.playerHeight = playerHeight;
         this.playerWeight = playerWeight;
         this.gender = gender;
+        this.profilePicUrl = profilePicUrl;
     }
 
     public YipliPlayerInfo(DataSnapshot snapshot, string key)
@@ -132,7 +133,7 @@ public class YipliMatInfo
         {
             if (snapshot != null)
             {
-                Debug.Log("filling the YipliPlayerInfo from Snapshot.");
+                Debug.Log("filling the YipliMatInfo from Snapshot.");
                 matId = key.ToString();
                 matName = snapshot.Child("display-name").Value?.ToString() ?? "";
                 macAddress = snapshot.Child("mac-address").Value?.ToString() ?? "";
@@ -149,6 +150,49 @@ public class YipliMatInfo
             Debug.Log("Exception in creating YipliMatInfo object from DataSnapshot : " + exp.Message);
             matId = null;
         }
+    }
+}
+
+
+public class YipliInventoryGameInfo
+{
+    public string gameId;
+    public string displayName;
+    public string gamePackageId;
+    public string gameVersion;
+
+    YipliInventoryGameInfo(string gameId)
+    {
+        this.gameId = gameId;
+    }
+
+    public YipliInventoryGameInfo(DataSnapshot snapshot)
+    {
+        try
+        {
+            if (snapshot != null)
+            {
+                Debug.Log("filling the GameInfo from Snapshot.");
+                gameId = snapshot.Key;
+                displayName = snapshot.Child("name").Value?.ToString() ?? "";
+                gamePackageId = snapshot.Child("android-url").Value?.ToString() ?? "";
+                gameVersion = snapshot.Child("current-version").Value?.ToString() ?? "";
+            }
+            else
+            {
+                Debug.Log("DataSnapshot is null. Can't create YipliGameInfo instance.");
+                gameId = null;
+            }
+        }
+        catch (Exception exp)
+        {
+            Debug.Log("Exception in creating YipliMatInfo object from DataSnapshot : " + exp.Message);
+            gameId = null;
+        }
+    }
+
+    public YipliInventoryGameInfo()
+    {
     }
 }
 

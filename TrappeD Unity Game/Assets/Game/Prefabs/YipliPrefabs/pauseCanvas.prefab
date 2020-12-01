@@ -1074,6 +1074,7 @@ MonoBehaviour:
   - {fileID: 7414530026137865823}
   - {fileID: 7414530024549384084}
   - {fileID: 5673878884707460503}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
 --- !u!1 &6091894214777493854
 GameObject:
   m_ObjectHideFlags: 0

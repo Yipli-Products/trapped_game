@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5020798}
   m_Layer: 0
   m_Name: flagStand
-  m_TagString: Untagged
+  m_TagString: invisibleCP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,6 +48,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -122,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theCheckPointFlag: {fileID: 120798}
+  ps: {fileID: 11400000, guid: 4ce718fafab7d0746bc6673d09c7dbab, type: 2}
 --- !u!50 &5020798
 Rigidbody2D:
   serializedVersion: 4
@@ -154,7 +156,7 @@ GameObject:
   - component: {fileID: 420796}
   m_Layer: 0
   m_Name: InvisibleCheckPoint
-  m_TagString: Untagged
+  m_TagString: invisibleCP
   m_Icon: {fileID: -1203168336, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,6 +225,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

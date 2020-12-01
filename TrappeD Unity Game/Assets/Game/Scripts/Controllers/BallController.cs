@@ -78,11 +78,9 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		private GameObject backMusic;
 
 		private bool AutoMovement = false;
-		private bool MatMovement = false;
 		private float backValue = 0f;
 		public float forwardForce = 500f;
 
-		int FMResponseCount = -1;
 		private int thisLevelPoints;
 
 		public bool leftJump = false;
@@ -119,14 +117,16 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		
 			coinAmount = ps.GetCoinScore();
 			coinText.text = coinAmount.ToString();
-			int playerLife = PlayerPrefs.GetInt ("PLAYER_LIFE");
+			/*int playerLife = PlayerPrefs.GetInt ("PLAYER_LIFE");
 			if (playerLife < 3 && currentLevel != "Level_09_RC") {
-				gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("CHKP_X"), 3, PlayerPrefs.GetFloat("CHKP_Z"));
+				//gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("CHKP_X"), 3, PlayerPrefs.GetFloat("CHKP_Z"));
+				gameObject.transform.position = new Vector3(ps.CheckPointPos.x, 3, ps.CheckPointPos.z);
 			}
 			else
             {
-				gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("CHKP_X"), PlayerPrefs.GetFloat("CHKP_Y"), PlayerPrefs.GetFloat("CHKP_Z"));
-			}
+				//gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("CHKP_X"), PlayerPrefs.GetFloat("CHKP_Y"), PlayerPrefs.GetFloat("CHKP_Z"));
+				gameObject.transform.position = ps.CheckPointPos;
+			}*/
 		
 			showLifeOnScreen ();
 			#if UNITY_ANDROID
@@ -144,12 +144,14 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			totalCoins = ps.GetCoinScore();
 
 			StartCoroutine(BluetoothCheck());
+
+			ps.AllowInput = true;
 		}
 
 
 
 		private void showLifeOnScreen(){
-				int playerLife = PlayerPrefs.GetInt ("PLAYER_LIFE");
+				int playerLife = ps.PlayerLives;
 				if (playerLife == 2)
 				Life3.enabled = false;
 			else if (playerLife == 1) {
@@ -244,7 +246,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			//ManagePlayerInput();
 
 #endif
-			ManagePlayerInput();
+			if (!PlayerSession.Instance.currentYipliConfig.onlyMatPlayMode)
+            {
+				ManagePlayerPCInput();
+			}
 			//ManageAndroidActions();
 
 			hInput *= horizontalForce;
@@ -306,7 +311,11 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			CalculateTimkePlayed();
 
 			manageAUtoMovement();
-			ManageMatActions();
+			
+			if (ps.AllowInput)
+            {
+				ManageMatActions();
+			}
 
 			if (isPlayerDead)GetComponent<Rigidbody2D>().velocity = new Vector3 (0,0,0);
 
@@ -354,7 +363,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		public void PlayerDead(){
 				//Debug.Log ("Someone called player Dead...");
 			PlayerPrefs.SetString ("LAST_LEVEL", SceneManager.GetActiveScene().name);
-			PlayerPrefs.SetInt ("PLAYER_LIFE", PlayerPrefs.GetInt("PLAYER_LIFE") - 1);
+			//PlayerPrefs.SetInt ("PLAYER_LIFE", PlayerPrefs.GetInt("PLAYER_LIFE") - 1);
+			ps.PlayerLives -= 1;
 
 			
 
@@ -382,11 +392,12 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 
 		public void DecreaseLifeByOne(){
-			PlayerPrefs.SetInt ("PLAYER_LIFE", PlayerPrefs.GetInt("PLAYER_LIFE") - 1);
+			//PlayerPrefs.SetInt ("PLAYER_LIFE", PlayerPrefs.GetInt("PLAYER_LIFE") - 1);
+			ps.PlayerLives -= 1;
 			showLifeOnScreen ();
 		}
 
-		private void ManagePlayerInput()
+		private void ManagePlayerPCInput()
 		{
 			hInput = Input.GetAxis("Horizontal"); //FOR PC
 
@@ -452,17 +463,24 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		private void ManageMatActions()
         {
-			string fmActionData = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
+			string fmActionData = InitBLE.GetFMResponse();
 			Debug.Log("Json Data from Fmdriver : " + fmActionData);
 
 			FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
 
 			if (singlePlayerResponse == null) return;
 
-			if (FMResponseCount != singlePlayerResponse.count)
+			YipliUtils.PlayerActions pauseAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
+
+			if (pauseAction == YipliUtils.PlayerActions.PAUSE)
+            {
+				pg.pauseFunction();
+			}
+
+			if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount < singlePlayerResponse.count)
             {
 				Debug.Log("FMResponse " + fmActionData);
-				FMResponseCount = singlePlayerResponse.count;
+				PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
 
 				Debug.LogError("provided action id : " + singlePlayerResponse.playerdata[0].fmresponse.action_id);
 
@@ -554,6 +572,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						break;
 				}
 			}
+			else if (Time.frameCount % 200 == 0)
+            {
+				RunningStopAction();
+			}
 		}
 
 
@@ -576,7 +598,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			while (true)
 			{
 				yield return new WaitForSeconds(0.5f);
-				if (!YipliHelper.GetBleConnectionStatus().Equals("Connected", System.StringComparison.OrdinalIgnoreCase) && (Time.timeScale == 1f))
+				if (!YipliHelper.GetMatConnectionStatus().Equals("Connected", System.StringComparison.OrdinalIgnoreCase) && (Time.timeScale == 1f))
 				{
 					//Pause the game.
 					Debug.Log("Pausing the game as the bluetooth isn't connected.");

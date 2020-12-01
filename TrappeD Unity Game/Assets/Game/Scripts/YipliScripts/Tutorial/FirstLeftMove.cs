@@ -7,6 +7,8 @@ public class FirstLeftMove : MonoBehaviour
 {
     // required variables
     [SerializeField] GameObject RunAgainCol;
+    [SerializeField] GameObject jumpbackCol;
+    [SerializeField] GameObject jumpbacktwoCol;
 
     [SerializeField] Text speakerT;
     [SerializeField] GameObject speakerBack;
@@ -21,6 +23,8 @@ public class FirstLeftMove : MonoBehaviour
         tmm = FindObjectOfType<TutModelManager>();
 
         RunAgainCol.SetActive(false);
+        jumpbackCol.SetActive(false);
+        jumpbacktwoCol.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,21 +38,29 @@ public class FirstLeftMove : MonoBehaviour
             bc.Runbackward = true;
 
             speakerBack.SetActive(true);
-            speakerT.text = "Just stand still to go backwards.";
+            speakerT.text = "Opps, we missed that box to cross over these boxes.";
             AudioControl.Instance.playAudio();
 
             RunAgainCol.SetActive(true);
+            jumpbackCol.SetActive(true);
+            jumpbacktwoCol.SetActive(false);
+
+            StartCoroutine(TextChange());
         }
     }
 
     private IEnumerator TextChange()
     {
-        speakerT.text = "Just stand still to go backwards";
-        AudioControl.Instance.playAudio();
         yield return new WaitForSecondsRealtime(5f);
 
         speakerT.text = "Just stand still to go backwards";
         AudioControl.Instance.playAudio();
         yield return new WaitForSecondsRealtime(5f);
+
+        /*
+        speakerT.text = "Just stand still to go backwards";
+        AudioControl.Instance.playAudio();
+        yield return new WaitForSecondsRealtime(5f);
+        */
     }
 }

@@ -49,12 +49,23 @@ public class GameWon : MonoBehaviour {
 				ysm.StoreSession(true);
 			}
 
+			if (currentScene == "Level_09_RC")
+            {
+				FindObjectOfType<EndManager>().ActiveEndNote();
+				ps.AllowInput = false;
+            }
+			else
+            {
+				isGameWon = true;
+			}
+
+			/*
 			PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
 			PlayerPrefs.DeleteKey("CHKP_X");
 			PlayerPrefs.DeleteKey("CHKP_Y");
 			PlayerPrefs.DeleteKey("CHKP_Z");
-
-			isGameWon = true;
+			*/
+			ps.CheckPointPassed = false;
 		}
 			
 	}

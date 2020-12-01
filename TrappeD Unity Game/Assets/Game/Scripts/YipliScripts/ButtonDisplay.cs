@@ -7,7 +7,7 @@ public class ButtonDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!PlayerSession.Instance.currentYipliConfig.matPlayMode)
+        if (!PlayerSession.Instance.currentYipliConfig.onlyMatPlayMode)
         {
             gameObject.SetActive(true);
         }

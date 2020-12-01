@@ -14,29 +14,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Test3
   completed_levels: 9
-  coinScore: 1990
-  active_ball: 0
+  coinScore: 3710
+  active_ball: 3
   timePlayed: 0
   calBurned: 0
   fpPoints: 0
-  thisSessionTimePlayed: 1071
-  thisSessionCalBurned: 5
-  thisSessionFpPoints: 1100
+  thisSessionTimePlayed: 410
+  thisSessionCalBurned: 6.6000004
+  thisSessionFpPoints: 660
   playerID: -M7DmXj_rRc7OaMYUOiT
-  purchasedBalls: 
+  purchasedBalls: 0,1,3
   ballsInStore:
   - ballID: 0
     ballPrice: 0
     boughtStatus: 1
   - ballID: 1
     ballPrice: 250
-    boughtStatus: 0
+    boughtStatus: 1
   - ballID: 2
     ballPrice: 800
     boughtStatus: 0
   - ballID: 3
     ballPrice: 1200
-    boughtStatus: 0
+    boughtStatus: 1
   - ballID: 4
     ballPrice: 2000
     boughtStatus: 0
@@ -49,3 +49,14 @@ MonoBehaviour:
   - ballID: 7
     ballPrice: 4500
     boughtStatus: 0
+  gameState: 2
+  checkPointPos: {x: 65.67, y: -2.29, z: 0.52}
+  checkPointPassed: 0
+  tips:
+  - Strong body supports a strong mind.
+  - "Today\u2019s pain is tomorrow\u2019s strength! Let\u2019s get stronger together!"
+  - "Lose fats and get \u2018points\u2019! Let\u2019s go go go!"
+  - A good stretch and run is a must-do on daily basis!
+  - We are waiting for you with a surprise !
+  playerLives: 3
+  allowInput: 1

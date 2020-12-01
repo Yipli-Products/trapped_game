@@ -10,6 +10,8 @@ public class YipliGameOverMenuManager : MonoBehaviour
     Button currentB;
     int currentButtonIndex;
 
+    [SerializeField] PlayerStats ps;
+
     const string LEFT = "left";
     const string RIGHT = "right";
     const string ENTER = "enter";
@@ -21,10 +23,12 @@ public class YipliGameOverMenuManager : MonoBehaviour
     {
         MatControlsStatManager.gameStateChanged(GameState.GAME_OVER);
 
+        /*
         PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
         PlayerPrefs.DeleteKey("CHKP_X");
         PlayerPrefs.DeleteKey("CHKP_Y");
         PlayerPrefs.DeleteKey("CHKP_Z");
+        */
 
         SetClusterIDtoZero();
 
@@ -95,17 +99,17 @@ public class YipliGameOverMenuManager : MonoBehaviour
 
     private void MenuControlSystem()
     {
-        string fmActionData = InitBLE.PluginClass.CallStatic<string>("_getFMResponse");
+        string fmActionData = InitBLE.GetFMResponse();
         Debug.Log("Json Data from Fmdriver : " + fmActionData);
 
         FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
 
         if (singlePlayerResponse == null) return;
 
-        if (FMResponseCount != singlePlayerResponse.count)
+        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount < singlePlayerResponse.count)
         {
             Debug.Log("FMResponse " + fmActionData);
-            FMResponseCount = singlePlayerResponse.count;
+            PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
 
             YipliUtils.PlayerActions providedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
 

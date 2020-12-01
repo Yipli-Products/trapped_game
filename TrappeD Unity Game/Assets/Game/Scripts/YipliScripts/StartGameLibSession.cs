@@ -18,7 +18,7 @@ public class StartGameLibSession : MonoBehaviour
 
     private void StartyipliSession () 
     { 
-        PlayerSession.Instance.StartSPSession("trapped");
+        PlayerSession.Instance.StartSPSession();
         SessionStartStatus = true;
     }
 
@@ -28,3 +28,4 @@ public class StartGameLibSession : MonoBehaviour
         SessionStartStatus = false;
     }
 }
+//trapped

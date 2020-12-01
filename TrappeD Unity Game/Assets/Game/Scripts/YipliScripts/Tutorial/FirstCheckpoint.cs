@@ -56,7 +56,10 @@ public class FirstCheckpoint : MonoBehaviour
     IEnumerator frameAnimation()
     {
         checkpointFrame.SetActive(true);
-        yield return new WaitForSecondsRealtime(3f);
+
+        MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
+        yield return new WaitForSecondsRealtime(5f);
+        MatControlsStatManager.gameStateChanged(GameState.GAME_PLAY);
 
         checkpointFrame.SetActive(false);
 

@@ -1317,7 +1317,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop and Jump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -1954,7 +1954,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop andJ ump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -2401,7 +2401,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop and Jump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -5191,7 +5191,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop andJ ump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -11405,6 +11405,80 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d0d55161db973444848dc48e525acb5, type: 3}
+--- !u!1001 &474589877
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5475535136924392217, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: ballOBJ
+      value: 
+      objectReference: {fileID: 2046328522}
+    - target: {fileID: 5475535136924392218, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535136924392218, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535136924392218, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535136924392218, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535136924392218, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535136924392218, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535136924392218, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535136924392218, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535136924392218, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535136924392218, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535136924392218, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535136924392219, guid: 460deb2128c1a724dbf4cd99e7696ee1,
+        type: 3}
+      propertyPath: m_Name
+      value: GameStartPos
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 460deb2128c1a724dbf4cd99e7696ee1, type: 3}
 --- !u!1001 &476129438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14002,7 +14076,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop andJ ump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -26929,7 +27003,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop and Jump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -28090,7 +28164,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop and Jump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -28973,7 +29047,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop and Jump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -32713,7 +32787,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop andJ ump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -36074,7 +36148,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop andJ ump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -37111,7 +37185,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop andJ ump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -37682,7 +37756,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop and Jump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -49438,7 +49512,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop andJ ump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
@@ -51842,7 +51916,7 @@ PrefabInstance:
       objectReference: {fileID: 304394783}
     - target: {fileID: 11474790, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
       propertyPath: whatToSpeak
-      value: Stop andJ ump
+      value: Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0224fe5665b8e064da60bdbdd173b8dc, type: 3}
