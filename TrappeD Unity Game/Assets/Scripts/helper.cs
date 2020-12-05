@@ -1,6 +1,7 @@
 ﻿using com.fitmat.fitmatdriver.Producer.Connection;
 using System;
 using UnityEngine;
+using yipli.Windows;
 
 public static class YipliHelper
 {
@@ -19,16 +20,6 @@ public static class YipliHelper
     public static void SetGameClusterId(int gameClusterId)
     {
         InitBLE.setGameClusterID(gameClusterId);
-        //#if UNITY_ANDROID
-
-        //#endif
-        /*
-        #if UNITY_STANDALONE_WIN
-        //#if UNITY_STANDALONE_WIN && !UNITY_EDITOR
-                DeviceControlActivity.InitPCFramework(gameClusterId);
-                Debug.LogError("pc framework id is set : " + gameClusterId);
-        #endif
-        */
     }
 
     public static void SetGameMode(int gameMode)
@@ -83,6 +74,8 @@ public static class YipliHelper
             Debug.Log(e);
             Application.OpenURL("market://details?id=" + yipliAppBundleId);
         }
+#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+        FileReadWrite.OpenYipliApp();
 #else
         Debug.Log("Unsupported os");
 #endif

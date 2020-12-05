@@ -8026,6 +8026,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e5e939646aab849babadb40bfa7edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &882490014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5673878885202859443, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
+    type: 3}
+  m_PrefabInstance: {fileID: 882490011}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &882490015 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6937818800024660284, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
@@ -14969,7 +14975,7 @@ PrefabInstance:
     - target: {fileID: 11491444, guid: 4f2d65df182e5e14f9ad00d075f852b7, type: 3}
       propertyPath: pauseCanvas
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 882490014}
     - target: {fileID: 11491444, guid: 4f2d65df182e5e14f9ad00d075f852b7, type: 3}
       propertyPath: mainCamera
       value: 

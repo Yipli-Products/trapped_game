@@ -1,18 +1,19 @@
+using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.IO;
-using yipli.Windows.Cryptography;
 
 namespace yipli.Windows
 {
     public static class FileReadWrite
     {
-        static readonly string myDocLoc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        static string myDocLoc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         static readonly string yipliFolder = "Yipli";
         static readonly string yipliFile = "userinfo.txt";
 
-        static readonly string webDownloadPage = "https://www.playyipli.com/";
+        static readonly string yipliAppDownloadUrl = "https://swaraj429.github.io/yipli-new-website/download.html";
 
-        public static string WebDownloadPage => webDownloadPage;
+        static RegistryKey rk = Registry.CurrentUser;
 
         public static string ReadFromFile()
         {
@@ -32,9 +33,9 @@ namespace yipli.Windows
                         // the end of the file is reached. 
                         while ((line = sr.ReadLine()) != null)
                         {
-                            linedata = TripleDES.Decrypt(line).Substring(17);
+                            linedata = line.Substring(17);
 
-                            UnityEngine.Debug.LogError("received line : " + linedata);
+                            //UnityEngine.Debug.LogError("received line : " + linedata);
                         }
                     }
 
@@ -60,18 +61,50 @@ namespace yipli.Windows
             {
                 Directory.CreateDirectory(myDocLoc + "/" + yipliFolder);
                 var yipliFileToCreate = File.Create(myDocLoc + "/" + yipliFolder + "/" + yipliFile);
-
                 yipliFileToCreate.Close();
             }
 
-            string writeLine = "Current UserID : " + userID;
-            UnityEngine.Debug.LogError("writeline is : " + writeLine);
-
             StreamWriter sw = new StreamWriter(myDocLoc + "/Yipli/userinfo.txt");
-            sw.WriteLine(TripleDES.Encrypt(writeLine));
+            sw.WriteLine("Current UserID : " + userID);
             sw.Close();
 
-            ReadFromFile();
+            //ReadFromFile();
+        }
+
+        public static void OpenYipliApp()
+        {
+            string yipliAppExeLoc = GetApplictionInstallPath("yipliapp") + "\\" + "YipliApp.exe";
+
+            if (ValidateFile(yipliAppExeLoc))
+            {
+                Process.Start(yipliAppExeLoc);
+            }
+            else
+            {
+                Process.Start(yipliAppDownloadUrl);
+            }
+
+            //UnityEngine.Debug.LogError("Application is switched");
+            UnityEngine.Application.Quit();
+        }
+
+        public static string GetApplictionInstallPath(string gameName)
+        {
+            string installPath = null;
+
+            RegistryKey subKey = rk.OpenSubKey(gameName);
+
+            try
+            {
+                installPath = subKey.GetValue("InstallPath").ToString();
+                //UnityEngine.Debug.LogError("sub key : " + subKey.GetValue("InstallPath"));
+            }
+            catch (Exception e)
+            {
+                //UnityEngine.Debug.LogError("sub key not found. Error : " + e.Message);
+            }
+
+            return installPath;
         }
 
         public static bool ValidateFile(string fileLocation)

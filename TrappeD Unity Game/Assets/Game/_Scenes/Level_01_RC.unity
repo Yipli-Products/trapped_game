@@ -26647,7 +26647,7 @@ PrefabInstance:
     - target: {fileID: 11497862, guid: c2a3cc1cbffd8bd42bcab3d371df710f, type: 3}
       propertyPath: pauseCanvas
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5673878885259566658}
     - target: {fileID: 11497862, guid: c2a3cc1cbffd8bd42bcab3d371df710f, type: 3}
       propertyPath: mainCamera
       value: 
@@ -36572,3 +36572,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5673878885259566658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5673878885202859443, guid: 12b3b7282eb2f4443b4d3e3922959ac6,
+    type: 3}
+  m_PrefabInstance: {fileID: 5673878885259566656}
+  m_PrefabAsset: {fileID: 0}
