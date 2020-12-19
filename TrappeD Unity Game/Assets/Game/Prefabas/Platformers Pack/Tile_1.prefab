@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6167376}
   - component: {fileID: 6893204037649816418}
   - component: {fileID: 8555420109438808522}
+  - component: {fileID: -3321577600341244285}
   m_Layer: 10
   m_Name: Tile_1
   m_TagString: Untagged
@@ -48,6 +49,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -151,3 +153,15 @@ CircleCollider2D:
   m_Offset: {x: 0.305439, y: -0.5302782}
   serializedVersion: 2
   m_Radius: 0.49250412
+--- !u!114 &-3321577600341244285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ab984757144c44d941ad62d4c6b9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

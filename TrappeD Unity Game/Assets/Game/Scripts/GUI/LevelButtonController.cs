@@ -31,6 +31,12 @@ public class LevelButtonController : MonoBehaviour {
 		//numberOfCompletedLevels = PlayerPrefs.GetInt ("NUMBER_OF_COMP_LEVELS");
 
 		numberOfCompletedLevels = ps.GetCompletedLevels();
+
+		if (numberOfCompletedLevels == 0)
+        {
+			numberOfCompletedLevels = 1;
+			ps.SetCompletedLevels(1);
+        }
 		//numberOfCompletedLevels = 10; // uncomment this for only testing purpose. this will show all the levels unlocked. change 10 to maximum created levels.
 
 		//if(numberOfCompletedLevels == 0) numberOfCompletedLevels +=1;

@@ -37,6 +37,8 @@ public class PlayerStats : ScriptableObject
 
     [SerializeField] bool allowInput = false;
 
+    [SerializeField] bool initialiseOldFmResponse = false;
+
     public int Intended_ball_price { get => intended_ball_price; set => intended_ball_price = value; }
     public int Intended_ball_id { get => intended_ball_id; set => intended_ball_id = value; }
     public int Active_ball { get => active_ball; set => active_ball = value; }
@@ -55,6 +57,7 @@ public class PlayerStats : ScriptableObject
     public bool CheckPointPassed { get => checkPointPassed; set => checkPointPassed = value; }
     public int PlayerLives { get => playerLives; set => playerLives = value; }
     public bool AllowInput { get => allowInput; set => allowInput = value; }
+    public bool InitialiseOldFmResponse { get => initialiseOldFmResponse; set => initialiseOldFmResponse = value; }
 
     public void SetListofBalls(List<int> purchasedIDs)
     {

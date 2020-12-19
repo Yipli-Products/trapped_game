@@ -1,6 +1,14 @@
-﻿using Firebase.Database;
+using Firebase.Database;
 using System.Collections.Generic;
 using UnityEngine;
+
+
+public enum GameType
+{
+    FITNESS_GAMING,
+    MULTIPLAYER_GAMING,
+    ADV_GAMING
+}
 
 
 [CreateAssetMenu]
@@ -33,7 +41,7 @@ public class YipliConfig : ScriptableObject
     public DataSnapshot gameDataForCurrentPlayer;
 
     [HideInInspector]
-    public bool bIsChangePlayerCalled;
+    public bool bIsChangePlayerCalled = false;
 
     public bool onlyMatPlayMode = true;
 
@@ -45,4 +53,7 @@ public class YipliConfig : ScriptableObject
 
     [HideInInspector]
     public int oldFMResponseCount;
+
+    [HideInInspector]
+    public GameType gameType = GameType.FITNESS_GAMING;
 }

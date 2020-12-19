@@ -1,11 +1,14 @@
-﻿using com.fitmat.fitmatdriver.Producer.Connection;
-using System;
+﻿using System;
 using UnityEngine;
 using yipli.Windows;
 
 public static class YipliHelper
 {
     private static string yipliAppBundleId = "com.yipli.app"; //todo: Change this later
+
+    public static string userName = "bhansali.saurabh20@gmail.com";
+    public static string password = "abcdefg123456789";
+
 
     public static int GetGameClusterId()
     {
@@ -30,12 +33,15 @@ public static class YipliHelper
 
     public static bool checkInternetConnection()
     {
-        bool bIsNetworkAvailable = true;
-        if (Application.internetReachability == NetworkReachability.NotReachable)
+        try
         {
-            bIsNetworkAvailable = false;
+            return PlayerSession.Instance.currentYipliConfig.bIsInternetConnected;
         }
-        return bIsNetworkAvailable;
+        catch(Exception e )
+        {
+            Debug.LogError("Exception in check Internet : " + e.Message);
+            return false;
+        }
     }
 
     public static string GetMatConnectionStatus()
@@ -111,13 +117,33 @@ public static class YipliHelper
         Debug.Log("Yipli App is Installed. Returning true.");
         return true;
 
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN || UNITY_EDITOR // TODO : Handle Windows flow
         Debug.Log("Yipli App validation for windows isnt required. Returning true");
-        return true;
+        return FileReadWrite.IsYipliPcIsInstalled();
 #else
         Debug.Log("OS not supported. Returnin false.");
         return false;
 #endif
     }
+
+    public static int convertGameVersionToBundleVersionCode(string gameVersion)
+    {
+        int versionCode;
+
+        string[] strVersionCode = gameVersion.Split('.');
+
+        string finalVersion = "";
+        foreach (var word in strVersionCode)
+        {
+            finalVersion += word;
+        }
+
+        versionCode = int.Parse(finalVersion);
+
+        Debug.Log("Returning version Code : " + versionCode);
+
+        return versionCode;
+    }
+
 }
 

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Yipli Config
   m_EditorClassIdentifier: 
   callbackLevel: Main Menu
-  userId: F9zyHSRJUCb0Ctc15F9xkLFSH5f1
+  userId: lC4qqZCFEaMogYswKjd0ObE6nD43
   gameId: trapped
   bIsMatIntroDone: 1
   bIsChangePlayerCalled: 0
   onlyMatPlayMode: 1
   bIsInternetConnected: 1
-  oldFMResponseCount: 0
+  oldFMResponseCount: 17
+  gameType: 0

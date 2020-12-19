@@ -20,8 +20,6 @@ public class YMenuManager : MonoBehaviour
     const string ENTER = "enter";
     const float waitTime = 0.75f;
 
-    int FMResponseCount = -1;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +32,12 @@ public class YMenuManager : MonoBehaviour
 
         ps.CheckPointPassed = false;
         ps.AllowInput = false;
+
+        if (!ps.InitialiseOldFmResponse)
+        {
+            ps.InitialiseOldFmResponse = true;
+            PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = 0;
+        }
     }
 
     private static void SetClusterIDtoZero()

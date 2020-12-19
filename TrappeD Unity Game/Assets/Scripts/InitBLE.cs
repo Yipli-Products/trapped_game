@@ -1,6 +1,7 @@
 ﻿#if UNITY_STANDALONE_WIN
 using com.fitmat.fitmatdriver.Producer.Connection;
 #endif
+
 using System;
 using UnityEngine;
 public class InitBLE
@@ -45,13 +46,9 @@ public class InitBLE
         try
         {
 #if UNITY_ANDROID
-            Debug.Log("GetFMResponse called for Android ");
                 return PluginClass.CallStatic<string>("_getFMResponse");
 #elif UNITY_STANDALONE_WIN || UNITY_EDITOR
-
-            Debug.Log("GetFMResponse called for PC ");
             return DeviceControlActivity._getFMResponse();
-
 #endif
         }
         catch(Exception e)
@@ -89,15 +86,13 @@ public class InitBLE
 
     public static string getMatConnectionStatus()
     {
-        if (Application.platform == RuntimePlatform.WindowsEditor)
-            return "connected";
-
         try
         {
-#if UNITY_ANDROID
+#if UNITY_ANDROID && UNITY_EDITOR
+            return "CONNECTED";
+#elif UNITY_ANDROID
             return BLEStatus;
-#elif UNITY_STANDALONE_WIN
-            Debug.LogError("getMatConnectionStatus called for PC");
+#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
             return DeviceControlActivity._IsDeviceConnected() == 1 ? "CONNECTED" : "DISCONNECTED";
 #endif
         }

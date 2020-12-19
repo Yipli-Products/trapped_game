@@ -19,9 +19,35 @@ public class DelayedGameOver : MonoBehaviour {
 		elapsedTime += Time.deltaTime;
 		if (elapsedTime >= delayTime) {
 			//int playerAvailableLife = PlayerPrefs.GetInt("PLAYER_LIFE");
-			int playerAvailableLife = ps.PlayerLives;
-			if(playerAvailableLife > 0 )SceneManager.LoadScene(PlayerPrefs.GetString("LAST_LEVEL"));
-			else SceneManager.LoadScene ("Game Over");
+			
+			if (ps.PlayerLives > 0)
+			{
+				ps.PlayerLives -= 1;
+
+				ps.TimePlayed = 0;
+				ps.CalBurned = 0;
+				ps.FpPoints = 0;
+
+				ps.ThisSessionTimePlayed = 0;
+				ps.ThisSessionCalBurned = 0;
+				ps.ThisSessionFpPoints = 0;
+
+				SceneManager.LoadScene(PlayerPrefs.GetString("LAST_LEVEL"));
+			}
+			else
+			{
+				ps.TimePlayed = 0;
+				ps.CalBurned = 0;
+				ps.FpPoints = 0;
+
+				ps.ThisSessionTimePlayed = 0;
+				ps.ThisSessionCalBurned = 0;
+				ps.ThisSessionFpPoints = 0;
+
+				ps.CheckPointPassed = false;
+				ps.PlayerLives = 3;
+				SceneManager.LoadScene("Game Over");
+			}
 			
 		}
 	}

@@ -113,6 +113,4 @@ public class StoreMangement : MonoBehaviour {
 	private bool isThisBallBoughtAlready(){
 		return ps.GetBallBoughtStatus(thisBallID);
 	}
-
-
 }

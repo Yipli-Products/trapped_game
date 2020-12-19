@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 21210118}
   - component: {fileID: 5010118}
   - component: {fileID: 6110118}
+  - component: {fileID: -2601629782794297715}
   m_Layer: 10
   m_Name: WoodenBox
   m_TagString: Untagged
@@ -47,6 +48,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -129,3 +131,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.843398, y: 4.843397}
   m_EdgeRadius: 0
+--- !u!114 &-2601629782794297715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ab984757144c44d941ad62d4c6b9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

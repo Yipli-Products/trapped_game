@@ -59,15 +59,8 @@ public class GameWon : MonoBehaviour {
 				isGameWon = true;
 			}
 
-			/*
-			PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
-			PlayerPrefs.DeleteKey("CHKP_X");
-			PlayerPrefs.DeleteKey("CHKP_Y");
-			PlayerPrefs.DeleteKey("CHKP_Z");
-			*/
 			ps.CheckPointPassed = false;
-		}
-			
+		}			
 	}
 
 	private void setCurrentLevelIndex()

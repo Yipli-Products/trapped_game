@@ -61,6 +61,7 @@ public class StoreMsgController : MonoBehaviour {
 		storeData.Add("coins-collected", ps.GetCoinScore().ToString());
 		storeData.Add("active-ball", ps.Active_ball);
 		storeData.Add("balls-purchased", ps.PurchasedBalls);
+		storeData.Add("completed-levels", ps.GetCompletedLevels().ToString());
 
 		//Debug.LogError("Display store data : " + JsonConvert.SerializeObject(storeData));
 

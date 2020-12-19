@@ -84,11 +84,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
         }
         public void jumpB()
         {
-            Time.timeScale = 1f;
-            bc.ballJump = true;
-            bc.calWaitTime = false;
-            bc.waitTimeCal = 0f;
-            //Invoke("JumpFalse", 0.5f);
+            bc.JumpAction();
         }
 
         private void JumpFalse()

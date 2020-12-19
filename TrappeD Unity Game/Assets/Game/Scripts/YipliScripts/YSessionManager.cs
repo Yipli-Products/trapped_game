@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class YSessionManager : MonoBehaviour
@@ -36,24 +34,24 @@ public class YSessionManager : MonoBehaviour
             MatControlsStatManager.gameStateChanged(GameState.GAME_NEW_LIFE);
         }
 
-        if (ps.GetCompletedLevels() != completed_levels || ps.GetCoinScore() > coinScore)
-        {
-            Dictionary<string, string> gameData;
-            gameData = new Dictionary<string, string>();
-            gameData.Add("completed-levels", ps.GetCompletedLevels().ToString());
-            
-            if (ps.GetCoinScore() > coinScore)
-            {
-                gameData.Add("coins-collected", ps.GetCoinScore().ToString());
-            }
-            else
-            {
-                gameData.Add("coins-collected", coinScore.ToString());
-            }
+        Dictionary<string, string> gameData;
+        gameData = new Dictionary<string, string>();
+        gameData.Add("completed-levels", ps.GetCompletedLevels().ToString());
 
-            PlayerSession.Instance.UpdateGameData(gameData);
-            Debug.Log("Game data is updated successfully.");
+        if (ps.GetCoinScore() > coinScore)
+        {
+            gameData.Add("coins-collected", ps.GetCoinScore().ToString());
         }
+        else
+        {
+            gameData.Add("coins-collected", coinScore.ToString());
+        }
+
+        gameData.Add("active-ball", ps.Active_ball.ToString());
+        gameData.Add("balls-purchased", ps.PurchasedBalls);
+
+        PlayerSession.Instance.UpdateGameData(gameData);
+        Debug.Log("Game data is updated successfully.");
 
         ps.CalBurned = YipliUtils.GetCaloriesBurned(PlayerSession.Instance.getPlayerActionCounts());
         ps.FpPoints = (int)YipliUtils.GetFitnessPoints(PlayerSession.Instance.getPlayerActionCounts());

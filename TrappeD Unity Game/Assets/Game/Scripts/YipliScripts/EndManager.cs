@@ -19,6 +19,8 @@ public class EndManager : MonoBehaviour
     {
         endNotes.SetActive(true);
         endCol.SetActive(true);
+
+        YipliHelper.SetGameClusterId(0);
     }
 
     public void GoToMainMenu()

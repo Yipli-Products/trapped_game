@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 405850}
   - component: {fileID: 21205850}
   - component: {fileID: 6005850}
+  - component: {fileID: 3337346204095195505}
   m_Layer: 10
   m_Name: Tile_10
   m_TagString: Untagged
@@ -46,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -123,3 +125,15 @@ PolygonCollider2D:
       - {x: 1.26, y: -1.27}
       - {x: 1.28, y: -1.27}
       - {x: 1.2392521, y: 0.111338794}
+--- !u!114 &3337346204095195505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ab984757144c44d941ad62d4c6b9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

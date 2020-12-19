@@ -146,13 +146,15 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			StartCoroutine(BluetoothCheck());
 
 			ps.AllowInput = true;
+
+			RunningStopAction();
 		}
 
 
 
 		private void showLifeOnScreen(){
-				int playerLife = ps.PlayerLives;
-				if (playerLife == 2)
+			int playerLife = ps.PlayerLives;
+			if (playerLife == 2)
 				Life3.enabled = false;
 			else if (playerLife == 1) {
 				Life2.enabled = false;
@@ -214,9 +216,9 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		// Update is called once per frame
 		void FixedUpdate () {
 
-			isGrounded = Physics2D.OverlapCircle (groundCheckPos, 0.01f, whatIsGround);
+			//isGrounded = Physics2D.OverlapCircle (groundCheckPos, 0.1f, whatIsGround);
 
-			if (!isGrounded && isJumping)
+			if (!isGrounded)
             {
 				if (GetComponent<Rigidbody2D>().velocity.y < 0)
 				{
@@ -230,6 +232,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					}
 				}
 
+				isJumping = false;
 				ballJump = false;
 			}
 
@@ -252,7 +255,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			}
 			//ManageAndroidActions();
 
-			hInput *= horizontalForce;
+			//hInput *= horizontalForce;
 
 			if (isPlayerDead == false) {
 				//GetComponent<Rigidbody2D>().AddForce (new Vector2 (hInput*Time.deltaTime*horzontalInputMultiplier, 0));
@@ -266,13 +269,13 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					if (!leftJump)
 					{
 						isJumping = true;
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(1000f, 1500f));
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(1000f, 1000f));
 						//StartCoroutine(positiveXJump());
 					}
 					else if (leftJump)
 					{
 						isJumping = true;
-						GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 1500f));
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 1000f));
 						//StartCoroutine(negetiveXJump());
 					}
 					else
@@ -311,7 +314,12 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			CalculateTimkePlayed();
 
 			manageAUtoMovement();
-			
+
+			if (calWaitTime)
+			{
+				waitTimeCal += Time.deltaTime;
+			}
+
 			if (ps.AllowInput)
             {
 				ManageMatActions();
@@ -321,11 +329,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if (Input.GetKeyDown (KeyCode.UpArrow)){
-					//ballJump = true;
-					GetComponent<AudioSource>().PlayOneShot(jumpingSound);
+					JumpAction();
 				}
-				if (Input.GetKeyUp (KeyCode.UpArrow))
-					ballJump = false;
 			#endif
 
 			groundCheckPos = new Vector3 (transform.position.x, transform.position.y-distG, transform.position.z);
@@ -340,33 +345,12 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					Destroy (go, .60f);
 				}
 			}
-
-			if (calWaitTime)
-			{
-				waitTimeCal += Time.deltaTime;
-			}
-
-			/*if (ballJump && isJumping)
-			{
-				if (!leftJump)
-				{
-					GetComponent<Rigidbody2D>().AddForce(new Vector2(1000f, 0f), ForceMode2D.Force);
-				}
-				else if (leftJump)
-				{
-					GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 0f), ForceMode2D.Force);
-				}
-			}*/
-
 		}
 
 		public void PlayerDead(){
 				//Debug.Log ("Someone called player Dead...");
 			PlayerPrefs.SetString ("LAST_LEVEL", SceneManager.GetActiveScene().name);
-			//PlayerPrefs.SetInt ("PLAYER_LIFE", PlayerPrefs.GetInt("PLAYER_LIFE") - 1);
-			ps.PlayerLives -= 1;
-
-			
+			//PlayerPrefs.SetInt ("PLAYER_LIFE", PlayerPrefs.GetInt("PLAYER_LIFE") - 1);			
 
 			GetComponent<Rigidbody2D>().velocity = new Vector3 (0,0,0);
 			isPlayerDead = true;
@@ -393,7 +377,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		public void DecreaseLifeByOne(){
 			//PlayerPrefs.SetInt ("PLAYER_LIFE", PlayerPrefs.GetInt("PLAYER_LIFE") - 1);
-			ps.PlayerLives -= 1;
 			showLifeOnScreen ();
 		}
 
@@ -421,10 +404,9 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					calWaitTime = true;
 				}
 				
-				if (waitTimeCal >= 4f)
+				if (waitTimeCal >= 5f)
 				{
-					hInput = -20f;
-					leftJump = true;
+					BackwardsMovement();
 				}
 			}
 		}
@@ -482,8 +464,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				Debug.Log("FMResponse " + fmActionData);
 				PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
 
-				Debug.LogError("provided action id : " + singlePlayerResponse.playerdata[0].fmresponse.action_id);
-
 				YipliUtils.PlayerActions providedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
 
 				switch(providedAction)
@@ -494,24 +474,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						break;
 
 					case YipliUtils.PlayerActions.RUNNINGSTOPPED:
-						/*if (currentLevel == "Level_Tutorial" && !Runbackward)
-						{
-							calWaitTime = false;
-							waitTimeCal = 0f;
-							return;
-						}*/
-
 						RunningStopAction();
 						break;
 
 					case YipliUtils.PlayerActions.STOP:
-						/*if (currentLevel == "Level_Tutorial" && !Runbackward)
-						{
-							calWaitTime = false;
-							waitTimeCal = 0f;
-							return;
-						}*/
-
 						RunningStopAction();
 						break;
 
@@ -519,8 +485,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					case YipliUtils.PlayerActions.RUNNING:
 						// do run here
 						int steps = 1;
-
-						Debug.LogError("from YipliUtils.PlayerActions.RUNNING case in switch");
 
 						///CheckPoint for the running action properties.
 						/*if (singlePlayerResponse.playerdata[0].fmresponse.properties.ToString() != "null")
@@ -550,8 +514,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 							}
 						}*/
 
-						Debug.LogError("ball jump status : " + ballJump);
-
 						if (!ballJump)
 						{
 							RunningStartAction();
@@ -572,14 +534,27 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						break;
 				}
 			}
-			else if (Time.frameCount % 200 == 0)
+			else
             {
 				RunningStopAction();
+
+				if (waitTimeCal >= 5f)
+				{
+					BackwardsMovement();
+				}
 			}
-		}
+        }
 
+        private void BackwardsMovement()
+        {
+            // make ball go backwords
+            moveHorzRight = false;
+            //hInput = -20f;
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-5f, 0f));
+            leftJump = true;
+        }
 
-		public void RunningStartAction()
+        public void RunningStartAction()
         {
 			Time.timeScale = 1f;
 
@@ -627,13 +602,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			Time.timeScale = 1f;
 			calWaitTime = true;
 
-			// generate the notification for not doing anything. just to let player know.
-			if (waitTimeCal >= 5f)
-			{
-				moveHorzRight = false;
-				hInput = -20f;
-				leftJump = true;
-			}
+			//BackwardsMovement();
 		}
 	}
 }

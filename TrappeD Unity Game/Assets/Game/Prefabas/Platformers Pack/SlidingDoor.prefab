@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3051003583034851071}
   - component: {fileID: 3051003583034851068}
   - component: {fileID: 3051003583034851069}
+  - component: {fileID: 8698071500278010907}
   m_Layer: 10
   m_Name: key
   m_TagString: Untagged
@@ -48,6 +49,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -183,6 +185,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameobjectToInform: {fileID: 3051003583102364249}
+--- !u!114 &8698071500278010907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3051003583034851067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ab984757144c44d941ad62d4c6b9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3051003583050266436
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +240,7 @@ GameObject:
   - component: {fileID: 3051003583102364253}
   - component: {fileID: 3051003583102364250}
   - component: {fileID: 3051003583102364251}
+  - component: {fileID: 3397851844112390281}
   m_Layer: 10
   m_Name: simpleWoodBar
   m_TagString: Untagged
@@ -261,6 +276,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -358,6 +374,18 @@ MonoBehaviour:
   doorClosingSpeed: 5
   leftLimit: {fileID: 3051003583740599474}
   rightLimit: {fileID: 3051003583050266439}
+--- !u!114 &3397851844112390281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3051003583102364249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ab984757144c44d941ad62d4c6b9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3051003583267688426
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3051003583267688429}
   - component: {fileID: 3051003583267688428}
+  - component: {fileID: -3311161114825373258}
   m_Layer: 10
   m_Name: SlidingDoor
   m_TagString: Untagged
@@ -412,6 +441,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-3311161114825373258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3051003583267688426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ab984757144c44d941ad62d4c6b9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3051003583740599475
 GameObject:
   m_ObjectHideFlags: 0

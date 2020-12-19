@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 405794}
   - component: {fileID: 21205794}
   - component: {fileID: 6005794}
+  - component: {fileID: -4963096505845861668}
   m_Layer: 10
   m_Name: Walkway 2 E
   m_TagString: Untagged
@@ -46,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -130,3 +132,15 @@ PolygonCollider2D:
       - {x: 0.44, y: 0.31}
       - {x: 0.32, y: 0.19}
       - {x: 0.32, y: 0.2}
+--- !u!114 &-4963096505845861668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ab984757144c44d941ad62d4c6b9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
