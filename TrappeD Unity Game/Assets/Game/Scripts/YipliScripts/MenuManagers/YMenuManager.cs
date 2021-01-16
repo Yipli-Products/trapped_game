@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YipliFMDriverCommunication;
 
@@ -25,6 +26,8 @@ public class YMenuManager : MonoBehaviour
     {
         MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
 
+        StartCoroutine(FindObjectOfType<Transition>().FadeInScene());
+
         currentButtonIndex = 0;
         manageCurrentButton();
 
@@ -32,6 +35,7 @@ public class YMenuManager : MonoBehaviour
 
         ps.CheckPointPassed = false;
         ps.AllowInput = false;
+        ps.PlayerLives = 3;
 
         if (!ps.InitialiseOldFmResponse)
         {
@@ -87,16 +91,17 @@ public class YMenuManager : MonoBehaviour
         {
             if (i == currentButtonIndex)
             {
-                menuButtons[i].GetComponent<Image>().color = Color.green;
+                //menuButtons[i].GetComponent<Image>().color = Color.green;
                 menuButtons[i].GetComponent<Animator>().enabled = true;
                 menuButtons[i].transform.GetChild(0).gameObject.SetActive(true);
                 currentB = menuButtons[i];
             }
             else
             {
-                menuButtons[i].GetComponent<Image>().color = Color.white;
+                //menuButtons[i].GetComponent<Image>().color = Color.white;
                 menuButtons[i].GetComponent<Animator>().enabled = false;
                 menuButtons[i].transform.GetChild(0).gameObject.SetActive(false);
+                menuButtons[i].transform.localScale = new Vector3(1, 1, 1);
             }
         }
     }
@@ -110,7 +115,7 @@ public class YMenuManager : MonoBehaviour
 
         if (singlePlayerResponse == null) return;
 
-        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount < singlePlayerResponse.count)
+        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount != singlePlayerResponse.count)
         {
             Debug.Log("FMResponse " + fmActionData);
             PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
@@ -190,5 +195,11 @@ public class YMenuManager : MonoBehaviour
     public void CloseNoInternetText()
     {
         niText.SetActive(false);
+    }
+
+    public void LoadTutorial()
+    {
+        ps.IsStartTextShown = false;
+        SceneManager.LoadScene("Level_Tutorial");
     }
 }

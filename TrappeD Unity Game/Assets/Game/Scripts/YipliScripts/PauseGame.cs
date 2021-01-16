@@ -160,16 +160,17 @@ public class PauseGame : MonoBehaviour
         {
             if (i == currentButtonIndex)
             {
-                menuButtons[i].GetComponent<Image>().color = Color.green;
+                //menuButtons[i].GetComponent<Image>().color = Color.green;
                 menuButtons[i].GetComponent<Animator>().enabled = true;
                 menuButtons[i].transform.GetChild(0).gameObject.SetActive(true);
                 currentB = menuButtons[i];
             }
             else
             {
-                menuButtons[i].GetComponent<Image>().color = Color.white;
+                //menuButtons[i].GetComponent<Image>().color = Color.white;
                 menuButtons[i].GetComponent<Animator>().enabled = false;
                 menuButtons[i].transform.GetChild(0).gameObject.SetActive(false);
+                menuButtons[i].transform.localScale = new Vector3(1, 1, 1);
             }
         }
     }
@@ -203,7 +204,7 @@ public class PauseGame : MonoBehaviour
 
         if (singlePlayerResponse == null) return;
 
-        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount < singlePlayerResponse.count)
+        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount != singlePlayerResponse.count)
         {
             Debug.Log("FMResponse " + fmActionData);
             PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
@@ -273,5 +274,13 @@ public class PauseGame : MonoBehaviour
                 Debug.Log("Wrong Input");
                 break;
         }
+    }
+
+    public void GotoMainMenu()
+    {
+        PlayerSession.Instance.CloseSPSession();
+        MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
+        //StartCoroutine(FindObjectOfType<Transition>().FadeOutScene("Main Menu"));
+        SceneManager.LoadScene("Main Menu");
     }
 }

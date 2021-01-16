@@ -8,7 +8,8 @@ public class RunAgain : MonoBehaviour
 
     [SerializeField] GameObject obstacleBoxSmall;
     [SerializeField] GameObject leftMoveCol;
-    [SerializeField] GameObject jumopbacktwoCol;
+    [SerializeField] GameObject runAgainCol;
+    [SerializeField] GameObject jumpCol;
     [SerializeField] Text speakerT;
 
     private BallController bc;
@@ -19,23 +20,22 @@ public class RunAgain : MonoBehaviour
     {
         bc = FindObjectOfType<BallController>();
         tmm = FindObjectOfType<TutModelManager>();
+
+        jumpCol.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player" && gameObject.activeSelf)
         {
-            //tmm.ActivateModel();
-            //tmm.SetRunOverride();
+            tmm.ActivateModel();
+            tmm.SetRunOverride();
 
-            bc.allowjump = true;
-            bc.allowRun = true;
-            bc.Runbackward = false;
-
-            speakerT.text = "Take the box with you and make your moves smartly";
+            speakerT.text = "Run and Jump Smartly to move forward";
             AudioControl.Instance.playAudio();
+            jumpCol.SetActive(true);
             leftMoveCol.SetActive(false);
-            jumopbacktwoCol.SetActive(false);
+            runAgainCol.SetActive(false);
 
             obstacleBoxSmall.GetComponent<Rigidbody2D>().mass = 1;
         }

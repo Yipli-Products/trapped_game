@@ -35,10 +35,6 @@ public class FirstJump : MonoBehaviour
             stopVideoScreen.SetActive(false);
             jumpVideoScreen.SetActive(true);
 
-            bc.allowjump = false;
-            bc.allowRun = false;
-            bc.Runbackward = false;
-
             AIText.text = "Game Hints";
 
             speakerT.text = "You will be provided Text instructions through out the Game.";
@@ -64,9 +60,5 @@ public class FirstJump : MonoBehaviour
         AIText.text = "JUMP";
         AudioControl.Instance.playAudio();
         Time.timeScale = 1f;
-
-        bc.allowjump = false;
-        bc.allowRun = true;
-        bc.Runbackward = false;
     }
 }

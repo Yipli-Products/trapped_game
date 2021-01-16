@@ -39,33 +39,42 @@ public class StoreMangement : MonoBehaviour {
 	public void updateThePriceAndStateText()
 	{
 		if (isThisBallBoughtAlready () == false) {
-			ballPriceAndState.text = "$ " + thisBallPrice.ToString();
+			ballPriceAndState.text = thisBallPrice.ToString();
+			gameObject.transform.parent.GetComponent<Animator>().enabled = false;
 		} 
 		else {
 			if(thisBallID == ps.Active_ball){
 				ballPriceAndState.text = "Active" ;
 				ballPriceAndState.color = Color.gray;
+				gameObject.transform.parent.GetComponent<Animator>().enabled = true;
 			}
 			else {
 				ballPriceAndState.text = "Unlocked" ;
 				ballPriceAndState.color = Color.blue;
+				gameObject.transform.parent.GetComponent<Animator>().enabled = false;
 			}
 		}
 	}
 
 	public void manageBallBuying()
 	{
+		if (ps.Active_ball == thisBallID)
+        {
+			return;
+        }
 
 		if (isThisBallBoughtAlready () == true) {
 			setThisBallAsActive ();
 			msgCanvas.enabled = true;
-			msgToMsgCanvas.text = "This Ball has been set \n as active now.";
+			msgToMsgCanvas.text = "This Avatar has been set \n as active now.";
 			//bool noBallYetShownAsActive = true;
 			for(int i= 0; i<allBtn.Length; i++){
 				allBtn[i].SendMessage("updateThePriceAndStateText");
 				//if(allBtn.G)
 			}
 			//updateThePriceAndStateText ();
+
+			FindObjectOfType<StoreMsgController>().UpdatePurchaseToDBAsync();
 		} 
 		else {
 
@@ -75,7 +84,7 @@ public class StoreMangement : MonoBehaviour {
 			}
 			else {
 				msgCanvas.enabled = true;
-				msgToMsgCanvas.text = "Sorry, You don't have enough money to buy this item !!!";
+				msgToMsgCanvas.text = "Sorry, You don't have enough stars to buy this Avatar !!!";
 
 			}
 		}

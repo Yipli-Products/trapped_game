@@ -34,6 +34,11 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
         return getGameDataForCurrentPlayerQueryStatus;
     }
 
+    public static void SetGameDataForCurrenPlayerQueryStatus(QueryStatus queryStatus)
+    {
+        getGameDataForCurrentPlayerQueryStatus = queryStatus;
+    }
+
     public static QueryStatus GetPlayersQueryStatus()
     {
         return getAllPlayersQureyStatus;
@@ -200,7 +205,7 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
             }
         }
 
-        if (!isDefaultPlayerPresent || !isSavedPlayerInfoAvailabe)
+        if (currentYipliConfig.gameType != GameType.MULTIPLAYER_GAMING && (!isDefaultPlayerPresent || !isSavedPlayerInfoAvailabe))
         {
             Debug.Log("Removing saved player as it don't exist.");
             UserDataPersistence.ClearDefaultPlayer(currentYipliConfig);

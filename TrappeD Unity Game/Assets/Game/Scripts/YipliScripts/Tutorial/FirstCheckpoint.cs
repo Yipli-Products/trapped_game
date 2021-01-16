@@ -39,10 +39,6 @@ public class FirstCheckpoint : MonoBehaviour
 
                 calledAnim = true;
 
-                bc.allowjump = false;
-                bc.allowRun = false;
-                bc.Runbackward = false;
-
                 Time.timeScale = 0.1f;
                 StartCoroutine(frameAnimation());
             }
@@ -62,10 +58,6 @@ public class FirstCheckpoint : MonoBehaviour
         MatControlsStatManager.gameStateChanged(GameState.GAME_PLAY);
 
         checkpointFrame.SetActive(false);
-
-        bc.allowjump = true;
-        bc.allowRun = true;
-        bc.Runbackward = false;
 
         AudioControl.Instance.playAudio();
         speakerT.text = "Keep Running";

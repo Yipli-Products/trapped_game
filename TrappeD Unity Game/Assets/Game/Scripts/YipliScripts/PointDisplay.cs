@@ -39,13 +39,31 @@ public class PointDisplay : MonoBehaviour
         }
         else
         {
-            timePlayedText.text = "Time Played : " + ((int)(ps.TimePlayed / 60)).ToString("00") + ":" + ((int)(ps.TimePlayed % 60)).ToString("00");
-            cbText.text = "Calories Burnt : " + ps.CalBurned;
-            fpText.text = "Fitness Points : " + ps.FpPoints;
+            Debug.LogError("ps.IsPreviousSceneTut : " + ps.IsPreviousSceneTut);
 
-            ps.TimePlayed = 0;
-            ps.CalBurned = 0;
-            ps.FpPoints = 0;
+            if (ps.IsPreviousSceneTut)
+            {
+                ps.IsPreviousSceneTut = false;
+                tipsText.text = "Congratulations on finishing the Tutorial";
+
+                timePlayedText.text = "";
+                cbText.text = "";
+                fpText.text = "";
+
+                pointScore.text = "";
+            }
+            else
+            {
+                timePlayedText.text = "Time Played : " + ((int)(ps.TimePlayed / 60)).ToString("00") + ":" + ((int)(ps.TimePlayed % 60)).ToString("00");
+                cbText.text = "Calories Burnt : " + ps.CalBurned;
+                fpText.text = "Fitness Points : " + ps.FpPoints;
+
+                ps.TimePlayed = 0;
+                ps.CalBurned = 0;
+                ps.FpPoints = 0;
+
+                tipsText.text = "";
+            }
         }
     }
 }

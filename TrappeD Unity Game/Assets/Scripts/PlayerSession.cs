@@ -30,7 +30,7 @@ public class PlayerSession : MonoBehaviour
     public GameObject retryBleConnectionButton;
     public GameObject LoadingScreen;
     private GameObject instantiatedBleErrorPanel;
-
+    public GameObject netErrorPanel;
 
     private bool bIsBleCheckRunning = false;
 
@@ -47,6 +47,8 @@ public class PlayerSession : MonoBehaviour
     public static PlayerSession Instance { get { return _instance; } }
 
     public float GetGameplayDuration { get => duration; set => duration = value; }
+    public float Calories { get => calories; set => calories = value; }
+    public float FitnesssPoints { get => fitnesssPoints; set => fitnesssPoints = value; }
 
     //Delegates for Firebase Listeners
     public delegate void OnDefaultMatChanged();
@@ -77,7 +79,7 @@ public class PlayerSession : MonoBehaviour
             // Call Yipli_GameLib_Scene
             _instance.currentYipliConfig.callbackLevel = SceneManager.GetActiveScene().name;
             Debug.Log("Updating the callBackLevel Value to :" + _instance.currentYipliConfig.callbackLevel);
-            Debug.Log("Loading Yipli scene for player Selection...");           
+            Debug.Log("Loading Yipli scene for player Selection...");
             if (!_instance.currentYipliConfig.callbackLevel.Equals("Yipli_Testing_harness"))
                 SceneManager.LoadScene("yipli_lib_scene");
         }
@@ -102,9 +104,14 @@ public class PlayerSession : MonoBehaviour
             Debug.LogError("Game Id not Set");
         }
 
-        playerNameGreetingText.text = "Hi, " + GetCurrentPlayer();
+        if (currentYipliConfig.gameType != GameType.MULTIPLAYER_GAMING)
+        {
+            playerNameGreetingText.text = "Hi, " + GetCurrentPlayer();
+        }
         
         Debug.Log("Starting the BLE routine check in PlayerSession Start()");
+
+        StartCoroutine(CheckInternetConnection());
     }
 
     public void Update()
@@ -128,6 +135,9 @@ public class PlayerSession : MonoBehaviour
         _instance.currentYipliConfig.callbackLevel = SceneManager.GetActiveScene().name;
         Debug.Log("Updating the callBackLevel Value to :" + _instance.currentYipliConfig.callbackLevel);
         Debug.Log("Loading Yipli scene for player Selection...");
+
+        firebaseDBListenersAndHandlers.SetGameDataForCurrenPlayerQueryStatus(QueryStatus.NotStarted);
+
         currentYipliConfig.bIsChangePlayerCalled = true;
         SceneManager.LoadScene("yipli_lib_scene");
     }
@@ -159,8 +169,8 @@ public class PlayerSession : MonoBehaviour
     public void CloseSPSession()
     {
         //Destroy current player session data
-        calories = 0;
-        fitnesssPoints = 0;
+        Calories = 0;
+        FitnesssPoints = 0;
         gamePoints = 0;
         duration = 0;
         Debug.Log("Aborting current player session.");
@@ -195,10 +205,11 @@ public class PlayerSession : MonoBehaviour
         if (YipliHelper.GetMatConnectionStatus().Equals("connected", StringComparison.OrdinalIgnoreCase))
         {
             Debug.Log("Mat connection is established.");
-            YipliBackgroundPanel.SetActive(false);
-            BleErrorPanel.SetActive(false);
+            
             if (BleErrorPanel.activeSelf)
             {
+                YipliBackgroundPanel.SetActive(false);
+                BleErrorPanel.SetActive(false);
                 FindObjectOfType<YipliAudioManager>().Play("BLE_success");
             }
         }
@@ -207,7 +218,13 @@ public class PlayerSession : MonoBehaviour
             Debug.Log("Mat connection is lost.");
             if (!BleErrorPanel.activeSelf)
             {
-                bleErrorText.text = "Bluetooth Connection lost.\nMake sure that your active Yipli Mat and device bluetooth are turned on.";
+                // Different mat connection (error)message based on Operating system and connectivity type.
+#if UNITY_ANDROID
+                bleErrorText.text = ProductMessages.Err_mat_connection_android_phone;
+#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+                bleErrorText.text = ProductMessages.Err_mat_connection_pc;
+#endif
+
                 FindObjectOfType<YipliAudioManager>().Play("BLE_failure");
                 YipliBackgroundPanel.SetActive(true);
                 BleErrorPanel.SetActive(true);
@@ -305,8 +322,8 @@ public class PlayerSession : MonoBehaviour
         x.Add("intensity", intensityLevel);
         x.Add("player-actions", playerActionCounts);
         x.Add("timestamp", ServerValue.Timestamp);
-        x.Add("calories", (int)calories);
-        x.Add("fitness-points", (int)fitnesssPoints);
+        x.Add("calories", (int)GetCaloriesBurned());
+        x.Add("fitness-points", (int)GetFitnessPoints());
         if (playerGameData != null)
         {
             if (playerGameData.Count > 0)
@@ -345,8 +362,8 @@ public class PlayerSession : MonoBehaviour
         Debug.Log("Storing current player session to backend database.");
         this.gamePoints = gamePoints;
 
-        calories = YipliUtils.GetCaloriesBurned(getPlayerActionCounts());
-        fitnesssPoints = YipliUtils.GetFitnessPoints(getPlayerActionCounts());
+        //Calories = YipliUtils.GetCaloriesBurned(getPlayerActionCounts());
+        //FitnesssPoints = YipliUtils.GetFitnessPointsWithRandomization(getPlayerActionCounts());
         xp = YipliUtils.GetXP(Math.Ceiling(duration));
 
         if (0 == ValidateSessionBeforePosting())
@@ -417,11 +434,20 @@ public class PlayerSession : MonoBehaviour
     }
     public void AddPlayerAction(YipliUtils.PlayerActions action, int count = 1)
     {
+        if (count < 1) return;
+
         Debug.Log("Adding action in current player session.");
         if (playerActionCounts.ContainsKey(action))
+        {
             playerActionCounts[action] = playerActionCounts[action] + count;
+        }
         else
+        {
             playerActionCounts.Add(action, count);
+        }
+
+        FitnesssPoints += YipliUtils.GetFitnessPointsPerAction(action) * count * UnityEngine.Random.Range(0.92f, 1.04f); // this is to hide direct mapping between calories and fitnesspoint. small random multiplier is added fitness points to keep it random on single action level
+        Calories += YipliUtils.GetCaloriesPerAction(action) * count;
     }
 
     #endregion
@@ -495,11 +521,11 @@ public class PlayerSession : MonoBehaviour
 
         Debug.Log("Storing current player session to backend database.");
 
-        currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.calories = YipliUtils.GetCaloriesBurned(getMultiPlayerActionCounts(currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails));
-        currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.fitnesssPoints = YipliUtils.GetFitnessPoints(getMultiPlayerActionCounts(currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails));
+        currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.calories = currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.calories;
+        currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.fitnesssPoints = currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.fitnesssPoints;
 
-        currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.calories = YipliUtils.GetCaloriesBurned(getMultiPlayerActionCounts(currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails));
-        currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.fitnesssPoints = YipliUtils.GetFitnessPoints(getMultiPlayerActionCounts(currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails));
+        currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.calories = currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.calories;
+        currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.fitnesssPoints = currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.fitnesssPoints;
 
         currentYipliConfig.MP_GameStateManager.playerData.PlayerOneDetails.points = playerOneGamePoints;
         currentYipliConfig.MP_GameStateManager.playerData.PlayerTwoDetails.points = playerTwoGamePoints;
@@ -567,7 +593,76 @@ public class PlayerSession : MonoBehaviour
             playerDetails.playerActionCounts[action] = playerDetails.playerActionCounts[action] + count;
         else
             playerDetails.playerActionCounts.Add(action, count);
+
+        playerDetails.calories += YipliUtils.GetCaloriesPerAction(action) * count;
+        playerDetails.fitnesssPoints += YipliUtils.GetFitnessPointsPerAction(action) * count * UnityEngine.Random.Range(0.92f, 1.04f); // this is to hide direct mapping between calories and fitnesspoint. small random multiplier is added fitness points to keep it random on single action level
     }
 
     #endregion
+
+    // get game and driver version
+    public string GetDriverAndGameVersion()
+    {
+        return YipliHelper.GetFMDriverVersion() + " : " + Application.version;
+    }
+
+    // get fitness poins
+    public float GetFitnessPoints()
+    {
+        return FitnesssPoints;
+    }
+
+    // get calories
+    public float GetCaloriesBurned()
+    {
+        if (Calories < 1f)
+        {
+            return 1f;
+        }
+
+        return Calories;
+    }
+
+    // network connection panel management
+    private IEnumerator CheckInternetConnection()
+    {
+        while(true)
+        {
+            yield return new WaitForSecondsRealtime(1f);
+
+            if (YipliHelper.checkInternetConnection())
+            {
+                if (netErrorPanel.activeSelf)
+                {
+                    YipliBackgroundPanel.SetActive(false);
+                    netErrorPanel.SetActive(false);
+                    FindObjectOfType<YipliAudioManager>().Play("BLE_success");
+                }
+            }
+            else
+            {
+                Debug.Log("Internect connection is lost.");
+                if (!netErrorPanel.activeSelf)
+                {
+                    FindObjectOfType<YipliAudioManager>().Play("BLE_failure");
+                    YipliBackgroundPanel.SetActive(true);
+                    netErrorPanel.SetActive(true);
+                }
+            }
+        }
+    }
+
+    // quit from playersession canvas
+    public void QuitApplication()
+    {
+        Application.Quit();
+    }
+
+    // retake tutorial
+    public void RetakeMatControlsTutorial()
+    {
+        _instance.currentYipliConfig.callbackLevel = SceneManager.GetActiveScene().name;
+        currentYipliConfig.bIsRetakeTutorialFlagActivated = true;
+        SceneManager.LoadScene("yipli_lib_scene");
+    }
 }

@@ -15,9 +15,9 @@ MonoBehaviour:
   callbackLevel: Main Menu
   userId: lC4qqZCFEaMogYswKjd0ObE6nD43
   gameId: trapped
-  bIsMatIntroDone: 1
   bIsChangePlayerCalled: 0
   onlyMatPlayMode: 1
+  bIsRetakeTutorialFlagActivated: 0
   bIsInternetConnected: 1
-  oldFMResponseCount: 17
+  oldFMResponseCount: 0
   gameType: 0

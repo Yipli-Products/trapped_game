@@ -10,40 +10,44 @@ public class PlayerStats : ScriptableObject
 
     private int intended_ball_price = -1;
     private int intended_ball_id = -1;
-    [SerializeField] int active_ball = -1;
+    public int active_ball = -1;
 
-    [SerializeField] int timePlayed;
-    [SerializeField] float calBurned;
-    [SerializeField] int fpPoints;
+    public int timePlayed;
+    public float calBurned;
+    public int fpPoints;
 
-    [SerializeField] int thisSessionTimePlayed;
-    [SerializeField] float thisSessionCalBurned;
-    [SerializeField] int thisSessionFpPoints;
+    public int thisSessionTimePlayed;
+    public float thisSessionCalBurned;
+    public int thisSessionFpPoints;
 
-    [SerializeField] string playerID;
-    [SerializeField] string purchasedBalls;
+    public string playerID;
+    public string purchasedBalls;
 
-    [SerializeField] List<StoreBalls> ballsInStore;
+    public List<StoreBalls> ballsInStore;
 
-    [SerializeField] GameState gameState;
+    public GameState gameState;
 
-    [SerializeField] Vector3 checkPointPos;
+    public Vector3 checkPointPos;
 
-    [SerializeField] bool checkPointPassed = false;
+    public bool checkPointPassed = false;
 
-    [SerializeField] string[] tips;
+    public string[] tips;
 
-    [SerializeField] int playerLives;
+    public int playerLives;
 
-    [SerializeField] bool allowInput = false;
+    public bool allowInput = false;
 
-    [SerializeField] bool initialiseOldFmResponse = false;
+    public bool initialiseOldFmResponse = false;
+
+    public bool isPreviousSceneTut = false;
+
+    public bool isStartTextShown = false;
 
     public int Intended_ball_price { get => intended_ball_price; set => intended_ball_price = value; }
     public int Intended_ball_id { get => intended_ball_id; set => intended_ball_id = value; }
     public int Active_ball { get => active_ball; set => active_ball = value; }
     public int TimePlayed { get => timePlayed; set => timePlayed = value; }
-    private List<StoreBalls> BallsInStore { get => ballsInStore; set => ballsInStore = value; }
+    public List<StoreBalls> BallsInStore { get => ballsInStore; set => ballsInStore = value; }
     public float CalBurned { get => calBurned; set => calBurned = value; }
     public int FpPoints { get => fpPoints; set => fpPoints = value; }
     public string PlayerID { get => playerID; set => playerID = value; }
@@ -58,6 +62,8 @@ public class PlayerStats : ScriptableObject
     public int PlayerLives { get => playerLives; set => playerLives = value; }
     public bool AllowInput { get => allowInput; set => allowInput = value; }
     public bool InitialiseOldFmResponse { get => initialiseOldFmResponse; set => initialiseOldFmResponse = value; }
+    public bool IsPreviousSceneTut { get => isPreviousSceneTut; set => isPreviousSceneTut = value; }
+    public bool IsStartTextShown { get => isStartTextShown; set => isStartTextShown = value; }
 
     public void SetListofBalls(List<int> purchasedIDs)
     {

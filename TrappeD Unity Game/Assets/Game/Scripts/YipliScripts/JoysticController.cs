@@ -26,7 +26,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
         private void Update()
         {
-            ScoreText.text = ps.GetCoinScore().ToString();
+            //ScoreText.text = ps.GetCoinScore().ToString();
         }
 
         private void FixedUpdate()

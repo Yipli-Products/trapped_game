@@ -8,9 +8,9 @@ public class LevelButtonController : MonoBehaviour {
 	[SerializeField] PlayerStats ps;
 
 	public Button thisButton;
-	public Image star1;
-	public Image star2;
-	public Image star3;
+	//public Image star1;
+	//public Image star2;
+	//public Image star3;
 
 	public Sprite starActive;
 	public Sprite starInactive;
@@ -48,6 +48,7 @@ public class LevelButtonController : MonoBehaviour {
 		}
 		else thisButton.image.sprite = levelBackLocked;
 
+		/*
 		//show the stars earned
 		if (thisLevelNumber <= ps.GetCompletedLevels() + 1) {//this level has been unlocked. 
 
@@ -75,6 +76,7 @@ public class LevelButtonController : MonoBehaviour {
 			star2.sprite = lockedLevelStarInactive;
 			star3.sprite = lockedLevelStarInactive;
 		}
+		*/
 	}
 	
 	public void LoadThisLevel(){

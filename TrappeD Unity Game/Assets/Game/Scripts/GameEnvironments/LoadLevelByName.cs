@@ -55,12 +55,4 @@ public class LoadLevelByName : MonoBehaviour {
 		}*/
 
 	}
-
-	public void rateThisApp(){
-		Application.OpenURL("market://details?id=com.codespec.trapped");
-	}
-	public void visitMySocialPage(string webURL){
-		Application.OpenURL(webURL);
-	}
-
 }

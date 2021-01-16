@@ -10,13 +10,13 @@ public class BalanceManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		balanceText.text = "Balance: $ " + ps.GetCoinScore();
+		balanceText.text = ps.GetCoinScore().ToString();
 		SetStore();
 	}
 	
 	// Update is called once per frame
 	void updateBalance () {
-		balanceText.text = "Balance: $ " + ps.GetCoinScore();
+		balanceText.text = ps.GetCoinScore().ToString();
 	}
 
 	private void SetStore()
@@ -37,5 +37,11 @@ public class BalanceManager : MonoBehaviour {
 
 			ps.SetListofBalls(pBallNos);
 		}
+	}
+
+	public void GotoMainMenu()
+	{
+		MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
+		StartCoroutine(FindObjectOfType<Transition>().FadeOutScene("Main Menu"));
 	}
 }

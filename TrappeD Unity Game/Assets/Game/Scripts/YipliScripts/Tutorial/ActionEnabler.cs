@@ -22,10 +22,6 @@ public class ActionEnabler : MonoBehaviour
     {
         tmm.SetRunOverride();
 
-        bc.allowjump = true;
-        bc.allowRun = true;
-        bc.Runbackward = false;
-
         speakerT.text = "";
         speakerBack.SetActive(false);
         AudioControl.Instance.playAudio();

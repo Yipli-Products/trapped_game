@@ -26,10 +26,12 @@ public class FirstScore : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             speakerT.text = "";
+            /*
             AudioControl.Instance.playAudio();
 
             Time.timeScale = 0.1f;
             StartCoroutine(frameAnimation());
+            */
         }
     }
 

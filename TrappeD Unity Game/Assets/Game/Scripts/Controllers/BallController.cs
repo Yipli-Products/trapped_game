@@ -81,7 +81,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		private float backValue = 0f;
 		public float forwardForce = 500f;
 
-		private int thisLevelPoints;
+		private int thisLevelPoints = 0;
 
 		public bool leftJump = false;
 
@@ -91,9 +91,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		PauseGame pg;
 
-		public bool allowRun = false;
-		public bool allowjump = false;
-		public bool Runbackward = false;
 		public bool isJumping = false;
 		public bool gameHint = false;
 
@@ -101,8 +98,12 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		public float matBallForce = 30f;
 
-		// Use this for initialization
-		void Start () {
+		private int currentStepCount = 0;
+
+        public int CurrentStepCount { get => currentStepCount; set => currentStepCount = value; }
+
+        // Use this for initialization
+        void Start () {
 
 			currentLevel = SceneManager.GetActiveScene().name;
 
@@ -116,7 +117,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 		
 			coinAmount = ps.GetCoinScore();
-			coinText.text = coinAmount.ToString();
+			//coinText.text = coinAmount.ToString();
+			coinText.text = thisLevelPoints.ToString();
 			/*int playerLife = PlayerPrefs.GetInt ("PLAYER_LIFE");
 			if (playerLife < 3 && currentLevel != "Level_09_RC") {
 				//gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("CHKP_X"), 3, PlayerPrefs.GetFloat("CHKP_Z"));
@@ -366,7 +368,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			coinAmount += amount;
 			thisLevelPoints += amount;
 			totalCoins += amount;
-			coinText.text = coinAmount.ToString ();
+			//coinText.text = coinAmount.ToString (); // shows total coins
+			coinText.text = thisLevelPoints.ToString();
 			
 			PlayerPrefs.SetInt ("Coins", coinAmount);
 			PlayerPrefs.SetInt("thisLevelPoints", thisLevelPoints);
@@ -456,10 +459,17 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			if (pauseAction == YipliUtils.PlayerActions.PAUSE)
             {
+				// add running action here
+				if (PlayerSession.Instance != null)
+				{
+					PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, CurrentStepCount);
+					CurrentStepCount = 0;
+				}
+
 				pg.pauseFunction();
 			}
 
-			if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount < singlePlayerResponse.count)
+			if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount != singlePlayerResponse.count)
             {
 				Debug.Log("FMResponse " + fmActionData);
 				PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
@@ -474,20 +484,39 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						break;
 
 					case YipliUtils.PlayerActions.RUNNINGSTOPPED:
+
+						// add running action here
+						if (PlayerSession.Instance != null)
+						{
+							PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, CurrentStepCount);
+							CurrentStepCount = 0;
+						}
+
 						RunningStopAction();
 						break;
 
 					case YipliUtils.PlayerActions.STOP:
+
+						// add running action here
+						if (PlayerSession.Instance != null)
+						{
+							PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, CurrentStepCount);
+							CurrentStepCount = 0;
+						}
+
 						RunningStopAction();
 						break;
 
 					// actions
 					case YipliUtils.PlayerActions.RUNNING:
 						// do run here
-						int steps = 1;
+						if (!ballJump)
+						{
+							RunningStartAction();
+						}
 
 						///CheckPoint for the running action properties.
-						/*if (singlePlayerResponse.playerdata[0].fmresponse.properties.ToString() != "null")
+						if (singlePlayerResponse.playerdata[0].fmresponse.properties.ToString() != "null")
 						{
 							string[] tokens = singlePlayerResponse.playerdata[0].fmresponse.properties.Split(',');
 
@@ -500,33 +529,26 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 								string[] totalStepsCountKeyValue = tokens[0].Split(':');
 								if (totalStepsCountKeyValue[0].Equals("totalStepsCount"))
 								{
-									Debug.Log("Adding steps : " + totalStepsCountKeyValue[1]);
-									steps = int.Parse(totalStepsCountKeyValue[1]);
+									Debug.LogError("Adding steps : " + totalStepsCountKeyValue[1]);
+									CurrentStepCount = int.Parse(totalStepsCountKeyValue[1]);
 								}
 
 								string[] speedKeyValue = tokens[1].Split(':');
 								if (speedKeyValue[0].Equals("speed"))
 								{
 									//TODO : Do some handling if speed parameter needs to be used to adjust the running speed in the game.
-									float speedAdditive = float.Parse(speedKeyValue[1]);
-									matBallForce *= speedAdditive;
+									//float speedAdditive = float.Parse(speedKeyValue[1]);
+									//matBallForce *= speedAdditive;
 								}
 							}
-						}*/
-
-						if (!ballJump)
-						{
-							RunningStartAction();
-
-							PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, steps);
 						}
 						break;
 
 					case YipliUtils.PlayerActions.JUMP:
-						if (currentLevel == "Level_Tutorial")
+						/*if (currentLevel == "Level_Tutorial")
 						{
 							FindObjectOfType<TutorialManager>().TextTutorialNextButton();
-						}
+						}*/
 
 						JumpAction();
 
@@ -541,6 +563,13 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				if (waitTimeCal >= 5f)
 				{
 					BackwardsMovement();
+
+					// add running action here
+					if (PlayerSession.Instance != null)
+					{
+						PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, CurrentStepCount);
+						CurrentStepCount = 0;
+					}
 				}
 			}
         }
@@ -590,11 +619,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			calWaitTime = false;
 			waitTimeCal = 0f;
-
-			if (currentLevel == "Level_Tutorial")
-            {
-				allowRun = true;
-            }
 		}
 
 		public void RunningStopAction()

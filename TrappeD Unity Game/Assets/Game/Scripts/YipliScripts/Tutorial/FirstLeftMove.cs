@@ -33,19 +33,16 @@ public class FirstLeftMove : MonoBehaviour
         {
             tmm.DeActivateModel();
 
-            bc.allowjump = false;
-            bc.allowRun = false;
-            bc.Runbackward = true;
-
             speakerBack.SetActive(true);
-            speakerT.text = "Opps, we missed that box to cross over these boxes.";
+            //speakerT.text = "Opps, we missed that box to cross over these boxes.";
+            speakerT.text = "Just stand still to go backwards";
             AudioControl.Instance.playAudio();
 
             RunAgainCol.SetActive(true);
             jumpbackCol.SetActive(true);
             jumpbacktwoCol.SetActive(false);
 
-            StartCoroutine(TextChange());
+            //StartCoroutine(TextChange());
         }
     }
 

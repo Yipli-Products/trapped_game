@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -8,16 +6,34 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] GameObject TextTutorial;
     [SerializeField] GameObject PlayerName;
     [SerializeField] GameObject LevelName;
+
+    [SerializeField] PlayerStats ps;
+
     private bool pauseForTextTut;
 
     // Start is called before the first frame update
     void Start()
     {
+        /*
         PlayerName.SetActive(false);
         LevelName.SetActive(false);
 
-        TextTutorial.SetActive(true);
-        pauseForTextTut = true;
+        if (!ps.IsStartTextShown)
+        {
+            ps.IsStartTextShown = true;
+            TextTutorial.SetActive(false);
+            pauseForTextTut = true;
+        }
+        else
+        {
+            TextTutorial.SetActive(false);
+            pauseForTextTut = false;
+        }
+        */
+
+        TextTutorialNextButton();
+
+        ps.IsPreviousSceneTut = true;
     }
 
     private void Update()

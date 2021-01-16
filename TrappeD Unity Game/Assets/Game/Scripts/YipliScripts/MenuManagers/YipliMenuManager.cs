@@ -16,8 +16,6 @@ public class YipliMenuManager : MonoBehaviour
     const string RIGHT = "right";
     const string ENTER = "enter";
 
-    int FMResponseCount = -1;
-
     float timer = 0;
 
     // Start is called before the first frame update
@@ -33,7 +31,7 @@ public class YipliMenuManager : MonoBehaviour
         SetClusterIDtoZero();
         MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
 
-        currentButtonIndex = 0;
+        currentButtonIndex = 2;
         manageCurrentButton();
 
         SetClusterIDtoZero();
@@ -72,16 +70,17 @@ public class YipliMenuManager : MonoBehaviour
         {
             if (i == currentButtonIndex)
             {
-                menuButtons[i].GetComponent<Image>().color = Color.green;
+                //menuButtons[i].GetComponent<Image>().color = Color.green;
                 menuButtons[i].GetComponent<Animator>().enabled = true;
                 menuButtons[i].transform.GetChild(0).gameObject.SetActive(true);
                 currentB = menuButtons[i];
             }
             else
             {
-                menuButtons[i].GetComponent<Image>().color = Color.white;
+                //menuButtons[i].GetComponent<Image>().color = Color.white;
                 menuButtons[i].GetComponent<Animator>().enabled = false;
                 menuButtons[i].transform.GetChild(0).gameObject.SetActive(false);
+                menuButtons[i].transform.localScale = new Vector3(1, 1, 1);
             }
         }
     }
@@ -115,7 +114,7 @@ public class YipliMenuManager : MonoBehaviour
 
         if (singlePlayerResponse == null) return;
 
-        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount < singlePlayerResponse.count)
+        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount != singlePlayerResponse.count)
         {
             Debug.Log("FMResponse " + fmActionData);
             PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
@@ -185,5 +184,11 @@ public class YipliMenuManager : MonoBehaviour
                 Debug.Log("Wrong Input");
                 break;
         }
+    }
+
+    public void GotoLevelSelect()
+    {
+        MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
+        StartCoroutine(FindObjectOfType<Transition>().FadeOutScene("Level_Selector"));
     }
 }

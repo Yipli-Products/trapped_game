@@ -43,10 +43,6 @@ public class FirstRun : MonoBehaviour
 
             bc.calWaitTime = false;
             bc.waitTimeCal = 0f;
-
-            bc.allowjump = false;
-            bc.allowRun = true;
-            bc.Runbackward = false;
         }
     }
 }

@@ -27,14 +27,9 @@ public class YipliButtonScript : MonoBehaviour
 
         if (YipliHelper.checkInternetConnection())
         {
-            if (PlayerSession.Instance.currentYipliConfig.playerInfo.playerId != ps.PlayerID)
-            {
-                LoadingPanel.SetActive(true);
-                GetPlayerData();
-                LoadingPanel.SetActive(false);
-            }
-
-            //Task.Run(GetPlayerData).Wait();
+            //LoadingPanel.SetActive(true);
+            GetPlayerData();
+            //LoadingPanel.SetActive(false);
         }
         else
         {
@@ -55,7 +50,7 @@ public class YipliButtonScript : MonoBehaviour
             playerName.text = ps.GetPlayerName();
         }
 
-        pointScore.text = "Points : " + ps.GetCoinScore();
+        pointScore.text = ps.GetCoinScore().ToString();
 
         ps.TimePlayed = 0;
     }
@@ -63,7 +58,7 @@ public class YipliButtonScript : MonoBehaviour
     private void Update()
     {
         playerName.text = ps.GetPlayerName();
-        pointScore.text = "Points : " + ps.GetCoinScore();
+        pointScore.text = ps.GetCoinScore().ToString();
     }
 
     public void ChangePlayer()
@@ -78,7 +73,14 @@ public class YipliButtonScript : MonoBehaviour
 
     public void GoToStore()
     {
-        SceneManager.LoadScene("Store");
+        if (YipliHelper.checkInternetConnection())
+        {
+            SceneManager.LoadScene("Store");
+        }
+        else
+        {
+            NoInternetIcon.SetActive(true);
+        }
     }
 
     private void GetPlayerData ()
@@ -90,6 +92,7 @@ public class YipliButtonScript : MonoBehaviour
         {
             if (dataSnapshot != null)
             {
+                // active ball
                 if (dataSnapshot.Child("active-ball").Value == null)
                 {
                     gameData.Active_ball = 0;
@@ -99,6 +102,7 @@ public class YipliButtonScript : MonoBehaviour
                     gameData.Active_ball = int.Parse(dataSnapshot.Child("active-ball").Value.ToString());
                 }
 
+                // store data
                 if (dataSnapshot.Child("balls-purchased").Value == null)
                 {
                     gameData.Balls_purchased = "";
@@ -106,10 +110,27 @@ public class YipliButtonScript : MonoBehaviour
                 else
                 {
                     gameData.Balls_purchased = dataSnapshot.Child("balls-purchased").Value.ToString();
-                }                
-               
-                gameData.SetCoinScore(int.Parse(dataSnapshot.Child("coins-collected").Value.ToString()));
-                gameData.SetCompletedLevels(Convert.ToInt32(dataSnapshot.Child("completed-levels").Value.ToString()));
+                }
+
+                // coins - collected
+                if (dataSnapshot.Child("coins-collected").Value == null)
+                {
+                    gameData.SetCoinScore(0);
+                }
+                else
+                {
+                    gameData.SetCoinScore(int.Parse(dataSnapshot.Child("coins-collected").Value.ToString()));
+                }
+
+                // levels completed
+                if (dataSnapshot.Child("completed-levels").Value == null)
+                {
+                    gameData.SetCompletedLevels(0);
+                }
+                else
+                {
+                    gameData.SetCompletedLevels(Convert.ToInt32(dataSnapshot.Child("completed-levels").Value.ToString()));
+                }
 
                 ps.Active_ball = gameData.Active_ball;
                 ps.PurchasedBalls = gameData.Balls_purchased;

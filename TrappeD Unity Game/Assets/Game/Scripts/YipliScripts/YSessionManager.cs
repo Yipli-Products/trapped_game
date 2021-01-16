@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
 
 public class YSessionManager : MonoBehaviour
 {
@@ -53,12 +54,19 @@ public class YSessionManager : MonoBehaviour
         PlayerSession.Instance.UpdateGameData(gameData);
         Debug.Log("Game data is updated successfully.");
 
-        ps.CalBurned = YipliUtils.GetCaloriesBurned(PlayerSession.Instance.getPlayerActionCounts());
-        ps.FpPoints = (int)YipliUtils.GetFitnessPoints(PlayerSession.Instance.getPlayerActionCounts());
+        ps.CalBurned = PlayerSession.Instance.GetCaloriesBurned();
+        ps.FpPoints = (int)PlayerSession.Instance.GetFitnessPoints();
 
         ps.ThisSessionTimePlayed += ps.TimePlayed;
         ps.ThisSessionCalBurned += ps.CalBurned;
         ps.ThisSessionFpPoints += ps.FpPoints;
+
+        // add running action here
+        if (PlayerSession.Instance != null)
+        {
+            PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, FindObjectOfType<BallController>().CurrentStepCount);
+            FindObjectOfType<BallController>().CurrentStepCount = 0;
+        }
 
         PlayerSession.Instance.StoreSPSession(ps.GetCoinScore());
     }

@@ -1529,6 +1529,14 @@ PrefabInstance:
       propertyPath: m_FontData.m_MinSize
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1617,6 +1625,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.0000076293
       objectReference: {fileID: 0}
+    - target: {fileID: 22404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 456
+      objectReference: {fileID: 0}
+    - target: {fileID: 22404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 122
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
 --- !u!224 &174723131 stripped
@@ -1643,6 +1659,14 @@ PrefabInstance:
     - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_FontData.m_MinSize
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1736,6 +1760,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -27
       objectReference: {fileID: 0}
+    - target: {fileID: 22404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 456
+      objectReference: {fileID: 0}
+    - target: {fileID: 22404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 122
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
 --- !u!224 &2132806320 stripped
@@ -1754,14 +1786,6 @@ PrefabInstance:
     - target: {fileID: 104626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_Name
       value: speakWindowL
-      objectReference: {fileID: 0}
-    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_FontData.m_MaxSize
-      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 11404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_Text
@@ -1812,36 +1836,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 364.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 201
-      objectReference: {fileID: 0}
-    - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1157.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 144
-      objectReference: {fileID: 0}
-    - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404626, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_Pivot.x
@@ -1858,14 +1866,6 @@ PrefabInstance:
     - target: {fileID: 22404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1111
-      objectReference: {fileID: 0}
-    - target: {fileID: 22404628, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 98
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e80aaf449e43ff6439c3a1cbd8617956, type: 3}

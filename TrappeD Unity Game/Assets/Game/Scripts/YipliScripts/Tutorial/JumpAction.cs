@@ -22,10 +22,6 @@ public class JumpAction : MonoBehaviour
         tmm.ActivateModel();
         tmm.SetJumpOverride();
 
-        bc.allowjump = true;
-        bc.allowRun = false;
-        bc.Runbackward = false;
-
         speakerT.text = "Jump to cross the hurdles";
     }
 }

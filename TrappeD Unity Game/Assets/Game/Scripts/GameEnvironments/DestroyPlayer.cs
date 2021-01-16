@@ -57,7 +57,10 @@ public class DestroyPlayer : MonoBehaviour {
 
 				ysm.StoreSession();
 
-			//col.gameObject.SendMessage("PlayerDead");
+			if (currentScene.Equals("Level_09_RC", System.StringComparison.OrdinalIgnoreCase))
+            {
+				col.gameObject.SendMessage("PlayerDead");
+			}
 		}
 	}
 

@@ -53,7 +53,7 @@ public class StoreMsgController : MonoBehaviour {
 		ps.Active_ball = ps.Intended_ball_id;
 	}
 
-	private void UpdatePurchaseToDBAsync()
+	public void UpdatePurchaseToDBAsync()
     {
 		Dictionary<string, object> storeData;
 		storeData = new Dictionary<string, object>();
@@ -63,7 +63,7 @@ public class StoreMsgController : MonoBehaviour {
 		storeData.Add("balls-purchased", ps.PurchasedBalls);
 		storeData.Add("completed-levels", ps.GetCompletedLevels().ToString());
 
-		//Debug.LogError("Display store data : " + JsonConvert.SerializeObject(storeData));
+		Debug.LogError("Display store data : " + JsonConvert.SerializeObject(storeData));
 
 		PlayerSession.Instance.UpdateStoreData(storeData);
 	}

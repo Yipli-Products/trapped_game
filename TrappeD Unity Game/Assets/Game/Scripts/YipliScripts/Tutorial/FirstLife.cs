@@ -34,7 +34,7 @@ public class FirstLife : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            TriggerTutorial();
+            //TriggerTutorial();
         }
     }
 
@@ -46,10 +46,6 @@ public class FirstLife : MonoBehaviour
 
         speakerT.text = "You have 3 lives in each level.";
         AudioControl.Instance.playAudio();
-
-        bc.allowjump = false;
-        bc.allowRun = false;
-        bc.Runbackward = false;
 
         Time.timeScale = 0.1f;
         StartCoroutine(frameAnimation());
@@ -75,10 +71,6 @@ public class FirstLife : MonoBehaviour
             lifeThree.SetActive(true);
             yield return new WaitForSecondsRealtime(0.25f);
         }
-
-        bc.allowjump = true;
-        bc.allowRun = true;
-        bc.Runbackward = false;
 
         speakerT.text = "Keep Running";
         AudioControl.Instance.playAudio();

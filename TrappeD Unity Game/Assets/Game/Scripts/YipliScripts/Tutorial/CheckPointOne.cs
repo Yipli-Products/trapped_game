@@ -13,11 +13,4 @@ public class CheckPointOne : MonoBehaviour
     {
         bc = FindObjectOfType<BallController>();
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        bc.allowjump = true;
-        bc.allowRun = true;
-        bc.Runbackward = false;
-    }
 }

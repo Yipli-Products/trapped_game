@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
 
 public class StartGameLibSession : MonoBehaviour
 {
@@ -23,7 +24,14 @@ public class StartGameLibSession : MonoBehaviour
     }
 
     public void StoreYipliSession () 
-    { 
+    {
+        // add running action here
+        if (PlayerSession.Instance != null)
+        {
+            PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, FindObjectOfType<BallController>().CurrentStepCount);
+            FindObjectOfType<BallController>().CurrentStepCount = 0;
+        }
+
         PlayerSession.Instance.StoreSPSession(PlayerPrefs.GetInt("Coins"));
         SessionStartStatus = false;
     }

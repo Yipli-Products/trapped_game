@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using YipliFMDriverCommunication;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LevelSelectMenumanagerYipli : MonoBehaviour
 {
@@ -15,23 +17,23 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     [SerializeField] PlayerStats ps;
 
     Button currentB;
-    int currentButtonIndex;
+    public int currentButtonIndex;
 
     const string LEFT = "left";
     const string RIGHT = "right";
     const string ENTER = "enter";
 
-    int FMResponseCount = -1;
+    const int totalLevels = 9; // change this number whenmore levels are added
 
     // Start is called before the first frame update
     void Start()
     {
-        /*
-        PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
-        PlayerPrefs.DeleteKey("CHKP_X");
-        PlayerPrefs.DeleteKey("CHKP_Y");
-        PlayerPrefs.DeleteKey("CHKP_Z");
-        */
+        StartCoroutine(FindObjectOfType<Transition>().FadeInScene());
+
+        foreach (Button b in allButtons)
+        {
+            b.GetComponent<Animator>().enabled = false;
+        }
 
         SetClusterIDtoZero();
 
@@ -56,23 +58,23 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
     private void SetAllowedLevels()
     {
         int totalButtons;
-        if (ps.GetCompletedLevels() >= 10)
+        if (ps.GetCompletedLevels() >= totalLevels)
         {
-            currentButtonIndex = 9;
-            totalButtons = 10;
+            currentButtonIndex = totalLevels;
+            totalButtons = totalLevels;
         }
         else
         {
             currentButtonIndex = ps.GetCompletedLevels();
-            totalButtons = ps.GetCompletedLevels() + 1;
+            totalButtons = ps.GetCompletedLevels();
         }
+
+        menuButtons.Add(backButton);
 
         for (int i = 0; i < totalButtons; i++)
         {
             menuButtons.Add(allButtons[i]);
         }
-
-        menuButtons.Add(backButton);
     }
 
     // Update is called once per frame
@@ -108,12 +110,25 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
         {
             if (i == currentButtonIndex)
             {
-                menuButtons[i].GetComponent<Image>().color = Color.green;
+                if (menuButtons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>())
+                {
+                    menuButtons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = true;
+                }
+
+                //menuButtons[i].GetComponent<Image>().color = Color.green;
+                menuButtons[i].GetComponent<Animator>().enabled = true;
                 currentB = menuButtons[i];
             }
             else
             {
-                menuButtons[i].GetComponent<Image>().color = Color.white;
+                if (menuButtons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>())
+                {
+                    menuButtons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = false;
+                }
+
+                //menuButtons[i].GetComponent<Image>().color = Color.white;
+                menuButtons[i].GetComponent<Animator>().enabled = false;
+                menuButtons[i].transform.localScale = new Vector3(1, 1, 1);
             }
         }
     }
@@ -128,7 +143,7 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
 
         if (singlePlayerResponse == null) return;
 
-        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount < singlePlayerResponse.count)
+        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount != singlePlayerResponse.count)
         {
             Debug.Log("FMResponse " + fmActionData);
             PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
@@ -198,5 +213,13 @@ public class LevelSelectMenumanagerYipli : MonoBehaviour
                 Debug.Log("Wrong Input");
                 break;
         }
+    }
+
+    public void GotoMainMenu()
+    {
+        MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
+        //StartCoroutine(FindObjectOfType<Transition>().FadeOutScene("Main Menu"));
+
+        SceneManager.LoadScene("Main Menu");
     }
 }

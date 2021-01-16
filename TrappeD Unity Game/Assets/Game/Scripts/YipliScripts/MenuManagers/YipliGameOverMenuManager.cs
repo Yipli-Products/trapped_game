@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YipliFMDriverCommunication;
 
@@ -63,16 +64,17 @@ public class YipliGameOverMenuManager : MonoBehaviour
         {
             if (i == currentButtonIndex)
             {
-                menuButtons[i].GetComponent<Image>().color = Color.green;
+                //menuButtons[i].GetComponent<Image>().color = Color.green;
                 menuButtons[i].GetComponent<Animator>().enabled = true;
                 menuButtons[i].transform.GetChild(0).gameObject.SetActive(true);
                 currentB = menuButtons[i];
             }
             else
             {
-                menuButtons[i].GetComponent<Image>().color = Color.white;
+                //menuButtons[i].GetComponent<Image>().color = Color.white;
                 menuButtons[i].GetComponent<Animator>().enabled = false;
                 menuButtons[i].transform.GetChild(0).gameObject.SetActive(false);
+                menuButtons[i].transform.localScale = new Vector3(1, 1, 1);
             }
         }
     }
@@ -106,7 +108,7 @@ public class YipliGameOverMenuManager : MonoBehaviour
 
         if (singlePlayerResponse == null) return;
 
-        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount < singlePlayerResponse.count)
+        if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount != singlePlayerResponse.count)
         {
             Debug.Log("FMResponse " + fmActionData);
             PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
@@ -176,5 +178,17 @@ public class YipliGameOverMenuManager : MonoBehaviour
                 Debug.Log("Wrong Input");
                 break;
         }
+    }
+
+    public void GotoMainMenu()
+    {
+        MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
+        StartCoroutine(FindObjectOfType<Transition>().FadeOutScene("Main Menu"));
+    }
+
+    public void GotoLevelSelect()
+    {
+        MatControlsStatManager.gameStateChanged(GameState.GAME_UI);
+        StartCoroutine(FindObjectOfType<Transition>().FadeOutScene("Level_Selector"));
     }
 }
