@@ -255,7 +255,11 @@ public class PlayerSession : MonoBehaviour
         {
             //Initiate mat connection with last set GameCluterId
             Debug.Log("ReconnectBle with Game clster ID : " + YipliHelper.GetGameClusterId());
+#if UNITY_ANDROID
             InitBLE.InitBLEFramework(currentYipliConfig.matInfo?.macAddress ?? "", YipliHelper.GetGameClusterId() != 1000 ? YipliHelper.GetGameClusterId() : 0);
+#else
+            InitBLE.reconnectMat();
+#endif
         }
         catch (Exception exp)
         {
