@@ -172,7 +172,7 @@ public class MatSelection : MonoBehaviour
         }
     }
 
-
+    
     private IEnumerator ConnectMat(bool bIsReconnectMatNeeded = false)
     {
         int iTryCount = 0;
@@ -223,7 +223,15 @@ public class MatSelection : MonoBehaviour
 #if UNITY_ANDROID
                 noMatText.text = ProductMessages.Err_mat_connection_mat_off;
 #elif UNITY_STANDALONE_WIN || UNITY_EDITOR
-            noMatText.text = ProductMessages.Err_mat_connection_mat_off;
+            if (PortTestings.CheckAvailableComPorts() == 0)
+            {
+                noMatText.text = ProductMessages.Err_mat_connection_no_ports;
+            }
+            else
+            {
+                noMatText.text = ProductMessages.Err_mat_connection_mat_off;
+            }
+
 #endif
 
             NoMatPanel.SetActive(true);

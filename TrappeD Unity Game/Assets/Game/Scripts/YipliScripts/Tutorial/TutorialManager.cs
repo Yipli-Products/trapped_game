@@ -21,7 +21,7 @@ public class TutorialManager : MonoBehaviour
         if (!ps.IsStartTextShown)
         {
             ps.IsStartTextShown = true;
-            TextTutorial.SetActive(false);
+            TextTutorial.SetActive(true);
             pauseForTextTut = true;
         }
         else

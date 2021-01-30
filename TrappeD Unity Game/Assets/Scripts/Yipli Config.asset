@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40c8c606cc173f4eb200ee27aa3e131, type: 3}
   m_Name: Yipli Config
   m_EditorClassIdentifier: 
-  callbackLevel: Main Menu
+  callbackLevel: DemoGameScene
   userId: lC4qqZCFEaMogYswKjd0ObE6nD43
   gameId: trapped
   bIsChangePlayerCalled: 0

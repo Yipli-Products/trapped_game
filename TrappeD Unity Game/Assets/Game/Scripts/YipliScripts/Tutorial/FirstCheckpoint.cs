@@ -35,12 +35,11 @@ public class FirstCheckpoint : MonoBehaviour
                 tmm.DeActivateModel();
 
                 speakerT.text = "If you die, Game will resume\nfrom last checkpoint";
-                AudioControl.Instance.playAudio();
 
                 calledAnim = true;
 
-                Time.timeScale = 0.1f;
-                StartCoroutine(frameAnimation());
+                Time.timeScale = 1f;
+                //StartCoroutine(frameAnimation());
             }
             else
             {
@@ -59,7 +58,6 @@ public class FirstCheckpoint : MonoBehaviour
 
         checkpointFrame.SetActive(false);
 
-        AudioControl.Instance.playAudio();
         speakerT.text = "Keep Running";
 
         tmm.ActivateModel();

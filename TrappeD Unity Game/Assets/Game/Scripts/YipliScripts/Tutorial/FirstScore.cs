@@ -50,7 +50,6 @@ public class FirstScore : MonoBehaviour
         }
 
         speakerT.text = "Keep Running. Finish the tutorial to unlock Level 1.";
-        AudioControl.Instance.playAudio();
         rightArrow.SetActive(false);
 
         Time.timeScale = 1f;

@@ -45,7 +45,6 @@ public class FirstLife : MonoBehaviour
         tmm.DeActivateModel();
 
         speakerT.text = "You have 3 lives in each level.";
-        AudioControl.Instance.playAudio();
 
         Time.timeScale = 0.1f;
         StartCoroutine(frameAnimation());
@@ -73,7 +72,6 @@ public class FirstLife : MonoBehaviour
         }
 
         speakerT.text = "Keep Running";
-        AudioControl.Instance.playAudio();
         leftArrow.SetActive(false);
         Time.timeScale = 1f;
 

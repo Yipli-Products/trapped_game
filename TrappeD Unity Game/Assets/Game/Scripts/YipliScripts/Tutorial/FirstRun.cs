@@ -12,10 +12,13 @@ public class FirstRun : MonoBehaviour
     private BallController bc;
     private TutModelManager tmm;
 
+    private AudioControl ac;
+
     private void Awake()
     {
         speakerT.text = "";
         tmm = FindObjectOfType<TutModelManager>();
+        ac = FindObjectOfType<AudioControl>();
     }
 
     // Start is called before the first frame update
@@ -26,7 +29,6 @@ public class FirstRun : MonoBehaviour
         bc = FindObjectOfType<BallController>();
 
         speakerT.text = "";
-        AudioControl.Instance.playAudio();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,7 +41,7 @@ public class FirstRun : MonoBehaviour
             tmm.SetRunOverride();
 
             speakerT.text = "Run to move Forward";
-            AudioControl.Instance.playAudio();
+            ac.PlayRunAudio();
 
             bc.calWaitTime = false;
             bc.waitTimeCal = 0f;

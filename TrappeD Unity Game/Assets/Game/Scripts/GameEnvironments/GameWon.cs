@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameWon : MonoBehaviour {
@@ -47,6 +48,20 @@ public class GameWon : MonoBehaviour {
 			if (currentScene != "Level_Tutorial")
             {
 				ysm.StoreSession(true);
+			}
+			else
+            {
+				ps.isTutorialMandatory = false;
+
+				Dictionary<string, object> storeData;
+				storeData = new Dictionary<string, object>();
+
+				storeData.Add("coins-collected", ps.GetCoinScore().ToString());
+				storeData.Add("active-ball", ps.Active_ball);
+				storeData.Add("balls-purchased", ps.PurchasedBalls);
+				storeData.Add("completed-levels", ps.GetCompletedLevels().ToString());
+
+				PlayerSession.Instance.UpdateStoreData(storeData);
 			}
 
 			if (currentScene == "Level_09_RC")

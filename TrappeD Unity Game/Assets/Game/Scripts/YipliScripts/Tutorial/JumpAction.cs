@@ -10,11 +10,14 @@ public class JumpAction : MonoBehaviour
     private BallController bc;
     private TutModelManager tmm;
 
+    private AudioControl ac;
+
     // Start is called before the first frame update
     void Start()
     {
         bc = FindObjectOfType<BallController>();
         tmm = FindObjectOfType<TutModelManager>();
+        ac = FindObjectOfType<AudioControl>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,5 +26,6 @@ public class JumpAction : MonoBehaviour
         tmm.SetJumpOverride();
 
         speakerT.text = "Jump to cross the hurdles";
+        ac.PlayJumpAudio();
     }
 }

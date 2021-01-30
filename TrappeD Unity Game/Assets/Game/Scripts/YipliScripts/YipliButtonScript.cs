@@ -17,14 +17,6 @@ public class YipliButtonScript : MonoBehaviour
     {
         NoInternetIcon.SetActive(false);
 
-        //PlayerPrefs.DeleteAll(); // reset player prefs
-        /*
-        PlayerPrefs.DeleteKey("IS_CHKP_REACHED");
-        PlayerPrefs.DeleteKey("CHKP_X");
-        PlayerPrefs.DeleteKey("CHKP_Y");
-        PlayerPrefs.DeleteKey("CHKP_Z");
-        */
-
         if (YipliHelper.checkInternetConnection())
         {
             //LoadingPanel.SetActive(true);
@@ -90,8 +82,10 @@ public class YipliButtonScript : MonoBehaviour
 
         try
         {
-            if (dataSnapshot != null)
+            if (dataSnapshot.Value != null)
             {
+                ps.IsTutorialMandatory = false;
+
                 // active ball
                 if (dataSnapshot.Child("active-ball").Value == null)
                 {
@@ -139,6 +133,8 @@ public class YipliButtonScript : MonoBehaviour
             }
             else
             {
+                ps.isTutorialMandatory = true;
+
                 gameData.Active_ball = 0;
                 gameData.Balls_purchased = "";
                 gameData.SetCoinScore(0);
@@ -153,6 +149,8 @@ public class YipliButtonScript : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError("Something is wrong : " + e.Message);
+
+            ps.isTutorialMandatory = true;
 
             gameData.Active_ball = 0;
             gameData.Balls_purchased = "";

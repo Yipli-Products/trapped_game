@@ -24,6 +24,5 @@ public class ActionEnabler : MonoBehaviour
 
         speakerT.text = "";
         speakerBack.SetActive(false);
-        AudioControl.Instance.playAudio();
     }
 }

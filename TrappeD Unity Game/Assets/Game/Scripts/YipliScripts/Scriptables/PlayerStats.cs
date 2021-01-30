@@ -43,6 +43,8 @@ public class PlayerStats : ScriptableObject
 
     public bool isStartTextShown = false;
 
+    public bool isTutorialMandatory = false;
+
     public int Intended_ball_price { get => intended_ball_price; set => intended_ball_price = value; }
     public int Intended_ball_id { get => intended_ball_id; set => intended_ball_id = value; }
     public int Active_ball { get => active_ball; set => active_ball = value; }
@@ -64,6 +66,7 @@ public class PlayerStats : ScriptableObject
     public bool InitialiseOldFmResponse { get => initialiseOldFmResponse; set => initialiseOldFmResponse = value; }
     public bool IsPreviousSceneTut { get => isPreviousSceneTut; set => isPreviousSceneTut = value; }
     public bool IsStartTextShown { get => isStartTextShown; set => isStartTextShown = value; }
+    public bool IsTutorialMandatory { get => isTutorialMandatory; set => isTutorialMandatory = value; }
 
     public void SetListofBalls(List<int> purchasedIDs)
     {

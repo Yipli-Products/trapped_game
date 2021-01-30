@@ -16,11 +16,14 @@ public class FirstLeftMove : MonoBehaviour
     private BallController bc;
     private TutModelManager tmm;
 
+    private AudioControl ac;
+
     // Start is called before the first frame update
     void Start()
     {
         bc = FindObjectOfType<BallController>();
         tmm = FindObjectOfType<TutModelManager>();
+        ac = FindObjectOfType<AudioControl>();
 
         RunAgainCol.SetActive(false);
         jumpbackCol.SetActive(false);
@@ -34,30 +37,12 @@ public class FirstLeftMove : MonoBehaviour
             tmm.DeActivateModel();
 
             speakerBack.SetActive(true);
-            //speakerT.text = "Opps, we missed that box to cross over these boxes.";
             speakerT.text = "Just stand still to go backwards";
-            AudioControl.Instance.playAudio();
+            ac.PlayStopAudio();
 
             RunAgainCol.SetActive(true);
             jumpbackCol.SetActive(true);
             jumpbacktwoCol.SetActive(false);
-
-            //StartCoroutine(TextChange());
         }
-    }
-
-    private IEnumerator TextChange()
-    {
-        yield return new WaitForSecondsRealtime(5f);
-
-        speakerT.text = "Just stand still to go backwards";
-        AudioControl.Instance.playAudio();
-        yield return new WaitForSecondsRealtime(5f);
-
-        /*
-        speakerT.text = "Just stand still to go backwards";
-        AudioControl.Instance.playAudio();
-        yield return new WaitForSecondsRealtime(5f);
-        */
     }
 }

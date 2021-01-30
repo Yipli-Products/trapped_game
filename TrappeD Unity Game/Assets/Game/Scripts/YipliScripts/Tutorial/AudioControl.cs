@@ -7,21 +7,32 @@ public class AudioControl : MonoBehaviour
     // required variables
     [SerializeField] AudioSource audioS;
 
-    public static AudioControl Instance;
+    [SerializeField] AudioClip RunClip;
+    [SerializeField] AudioClip JumpClip;
+    [SerializeField] AudioClip StopClip;
+    [SerializeField] AudioClip RunAndJumpClip;
 
-    private void Awake()
+    public void PlayRunAudio()
     {
-        Instance = this;
+        audioS.clip = RunClip;
+        audioS.Play();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void PlayJumpAudio()
     {
-        
+        audioS.clip = JumpClip;
+        audioS.Play();
     }
 
-    public void playAudio()
+    public void PlayStopAudio()
     {
+        audioS.clip = StopClip;
+        audioS.Play();
+    }
+
+    public void PlayRunAndJumpAudio()
+    {
+        audioS.clip = RunAndJumpClip;
         audioS.Play();
     }
 }

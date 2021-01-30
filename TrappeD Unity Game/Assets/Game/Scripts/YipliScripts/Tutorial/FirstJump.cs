@@ -38,7 +38,6 @@ public class FirstJump : MonoBehaviour
             AIText.text = "Game Hints";
 
             speakerT.text = "You will be provided Text instructions through out the Game.";
-            AudioControl.Instance.playAudio();
 
             StartCoroutine(frameAnimation());
 
@@ -58,7 +57,6 @@ public class FirstJump : MonoBehaviour
         }
 
         AIText.text = "JUMP";
-        AudioControl.Instance.playAudio();
         Time.timeScale = 1f;
     }
 }

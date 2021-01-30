@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: CurrentPlayerData
   m_EditorClassIdentifier: 
   playerName: Kauva biryani
-  completed_levels: 0
-  coinScore: 0
+  completed_levels: 6
+  coinScore: 90
   active_ball: 0
   timePlayed: 0
   calBurned: 0
   fpPoints: 0
-  thisSessionTimePlayed: 0
-  thisSessionCalBurned: 0
-  thisSessionFpPoints: 0
+  thisSessionTimePlayed: 42
+  thisSessionCalBurned: 4.599998
+  thisSessionFpPoints: 453
   playerID: -MQHc-Ija9odZdIXkFYB
   purchasedBalls: 
   ballsInStore:
@@ -63,3 +63,4 @@ MonoBehaviour:
   initialiseOldFmResponse: 1
   isPreviousSceneTut: 0
   isStartTextShown: 0
+  isTutorialMandatory: 0

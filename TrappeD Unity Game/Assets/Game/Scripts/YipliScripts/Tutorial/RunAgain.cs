@@ -15,11 +15,14 @@ public class RunAgain : MonoBehaviour
     private BallController bc;
     private TutModelManager tmm;
 
+    private AudioControl ac;
+
     // Start is called before the first frame update
     void Start()
     {
         bc = FindObjectOfType<BallController>();
         tmm = FindObjectOfType<TutModelManager>();
+        ac = FindObjectOfType<AudioControl>();
 
         jumpCol.SetActive(false);
     }
@@ -32,7 +35,8 @@ public class RunAgain : MonoBehaviour
             tmm.SetRunOverride();
 
             speakerT.text = "Run and Jump Smartly to move forward";
-            AudioControl.Instance.playAudio();
+            ac.PlayRunAndJumpAudio();
+
             jumpCol.SetActive(true);
             leftMoveCol.SetActive(false);
             runAgainCol.SetActive(false);

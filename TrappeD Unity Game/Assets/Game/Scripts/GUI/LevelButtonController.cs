@@ -88,7 +88,14 @@ public class LevelButtonController : MonoBehaviour {
 
 			MatControlsStatManager.gameStateChanged(GameState.GAME_PLAY);
 
-			SceneManager.LoadScene(thisLevelNumber);
+			if (ps.IsTutorialMandatory)
+            {
+				SceneManager.LoadScene("Level_Tutorial");
+			}
+			else
+            {
+				SceneManager.LoadScene(thisLevelNumber);
+			}
 		}
 	}
 }
