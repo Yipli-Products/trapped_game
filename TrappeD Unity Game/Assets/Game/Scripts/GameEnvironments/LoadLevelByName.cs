@@ -27,7 +27,17 @@ public class LoadLevelByName : MonoBehaviour {
 
 		//PlayerPrefs.SetInt("PLAYER_LIFE", 3);
 		ps.PlayerLives = 3;
-		SceneManager.LoadScene (PlayerPrefs.GetInt("CURRENT_LEVEL_SERIAL"));
+
+		if (PlayerPrefs.GetInt("CURRENT_LEVEL_SERIAL") > ps.GetCompletedLevels())
+		{
+			SceneManager.LoadScene(ps.GetCompletedLevels() + 1);
+		}
+		else
+		{
+			SceneManager.LoadScene(PlayerPrefs.GetInt("CURRENT_LEVEL_SERIAL"));
+		}
+
+		//SceneManager.LoadScene (PlayerPrefs.GetInt("CURRENT_LEVEL_SERIAL"));
 
 	}
 
