@@ -93,7 +93,8 @@ public static class YipliHelper
             Debug.Log(e);
             Application.OpenURL("market://details?id=" + yipliAppBundleId);
         }
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+//#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN
         FileReadWrite.OpenYipliApp();
 #else
         Debug.Log("Unsupported os");

@@ -78,6 +78,8 @@ public class PlayerSelection : MonoBehaviour
     public async void Start()
 #elif UNITY_ANDROID
     void Start()
+#else
+    void Start()
 #endif
     {
         TurnOffAllDeviceSpecificTextObject();
@@ -470,8 +472,11 @@ public class PlayerSelection : MonoBehaviour
             Debug.Log("In player Selection Start()");
 #if UNITY_ANDROID
             ReadAndroidIntents();
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+//#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN
             ReadFromWindowsFile();
+#elif UNITY_IOS
+            // provide ios read intent function
 #endif
         }
         catch (System.Exception exp)// handling of game directing opening, without yipli app

@@ -246,7 +246,8 @@ public class MatSelection : MonoBehaviour
 
 #if UNITY_ANDROID
                 noMatText.text = ProductMessages.Err_mat_connection_mat_off;
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+//#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN
             if (PortTestings.CheckAvailableComPorts() == 0)
             {
                 noMatText.text = ProductMessages.Err_mat_connection_no_ports;
@@ -256,6 +257,8 @@ public class MatSelection : MonoBehaviour
                 noMatText.text = ProductMessages.Err_mat_connection_mat_off;
             }
 
+#elif UNITY_IOS
+            noMatText.text = ProductMessages.Err_mat_connection_mat_off;
 #endif
 
             NoMatPanel.SetActive(true);

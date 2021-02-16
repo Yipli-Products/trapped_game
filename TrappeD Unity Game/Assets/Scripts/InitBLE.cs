@@ -47,11 +47,14 @@ public class InitBLE
         {
 #if UNITY_ANDROID
                 return PluginClass.CallStatic<string>("_getFMResponse");
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+//#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN
             return DeviceControlActivity._getFMResponse();
+#elif UNITY_IOS
+            return null;
 #endif
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Debug.Log("Exception in getMatConnectionStatus() : " + e.Message);
             return "error";
@@ -92,8 +95,11 @@ public class InitBLE
             return "CONNECTED";
 #elif UNITY_ANDROID
             return BLEStatus;
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+//#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN
             return DeviceControlActivity._IsDeviceConnected() == 1 ? "CONNECTED" : "DISCONNECTED";
+#elif UNITY_IOS
+            return "Connected";
 #endif
         }
         catch (Exception e)
@@ -127,11 +133,11 @@ public class InitBLE
     public static void InitBLEFramework(string macaddress, int gameID)
     {
         Debug.Log("init_ble: setting macaddress & gameID - " + macaddress + " " + gameID);
-#if UNITY_IPHONE
+#if UNITY_IOS
             // Now we check that it's actually an iOS device/simulator, not the Unity Player. You only get plugins on the actual device or iOS Simulator.
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
-                _InitBLEFramework();
+                //_InitBLEFramework();
             }
 #elif UNITY_ANDROID
             if (Application.platform == RuntimePlatform.Android)
@@ -163,8 +169,11 @@ public class InitBLE
         {
 #if UNITY_ANDROID
                 PluginInstance.Call("_setGameMode", gameMode);
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+//#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN
             DeviceControlActivity._setGameMode(gameMode);
+#elif UNITY_IOS
+            // set game mode in ios
 #endif
         }
         catch (Exception e)
@@ -179,8 +188,11 @@ public class InitBLE
         {
 #if UNITY_ANDROID
                 return PluginInstance.CallStatic<int>("_getGameMode");
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+//#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN
             return DeviceControlActivity._getGameMode();
+#elif UNITY_IOS
+            return 0;
 #endif
         }
         catch (Exception e)
@@ -197,8 +209,11 @@ public class InitBLE
         {
 #if UNITY_ANDROID
                 PluginInstance.Call("_setGameID", gameID);
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+//#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN
             DeviceControlActivity._setGameID(gameID);
+#elif UNITY_IOS
+            // set game mode for ios
 #endif
         }
         catch (Exception e)
@@ -213,8 +228,11 @@ public class InitBLE
         {
 #if UNITY_ANDROID
                 return PluginInstance.Call<int>("_getGameID");
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+//#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN
             return DeviceControlActivity._getGameID();
+#elif UNITY_IOS
+            return 1010;
 #endif
         }
         catch (Exception e)
@@ -230,8 +248,11 @@ public class InitBLE
         {
 #if UNITY_ANDROID
                 return PluginInstance.CallStatic<string>("_getDriverVersion");
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+//#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN
             return DeviceControlActivity._getDriverVersion();
+#elif UNITY_IOS
+            return "";
 #endif
         }
         catch (Exception exp)
@@ -247,8 +268,11 @@ public class InitBLE
         {
 #if UNITY_ANDROID
             PluginInstance.Call("_setGameID", P1_gameID, P2_gameID);
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+//#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN
                 DeviceControlActivity._setGameID(P1_gameID, P2_gameID);
+#elif UNITY_IOS
+            // set multiplayer cluster id in ios
 #endif
         }
         catch (Exception e)
@@ -263,8 +287,11 @@ public class InitBLE
         {
 #if UNITY_ANDROID
             return PluginInstance.Call<int>("_getGameID", playerID);
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+//#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+#elif UNITY_STANDALONE_WIN
                 return DeviceControlActivity._getGameID(playerID);
+#elif UNITY_IOS
+            return 1010;
 #endif
         }
         catch (Exception e)
