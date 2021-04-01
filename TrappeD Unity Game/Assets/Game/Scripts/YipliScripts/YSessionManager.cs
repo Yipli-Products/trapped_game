@@ -65,6 +65,7 @@ public class YSessionManager : MonoBehaviour
         if (PlayerSession.Instance != null)
         {
             PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, FindObjectOfType<BallController>().CurrentStepCount);
+            Debug.LogError("CurrentStepCount from store session : " + FindObjectOfType<BallController>().CurrentStepCount);
             FindObjectOfType<BallController>().CurrentStepCount = 0;
         }
 

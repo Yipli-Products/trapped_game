@@ -514,6 +514,62 @@ public static class FirebaseDBHandler
         return appUpdateUrl.ToString();
     }
 
+    /* The function call to be allowed only if network is available 
+       Get yipli pc app url from backend */
+    public static async Task UploadLogsFileToDB(string userID, List<string> fileNames, List<string> filePaths)
+    {
+        StorageReference storageRef = yipliStorage.RootReference;
+
+        string storageChildRef = "customer-tickets/" + userID + "/" + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + "/" + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + "/";
+
+        for (int i = 0; i < fileNames.Count; i++)
+        {
+            StorageReference fmResponseLogRef = storageRef.Child(storageChildRef + fileNames[i]);
+
+            await fmResponseLogRef.PutFileAsync(filePaths[i]).ContinueWith((Task<StorageMetadata> task) => {
+                if (task.IsFaulted || task.IsCanceled)
+                {
+                    Debug.Log(task.Exception.ToString());
+                    // Uh-oh, an error occurred!
+                }
+                else
+                {
+                    // Metadata contains file metadata such as size, content-type, and download URL.
+                    StorageMetadata metadata = task.Result;
+                    string md5Hash = metadata.Md5Hash;
+                    Debug.Log("Finished uploading...");
+                    Debug.Log("md5 hash = " + md5Hash);
+                }
+            });
+        }
+    }
+
+    // only foir IOS get mac address from fb
+    public static async Task<string> GetMacAddressFromMatIDAsync(string MatID)
+    {
+        string macAddress = string.Empty;
+        DataSnapshot snapshot = null;
+        try
+        {
+            //Firebase.Auth.FirebaseUser newUser = await auth.SignInWithEmailAndPasswordAsync(YipliHelper.userName, YipliHelper.password);
+            Firebase.Auth.FirebaseUser newUser = await auth.SignInAnonymouslyAsync();
+            Debug.LogFormat("User signed in successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
+
+            FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://yipli-project.firebaseio.com/");
+            DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+            snapshot = await reference.Child("/inventory/mats/").Child(MatID).Child("mac-address").GetValueAsync();
+            macAddress = snapshot.Value.ToString();
+        }
+        catch (Exception exp)
+        {
+            Debug.LogError("Failed to tutstatus : " + exp.Message);
+        }
+
+        //return macAddress;
+
+        return "A4:DA:32:4F:C2:54";
+    }
+
     //************************ Test Harness code. Do Not modify (- Saurabh) ***************************
     // Adds a PlayerSession to the Firebase Database
     public static void _T_PostDummyPlayerSession(Dictionary<string, dynamic> tempData)

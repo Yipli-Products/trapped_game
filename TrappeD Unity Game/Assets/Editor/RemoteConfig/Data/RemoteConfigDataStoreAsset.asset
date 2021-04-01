@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
+  m_Name: RemoteConfigDataStoreAsset
+  m_EditorClassIdentifier: 
+  rsKeyList:
+  - metadata:
+      entityId: d9f9b1cf-e5c5-444d-8c98-926a3f8fed72
+    rs:
+      key: isGameUnderMaintenance
+      type: bool
+      value: True
+  - metadata:
+      entityId: ccf54ae9-fe99-41e5-a708-095fea75f082
+    rs:
+      key: gameNameThatisUndermaintenance
+      type: string
+      value: 
+  - metadata:
+      entityId: 2a8a0b88-cb17-455c-8035-ade048d7ee05
+    rs:
+      key: maintenanceMessage
+      type: string
+      value: 
+  - metadata:
+      entityId: 8bf171dc-a089-486b-88f9-a9c75ffce192
+    rs:
+      key: GameUpdateMessage
+      type: string
+      value: 
+  - metadata:
+      entityId: 0b199ba3-833b-4ec9-8cde-1f9c95da3081
+    rs:
+      key: trapped
+      type: string
+      value: win,ios,android:0,0,2.00.200
+  rsLastCachedKeyList:
+  - metadata:
+      entityId: d9f9b1cf-e5c5-444d-8c98-926a3f8fed72
+    rs:
+      key: isGameUnderMaintenance
+      type: bool
+      value: True
+  - metadata:
+      entityId: ccf54ae9-fe99-41e5-a708-095fea75f082
+    rs:
+      key: gameNameThatisUndermaintenance
+      type: string
+      value: 
+  - metadata:
+      entityId: 2a8a0b88-cb17-455c-8035-ade048d7ee05
+    rs:
+      key: maintenanceMessage
+      type: string
+      value: 
+  - metadata:
+      entityId: 8bf171dc-a089-486b-88f9-a9c75ffce192
+    rs:
+      key: GameUpdateMessage
+      type: string
+      value: 
+  - metadata:
+      entityId: 0b199ba3-833b-4ec9-8cde-1f9c95da3081
+    rs:
+      key: trapped
+      type: string
+      value: win,ios,android:0,0,2.00.200
+  configId: b57fbacd-1ea9-401a-84ab-e05790be6818
+  currentEnvironmentId: 9f14009c-2196-49e3-9625-14fd41cde80e
+  environments:
+  - id: 9f14009c-2196-49e3-9625-14fd41cde80e
+    appId: 
+    name: Release (Default)
+    description: 
+    createdAt: 2021-03-29T05:47:47Z
+    updatedAt: 2021-03-29T05:47:47Z
+  - id: b9531c5c-a3ac-4deb-be64-a33992d210f7
+    appId: 
+    name: Development
+    description: 
+    createdAt: 2021-03-29T05:47:47Z
+    updatedAt: 2021-03-29T05:47:47Z
+  rulesList: []
+  lastCachedRulesList: []
+  addedRulesIDs: []
+  updatedRulesIDs: []
+  deletedRulesIDs: []

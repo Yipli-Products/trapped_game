@@ -58,5 +58,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-TrappeD Unity Game/Assets/Firebase/Plugins/x86_64/FirebaseCppApp-6_8_1.so
-TrappeD Unity Game/Assets/Firebase/Plugins/x86_64/FirebaseCppApp-6_15_2.so
+/[Aa]ssets/Firebase/Plugins/x86_64/FirebaseCppApp-6_8_1.so
+/[Aa]ssets/Firebase/Plugins/x86_64/FirebaseCppApp-6_15_2.so

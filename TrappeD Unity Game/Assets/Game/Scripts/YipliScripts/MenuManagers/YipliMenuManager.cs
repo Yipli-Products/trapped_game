@@ -116,7 +116,7 @@ public class YipliMenuManager : MonoBehaviour
 
         if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount != singlePlayerResponse.count)
         {
-            Debug.Log("FMResponse " + fmActionData);
+            //Debug.Log("FMResponse " + fmActionData);
             PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
 
             YipliUtils.PlayerActions providedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);

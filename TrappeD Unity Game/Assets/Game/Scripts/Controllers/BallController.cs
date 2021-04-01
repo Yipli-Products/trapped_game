@@ -102,8 +102,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
         public int CurrentStepCount { get => currentStepCount; set => currentStepCount = value; }
 
-        // Use this for initialization
-        void Start () {
+		// Use this for initialization
+		void Start () {
 
 			currentLevel = SceneManager.GetActiveScene().name;
 
@@ -286,8 +286,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						isJumping = true;
 						GetComponent<Rigidbody2D>().AddForce(new Vector2(0, verticalForce * Time.deltaTime * 60.0f)); //o
 					}
-
-					AddJumpPlayerAction();
 				}
 			}
 
@@ -434,14 +432,6 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			else hInput = 0.0f;
 		}
 
-		private void AddJumpPlayerAction() 
-		{
-			if (currentLevel != "Level_Tutorial")
-			{
-				PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.JUMP);
-			}
-		}
-
 		private void JumpFalse () {
 			ballJump = false;
 		}
@@ -463,6 +453,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				if (PlayerSession.Instance != null)
 				{
 					PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, CurrentStepCount);
+					Debug.LogError("CurrentStepCount : " + CurrentStepCount);
 					CurrentStepCount = 0;
 				}
 
@@ -471,7 +462,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 			if (PlayerSession.Instance.currentYipliConfig.oldFMResponseCount != singlePlayerResponse.count)
             {
-				Debug.Log("FMResponse " + fmActionData);
+				//Debug.Log("FMResponse " + fmActionData);
 				PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
 
 				YipliUtils.PlayerActions providedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
@@ -489,6 +480,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						if (PlayerSession.Instance != null)
 						{
 							PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, CurrentStepCount);
+							Debug.LogError("CurrentStepCount in running stop : " + CurrentStepCount);
 							CurrentStepCount = 0;
 						}
 
@@ -501,6 +493,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						if (PlayerSession.Instance != null)
 						{
 							PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, CurrentStepCount);
+							Debug.LogError("CurrentStepCount stop : " + CurrentStepCount);
 							CurrentStepCount = 0;
 						}
 
@@ -529,7 +522,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 								string[] totalStepsCountKeyValue = tokens[0].Split(':');
 								if (totalStepsCountKeyValue[0].Equals("totalStepsCount"))
 								{
-									Debug.LogError("Adding steps : " + totalStepsCountKeyValue[1]);
+									//Debug.LogError("Adding steps : " + totalStepsCountKeyValue[1]);
 									CurrentStepCount = int.Parse(totalStepsCountKeyValue[1]);
 								}
 
@@ -568,6 +561,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 					if (PlayerSession.Instance != null)
 					{
 						PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, CurrentStepCount);
+						Debug.LogError("CurrentStepCount in else : " + CurrentStepCount);
 						CurrentStepCount = 0;
 					}
 				}

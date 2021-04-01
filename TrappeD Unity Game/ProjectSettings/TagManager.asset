@@ -16,6 +16,7 @@ TagManager:
   - jumpTUT
   - stepBackStart
   - stepBackEnd
+  - matPixel
   layers:
   - Default
   - TransparentFX

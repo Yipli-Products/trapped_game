@@ -63,6 +63,11 @@ public class YipliButtonScript : MonoBehaviour
         YipliHelper.GoToYipli();
     }
 
+    public void GoToTroubleShooting()
+    {
+        PlayerSession.Instance.TroubleShootSystem();
+    }
+
     public void GoToStore()
     {
         if (YipliHelper.checkInternetConnection())
