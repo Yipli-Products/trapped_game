@@ -700,4 +700,15 @@ public class PlayerSession : MonoBehaviour
     {
         SceneManager.LoadScene("Troubleshooting");
     }
+
+    // Ticket system
+    // Update current ticket data.
+    public void UpdateCurrentTicketData(Dictionary<string, object> currentTicketData)
+    {
+        FirebaseDBHandler.UpdateCurrentTicketData(
+            currentYipliConfig.userId,
+            currentTicketData,
+            () => { Debug.Log("Ticket Generated successfully"); }
+        );
+    }
 }
