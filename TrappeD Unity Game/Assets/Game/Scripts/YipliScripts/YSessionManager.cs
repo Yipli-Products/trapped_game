@@ -61,6 +61,7 @@ public class YSessionManager : MonoBehaviour
         ps.ThisSessionCalBurned += ps.CalBurned;
         ps.ThisSessionFpPoints += ps.FpPoints;
 
+        /*
         // add running action here
         if (PlayerSession.Instance != null)
         {
@@ -68,6 +69,7 @@ public class YSessionManager : MonoBehaviour
             Debug.LogError("CurrentStepCount from store session : " + FindObjectOfType<BallController>().CurrentStepCount);
             FindObjectOfType<BallController>().CurrentStepCount = 0;
         }
+        */
 
         PlayerSession.Instance.StoreSPSession(ps.GetCoinScore());
     }

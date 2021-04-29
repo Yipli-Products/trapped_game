@@ -99,8 +99,10 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 		public float matBallForce = 30f;
 
 		private int currentStepCount = 0;
+		private int previousStepCount = 0;
 
         public int CurrentStepCount { get => currentStepCount; set => currentStepCount = value; }
+		public int PreviousStepCount { get => previousStepCount; set => previousStepCount = value; }
 
 		// Use this for initialization
 		void Start () {
@@ -475,7 +477,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						break;
 
 					case YipliUtils.PlayerActions.RUNNINGSTOPPED:
-
+						/*
 						// add running action here
 						if (PlayerSession.Instance != null)
 						{
@@ -483,12 +485,14 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 							Debug.LogError("CurrentStepCount in running stop : " + CurrentStepCount);
 							CurrentStepCount = 0;
 						}
+						*/
 
 						RunningStopAction();
 						break;
 
 					case YipliUtils.PlayerActions.STOP:
 
+						/*
 						// add running action here
 						if (PlayerSession.Instance != null)
 						{
@@ -496,6 +500,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 							Debug.LogError("CurrentStepCount stop : " + CurrentStepCount);
 							CurrentStepCount = 0;
 						}
+						*/
 
 						RunningStopAction();
 						break;
@@ -519,11 +524,18 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 
 								//{"count":240,"timestamp":1597928543171,"playerdata":[{"id":1,"fmresponse":{"action_id":"SWLO","action_name":"Running","properties":"totalStepsCount:1,speed:1.60"},"count":123},{null}]}
 
-								string[] totalStepsCountKeyValue = tokens[0].Split(':');
+								string[] totalStepsCountKeyValue = tokens[1].Split(':');
 								if (totalStepsCountKeyValue[0].Equals("totalStepsCount"))
 								{
 									//Debug.LogError("Adding steps : " + totalStepsCountKeyValue[1]);
 									CurrentStepCount = int.Parse(totalStepsCountKeyValue[1]);
+
+									if (CurrentStepCount < PreviousStepCount) {
+                                    	PlayerSession.Instance.AddPlayerAction(YipliUtils.PlayerActions.RUNNING, PreviousStepCount);
+										PreviousStepCount = CurrentStepCount;
+									} else {
+										PreviousStepCount = CurrentStepCount;
+									}
 								}
 
 								string[] speedKeyValue = tokens[1].Split(':');
@@ -557,6 +569,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 				{
 					BackwardsMovement();
 
+					/*
 					// add running action here
 					if (PlayerSession.Instance != null)
 					{
@@ -564,6 +577,7 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 						Debug.LogError("CurrentStepCount in else : " + CurrentStepCount);
 						CurrentStepCount = 0;
 					}
+					*/
 				}
 			}
         }
