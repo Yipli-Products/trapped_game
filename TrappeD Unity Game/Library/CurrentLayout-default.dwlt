@@ -111,8 +111,8 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 957
-  m_MinSize: {x: 779, y: 492}
-  m_MaxSize: {x: 14002, y: 14042}
+  m_MinSize: {x: 779, y: 342}
+  m_MaxSize: {x: 12004, y: 8042}
   vertical: 1
   controlID: 276
 --- !u!114 &6
@@ -136,8 +136,8 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 957
-  m_MinSize: {x: 779, y: 492}
-  m_MaxSize: {x: 14002, y: 14042}
+  m_MinSize: {x: 779, y: 342}
+  m_MaxSize: {x: 12004, y: 8042}
   vertical: 0
   controlID: 277
 --- !u!114 &7
@@ -161,8 +161,8 @@ MonoBehaviour:
     y: 0
     width: 1424
     height: 957
-  m_MinSize: {x: 503, y: 492}
-  m_MaxSize: {x: 10001, y: 14042}
+  m_MinSize: {x: 503, y: 342}
+  m_MaxSize: {x: 8003, y: 8042}
   vertical: 1
   controlID: 72
 --- !u!114 &8
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -266,16 +266,16 @@ MonoBehaviour:
     y: 565
     width: 1424
     height: 392
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 20}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 20}
   - {fileID: 21}
   - {fileID: 22}
   - {fileID: 23}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -331,7 +331,7 @@ MonoBehaviour:
     height: 544
   m_ViewDataDictionary: {fileID: 0}
   m_PosLeft: {x: 0, y: 0}
-  m_PosRight: {x: 0, y: 561}
+  m_PosRight: {x: 0, y: 600}
   m_Scope: 1
   m_SplitterFlex: 0.16988951
 --- !u!114 &14
@@ -460,7 +460,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 206dffff346dffff186fffff506fffff3070ffff0c71ffffee71ffffce72ffff0288ffff5892ffff86a1ffffaab1ffffa8c0ffff2ed2ffff2adcffff70e8ffff02f0ffff8cf8ffff98f8ffff6afbffff
+      m_ExpandedIDs: 3053feff4453feff2855feff6055feff4056feff1c57fefffe57feffde58feff126efeff6878feff9687feffba97feffb8a6feff3eb8feff3ac2feff80cefeff12d6feff9adefeffa6defeffbedffeffd2dffeffb6e1feffeee1feffcee2feffaae3feff8ce4feff6ce5feffa0fafefff604ffff2414ffff4824ffff4633ffffcc44ffffc84effff0e5bffffa062ffff286bffff346bffff4c6cffff606cffff446effff7c6effff5c6fffff3870ffff1a71fffffa71ffff2e87ffff8491ffffb2a0ffffd6b0ffffd4bfffff5ad1ffff56dbffff9ce7ffff2eefffffb8f7ffffc4f7ffff6afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
