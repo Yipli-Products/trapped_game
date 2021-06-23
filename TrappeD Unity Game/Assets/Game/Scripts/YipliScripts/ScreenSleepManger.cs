@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using FMInterface_Windows;
 using UnityEngine;
 
 public class ScreenSleepManger : MonoBehaviour
@@ -18,4 +19,13 @@ public class ScreenSleepManger : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+
+    /*
+    void OnApplicationQuit()
+    {
+        Debug.LogError("Inside OnApplicationQuit");
+        DeviceControlActivity._disconnect();
+        DeviceControlActivity.readThread.Abort();
+    }
+    */
 }

@@ -443,6 +443,8 @@ namespace UnitySampleAssets.CrossPlatformInput.PlatformSpecific
 			string fmActionData = InitBLE.GetFMResponse();
 			Debug.Log("Json Data from Fmdriver : " + fmActionData);
 
+			if (fmActionData == null || fmActionData == "Make action") return;
+
 			FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
 
 			if (singlePlayerResponse == null) return;
