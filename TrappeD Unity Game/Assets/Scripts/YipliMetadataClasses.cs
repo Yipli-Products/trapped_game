@@ -188,8 +188,8 @@ public class YipliInventoryGameInfo
     public string versionUpdateMessage;
     public string maintenanceMessage;
     public string osListForMaintanence;
-    // public int maxDaysWithoutUpdate;
-    // public string onlyMatPlayMode;
+    public int maxDaysWithoutUpdate;
+    public string onlyMatPlayMode = ",";
 
     YipliInventoryGameInfo(string gameId)
     {
@@ -222,20 +222,23 @@ public class YipliInventoryGameInfo
                 maintenanceMessage = snapshot.Child("maintenance-message").Value.ToString();
                 versionUpdateMessage = snapshot.Child("version-update-message").Value.ToString();
 
-                // if (snapshot.HasChild("max-days-without-update")) {
-                //     maxDaysWithoutUpdate = (int)snapshot.Child("max-days-without-update").Value;
-                // } else {
-                //     maxDaysWithoutUpdate = 6;
-                // }
-                
-                // if (snapshot.HasChild("only-mat-play-mode")) {
-                //     onlyMatPlayMode = snapshot.Child("only-mat-play-mode").Value.ToString();
-                // } else {
-                //     onlyMatPlayMode = ",";
-                // }
+                if (snapshot.HasChild("max-days-without-update"))
+                {
+                    maxDaysWithoutUpdate = (int)snapshot.Child("max-days-without-update").Value;
+                }
+                else
+                {
+                    maxDaysWithoutUpdate = 6;
+                }
 
-                // Debug.LogError("onlyMatPlayMode : from yipli matadata : " + onlyMatPlayMode);
-                // Debug.LogError("onlyMatPlayMode : from yipli matadata : " + maxDaysWithoutUpdate);
+                if (snapshot.HasChild("only-mat-play-mode"))
+                {
+                    onlyMatPlayMode = snapshot.Child("only-mat-play-mode").Value.ToString();
+                }
+                else
+                {
+                    onlyMatPlayMode = ",";
+                }
             }
             else
             {

@@ -22,6 +22,7 @@ PluginImporter:
         Exclude OSXUniversal: 1
         Exclude Win: 1
         Exclude Win64: 1
+        Exclude WindowsStoreApps: 1
         Exclude iOS: 0
   - first:
       Android: Android
@@ -47,13 +48,13 @@ PluginImporter:
     second:
       enabled: 0
       settings:
-        CPU: AnyCPU
+        CPU: None
   - first:
       Standalone: OSXUniversal
     second:
       enabled: 0
       settings:
-        CPU: x86_64
+        CPU: None
   - first:
       Standalone: Win
     second:
@@ -67,6 +68,16 @@ PluginImporter:
       settings:
         CPU: x86_64
   - first:
+      Windows Store Apps: WindowsStoreApps
+    second:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
+        DontProcess: false
+        PlaceholderPath: 
+        SDK: AnySDK
+        ScriptingBackend: AnyScriptingBackend
+  - first:
       iPhone: iOS
     second:
       enabled: 1
@@ -74,7 +85,7 @@ PluginImporter:
         AddToEmbeddedBinaries: false
         CPU: AnyCPU
         CompileFlags: 
-        FrameworkDependencies: CoreBluetooth;
+        FrameworkDependencies: ARKit;GameKit;CoreBluetooth;
   userData: 
   assetBundleName: 
   assetBundleVariant: 
