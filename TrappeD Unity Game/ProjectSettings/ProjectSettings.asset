@@ -137,7 +137,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 4.03.068
+  bundleVersion: 4.03.072
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -161,11 +161,11 @@ PlayerSettings:
     iPhone: com.yipli.trappedd
     tvOS: 
   buildNumber:
-    Standalone: 403066
+    Standalone: 403071
     iPhone: 403068
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 403063
+  AndroidBundleVersionCode: 403072
   AndroidMinSdkVersion: 21
   AndroidTargetSdkVersion: 30
   AndroidPreferredInstallLocation: 1
@@ -241,7 +241,7 @@ PlayerSettings:
   clonedFromGUID: 00000000000000000000000000000000
   templatePackageId: 
   templateDefaultScene: 
-  useCustomMainManifest: 0
+  useCustomMainManifest: 1
   useCustomLauncherManifest: 0
   useCustomMainGradleTemplate: 0
   useCustomLauncherGradleManifest: 0
@@ -252,7 +252,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/User/Documents/F/Data/SiginingKeys/Trapped/user.keystore
+  AndroidKeystoreName: D:/F/Data/SiginingKeys/Trapped/user.keystore
   AndroidKeyaliasName: fitmat
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1
