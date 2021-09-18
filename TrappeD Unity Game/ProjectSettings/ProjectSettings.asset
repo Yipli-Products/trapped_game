@@ -137,7 +137,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 4.03.072
+  bundleVersion: 4.03.074
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -161,11 +161,11 @@ PlayerSettings:
     iPhone: com.yipli.trappedd
     tvOS: 
   buildNumber:
-    Standalone: 403071
+    Standalone: 403074
     iPhone: 403068
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 403072
+  AndroidBundleVersionCode: 403073
   AndroidMinSdkVersion: 21
   AndroidTargetSdkVersion: 30
   AndroidPreferredInstallLocation: 1

@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404322af594942f478347946ad7d1557, type: 3}
   m_Name: CurrentPlayerData
   m_EditorClassIdentifier: 
-  playerName: Nasha Mukti kendra
-  completed_levels: 3
-  coinScore: 200
-  active_ball: 1
+  playerName: 
+  completed_levels: 0
+  coinScore: 0
+  active_ball: 0
   timePlayed: 0
   calBurned: 0
   fpPoints: 0
-  thisSessionTimePlayed: 73
-  thisSessionCalBurned: 1
-  thisSessionFpPoints: 78
-  playerID: -MSX--0uyqI7KgKmNOIY
-  purchasedBalls: 0,1,2
+  thisSessionTimePlayed: 0
+  thisSessionCalBurned: 0
+  thisSessionFpPoints: 0
+  playerID: 
+  purchasedBalls: 
   ballsInStore:
   - ballID: 0
     ballPrice: 0

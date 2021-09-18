@@ -55,6 +55,7 @@ ScriptsOnlyBuild:
     - MatControlsStatManager
     - MatInputController
     - MatSelection
+    - ModelEventActivator
     - NewMatInputController
     - NewUIManager
     - OBJDetection
@@ -64,11 +65,13 @@ ScriptsOnlyBuild:
     - PlayerStats
     - PointDisplay
     - PracticalTask
+    - ResumeManager
     - RotatingWoodFourWheels
     - RunAgain
     - SawRotation
     - ScaleUpdownAnimation
     - ScreenSleepManger
+    - SecondTutorialManager
     - SetBallStartPos
     - SetOnClickButtonName
     - SimpleCheckPoint
@@ -82,6 +85,7 @@ ScriptsOnlyBuild:
     - StickOBJ
     - StoreMangement
     - StoreMsgController
+    - ThreeDModelManager
     - TileTriggers
     - Transition
     - TroubleShootGL
@@ -148,6 +152,123 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Text
   sceneClasses:
+    Assets/GL/Scenes/gameLibTutorial.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
+    - Class: 90
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 1866}
+    - Class: 114
+      Script: {instanceID: 1868}
+    - Class: 114
+      Script: {instanceID: 1870}
+    - Class: 114
+      Script: {instanceID: 1872}
+    - Class: 114
+      Script: {instanceID: 1874}
+    - Class: 114
+      Script: {instanceID: 1876}
+    - Class: 114
+      Script: {instanceID: 1882}
+    - Class: 114
+      Script: {instanceID: 1884}
+    - Class: 114
+      Script: {instanceID: 1886}
+    - Class: 114
+      Script: {instanceID: 2020}
+    - Class: 114
+      Script: {instanceID: 2210}
+    - Class: 114
+      Script: {instanceID: 2216}
+    - Class: 114
+      Script: {instanceID: 2666}
+    - Class: 114
+      Script: {instanceID: 2692}
+    - Class: 114
+      Script: {instanceID: 2808}
+    - Class: 114
+      Script: {instanceID: 3078}
+    - Class: 114
+      Script: {instanceID: 3470}
+    - Class: 114
+      Script: {instanceID: 3482}
+    - Class: 114
+      Script: {instanceID: 3776}
+    - Class: 114
+      Script: {instanceID: 4004}
+    - Class: 114
+      Script: {instanceID: 4086}
+    - Class: 114
+      Script: {instanceID: 4182}
+    - Class: 114
+      Script: {instanceID: 4248}
+    - Class: 114
+      Script: {instanceID: 4258}
+    - Class: 114
+      Script: {instanceID: 4428}
+    - Class: 114
+      Script: {instanceID: 5062}
+    - Class: 114
+      Script: {instanceID: 5082}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 137
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 221
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 850595691
+      Script: {instanceID: 0}
     Assets/Game/_Scenes/Game Over.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -220,7 +341,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5182}
     - Class: 114
-      Script: {instanceID: 81612}
+      Script: {instanceID: 66718}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -4133,4 +4254,5 @@ ScriptsOnlyBuild:
   - Assets/Game/_Scenes/Store.unity
   - Assets/yipli_lib_scene.unity
   - Assets/TroubleshootingModule/Troubleshooting.unity
+  - Assets/GL/Scenes/gameLibTutorial.unity
   playerPath: D:/F/Builds/T/APK/Trapped.apk
