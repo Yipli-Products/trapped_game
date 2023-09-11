@@ -142,6 +142,7 @@ public class PlayerSelection : MonoBehaviour
         GetGameInfo();
 
 
+
         //Todo: Shift the following code to llistner basis. Avoid a get call.
         //Data could be ready already before reaching here.
 #if UNITY_STANDALONE_WIN

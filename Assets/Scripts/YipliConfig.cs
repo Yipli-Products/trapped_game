@@ -17,15 +17,18 @@ public class YipliConfig : ScriptableObject
     //[HideInInspector]
     public string callbackLevel;
 
-    [HideInInspector]
-    public YipliPlayerInfo playerInfo;
+    //[HideInInspector]
+    public List<YipliPlayerInfo> allPlayersInfo;
 
-    [HideInInspector]
+    //[HideInInspector]
+    public YipliPlayerInfo playerInfo = null;
+
+    //[HideInInspector]
     public YipliMatInfo matInfo;
 
     //[HideInInspector]
     public string userId = "";
-    
+
     public string gameId;
 
     //[HideInInspector]
@@ -33,9 +36,6 @@ public class YipliConfig : ScriptableObject
 
     [HideInInspector]
     public MP_GameStateManager MP_GameStateManager;
-
-    [HideInInspector]
-    public List<YipliPlayerInfo> allPlayersInfo;
 
     [HideInInspector]
     public List<YipliMatInfo> allMatsInfo;
@@ -82,4 +82,8 @@ public class YipliConfig : ScriptableObject
     public string getMatUrlUS = string.Empty;
 
     public bool allowMainGameSceneToLoad = false;
+
+    public bool sceneLoadedDirectly = false;
+
+    public bool onlyMatPlayModeIsSet = false;
 }
