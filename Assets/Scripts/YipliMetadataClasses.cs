@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 
+[Serializable]
 public class YipliPlayerInfo
 {
     public string playerName;
@@ -72,7 +73,7 @@ public class YipliPlayerInfo
                 profilePicUrl = snapshot.Child("profile-pic-url").Value?.ToString() ?? "";
 
                 //If playername is not found, set PlayerId to null
-                if (playerName== "")
+                if (playerName == "")
                 {
                     playerId = null;
                 }
@@ -94,7 +95,8 @@ public class YipliPlayerInfo
         }
     }
 
-    private async void SetProfilePicForPlayer(string profilePicUrlNew) {
+    private async void SetProfilePicForPlayer(string profilePicUrlNew)
+    {
         string onDeviceProfilePicPath = Application.persistentDataPath + "/" + profilePicUrlNew;
         playerProfilePicIMG = await FirebaseDBHandler.GetImageAsync(profilePicUrlNew, onDeviceProfilePicPath);
     }
@@ -122,6 +124,7 @@ public class YipliPlayerInfo
     }
 }
 
+[Serializable]
 public class YipliMatInfo
 {
     public string matName;

@@ -79,7 +79,8 @@ public static class FirebaseDBHandler
     public static void PostPlayerSession(PlayerSession session, PostUserCallback callback)
     {
         //auth.SignInWithEmailAndPasswordAsync(YipliHelper.userName, YipliHelper.password).ContinueWith(task => {
-        auth.SignInAnonymouslyAsync().ContinueWith(task => {
+        auth.SignInAnonymouslyAsync().ContinueWith(task =>
+        {
             if (task.IsCanceled)
             {
                 Debug.LogError("SignInAnonymouslyAsync was canceled.");
@@ -109,10 +110,11 @@ public static class FirebaseDBHandler
     }
 
     // Adds a PlayerSession to the Firebase Database
-    public static void PostMultiPlayerSession(PlayerSession session,PlayerDetails playerDetails,string mpSessionUUID, PostUserCallback callback)
+    public static void PostMultiPlayerSession(PlayerSession session, PlayerDetails playerDetails, string mpSessionUUID, PostUserCallback callback)
     {
         //auth.SignInWithEmailAndPasswordAsync(YipliHelper.userName, YipliHelper.password).ContinueWith(task => {
-        auth.SignInAnonymouslyAsync().ContinueWith(task => {
+        auth.SignInAnonymouslyAsync().ContinueWith(task =>
+        {
             if (task.IsCanceled)
             {
                 Debug.LogError("SignInAnonymouslyAsync was canceled.");
@@ -410,7 +412,7 @@ public static class FirebaseDBHandler
             Texture2D texture = new Texture2D(1, 1);
             texture.LoadImage(bytes);
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            
+
             Debug.Log("Profile image downloaded.");
             return sprite;
         }
@@ -527,7 +529,8 @@ public static class FirebaseDBHandler
         {
             StorageReference fmResponseLogRef = storageRef.Child(storageChildRef + fileNames[i]);
 
-            await fmResponseLogRef.PutFileAsync(filePaths[i]).ContinueWith((Task<StorageMetadata> task) => {
+            await fmResponseLogRef.PutFileAsync(filePaths[i]).ContinueWith((Task<StorageMetadata> task) =>
+            {
                 if (task.IsFaulted || task.IsCanceled)
                 {
                     Debug.Log(task.Exception.ToString());
@@ -705,7 +708,8 @@ public static class FirebaseDBHandler
     public static void _T_PostDummyPlayerSession(Dictionary<string, dynamic> tempData)
     {
         //auth.SignInWithEmailAndPasswordAsync(YipliHelper.userName, YipliHelper.password).ContinueWith(task => {
-        auth.SignInAnonymouslyAsync().ContinueWith(task => {
+        auth.SignInAnonymouslyAsync().ContinueWith(task =>
+        {
             if (task.IsCanceled)
             {
                 Debug.LogError("SignInAnonymouslyAsync was canceled.");
@@ -730,7 +734,7 @@ public static class FirebaseDBHandler
             reference.Child("stage-bucket/player-sessions").Child(key).SetRawJsonValueAsync(JsonConvert.SerializeObject(tempData, Formatting.None, new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            }));    
+            }));
         });
     }
 }

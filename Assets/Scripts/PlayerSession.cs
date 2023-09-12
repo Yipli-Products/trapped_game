@@ -13,6 +13,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YipliFMDriverCommunication;
+using Permission = UnityEngine.Android.Permission;
 
 public class PlayerSession : MonoBehaviour
 {
@@ -63,10 +64,21 @@ public class PlayerSession : MonoBehaviour
     [SerializeField] private GameObject yipliInfoPanel = null;
     [SerializeField] private TextMeshProUGUI infoPaneltext = null;
 
+    string[] _permissions = new string[]
+    {
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_SCAN",
+        "android.permission.BLUETOOTH_CONNECT",
+        "android.permission.ACCESS_FINE_LOCATION"
+    };
+
     private void Awake()
     {
         //SetMatPlayMode();
-        
+
+        Permission.RequestUserPermissions(_permissions);
+
         if (_instance != null && _instance != this)
         {
             Debug.Log("Destroying current instance of playersession and reinitializing");
@@ -122,7 +134,7 @@ public class PlayerSession : MonoBehaviour
         {
             playerNameGreetingText.text = "Hi, " + GetCurrentPlayer();
         }
-        
+
         Debug.Log("Starting the BLE routine check in PlayerSession Start()");
 
         StartCoroutine(CheckInternetConnection());
@@ -131,7 +143,7 @@ public class PlayerSession : MonoBehaviour
     public void Update()
     {
         Debug.Log("Game Cluster Id : " + YipliHelper.GetGameClusterId());
-        
+
         if (currentYipliConfig.onlyMatPlayMode)
         {
             CheckMatConnection();
@@ -161,7 +173,7 @@ public class PlayerSession : MonoBehaviour
         currentYipliConfig.playerInfo = new YipliPlayerInfo();
         SceneManager.LoadScene("yipli_lib_scene");
     }
-    
+
     public void UpdateGameData(Dictionary<string, string> update)
     {
         if (update != null)
@@ -231,7 +243,7 @@ public class PlayerSession : MonoBehaviour
         if (YipliHelper.GetMatConnectionStatus().Equals("connected", StringComparison.OrdinalIgnoreCase))
         {
             Debug.Log("Mat connection is established.");
-            
+
             if (BleErrorPanel.activeSelf)
             {
                 YipliBackgroundPanel.SetActive(false);
@@ -246,9 +258,12 @@ public class PlayerSession : MonoBehaviour
             {
                 // Different mat connection (error)message based on Operating system and connectivity type.
 #if UNITY_ANDROID
-                if (currentYipliConfig.isDeviceAndroidTV) {
+                if (currentYipliConfig.isDeviceAndroidTV)
+                {
                     bleErrorText.text = ProductMessages.Err_mat_connection_android_tv;
-                } else {
+                }
+                else
+                {
                     bleErrorText.text = ProductMessages.Err_mat_connection_android_phone;
                 }
 #elif UNITY_STANDALONE_WIN || UNITY_EDITOR
@@ -270,7 +285,7 @@ public class PlayerSession : MonoBehaviour
             if (!bIsBleCheckRunning)
                 StartCoroutine(ReconnectBleFromGame());
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Debug.Log("Exception in Retrying ble connection." + e.Message);
         }
@@ -330,7 +345,7 @@ public class PlayerSession : MonoBehaviour
         YipliHelper.GoToYipli(ProductMessages.openYipliApp);
     }
 
-#region Single Player Session Functions
+    #region Single Player Session Functions
 
     public void ReInitializeSPSession()
     {
@@ -350,7 +365,7 @@ public class PlayerSession : MonoBehaviour
     {
         return playerActionCounts;
     }
-    
+
     public Dictionary<string, dynamic> GetPlayerSessionDataJsonDic()
     {
         Dictionary<string, dynamic> x;
@@ -392,10 +407,13 @@ public class PlayerSession : MonoBehaviour
         //x.Add("mat-id", currentYipliConfig.matInfo.matId);
         //x.Add("mac-address", currentYipliConfig.matInfo.macAddress);
 
-        #if UNITY_ANDROID
-        if (currentYipliConfig.isDeviceAndroidTV) {
+#if UNITY_ANDROID
+        if (currentYipliConfig.isDeviceAndroidTV)
+        {
             x.Add("os", "atv");
-        } else {
+        }
+        else
+        {
             x.Add("os", "a");
         }
 #elif UNITY_IOS
@@ -461,7 +479,7 @@ public class PlayerSession : MonoBehaviour
         if (currentYipliConfig.gameId == null || currentYipliConfig.gameId == "")
         {
             Debug.Log("gameId is not set");
-            return -1;  
+            return -1;
         }
         if (currentYipliConfig.playerInfo.playerId == null || currentYipliConfig.playerInfo.playerId == "")
         {
@@ -686,7 +704,7 @@ public class PlayerSession : MonoBehaviour
             playerDetails.calories = 1;
         }
         */
-        
+
         if (playerDetails.duration == 0)
         {
             Debug.Log("duration is 0");
@@ -760,7 +778,7 @@ public class PlayerSession : MonoBehaviour
     // network connection panel management
     private IEnumerator CheckInternetConnection()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSecondsRealtime(1f);
 
@@ -846,18 +864,18 @@ public class PlayerSession : MonoBehaviour
         );
     }
 
-   // #if UNITY_STANDALONE_WIN
-        // application quit systems
-        void OnApplicationQuit()
-        {
-            #if UNITY_STANDALONE_WIN
+    // #if UNITY_STANDALONE_WIN
+    // application quit systems
+    void OnApplicationQuit()
+    {
+#if UNITY_STANDALONE_WIN
                 Debug.LogError("Inside OnApplicationQuit");
                 DeviceControlActivity._disconnect();
                 DeviceControlActivity.readThread.Abort();
-            #elif UNITY_IOS
+#elif UNITY_IOS
                 InitBLE.DisconnectMat();
-            #endif
-        }
+#endif
+    }
     //#endif
 
     // Application State Management
@@ -878,11 +896,13 @@ public class PlayerSession : MonoBehaviour
     }
 
     // Test functions
-    public void PrintBundleIdentifier() {
+    public void PrintBundleIdentifier()
+    {
         PlayerPrefs.SetString("skippedDate", new DateTime(2021, 07, 21).ToString());
     }
 
-    private void TimeDifferenceManager() {
+    private void TimeDifferenceManager()
+    {
         PlayerPrefs.SetString("skippedDate", DateTime.Today.ToString());
 
         DateTime todaysDate = new DateTime(2021, 07, 21);
