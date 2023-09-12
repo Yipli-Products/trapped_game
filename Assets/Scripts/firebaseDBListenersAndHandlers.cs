@@ -48,7 +48,7 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
 
     // delegates and events
     public delegate void OnUrlsFound();
-    public static event OnUrlsFound allUrlsFound;
+    public static event OnUrlsFound AllUrlsFound;
 
     public static QueryStatus GetGameDataForCurrenPlayerQueryStatus()
     {
@@ -75,19 +75,20 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
         return getGameInfoQueryStatus;
     }
 
-    private void Start() {
-        allUrlsFound();
+    private void Start()
+    {
+        AllUrlsFound();
     }
 
     // Start is called before the first frame update
     void OnEnable()
     {
-        allUrlsFound += addGetAllURLListener;
+        AllUrlsFound += addGetAllURLListener;
 
         // Add listener for Dynamic links
-        #if UNITY_ANDROID || UNITY_IOS
+#if UNITY_ANDROID || UNITY_IOS
         DynamicLinks.DynamicLinkReceived += ExtractUserDetailsFromLink;
-        #endif
+#endif
 
         //Add listeners to the Firebase backend for all the DB Calls
         Debug.Log("Add listeners to the Firebase backend for all the DB Calls");
@@ -106,7 +107,7 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
         StartCoroutine(TrackNetworkConnectivity());
     }
 
-    private  async void addListnerForGameInfo()
+    private async void addListnerForGameInfo()
     {
         Debug.Log("addGetPlayersListener invoked");
         await anonAuthenticate();
@@ -118,7 +119,7 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
     private void HandleGameInfoValueChanged(object sender, ValueChangedEventArgs e)
     {
         getGameInfoQueryStatus = global::QueryStatus.InProgress;
-        if(e.Snapshot.Value != null)
+        if (e.Snapshot.Value != null)
         {
             currentYipliConfig.gameInventoryInfo = new YipliInventoryGameInfo(e.Snapshot);
         }
@@ -136,13 +137,13 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
         yield return anonAuthenticate();
         FirebaseDatabase.DefaultInstance.GetReference(".info/connected").ValueChanged += HandleConnectedChanged;
 
-/*
-#if UNITY_ANDROID || UNITY_IOS
-        FirebaseDatabase.DefaultInstance.GetReference(".info/connected").ValueChanged += HandleConnectedChanged;
-#else
-        StartCoroutine(CheckPingResult());
-#endif
-*/
+        /*
+        #if UNITY_ANDROID || UNITY_IOS
+                FirebaseDatabase.DefaultInstance.GetReference(".info/connected").ValueChanged += HandleConnectedChanged;
+        #else
+                StartCoroutine(CheckPingResult());
+        #endif
+        */
     }
 
     private void HandleConnectedChanged(object sender, ValueChangedEventArgs e)
@@ -153,25 +154,25 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
         //FindObjectOfType<NoInternetPanelManager>().ManageNoInternetPanel();
     }
 
-/*
-    private IEnumerator CheckPingResult() {
-        while(true) {
-            yield return new WaitForSecondsRealtime(1f);
-            
-            if (Application.internetReachability == NetworkReachability.NotReachable) {
-                Debug.Log("Network from if : " + Application.internetReachability);
-                currentYipliConfig.bIsInternetConnected =false;
-            } else {
-                Debug.Log("Network from else : " + Application.internetReachability);
-                currentYipliConfig.bIsInternetConnected = true;
+    /*
+        private IEnumerator CheckPingResult() {
+            while(true) {
+                yield return new WaitForSecondsRealtime(1f);
+
+                if (Application.internetReachability == NetworkReachability.NotReachable) {
+                    Debug.Log("Network from if : " + Application.internetReachability);
+                    currentYipliConfig.bIsInternetConnected =false;
+                } else {
+                    Debug.Log("Network from else : " + Application.internetReachability);
+                    currentYipliConfig.bIsInternetConnected = true;
+                }
             }
         }
-    }
-*/
+    */
 
     void OnDisable()
     {
-        allUrlsFound -= addGetAllURLListener;
+        AllUrlsFound -= addGetAllURLListener;
 
         //Remove the events to avoid memory leaks
         PlayerSelection.NewUserFound -= addGetPlayersListener;
@@ -207,7 +208,7 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
     private void HandleCurrentMatInfoValueChanged(object sender, ValueChangedEventArgs args)
     {
         Debug.Log("HandleCurrentMatInfoValueChanged invoked");
-        if(args.Snapshot.Value != null)
+        if (args.Snapshot.Value != null)
             currentYipliConfig.matInfo = new YipliMatInfo(args.Snapshot, args.Snapshot.Key);
         getDefaultMatQueryStatus = global::QueryStatus.Completed;
     }
@@ -249,7 +250,7 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
         Debug.Log("HandleAllPlayersDataValueChanged invoked");
         if (args.DatabaseError != null)
         {
-            Debug.LogError(args.DatabaseError.Message);
+            ////Debug.LogError(args.DatabaseError.Message);
             return;
         }
 
@@ -257,6 +258,8 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
         //bool isSavedPlayerInfoAvailabe = currentYipliConfig.playerInfo == null ? false : true;
 
         currentYipliConfig.allPlayersInfo = new List<YipliPlayerInfo>();
+
+
 
         foreach (var childSnapshot in args.Snapshot.Children)
         {
@@ -298,7 +301,7 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
         //Debug.Log("addGameDataListener invoked");
         await anonAuthenticate();
 
-        //Debug.LogError("player id : " + currentYipliConfig.playerInfo.playerId);
+        //////Debug.LogError("player id : " + currentYipliConfig.playerInfo.playerId);
 
         if (!currentYipliConfig.gameId.Equals("default") || currentYipliConfig.gameId.Length > 1)
             FirebaseDatabase.DefaultInstance
@@ -349,7 +352,7 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
         Debug.Log("HandleAllMatsDataValueChanged invoked");
         if (args.DatabaseError != null)
         {
-            Debug.LogError(args.DatabaseError.Message);
+            ////Debug.LogError(args.DatabaseError.Message);
             return;
         }
 
@@ -360,7 +363,7 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
             YipliMatInfo matInstance = new YipliMatInfo(childSnapshot, childSnapshot.Key);
             if (matInstance.matId != null)
             {
-                currentYipliConfig.allMatsInfo.Add(matInstance);                
+                currentYipliConfig.allMatsInfo.Add(matInstance);
             }
             else
             {
@@ -375,7 +378,9 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
     // dyanamic link function on received
     private void ExtractUserDetailsFromLink(object sender, EventArgs args)
     {
-        if (!dynamicLinkIsReceived) {
+        Debug.LogError("dynamicLinkIsReceived: " + dynamicLinkIsReceived);
+        if (!dynamicLinkIsReceived)
+        {
             dynamicLinkIsReceived = true;
 
             var dynamicLinkEventArgs = args as ReceivedDynamicLinkEventArgs;
@@ -405,15 +410,18 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
                         break;
 
                     case "tv":
-                        if (YipliHelper.StringToIntConvert(tempSplits[1]) == 1) {
+                        if (YipliHelper.StringToIntConvert(tempSplits[1]) == 1)
+                        {
                             currentYipliConfig.isDeviceAndroidTV = true;
-                        } else {
+                        }
+                        else
+                        {
                             currentYipliConfig.isDeviceAndroidTV = false;
                         }
                         break;
 
                     default:
-                        Debug.LogError("Wrong data set field : " + tempSplits[0]);
+                        ////Debug.LogError("Wrong data set field : " + tempSplits[0]);
                         break;
                 }
             }
@@ -494,7 +502,7 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
                         break;
 
                     default:
-                        Debug.LogError("Wrong data set field : " + tempSplits[0]);
+                        ////Debug.LogError("Wrong data set field : " + tempSplits[0]);
                         break;
                 }
             }
@@ -527,7 +535,7 @@ public class firebaseDBListenersAndHandlers : MonoBehaviour
         Debug.Log("HandleAllURLDataValueChanged invoked");
         if (args.DatabaseError != null)
         {
-            Debug.LogError(args.DatabaseError.Message);
+            ////Debug.LogError(args.DatabaseError.Message);
             return;
         }
 

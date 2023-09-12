@@ -116,7 +116,7 @@
             }
             */
 
-            Debug.LogError("peripheralJsonList from ble controller : " + peripheralJsonList);
+            ////Debug.LogError("peripheralJsonList from ble controller : " + peripheralJsonList);
 
             OnBleDidCompletePeripheralScanEvent?.Invoke(peripheralJsonList, errorMessage);
         }
@@ -166,7 +166,7 @@
                             // Directly connect to MAT ID if valid mac address 
                             // FOR BATCH-1 BOARDS
                             //----------
-                            Debug.LogError("from batch 1 boards else if");
+                            ////Debug.LogError("from batch 1 boards else if");
                             string macAddress = tempSplits[0];
 
                             //----------
@@ -184,13 +184,13 @@
                             // ---------OLDER  CHECK [NOT WORKING] FOLLOW -----
                             // if (InitBLE.MAC_ADDRESS == macAddress)
                             // {
-                            //     Debug.LogError("from batch 1 boards else if, next line will start connection");
+                            //     ////Debug.LogError("from batch 1 boards else if, next line will start connection");
                             //     InitBLE.ConnectPeripheral(tempSplits[0]);
                             // }
                         }
                         else
                         {
-                            Debug.LogError("from final else as above all conditions have failed");
+                            ////Debug.LogError("from final else as above all conditions have failed");
                         }
                     }
                 }

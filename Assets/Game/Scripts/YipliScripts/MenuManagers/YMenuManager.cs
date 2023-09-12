@@ -109,11 +109,18 @@ public class YMenuManager : MonoBehaviour
     private void MenuControlSystem()
     {
         string fmActionData = InitBLE.GetFMResponse();
-        Debug.Log("Json Data from Fmdriver : " + fmActionData);
+        Debug.Log("Json Data from Fmdriver in matinput : " + fmActionData);
 
-        if (fmActionData == null || fmActionData == "Make action") return;
+        FmDriverResponseInfo singlePlayerResponse = null;
 
-        FmDriverResponseInfo singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
+        try
+        {
+            singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("singlePlayerResponse is having problem : " + e.Message);
+        }
 
         if (singlePlayerResponse == null) return;
 

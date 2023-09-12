@@ -1,6 +1,6 @@
 ﻿#if UNITY_STANDALONE_WIN
-using com.fitmat.fitmatdriver.Producer.Connection;
-//using FMInterface_Windows;
+//using com.fitmat.fitmatdriver.Producer.Connection;
+using FMInterface_Windows;
 #endif
 
 using BLEFramework.Unity;
@@ -22,9 +22,9 @@ public class InitBLE
 
     //required variables
     static string peripheralJsonList = null;
-    
+
     public static string PeripheralJsonList { get => peripheralJsonList; set => peripheralJsonList = value; }
-    
+
     //STEP 3 - Create Unity Callback class
 #if UNITY_IOS
 		[DllImport("__Internal")]
@@ -110,7 +110,7 @@ public class InitBLE
         }
     }
 #endif
-    
+
     //STEP 4 - Init Android Class & Objects
     public static AndroidJavaClass PluginClass
     {
@@ -136,7 +136,7 @@ public class InitBLE
             return _pluginInstance;
         }
     }
-    
+
     public static string GetFMResponse()
     {
         try
@@ -149,8 +149,9 @@ public class InitBLE
 #elif UNITY_STANDALONE_WIN
             string defaultResponse = DeviceControlActivity._getFMResponse();
             // this is to check if "null" response is coming from driver as this will come until 1st action is made
-            if (defaultResponse.Equals("null", StringComparison.OrdinalIgnoreCase)) {
-                
+            if (defaultResponse.Equals("null", StringComparison.OrdinalIgnoreCase))
+            {
+
                 //defaultResponse = "{\"count\":1,\"timestamp\":1597237057689,\"playerdata\":[{\"id\":1,\"fmresponse\":{\"action_id\":\"NOID\",\"action_name\":\"Jump\",\"properties\":\"null\"}}]}";
                 defaultResponse = "Make action";
                 return defaultResponse;
@@ -166,7 +167,7 @@ public class InitBLE
         }
         //return "error";
     }
-    
+
     public static string getMatConnectionStatus()
     {
         try
@@ -186,12 +187,12 @@ public class InitBLE
         }
         //return "error";
     }
-    
+
     public static void setMatConnectionStatus(string status)
     {
         BLEStatus = status;
     }
-    
+
     /*
     public static void reconnectMat()
     {
@@ -227,7 +228,7 @@ public class InitBLE
         */
         PluginInstance.Call("_setConnectionType", type);
     }
-    
+
     //STEP 5 - Init Android Class & Objects
     public static void InitBLEFramework(string macaddress, int gameID, string matAdvertisingName = "YIPLI", bool isThisAndroidTV = false)
     {
@@ -271,11 +272,11 @@ public class InitBLE
             */
         }
 #elif UNITY_STANDALONE_WIN
-            Debug.Log("Calling DeviceControlActivity.InitPCFramework()");
-            DeviceControlActivity.InitPCFramework(gameID);
+        Debug.Log("Calling DeviceControlActivity.InitPCFramework()");
+        DeviceControlActivity.InitPCFramework(gameID);
 #endif
     }
-    
+
     public static void setGameMode(int gameMode)
     {
         try
@@ -285,7 +286,7 @@ public class InitBLE
 #elif UNITY_ANDROID
             PluginInstance.Call("_setGameMode", gameMode);
 #elif UNITY_STANDALONE_WIN
-                DeviceControlActivity._setGameMode(gameMode);
+            DeviceControlActivity._setGameMode(gameMode);
 #endif
         }
         catch (Exception e)
@@ -293,7 +294,7 @@ public class InitBLE
             Debug.Log("Exception in _setGameMode() : " + e.Message);
         }
     }
-    
+
     public static int getGameMode()
     {
         try
@@ -303,7 +304,7 @@ public class InitBLE
 #elif UNITY_ANDROID
             return PluginInstance.Call<int>("_getGameMode");
 #elif UNITY_STANDALONE_WIN
-                return DeviceControlActivity._getGameMode();
+            return DeviceControlActivity._getGameMode();
 #endif
         }
         catch (Exception e)
@@ -313,7 +314,7 @@ public class InitBLE
         }
         //return 1000;
     }
-    
+
     public static void setGameClusterID(int gameID)
     {
         try
@@ -323,16 +324,16 @@ public class InitBLE
 #elif UNITY_ANDROID
             PluginInstance.Call("_setGameID", gameID);
 #elif UNITY_STANDALONE_WIN
-                //Debug.Log("Setting cluter ID : " + gameID);
-                DeviceControlActivity._setGameID(gameID);
+            //Debug.Log("Setting cluter ID : " + gameID);
+            DeviceControlActivity._setGameID(gameID);
 #endif
         }
         catch (Exception e)
         {
-            Debug.Log("Exception in setGameClusterID() : " + e.Message);
+            Debug.LogError("Exception in setGameClusterID() : " + e.Message);
         }
     }
-    
+
     public static int getGameClusterID()
     {
         try
@@ -342,7 +343,7 @@ public class InitBLE
 #elif UNITY_ANDROID
             return PluginInstance.Call<int>("_getGameID");
 #elif UNITY_STANDALONE_WIN
-                return DeviceControlActivity._getGameID();
+            return DeviceControlActivity._getGameID();
 #endif
         }
         catch (Exception e)
@@ -352,7 +353,7 @@ public class InitBLE
         }
         //return 1000;
     }
-    
+
     public static string getFMDriverVersion()
     {
         try
@@ -374,7 +375,7 @@ public class InitBLE
         }
         //return "error";
     }
-    
+
     public static void setGameClusterID(int P1_gameID, int P2_gameID)
     {
         try
@@ -384,8 +385,8 @@ public class InitBLE
 #elif UNITY_ANDROID
             PluginInstance.Call("_setGameID", P1_gameID, P2_gameID);
 #elif UNITY_STANDALONE_WIN
-            
-                DeviceControlActivity._setGameID(P1_gameID, P2_gameID);
+
+            DeviceControlActivity._setGameID(P1_gameID, P2_gameID);
 #endif
         }
         catch (Exception e)
@@ -393,7 +394,7 @@ public class InitBLE
             Debug.Log("Exception in setGameClusterID() : " + e.Message);
         }
     }
-    
+
     public static int getGameClusterID(int playerID)
     {
         try
@@ -403,7 +404,7 @@ public class InitBLE
 #elif UNITY_ANDROID
             return PluginInstance.Call<int>("_getGameID", playerID);
 #elif UNITY_STANDALONE_WIN
-                return DeviceControlActivity._getGameID(playerID);
+            return DeviceControlActivity._getGameID(playerID);
 #endif
         }
         catch (Exception e)
@@ -413,7 +414,7 @@ public class InitBLE
         }
         //return 1000;
     }
-    
+
     public static void ScanForPeripherals()
     {
         // We check for UNITY_IPHONE again so we don't try this if it isn't iOS platform.
@@ -434,7 +435,7 @@ public class InitBLE
         }
 #endif
     }
-    
+
     public static string GetListOfDevices()
     {
         string listOfDevices = "";
@@ -453,7 +454,7 @@ public class InitBLE
 #endif
         return listOfDevices;
     }
-    
+
     public static bool ConnectPeripheral(string peripheralID)
     {
         bool result = false;

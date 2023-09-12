@@ -91,27 +91,30 @@ public class MatInputController : MonoBehaviour
     {
         try
         {
-            //Debug.LogError("provided clusterID : " + clusterID);
+            //////Debug.LogError("provided clusterID : " + clusterID);
             YipliHelper.SetGameClusterId(clusterID);
         }
         catch (Exception e)
         {
-            Debug.LogError("Something went wrong with setting the cluster id : " + e.Message);
+            ////Debug.LogError("Something went wrong with setting the cluster id : " + e.Message);
         }
     }
 
     private void ManageMatActions()
     {
         //if (!currentYipliConfig.onlyMatPlayMode) return;
-        
+
         string fmActionData = InitBLE.GetFMResponse();
         Debug.Log("Json Data from Fmdriver in matinput : " + fmActionData);
 
         FmDriverResponseInfo singlePlayerResponse = null;
 
-        try {
+        try
+        {
             singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
-        } catch (System.Exception e) {
+        }
+        catch (System.Exception e)
+        {
             Debug.Log("singlePlayerResponse is having problem : " + e.Message);
         }
 
@@ -123,7 +126,7 @@ public class MatInputController : MonoBehaviour
 
             DetectedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
 
-            switch(DetectedAction)
+            switch (DetectedAction)
             {
                 // UI input executions
                 case YipliUtils.PlayerActions.LEFT:
@@ -139,7 +142,7 @@ public class MatInputController : MonoBehaviour
                     break;
 
                 default:
-                    Debug.LogError("Wrong Action is detected : " + DetectedAction.ToString());
+                    ////Debug.LogError("Wrong Action is detected : " + DetectedAction.ToString());
                     break;
             }
         }
@@ -217,7 +220,8 @@ public class MatInputController : MonoBehaviour
 
     private int GetNextButton()
     {
-        if (IsThisPlayerSelectionPanel) {
+        if (IsThisPlayerSelectionPanel)
+        {
             if ((currentButtonIndex + 1) == currentYipliConfig.allPlayersInfo.Count)
             {
                 return 0;
@@ -226,7 +230,9 @@ public class MatInputController : MonoBehaviour
             {
                 return currentButtonIndex + 1;
             }
-        } else {
+        }
+        else
+        {
             if ((currentButtonIndex + 1) == currentMenuButtons.Count)
             {
                 return 0;
@@ -240,7 +246,8 @@ public class MatInputController : MonoBehaviour
 
     private int GetPreviousButton()
     {
-        if (IsThisPlayerSelectionPanel) {
+        if (IsThisPlayerSelectionPanel)
+        {
             if (currentButtonIndex == 0)
             {
                 return currentYipliConfig.allPlayersInfo.Count - 1;
@@ -249,7 +256,9 @@ public class MatInputController : MonoBehaviour
             {
                 return currentButtonIndex - 1;
             }
-        } else {
+        }
+        else
+        {
             if (currentButtonIndex == 0)
             {
                 return currentMenuButtons.Count - 1;
@@ -263,7 +272,7 @@ public class MatInputController : MonoBehaviour
 
     private void ManageCurrentButton(bool isPlayerSelectionPanel)
     {
-        //Debug.LogError("switchPlayer isPlayerSelectionPanel :  " + isPlayerSelectionPanel);
+        //////Debug.LogError("switchPlayer isPlayerSelectionPanel :  " + isPlayerSelectionPanel);
 
         if (isPlayerSelectionPanel)
         {
@@ -301,7 +310,8 @@ public class MatInputController : MonoBehaviour
         */
     }
 
-    public void StartScrolling() {
+    public void StartScrolling()
+    {
         ScrollButtonList(currentButtonIndex);
     }
 
@@ -347,13 +357,14 @@ public class MatInputController : MonoBehaviour
         }
         */
 
-        //Debug.LogError("switchPlayer button scroll :  " + currentYipliConfig.allPlayersInfo.Count);
+        //////Debug.LogError("switchPlayer button scroll :  " + currentYipliConfig.allPlayersInfo.Count);
 
-        if (currentYipliConfig.allPlayersInfo.Count == 1) {
+        if (currentYipliConfig.allPlayersInfo.Count == 1)
+        {
             UpdateButtonObject(currentYipliConfig.allPlayersInfo[0], playerMiddle, 0);
 
             // playerMiddle.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentYipliConfig.allPlayersInfo[0].playerName;
-            
+
             // if (currentYipliConfig.allPlayersInfo[0].playerProfilePicIMG != null) {
             //     playerMiddle.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = currentYipliConfig.allPlayersInfo[0].playerProfilePicIMG;   
             // } else {
@@ -365,35 +376,48 @@ public class MatInputController : MonoBehaviour
 
             playerLeft.SetActive(false);
             playerRight.SetActive(false);
-        } else {
-            if (btnIndex == 0) {
+        }
+        else
+        {
+            if (btnIndex == 0)
+            {
                 UpdateButtonObject(currentYipliConfig.allPlayersInfo[GetPreviousButton()], playerLeft, -1);
-            } else {
+            }
+            else
+            {
                 UpdateButtonObject(currentYipliConfig.allPlayersInfo[btnIndex - 1], playerLeft, -1);
             }
 
             UpdateButtonObject(currentYipliConfig.allPlayersInfo[btnIndex], playerMiddle, 0);
 
-            if (btnIndex == currentYipliConfig.allPlayersInfo.Count) {
+            if (btnIndex == currentYipliConfig.allPlayersInfo.Count)
+            {
                 UpdateButtonObject(currentYipliConfig.allPlayersInfo[0], playerRight, 1);
-            } else {
+            }
+            else
+            {
                 UpdateButtonObject(currentYipliConfig.allPlayersInfo[GetNextButton()], playerRight, 1);
             }
         }
     }
 
-    private void UpdateButtonObject(YipliPlayerInfo playerInfo, GameObject playerObject, int playerInspectorIndex) {
+    private void UpdateButtonObject(YipliPlayerInfo playerInfo, GameObject playerObject, int playerInspectorIndex)
+    {
         playerObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = playerInfo.playerName;
-        
-        if (playerInfo.playerProfilePicIMG != null) {
-            playerObject.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = playerInfo.playerProfilePicIMG;   
-        } else {
+
+        if (playerInfo.playerProfilePicIMG != null)
+        {
+            playerObject.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = playerInfo.playerProfilePicIMG;
+        }
+        else
+        {
             playerObject.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = defaultProfilePic;
         }
 
         playerObject.transform.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(FindObjectOfType<PlayerSelection>().SelectPlayer);
 
-        switch(playerInspectorIndex) {
+        switch (playerInspectorIndex)
+        {
             case -1:
                 leftButton.onClick.AddListener(FindObjectOfType<PlayerSelection>().SelectPlayer);
                 break;
@@ -407,20 +431,22 @@ public class MatInputController : MonoBehaviour
                 break;
 
             default:
-                Debug.LogError("Wrong inspector index detected : " + playerInspectorIndex);
+                ////Debug.LogError("Wrong inspector index detected : " + playerInspectorIndex);
                 break;
         }
-        
+
         // fade management
         // playerObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("fadePlayerName"); // player name
         // playerObject.transform.GetChild(1).transform.GetChild(0).GetComponent<Animator>().SetTrigger("fadeProfilePic"); // player profile pic
     }
 
-    public void UpdateSwitchPlayerPanelPlayerObject() {
+    public void UpdateSwitchPlayerPanelPlayerObject()
+    {
         //switchPlayerPanelPlayerObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = playerMiddle.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
         //switchPlayerPanelPlayerObject.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = playerMiddle.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite;
 
-        switch(currentPlayerIndex) {
+        switch (currentPlayerIndex)
+        {
             case -1:
                 switchPlayerPanelPlayerObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Continue with " + playerLeft.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
                 switchPlayerPanelPlayerObject.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = playerLeft.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite;
@@ -437,7 +463,7 @@ public class MatInputController : MonoBehaviour
                 break;
 
             default:
-                Debug.LogError("Wrong inspector index detected : " + currentPlayerIndex);
+                ////Debug.LogError("Wrong inspector index detected : " + currentPlayerIndex);
                 break;
         }
     }
@@ -447,26 +473,31 @@ public class MatInputController : MonoBehaviour
         return currentB.gameObject;
     }
 
-    public void PlayerLeftButtonFunction() {
+    public void PlayerLeftButtonFunction()
+    {
         currentPlayerName = playerLeft.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
         currentPlayerIndex = -1;
     }
 
-    public void PlayerMiddleButtonFunction() {
+    public void PlayerMiddleButtonFunction()
+    {
         currentPlayerName = playerMiddle.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
         currentPlayerIndex = 0;
     }
 
-    public void PlayerRightButtonFunction() {
+    public void PlayerRightButtonFunction()
+    {
         currentPlayerName = playerRight.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
         currentPlayerIndex = 1;
     }
 
-    public void ManualLeftButton() {
+    public void ManualLeftButton()
+    {
         ProcessMatInputs(LEFT);
     }
 
-    public void ManualRightButton() {
+    public void ManualRightButton()
+    {
         ProcessMatInputs(RIGHT);
     }
 }
