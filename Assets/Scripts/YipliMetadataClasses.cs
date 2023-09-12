@@ -1,6 +1,6 @@
-﻿using Firebase.Database;
-using System;
+﻿using System;
 using UnityEngine;
+using Firebase.Database;
 
 [Serializable]
 public class YipliPlayerInfo
@@ -95,7 +95,7 @@ public class YipliPlayerInfo
         }
     }
 
-    private async void SetProfilePicForPlayer(string profilePicUrlNew)
+    public async void SetProfilePicForPlayer(string profilePicUrlNew)
     {
         string onDeviceProfilePicPath = Application.persistentDataPath + "/" + profilePicUrlNew;
         playerProfilePicIMG = await FirebaseDBHandler.GetImageAsync(profilePicUrlNew, onDeviceProfilePicPath);
@@ -124,7 +124,6 @@ public class YipliPlayerInfo
     }
 }
 
-[Serializable]
 public class YipliMatInfo
 {
     public string matName;

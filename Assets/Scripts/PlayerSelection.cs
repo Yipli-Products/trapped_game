@@ -111,7 +111,7 @@ public class PlayerSelection : MonoBehaviour
     private bool phoneHolderTUTPlayed = false;
     private bool psFlowForCPcalled = false;
     private bool startDataManagement = false;
-    private bool onlyMatPlayModeIsSet = false;
+    //private bool onlyMatPlayModeIsSet = false;
     private bool matConnectionStarted = false;
 
     public void OnEnable()
@@ -121,7 +121,7 @@ public class PlayerSelection : MonoBehaviour
 
     // When the game starts
 #if UNITY_STANDALONE_WIN
-        private async void Start()
+    private async void Start()
 #else
     private void Start()
 #endif
@@ -141,7 +141,9 @@ public class PlayerSelection : MonoBehaviour
         // Game info and update check before player selection
         GetGameInfo();
 
-
+        /*currentYipliConfig.userId = "lC4qqZCFEaMogYswKjd0ObE6nD43"; // vismay 
+        currentYipliConfig.pId = "-MSX--0uyqI7KgKmNOIY"; // vismay player
+        SetLinkData();*/
 
         //Todo: Shift the following code to llistner basis. Avoid a get call.
         //Data could be ready already before reaching here.
@@ -153,7 +155,6 @@ public class PlayerSelection : MonoBehaviour
 
         //FetchUserAndInitializePlayerEnvironment();
 #endif
-
 
         // comment below part is current platform is not UNITY_STANDALONE_WIN
 #if UNITY_EDITOR
@@ -167,8 +168,12 @@ public class PlayerSelection : MonoBehaviour
 
 
 #if UNITY_ANDROID || UNITY_IOS
+        ////Debug.LogError("<GL>Inside Android iOS");
         StartCoroutine(RelaunchgameFromYipliApp());
-
+        //if (!currentYipliConfig.bIsChangePlayerCalled)
+        //{
+        //   FetchUserDetailsForWindowsAndEditor();
+        //}
         //if (currentYipliConfig.bIsChangePlayerCalled) {
         //    FetchUserAndInitializePlayerEnvironment();
         //}
@@ -189,9 +194,23 @@ public class PlayerSelection : MonoBehaviour
 
     private void Update()
     {
-        if (!onlyMatPlayModeIsSet)
+        if (!currentYipliConfig.onlyMatPlayModeIsSet)
         {
             SetOnlyMatPlayMode();
+        }
+
+        // wait for only matplay mode to be set
+        if (!currentYipliConfig.onlyMatPlayModeIsSet) return;
+
+        //////Debug.LogError("onlyMatPlayMode : only mat play mode : " + currentYipliConfig.onlyMatPlayMode);
+
+        if (!currentYipliConfig.onlyMatPlayMode)
+        {
+            if (currentYipliConfig.sceneLoadedDirectly) return;
+
+            ////Debug.LogError("onlyMatPlayMode : next line is matSelectionScript.LoadMainGameSceneDirectly();");
+            matSelectionScript.LoadMainGameSceneDirectly();
+            return;
         }
 
         if (allowPhoneHolderAudioPlay)
@@ -283,31 +302,31 @@ public class PlayerSelection : MonoBehaviour
 
     public void playDeviceSpecificMatTutorial()
     {
-        //Debug.LogError("Retake tutorial : currentYipliConfig.bIsChangePlayerCalled : " + currentYipliConfig.bIsChangePlayerCalled);
+        //////Debug.LogError("Retake tutorial : currentYipliConfig.bIsChangePlayerCalled : " + currentYipliConfig.bIsChangePlayerCalled);
 
         if (currentYipliConfig.bIsChangePlayerCalled) return;
 
         if (phoneHolderTUTPlayed) return;
 
-        //Debug.LogError("Retake tutorial : next line to turn off all panels");
+        //////Debug.LogError("Retake tutorial : next line to turn off all panels");
         TurnOffAllPanels();
-        //Debug.LogError("Retake tutorial : all panels are off");
+        //////Debug.LogError("Retake tutorial : all panels are off");
 
         phoneHolderInfo.SetActive(true);
         newUIManager.UpdateButtonDisplay(phoneHolderInfo.gameObject.tag);
 
-        //Debug.LogError("Retake tutorial : holder panels are activated");
+        //////Debug.LogError("Retake tutorial : holder panels are activated");
 
         if (YipliHelper.GetMatConnectionStatus().Equals("connected", StringComparison.OrdinalIgnoreCase))
         {
             phoneHolderInfo.GetComponent<AudioSource>().Play();
         }
 
-        //Debug.LogError("Retake tutorial : audio is played");
+        //////Debug.LogError("Retake tutorial : audio is played");
 
         allowPhoneHolderAudioPlay = true;
 
-        Debug.LogError("phoneHolderTUTPlayed : " + phoneHolderTUTPlayed);
+        ////Debug.LogError("phoneHolderTUTPlayed : " + phoneHolderTUTPlayed);
 
         phoneHolderTUTPlayed = true;
 
@@ -321,7 +340,7 @@ public class PlayerSelection : MonoBehaviour
         {
             PlayPhoneTutStartAnimation();
         }
-        //Debug.LogError("Retake tutorial : proper animation is activated");
+        //////Debug.LogError("Retake tutorial : proper animation is activated");
 #elif UNITY_STANDALONE_WIN || UNITY_EDITOR
         //StartCoroutine(ChangeTextMessageWindowsPC());
         PlayPCTutStartAnimation();
@@ -559,7 +578,7 @@ public class PlayerSelection : MonoBehaviour
     }
 
 #if UNITY_STANDALONE_WIN
-        public void SetLinkData()
+    public void SetLinkData()
 #else
     public async void SetLinkData()
 #endif
@@ -586,9 +605,9 @@ public class PlayerSelection : MonoBehaviour
         //GetAllMats();
 
         currentYipliConfig.currentMatID = await FirebaseDBHandler.GetCurrentMatIdOfUserId(currentYipliConfig.userId);
-        Debug.LogError("Retake Tutorial : current mat ID : " + currentYipliConfig.currentMatID);
+        ////Debug.LogError("Retake Tutorial : current mat ID : " + currentYipliConfig.currentMatID);
         currentYipliConfig.currentMatDetails = await FirebaseDBHandler.GetMatDetailsOfUserId(currentYipliConfig.userId, currentYipliConfig.currentMatID);
-        Debug.LogError("Retake Tutorial : current mat address : " + currentYipliConfig.currentMatDetails.Child("mac-address").Value.ToString());
+        ////Debug.LogError("Retake Tutorial : current mat address : " + currentYipliConfig.currentMatDetails.Child("mac-address").Value.ToString());
 #endif
 
 #if UNITY_ANDROID
@@ -708,17 +727,17 @@ public class PlayerSelection : MonoBehaviour
 #endif
 
 #if UNITY_EDITOR // uncoment following lines to test in editor. only one user id uncomment.
-        // currentYipliConfig.userId = "F9zyHSRJUCb0Ctc15F9xkLFSH5f1"; // saurabh
-        currentYipliConfig.userId = "lC4qqZCFEaMogYswKjd0ObE6nD43"; // vismay
-        currentYipliConfig.pId = "-MSX--0uyqI7KgKmNOIY"; // vismay player
-        // currentYipliConfig.userId = "rKE4pP03qwdZtRsIw0QjrYpYyXm1"; // vismay test only for vismay
-        // currentYipliConfig.pId = "-MbGAzHTOONlQefgKklU"; // vismay player // smae above comment
+        //currentYipliConfig.userId = "F9zyHSRJUCb0Ctc15F9xkLFSH5f1"; // saurabh 
+        // currentYipliConfig.userId = "lC4qqZCFEaMogYswKjd0ObE6nD43"; // vismay 
+        //currentYipliConfig.pId = "-MSX--0uyqI7KgKmNOIY"; // vismay player
+        //currentYipliConfig.userId = "rKE4pP03qwdZtRsIw0QjrYpYyXm1"; // vismay test only for vismay
+        //currentYipliConfig.pId = "-MbGAzHTOONlQefgKklU"; // vismay player // smae above comment
         //currentYipliConfig.playerInfo = new YipliPlayerInfo("-MSX--0uyqI7KgKmNOIY", "Nasha Mukti kendra", "07-01-1990", "172", "64", "-MSX--0uyqI7KgKmNOIY.jpg", 1); // vismay user
-        currentYipliConfig.matInfo = new YipliMatInfo("-MUMyYuLTeqXB_K7RT_L", "A4:DA:32:4F:C2:54", "YIPLI");
+        //currentYipliConfig.matInfo = new YipliMatInfo("-MUMyYuLTeqXB_K7RT_L", "A4:DA:32:4F:BF:F4", "YIPLI");
 
-        //SetLinkData();
+        SetLinkData();
 
-        //GetAllMats();
+        GetAllMats();
 
         FetchUserAndInitializePlayerEnvironment();
 #endif
@@ -730,39 +749,39 @@ public class PlayerSelection : MonoBehaviour
 
         if (currentYipliConfig.gameInventoryInfo.onlyMatPlayMode.Contains("a") && Application.platform == RuntimePlatform.Android)
         {
-            //Debug.LogError("Executing a");
+            //////Debug.LogError("Executing a");
             currentYipliConfig.onlyMatPlayMode = false;
         }
         else if (currentYipliConfig.gameInventoryInfo.onlyMatPlayMode.Contains("s") && Application.platform == RuntimePlatform.Android && currentYipliConfig.isDeviceAndroidTV)
         {
-            //Debug.LogError("Executing atv");
+            //////Debug.LogError("Executing atv");
             currentYipliConfig.onlyMatPlayMode = false;
         }
         else if (currentYipliConfig.gameInventoryInfo.onlyMatPlayMode.Contains("i") && Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            //Debug.LogError("Executing i");
+            //////Debug.LogError("Executing i");
             currentYipliConfig.onlyMatPlayMode = false;
         }
         else if (currentYipliConfig.gameInventoryInfo.onlyMatPlayMode.Contains("w") && Application.platform == RuntimePlatform.WindowsPlayer)
         {
             // for testing in editor (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
-            //Debug.LogError("Executing w");
+            //////Debug.LogError("Executing w");
             currentYipliConfig.onlyMatPlayMode = false;
         }
         // testing purpose only
         // else if (currentYipliConfig.gameInventoryInfo.onlyMatPlayMode.Contains("a") && Application.platform == RuntimePlatform.WindowsEditor)
         else if (Application.platform == RuntimePlatform.WindowsEditor)
         {
-            currentYipliConfig.onlyMatPlayMode = false;
+            currentYipliConfig.onlyMatPlayMode = true;
         }
         else
         {
             // defalt value reset
-            //Debug.LogError("Executing final else");
+            //////Debug.LogError("Executing final else");
             currentYipliConfig.onlyMatPlayMode = true;
         }
 
-        onlyMatPlayModeIsSet = true;
+        currentYipliConfig.onlyMatPlayModeIsSet = true;
     }
 
     private void ManageChangePlayer()
@@ -782,6 +801,18 @@ public class PlayerSelection : MonoBehaviour
     {
         if (currentYipliConfig.bIsChangePlayerCalled) return;
 
+        //// wait for only matplay mode to be set
+        //if (!onlyMatPlayModeIsSet) return;
+
+        //////Debug.LogError("onlyMatPlayMode : only mat play mode : " + currentYipliConfig.onlyMatPlayMode);
+
+        //if (!currentYipliConfig.onlyMatPlayMode)
+        //{
+        //    ////Debug.LogError("onlyMatPlayMode : next line is matSelectionScript.LoadMainGameSceneDirectly();");
+        //    matSelectionScript.LoadMainGameSceneDirectly();
+        //    return;
+        //}
+
         // game info status check
         if (firebaseDBListenersAndHandlers.GetGameInfoQueryStatus() != QueryStatus.Completed) return;
 
@@ -799,13 +830,9 @@ public class PlayerSelection : MonoBehaviour
         //Todo: use this function in update if change player is not called
         if (!defaultPlayerIDInitiated)
         {
+            currentYipliConfig.playerInfo = null;
             InitDefaultPlayer();
         }
-
-        // wait for only matplay mode to be set
-        if (!onlyMatPlayModeIsSet) return;
-
-        Debug.LogError("stut : only mat play mode : " + currentYipliConfig.onlyMatPlayMode);
 
         // only once start the connection flow
         if (!matConnectionStarted && currentYipliConfig.onlyMatPlayMode)
@@ -845,7 +872,7 @@ public class PlayerSelection : MonoBehaviour
             if (currentYipliConfig.playerInfo != null && currentYipliConfig.playerInfo.isMatTutDone == 0 && currentYipliConfig.onlyMatPlayMode)
             {
                 LoadingPanel.SetActive(false);
-                //Debug.LogError("Retake Tutorial : next line is playdevice specific tutorial");
+                //////Debug.LogError("Retake Tutorial : next line is playdevice specific tutorial");
                 playDeviceSpecificMatTutorial();
             }
             else
@@ -857,12 +884,12 @@ public class PlayerSelection : MonoBehaviour
 
     private IEnumerator InitializeAndStartPlayerSelection()
     {
-        //Debug.LogError("Retake Tutorial : InitializeAndStartPlayerSelection start, next is GetGameInfo query status while loop");
+        //////Debug.LogError("Retake Tutorial : InitializeAndStartPlayerSelection start, next is GetGameInfo query status while loop");
 
         // game info status check
         while (firebaseDBListenersAndHandlers.GetGameInfoQueryStatus() != QueryStatus.Completed)
         {
-            //Debug.LogError("Retake Tutorial : waiting for GetGameInfo to finish");
+            //////Debug.LogError("Retake Tutorial : waiting for GetGameInfo to finish");
             yield return new WaitForSecondsRealtime(0.1f);
         }
 
@@ -882,7 +909,7 @@ public class PlayerSelection : MonoBehaviour
             InitDefaultPlayer();
         }
 
-        //Debug.LogError("Retake Tutorial : initdefault player is done next is to set mat info");
+        //////Debug.LogError("Retake Tutorial : initdefault player is done next is to set mat info");
 
 #if UNITY_ANDROID
         if (!currentYipliConfig.isDeviceAndroidTV)
@@ -906,12 +933,12 @@ public class PlayerSelection : MonoBehaviour
         //Check if current player has completed the Mat tutorial or not.
         //GetPlayersMatTutorialCompletionStatus();
 
-        //Debug.LogError("Retake Tutorial : from else before all if");
+        //////Debug.LogError("Retake Tutorial : from else before all if");
 
         //Special handling in case of Multiplayer games
         if (currentYipliConfig.gameType == GameType.MULTIPLAYER_GAMING)
         {
-            //Debug.LogError("Retake Tutorial : from multiplayer gaming if");
+            //////Debug.LogError("Retake Tutorial : from multiplayer gaming if");
 
             // Check if atleast 2 players are available for playing the multiplayer game
             if (currentYipliConfig.allPlayersInfo.Count < 2)
@@ -931,7 +958,7 @@ public class PlayerSelection : MonoBehaviour
         }
         else if (currentYipliConfig.bIsChangePlayerCalled == true)
         {
-            //Debug.LogError("Retake Tutorial : from change player if");
+            //////Debug.LogError("Retake Tutorial : from change player if");
             //currentYipliConfig.bIsChangePlayerCalled = false;
 
             /*
@@ -958,7 +985,7 @@ public class PlayerSelection : MonoBehaviour
                 }
 
                 LoadingPanel.SetActive(false);
-                //Debug.LogError("Retake Tutorial : next line is playdevice specific tutorial");
+                //////Debug.LogError("Retake Tutorial : next line is playdevice specific tutorial");
                 playDeviceSpecificMatTutorial();
             }
             else
@@ -1098,39 +1125,39 @@ public class PlayerSelection : MonoBehaviour
         //PlayerName = EventSystem.current.currentSelectedGameObject != null ? EventSystem.current.currentSelectedGameObject.name : FindObjectOfType<MatInputController>().GetCurrentButton().name;
 
         PlayerName = matInputController.CurrentPlayerName;
-        //Debug.LogError("switchPlayer matInputController.CurrentPlayerName :  " + matInputController.CurrentPlayerName);
+        //////Debug.LogError("switchPlayer matInputController.CurrentPlayerName :  " + matInputController.CurrentPlayerName);
 
         // first of all destroy all PlayerButton prefabs. This is required to remove stale prefabs.
         foreach (var obj1 in generatedObjects)
         {
             Destroy(obj1);
         }
-        //Debug.LogError("switchPlayer Selected :  " + PlayerName);
+        //////Debug.LogError("switchPlayer Selected :  " + PlayerName);
 
         //Changing the currentSelected player in the Scriptable object
         //No Making this player persist in the device. This will be done on continue press.
         currentYipliConfig.playerInfo = GetPlayerInfoFromPlayerName(PlayerName);
-        //Debug.LogError("switchPlayer configured : " + currentYipliConfig.playerInfo);
+        //////Debug.LogError("switchPlayer configured : " + currentYipliConfig.playerInfo);
 
         //Save the player to device
         //UserDataPersistence.SavePlayerToDevice(currentYipliConfig.playerInfo);
 
         //Trigger the GetGameData for new player.
         DefaultPlayerChanged();
-        //Debug.LogError("switchPlayer GameData is triggered");
+        //////Debug.LogError("switchPlayer GameData is triggered");
 
         //StartCoroutine(ImageUploadAndPlayerUIInit());
 
         TurnOffAllPanels();
-        //Debug.LogError("switchPlayer All panels are off : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
+        //////Debug.LogError("switchPlayer All panels are off : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
 
         /* if else conditions to start tutorial if player has not done
         if (learnMatControlIsClicked || currentYipliConfig.playerInfo.isMatTutDone == 0)
         {
-            Debug.LogError("switchPlayer from 1st if : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
+            ////Debug.LogError("switchPlayer from 1st if : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
             if (learnMatControlIsClicked) {
 
-                Debug.LogError("switchPlayer from 2nd if : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
+                ////Debug.LogError("switchPlayer from 2nd if : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
 
                 learnMatControlIsClicked = false;
 
@@ -1143,7 +1170,7 @@ public class PlayerSelection : MonoBehaviour
             // write tut flag to backend here or start the tutorial
             if (isTutorialDoneWithoutPlayerInfo)
             {
-                Debug.LogError("switchPlayer from 3rd if : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
+                ////Debug.LogError("switchPlayer from 3rd if : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
 
                 FirebaseDBHandler.UpdateTutStatusData(currentYipliConfig.userId, currentYipliConfig.playerInfo.playerId, 1);
                 //UserDataPersistence.SavePropertyValue("player-tutDone", 1.ToString());
@@ -1158,18 +1185,18 @@ public class PlayerSelection : MonoBehaviour
             }
             else
             {
-                Debug.LogError("switchPlayer from 3rd else : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
+                ////Debug.LogError("switchPlayer from 3rd else : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
                 if (currentYipliConfig.bIsChangePlayerCalled) {
                     currentYipliConfig.bIsChangePlayerCalled = false;
                 }
 
-                Debug.LogError("switchPlayer from 3rd else deviceSpecific tutorial will be triggered from next line : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
+                ////Debug.LogError("switchPlayer from 3rd else deviceSpecific tutorial will be triggered from next line : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
                 playDeviceSpecificMatTutorial();
             }
         }
         else
         {
-            Debug.LogError("switchPlayer from 1st else : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
+            ////Debug.LogError("switchPlayer from 1st else : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
 
             matInputController.IsThisSwitchPlayerPanel = true;
 
@@ -1181,7 +1208,7 @@ public class PlayerSelection : MonoBehaviour
             newMatInputController.HideChevrons();
             newMatInputController.DisplayMatForSwitchPlayerPanel();
 
-            Debug.LogError("switchPlayer from 1st else next line switch player panel active true : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
+            ////Debug.LogError("switchPlayer from 1st else next line switch player panel active true : " + learnMatControlIsClicked + " " +  currentYipliConfig.playerInfo.isMatTutDone);
             //switchPlayerPanel.SetActive(true);
 
             // only until switch player panel gets desiged
@@ -1253,7 +1280,7 @@ public class PlayerSelection : MonoBehaviour
         //TutorialPanel.GetComponent<TutorialManagerGL>().ActivateTutorial();
         //secondTutorialManager.StartMatTutorial();
 
-        //Debug.LogError("Next line is scene manager to load scene");
+        //////Debug.LogError("Next line is scene manager to load scene");
         SceneManager.LoadScene("gameLibTutorial");
 
         /*
@@ -1267,13 +1294,13 @@ public class PlayerSelection : MonoBehaviour
     // This function is attached to Continue button on Tutorial panel. This will be the end of tutorial.
     public void OnTutorialContinuePress()
     {
-        if (currentYipliConfig.bIsRetakeTutorialFlagActivated)
-        {
-            currentYipliConfig.bIsRetakeTutorialFlagActivated = false;
-            //matSelectionScript.MatConnectionFlow();
-            matSelectionScript.LoadMainGameSceneIfMatIsConnected();
-            return;
-        }
+        //if (currentYipliConfig.bIsRetakeTutorialFlagActivated)
+        //{
+        //    currentYipliConfig.bIsRetakeTutorialFlagActivated = false;
+        //    //matSelectionScript.MatConnectionFlow();
+        //    matSelectionScript.LoadMainGameSceneIfMatIsConnected();
+        //    return;
+        //}
 
 
         if (currentYipliConfig.playerInfo != null)
@@ -1440,7 +1467,7 @@ public class PlayerSelection : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogError("Loading of profile pic failed : " + e.Message);
+            ////Debug.LogError("Loading of profile pic failed : " + e.Message);
         }
     }
 
@@ -1527,23 +1554,23 @@ public class PlayerSelection : MonoBehaviour
     // redirect to yipli id userid is notfound after 10 seconds
     private IEnumerator RelaunchgameFromYipliApp()
     {
-        //if (!currentYipliConfig.onlyMatPlayMode)
-        //{
-        //    yield break;
-        //}
-
 #if UNITY_EDITOR
         if (currentYipliConfig.userId != null)
         {
             yield break;
         }
 #endif
-
+        ////Debug.LogError("<GL> Inside RelaunchgameFromYipliApp ");
         int totalTime = 0;
 
         while (totalTime < 10)
         {
-
+            if (!currentYipliConfig.onlyMatPlayMode)
+            {
+                matSelectionScript.LoadMainGameSceneIfMatIsConnected();
+                yield break;
+            }
+            ////Debug.LogError("<GL> Dynamic Link Recieved" + firebaseDBListenersAndHandlers.dynamicLinkIsReceived);
             if (firebaseDBListenersAndHandlers.dynamicLinkIsReceived)
             {
                 yield break;
@@ -1555,6 +1582,7 @@ public class PlayerSelection : MonoBehaviour
 
         if (!firebaseDBListenersAndHandlers.dynamicLinkIsReceived)
         {
+            ////Debug.LogError("<GL> NOT Dynamic Link Recieved" + firebaseDBListenersAndHandlers.dynamicLinkIsReceived);
             if (YipliHelper.checkInternetConnection())
             {
                 NoUserFoundInGameFlow();

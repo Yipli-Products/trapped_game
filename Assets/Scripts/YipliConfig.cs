@@ -23,7 +23,7 @@ public class YipliConfig : ScriptableObject
     //[HideInInspector]
     public YipliPlayerInfo playerInfo = null;
 
-    //[HideInInspector]
+    [HideInInspector]
     public YipliMatInfo matInfo;
 
     //[HideInInspector]

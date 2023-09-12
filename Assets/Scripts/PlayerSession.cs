@@ -13,6 +13,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YipliFMDriverCommunication;
+
+using UnityEngine.Android;
 using Permission = UnityEngine.Android.Permission;
 
 public class PlayerSession : MonoBehaviour
@@ -79,6 +81,17 @@ public class PlayerSession : MonoBehaviour
 
         Permission.RequestUserPermissions(_permissions);
 
+        /*if (!Permission.HasUserAuthorizedPermission("android.permission.BLUETOOTH"))
+            Permission.RequestUserPermission("android.permission.BLUETOOTH");
+        if (!Permission.HasUserAuthorizedPermission("android.permission.BLUETOOTH_ADMIN"))
+            Permission.RequestUserPermission("android.permission.BLUETOOTH_ADMIN");
+        if (!Permission.HasUserAuthorizedPermission("android.permission.BLUETOOTH_SCAN"))
+            Permission.RequestUserPermission("android.permission.BLUETOOTH_SCAN");
+        if (!Permission.HasUserAuthorizedPermission("android.permission.BLUETOOTH_CONNECT"))
+            Permission.RequestUserPermission("android.permission.BLUETOOTH_CONNECT");
+        if (!Permission.HasUserAuthorizedPermission("android.permission.ACCESS_FINE_LOCATION"))
+            Permission.RequestUserPermission("android.permission.ACCESS_FINE_LOCATION");*/
+
         if (_instance != null && _instance != this)
         {
             Debug.Log("Destroying current instance of playersession and reinitializing");
@@ -90,6 +103,8 @@ public class PlayerSession : MonoBehaviour
             _instance = this;
         }
 
+        if (currentYipliConfig.onlyMatPlayModeIsSet && !currentYipliConfig.onlyMatPlayMode) return;
+
         if (currentYipliConfig.gameType == GameType.MULTIPLAYER_GAMING)
         {
             if (currentYipliConfig.userId == null || currentYipliConfig.userId.Length < 1)
@@ -98,7 +113,7 @@ public class PlayerSession : MonoBehaviour
                 SceneManager.LoadScene("yipli_lib_scene");
             }
         }
-        else if (currentYipliConfig.playerInfo == null && currentYipliConfig.gameType != GameType.MULTIPLAYER_GAMING)
+        else if (currentYipliConfig.playerInfo.playerId.Length < 3 && currentYipliConfig.gameType != GameType.MULTIPLAYER_GAMING)
         {
             // Call Yipli_GameLib_Scene
             _instance.currentYipliConfig.callbackLevel = SceneManager.GetActiveScene().name;
@@ -111,6 +126,12 @@ public class PlayerSession : MonoBehaviour
         }
         else
         {
+            foreach (YipliPlayerInfo config in _instance.currentYipliConfig.allPlayersInfo)
+                config.SetProfilePicForPlayer(config.profilePicUrl);
+
+            if (_instance.currentYipliConfig.playerInfo != null && _instance.currentYipliConfig.playerInfo.playerId.Length > 3)
+                _instance.currentYipliConfig.playerInfo.SetProfilePicForPlayer(_instance.currentYipliConfig.playerInfo.profilePicUrl);
+
             Debug.Log("Current player is not null. Not calling yipli_lib_scene");
         }
     }
@@ -238,7 +259,7 @@ public class PlayerSession : MonoBehaviour
 
     private void CheckMatConnection()
     {
-        Debug.Log("Before Processing : BleErrorPanel.activeSelf = " + BleErrorPanel.activeSelf);
+        Debug.Log(YipliHelper.GetMatConnectionStatus() + " Before Processing : BleErrorPanel.activeSelf = " + BleErrorPanel.activeSelf);
 
         if (YipliHelper.GetMatConnectionStatus().Equals("connected", StringComparison.OrdinalIgnoreCase))
         {
@@ -869,9 +890,9 @@ public class PlayerSession : MonoBehaviour
     void OnApplicationQuit()
     {
 #if UNITY_STANDALONE_WIN
-                Debug.LogError("Inside OnApplicationQuit");
-                DeviceControlActivity._disconnect();
-                DeviceControlActivity.readThread.Abort();
+        Debug.LogError("Inside OnApplicationQuit");
+        DeviceControlActivity._disconnect();
+        DeviceControlActivity.readThread.Abort();
 #elif UNITY_IOS
                 InitBLE.DisconnectMat();
 #endif

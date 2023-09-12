@@ -42,7 +42,7 @@ public class MaintenancePanel : MonoBehaviour
         // panels with buttons
         // noInternetPanel, noMatPanel(Guest User panel), maintanencePanel, noMatConnectionPanel, phoneHolderTutorialPanel, minimum2Player
 
-        // Debug.LogError("versions : maintenancePanel.activeSelf : " + maintenancePanel.activeSelf);
+        // ////Debug.LogError("versions : maintenancePanel.activeSelf : " + maintenancePanel.activeSelf);
 
         //if (maintenancePanel.activeSelf || playerSelection.noNetworkPanel.activeSelf || playerSelection.GuestUserPanel.activeSelf || playerSelection.phoneHolderInfo.activeSelf || playerSelection.Minimum2PlayersPanel.activeSelf || matSelection.NoMatPanel.activeSelf) {
         //    newUIManager.TurnOnMainCommonButton();
@@ -52,7 +52,7 @@ public class MaintenancePanel : MonoBehaviour
         //    newMatInputController.MakeSortLayerTen();
         //}
 
-        ManageManitanenceOrBlocking();
+        //ManageManitanenceOrBlocking();
         //BlockIfTroubleShootingIsOn();
     }
 
@@ -63,7 +63,7 @@ public class MaintenancePanel : MonoBehaviour
 
     private void ManageManitanenceOrBlocking()
     {
-        // Debug.LogError("versions : from manage maintanence or blocking : ");
+        // ////Debug.LogError("versions : from manage maintanence or blocking : ");
 
         if (currentYipliConfig.gameInventoryInfo == null) return;
 
@@ -73,25 +73,25 @@ public class MaintenancePanel : MonoBehaviour
         {
             string[] allOS = currentYipliConfig.gameInventoryInfo.osListForMaintanence.Split(',');
 
-            Debug.LogError("Executing allOS length : " + allOS.Length);
+            ////Debug.LogError("Executing allOS length : " + allOS.Length);
 
             if (allOS.Length > 0) {
                 for (int i = 0; i < allOS.Length; i++) {
                     if (allOS[i] == "a" && Application.platform == RuntimePlatform.Android) {
-                        //Debug.LogError("Executing a");
+                        //////Debug.LogError("Executing a");
                         ManageMaintanenceMessages();
                         break;
                     } else if (allOS[i] == "atv" && Application.platform == RuntimePlatform.Android && currentYipliConfig.isDeviceAndroidTV) {
-                        //Debug.LogError("Executing atv");
+                        //////Debug.LogError("Executing atv");
                         ManageMaintanenceMessages();
                         break;
                     } else if (allOS[i] == "i" && Application.platform == RuntimePlatform.IPhonePlayer) {
-                        //Debug.LogError("Executing i");
+                        //////Debug.LogError("Executing i");
                         ManageMaintanenceMessages();
                         break;
                     } else if (allOS[i] == "w" && Application.platform == RuntimePlatform.WindowsPlayer) {
                         // for testing in editor (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
-                        //Debug.LogError("Executing w");
+                        //////Debug.LogError("Executing w");
                         ManageMaintanenceMessages();
                         break;
                     }
@@ -101,29 +101,29 @@ public class MaintenancePanel : MonoBehaviour
         }
         */
 
-        // Debug.LogError("versions : next is os processing for maintanence : ");
+        // ////Debug.LogError("versions : next is os processing for maintanence : ");
 
         string[] allOS = currentYipliConfig.gameInventoryInfo.osListForMaintanence.Split(',');
 
-        // Debug.LogError("versions : Executing allOS string : " + currentYipliConfig.gameInventoryInfo.osListForMaintanence);
+        // ////Debug.LogError("versions : Executing allOS string : " + currentYipliConfig.gameInventoryInfo.osListForMaintanence);
 
         if (currentYipliConfig.gameInventoryInfo.osListForMaintanence != ",") {
             for (int i = 0; i < allOS.Length; i++) {
                 if (allOS[i] == "a" && Application.platform == RuntimePlatform.Android) {
-                    //Debug.LogError("Executing a");
+                    //////Debug.LogError("Executing a");
                     ManageMaintanenceMessages();
                     break;
                 } else if (allOS[i] == "atv" && Application.platform == RuntimePlatform.Android && currentYipliConfig.isDeviceAndroidTV) {
-                    //Debug.LogError("Executing atv");
+                    //////Debug.LogError("Executing atv");
                     ManageMaintanenceMessages();
                     break;
                 } else if (allOS[i] == "i" && Application.platform == RuntimePlatform.IPhonePlayer) {
-                    //Debug.LogError("Executing i");
+                    //////Debug.LogError("Executing i");
                     ManageMaintanenceMessages();
                     break;
                 } else if (allOS[i] == "w" && Application.platform == RuntimePlatform.WindowsPlayer) {
                     // for testing in editor (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
-                    //Debug.LogError("Executing w");
+                    //////Debug.LogError("Executing w");
                     ManageMaintanenceMessages();
                     break;
                 }
@@ -132,7 +132,7 @@ public class MaintenancePanel : MonoBehaviour
             return;
         }
 
-        // Debug.LogError("versions : next is to check which block version to call : ");
+        // ////Debug.LogError("versions : next is to check which block version to call : ");
 
 #if UNITY_ANDROID
         if (currentYipliConfig.isDeviceAndroidTV) {
@@ -165,7 +165,7 @@ public class MaintenancePanel : MonoBehaviour
 
     private void BlockVersionCheck(string notAllowedVersionString, string currentStoreVersion)
     {
-        // Debug.LogError("versions : from block version check : ");
+        // ////Debug.LogError("versions : from block version check : ");
 
         if (notAllowedVersionString.Equals(",", System.StringComparison.OrdinalIgnoreCase)) return;
 
@@ -173,9 +173,9 @@ public class MaintenancePanel : MonoBehaviour
         int notAllowedVersionCode = YipliHelper.convertGameVersionToBundleVersionCode(notAllowedVersionString);
         int currentStoreCode = YipliHelper.convertGameVersionToBundleVersionCode(currentStoreVersion);
 
-        // Debug.LogError("versions : gameVersionCode : " + gameVersionCode);
-        // Debug.LogError("versions : notAllowedVersionCode : " + notAllowedVersionCode);
-        // Debug.LogError("versions : currentStoreCode : " + currentStoreCode);
+        // ////Debug.LogError("versions : gameVersionCode : " + gameVersionCode);
+        // ////Debug.LogError("versions : notAllowedVersionCode : " + notAllowedVersionCode);
+        // ////Debug.LogError("versions : currentStoreCode : " + currentStoreCode);
 
         if (notAllowedVersionCode > gameVersionCode)
         {
@@ -189,7 +189,7 @@ public class MaintenancePanel : MonoBehaviour
             currentYipliConfig.allowMainGameSceneToLoad = false;
         }
         else if (notAllowedVersionCode < gameVersionCode && currentStoreCode > gameVersionCode) {
-            // Debug.LogError("versions : TimeDifferenceManager() : " + TimeDifferenceManager());
+            // ////Debug.LogError("versions : TimeDifferenceManager() : " + TimeDifferenceManager());
 
             // update below 6 with firebase entries
             if (currentYipliConfig.skipNormalUpdateClicked || TimeDifferenceManager() < 6) return;
@@ -261,7 +261,7 @@ public class MaintenancePanel : MonoBehaviour
         DateTime todaysDate = DateTime.Today;
         DateTime skippedDate = DateTime.Parse(PlayerPrefs.GetString("skippedDate"));
 
-        Debug.LogError("difference : " + (int)(todaysDate - skippedDate).TotalDays);
+        ////Debug.LogError("difference : " + (int)(todaysDate - skippedDate).TotalDays);
 
         return (int)(todaysDate - skippedDate).TotalDays;
     }

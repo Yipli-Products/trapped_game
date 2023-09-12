@@ -176,12 +176,12 @@ public class SecondTutorialManager : MonoBehaviour
     {
         try
         {
-            //Debug.LogError("provided clusterID : " + clusterID);
+            //////Debug.LogError("provided clusterID : " + clusterID);
             YipliHelper.SetGameClusterId(clusterID);
         }
         catch (System.Exception e)
         {
-            Debug.LogError("Something went wrong with setting the cluster id : " + e.Message);
+            ////Debug.LogError("Something went wrong with setting the cluster id : " + e.Message);
         }
     }
 
@@ -1018,33 +1018,33 @@ public class SecondTutorialManager : MonoBehaviour
 
         FmDriverResponseInfo singlePlayerResponse = null;
 
-        Debug.LogError("stut : getting single player response");
+        ////Debug.LogError("stut : getting single player response");
         try
         {
-            Debug.LogError("stut : from try");
+            ////Debug.LogError("stut : from try");
             singlePlayerResponse = JsonUtility.FromJson<FmDriverResponseInfo>(fmActionData);
         }
         catch (System.Exception e)
         {
-            Debug.LogError("stut : singlePlayerResponse is having problem : " + e.Message);
+            ////Debug.LogError("stut : singlePlayerResponse is having problem : " + e.Message);
         }
 
-        Debug.LogError("stut : single player responce might be null returning");
+        ////Debug.LogError("stut : single player responce might be null returning");
         if (singlePlayerResponse == null) return;
 
-        Debug.LogError("stut : single player response is not null");
+        ////Debug.LogError("stut : single player response is not null");
 
-        Debug.LogError("stut : currentYipliConfig.oldFMResponseCount : " + currentYipliConfig.oldFMResponseCount);
-        Debug.LogError("stut : singlePlayerResponse.count : " + singlePlayerResponse.count);
+        ////Debug.LogError("stut : currentYipliConfig.oldFMResponseCount : " + currentYipliConfig.oldFMResponseCount);
+        ////Debug.LogError("stut : singlePlayerResponse.count : " + singlePlayerResponse.count);
 
         if (currentYipliConfig.oldFMResponseCount != singlePlayerResponse.count)
         {
-            Debug.LogError("stut : from if");
+            ////Debug.LogError("stut : from if");
             PlayerSession.Instance.currentYipliConfig.oldFMResponseCount = singlePlayerResponse.count;
 
-            Debug.LogError("stut : next line is to detect action");
+            ////Debug.LogError("stut : next line is to detect action");
             DetectedAction = ActionAndGameInfoManager.GetActionEnumFromActionID(singlePlayerResponse.playerdata[0].fmresponse.action_id);
-            Debug.LogError("stut : action is detected" + DetectedAction);
+            ////Debug.LogError("stut : action is detected" + DetectedAction);
 
             switch (DetectedAction)
             {
@@ -1066,7 +1066,7 @@ public class SecondTutorialManager : MonoBehaviour
                     break;
 
                 default:
-                    Debug.LogError("stut : Wrong Action is detected : " + DetectedAction.ToString());
+                    ////Debug.LogError("stut : Wrong Action is detected : " + DetectedAction.ToString());
                     break;
             }
         }
@@ -1104,19 +1104,19 @@ public class SecondTutorialManager : MonoBehaviour
 
         //if (phoneHolderPanel.activeSelf)
         //{
-        //    Debug.LogError("new tut : from ManagePlayerActions if");
+        //    ////Debug.LogError("new tut : from ManagePlayerActions if");
         //    if (DetectedAction == YipliUtils.PlayerActions.JUMP)
         //    {
-        //        Debug.LogError("new tut : from ManagePlayerActions if if ");
+        //        ////Debug.LogError("new tut : from ManagePlayerActions if if ");
         //        StartTutrorialOnJump();
         //    }
         //    return;
         //}
 
-        Debug.LogError("stut : connection status is : " + YipliHelper.GetMatConnectionStatus());
-        Debug.LogError("stut : current cluster id is : " + YipliHelper.GetGameClusterId());
-        Debug.LogError("stut : only mat play mode is : " + currentYipliConfig.onlyMatPlayMode);
-        Debug.LogError("stut : Detected action is : " + DetectedAction.ToString());
+        ////Debug.LogError("stut : connection status is : " + YipliHelper.GetMatConnectionStatus());
+        ////Debug.LogError("stut : current cluster id is : " + YipliHelper.GetGameClusterId());
+        ////Debug.LogError("stut : only mat play mode is : " + currentYipliConfig.onlyMatPlayMode);
+        ////Debug.LogError("stut : Detected action is : " + DetectedAction.ToString());
 
         if (!startIntroDone)
         {
@@ -1321,7 +1321,7 @@ public class SecondTutorialManager : MonoBehaviour
 
     private void TurnOnPHAnimationOBJs()
     {
-        Debug.LogError("new tut : from TurnOnPHAnimationOBJs");
+        ////Debug.LogError("new tut : from TurnOnPHAnimationOBJs");
         phoneAnimationOBJ.SetActive(true);
 
 #if UNITY_STANDALONE_WIN
@@ -1333,7 +1333,7 @@ public class SecondTutorialManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("new tut : from TurnOnPHAnimationOBJs else else");
+            ////Debug.LogError("new tut : from TurnOnPHAnimationOBJs else else");
             phoneAnimationOBJ.SetActive(true);
         }
 #endif
@@ -1341,7 +1341,7 @@ public class SecondTutorialManager : MonoBehaviour
 
     private void StartTutrorialOnJump()
     {
-        Debug.LogError("new tut : from StartTutrorialOnJump");
+        ////Debug.LogError("new tut : from StartTutrorialOnJump");
         phoneAnimationOBJ.SetActive(false);
         StartMatTutorial();
     }
